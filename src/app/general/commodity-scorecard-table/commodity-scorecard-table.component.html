@@ -1,0 +1,272 @@
+<!-- row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="profile card card-body px-3 pt-3 pb-0">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-head">
+                        <div class="profile-name px-3 pt-2">
+                            <h4 class="mb-0 pro-name uer-font">{{subtitle}} ScoreCard</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 ml-alto">
+                    <!-- <p class="text-right mb-0">
+                        <span class="total-red-new">Red <span
+                                style="color:#858585; font-size:11px;">30.00%</span></span>
+                        <span class="total-red-new">Yellow <span
+                                style="color:#858585; font-size:11px;">65.00%</span></span>
+                        <span class="total-red-new">Green <span
+                                style="color:#858585; font-size:11px;">5.00%</span></span>
+                        <span class="total-red-new d-none"> <span
+                                style="color:#858585; font-size:11px;">30.00%</span></span>
+                        <span class="total-red-new d-none"> <span
+                                style="color:#858585; font-size:11px;">30.00%</span></span>
+                        <span class="total-red-new">All</span>
+                    </p> -->
+                </div>
+            </div>
+            <div class="pro-form pt-4">
+                <div class="row">
+                   
+                    <div class="col-xl-12 col-lg-12 pr-4 vendorscorecard-table2 vendor-second-t-sectable">
+                        <app-data-table 
+                        style="margin-top: 22px" 
+                        [columns]="statisticColumns" 
+                        [dataSourceForTable]="data?.currentStatus"
+                        
+                        >
+                        <!-- <div>
+                            <h1 class="text-lg font-medium">All Programs</h1>
+                            <p>List of all Programs in Colleges</p>
+                            </div> -->
+
+                            <ng-template let-column let-data="element" let-value="value">
+                                <div *ngIf="column.def == 'status'" class="flex items-center space-x-2">
+                                    <mat-slide-toggle [checked]="value == true" (change)="onToggleChange($event, data)">
+                                    </mat-slide-toggle>
+                                </div>
+<!-- 
+                                <div *ngIf="column.def == 'compare'" sticky>
+                                    <mat-checkbox [checked]="isCommoditySelected(data)" (change)="onCheckBoxClick($event,data)"></mat-checkbox>
+                                </div> -->
+
+                                <span *ngIf="column.def == 'latestPostingDate'" class="px-3">
+                                    {{ (data.latestPostingDate | date: 'MM/dd/yyyy')  }}
+                                  </span>
+                                <span *ngIf="column.def == 'lastPostingDate'" class="px-3">
+                                    {{ (data.lastPostingDate | date: 'MM/dd/yyyy')  }}
+                                  </span>
+
+                                <div *ngIf="column.def == 'view'" class="flex flex-row justify-start">
+                                    <button mat-stroked-button color="primary">
+                                        Delete
+                                    </button>
+                                    <button mat-stroked-button color="primary">
+                                        Update
+                                    </button>
+                                </div>
+                            </ng-template>
+                        </app-data-table>
+                    </div>
+
+
+                    <!-- manage-u -->
+
+                    <div class="col-md-12 " style = "display : flex; justify-content :end">
+                    
+                        <div class="ml-3 radio-main">
+                            <label class="ml-2">
+                              <input type="radio" name="color" value="RED" [(ngModel)]="selectedColor"> {{'Red' | translate}}
+                            </label>
+                            <label class="ml-2">
+                              <input type="radio" name="color" value="YELLOW" [(ngModel)]="selectedColor"> {{'Yellow' | translate}}
+                            </label>
+                            <label class="ml-2">
+                              <input type="radio" name="color" value="GREEN" [(ngModel)]="selectedColor"> {{'Green' | translate}}
+                            </label>
+                            <label class="ml-2">
+                              <input type="radio" name="color" value="ALL" [(ngModel)]="selectedColor"> {{'All' | translate}}
+                            </label>
+                          </div>
+                     </div>
+
+
+
+                    <div class="col-xl-12 col-lg-12 pl-0 pr-4 vendorscorecard-table vendor-second-t" id="style-2">
+
+
+                        <app-data-table 
+                        style="margin-top: 22px" 
+                        defaultSortBy="name"
+                        [url]="getProjectsUrl"
+                        [columns]="columns" 
+                        [data] = "data"
+                        [color]="selectedColor"
+                        [apiRequestType]="apiRequestType" 
+                        [apiRequestData]="apiRequestData"
+                        (dataOutput)="getCheckedDataOutput($event)"
+                        (recordOutput)="getTableRecord($event)"
+                        >
+                        <!-- <div>
+                            <h1 class="text-lg font-medium">All Programs</h1>
+                            <p>List of all Programs in Colleges</p>
+                            </div> -->
+
+                            <ng-template let-column let-data="element" let-value="value">
+                                <div *ngIf="column.def == 'status'" class="flex items-center space-x-2">
+                                    <mat-slide-toggle [checked]="value == true" (change)="onToggleChange($event, data)">
+                                    </mat-slide-toggle>
+                                </div>
+
+                                <div *ngIf="column.def == 'compare'" sticky>
+                                    <mat-checkbox [checked]="isCommoditySelected(data)" (change)="onCheckBoxClick($event,data)"></mat-checkbox>
+                                </div>
+
+                                <span *ngIf="column.def == 'latestPostingDate'" class="px-3">
+                                    {{ (data.latestPostingDate | date: 'MM/dd/yyyy')  }}
+                                  </span>
+                                <span *ngIf="column.def == 'lastPostingDate'" class="px-3">
+                                    {{ (data.lastPostingDate | date: 'MM/dd/yyyy')  }}
+                                  </span>
+
+                                <div *ngIf="column.def == 'view'" class="flex flex-row justify-start">
+                                    <button mat-stroked-button color="primary">
+                                        Delete
+                                    </button>
+                                    <button mat-stroked-button color="primary">
+                                        Update
+                                    </button>
+                                    
+                                </div>
+                            </ng-template>
+                        </app-data-table>
+
+
+
+
+                    </div>
+                </div>
+
+       
+                <div class="col-lg-5 ml-auto d-flex justify-content-end">
+                    <p><span class="tool"
+                            data-tip="This option is to choose whether you want to see your report first or send directly."
+                            tabindex="1"><i class="fa fa-question-circle" aria-hidden="true"
+                                style="color:#3F4040;"></i></span></p>
+                    <label class="col-form-label col-sm-4 pt-1 larec mb-2">{{'Report Option' | translate }}</label>
+                    <div class="d-flex deliver-nav mb-2">
+                        <div class="form-check pr-3">
+                            <input class="form-check-input" 
+                            type="radio" 
+                            name="gridRadios" 
+                            value="option1" 
+                            [checked]="isViewFirst" 
+                            (change)="isViewFirstClick($event)"
+                            [matTooltip]="tips.viewFirst" [matTooltipPosition]="'above'">
+                            <label class="form-check-label"
+                            [matTooltip]="tips.viewFirst" [matTooltipPosition]="'above'">
+                               {{ 'View First' | translate }}
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" 
+                            type="radio" 
+                            name="gridRadios" 
+                            value="option2" 
+                            [checked]="!isViewFirst" 
+                            (change)="isNotViewFirstClick($event)"
+                            [matTooltip]="tips.sendDirect" [matTooltipPosition]="'above'">
+                            <label class="form-check-label"
+                            [matTooltip]="tips.sendDirect" [matTooltipPosition]="'above'"
+                            >
+                                {{'Send Direct' | translate}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="row pb-2 mt-2">
+                    <div class="col-lg-2 col-md-2">
+                       <button (click)="emitSelectedCommodity()" style="color:#fff;background:#3F4040;font-size:20px;" class="btn btn-primary mb-3 ven-re-btn-ran w-100" [matTooltip]="tips.compareVendorButton" [matTooltipPosition]="'above'"> {{'Compare' | translate }}
+                        </button>
+                        </div>
+                        <div class="col-lg-10 col-md-10 ml-auto">
+                            <div class="row justify-content-end">
+                                <div class="d-flex">
+                                    <a class="btn btn-primary mr-2 mb-3 ven-re-btn" style="white-space: nowrap;" (click)="openModel('otdDetail')" [matTooltip]="tips.otdDetail" [matTooltipPosition]="'above'">{{'OTD Detail' | translate }}</a>
+                                    <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran" style="white-space: nowrap;" (click)="openModel('nrcDetail')" [matTooltip]="tips.ncrDetail" [matTooltipPosition]="'above'">{{'NCR Detail' | translate }}</a>
+                                    <a class="btn btn-primary mr-2 mb-3 ven-re-btn" style="white-space: nowrap;" (click)="openModel('ppvDetail')" [matTooltip]="tips.ppvDetail" [matTooltipPosition]="'above'">{{'PPV Detail' | translate}}</a>
+                                    <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran" style="white-space: nowrap;" (click)="openModel('ltaDetail')" [matTooltip]="tips.ltaDetail" [matTooltipPosition]="'above'">{{'LTA Detail' | translate }} </a>
+                               
+                                    <mat-form-field appearance="fill" class="w-auto" style="min-width: 33%;">
+                                        <!-- form-control plant-select -->
+                                        <mat-select class="" placeholder="Select Report"  multiple [(ngModel)]="selected" 
+                                        (selectionChange)="onSelection($event)"
+                                        [matTooltip]="tips.selectReport" [matTooltipPosition]="'above'">
+                                            <mat-option *ngFor="let selectreport of listReport"
+                                                [value]="selectreport.id">
+                                                {{selectreport.value}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <div class="ml-2">
+                                    
+                                        <div class="w-100">
+                                            <button (click)="openDialog()" 
+                                            [matTooltip]="tips.sendReport" [matTooltipPosition]="'above'"
+                                            class="btn btn-primary mb-3 ven-re-btn w-100">{{'Send Report' | translate }} </button>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                
+                            </div>
+                        </div>
+
+                    <!-- <div class="col-lg-10 col-md-10 ml-auto">
+                        <div class="row justify-content-end">
+                            <div class="">
+                                <a class="btn btn-primary mr-2 mb-3 ven-re-btn" (click)="openModel('otdDetail')" [matTooltip]="tips.otdDetail" [matTooltipPosition]="'above'">{{'OTD Detail' | translate }}</a>
+                                <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran" (click)="openModel('nrcDetail')" [matTooltip]="tips.ncrDetail" [matTooltipPosition]="'above'">{{'NCR Detail' | translate}}</a>
+                                <a class="btn btn-primary mr-2 mb-3 ven-re-btn" (click)="openModel('ppvDetail')" [matTooltip]="tips.ppvDetail" [matTooltipPosition]="'above'">{{'PPV Detail' | translate }}</a>
+                                <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran" (click)="openModel('ltaDetail')" [matTooltip]="tips.ltaDetail" [matTooltipPosition]="'above'">{{'LTA Detail' | translate }}</a>
+                            </div>
+                            <div class="ml-3">
+                                <mat-form-field appearance="fill">
+                                    <mat-select class="" placeholder="Select Report"  multiple [(ngModel)]="selected" 
+                                    (selectionChange)="onSelection($event)"
+                                    [matTooltip]="tips.selectReport" [matTooltipPosition]="'above'">
+                                        <mat-option *ngFor="let selectreport of listReport"
+                                            [value]="selectreport.id">
+                                            {{selectreport.value}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                            </div>
+                            <div class="ml-3 mr-3">
+                                <button (click)="openDialog()" 
+                                [matTooltip]="tips.sendReport" [matTooltipPosition]="'above'"
+                                class="btn btn-primary mb-3 ven-re-btn w-100">
+                                {{'Send Report'  | translate }}</button>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ltaChart"></div>
+<div id="otdChart"></div>
+<div id="ncrChart"></div>
+<div id="ppvChart"></div>
+
+
+
+
+
+
+

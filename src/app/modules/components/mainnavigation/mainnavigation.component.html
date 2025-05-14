@@ -1,0 +1,32 @@
+<div class="deznav">
+    <div class="deznav-scroll">
+
+       
+        <ul class="metismenu" id="menu" metis-menu>
+
+            <li *ngFor="let item of userRoutes" (click)="onLiClick(item)">
+                <ng-container *ngIf="item?.parentId === null">
+                    <a [routerLink]="[item?.route]" class="ai-icon" id="{{item?.id}}" (click)="onMenuClick(item)">
+                        <span><img src="{{item?.logoSource}}" class="pr-3" /></span>
+                        <span class="nav-text">{{item.name}}</span>
+                    </a>
+                    <ng-container *ngIf="item?.isParent && item?.showChildMenu">
+
+                        <ul  class="">
+                            <li *ngFor="let childItem of getChildRoute(item)">
+                                <a [routerLink]="[childItem?.route]" class="child-li" id="{{item?.id}}" (click)="onMenuClick(item)">
+                                    <span><img style="color:white !important;" src="" /></span>
+                                    <span >
+                                        {{childItem?.name}}
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </ng-container>
+
+                </ng-container>
+            </li>
+        </ul>
+</div>
+</div>
+       

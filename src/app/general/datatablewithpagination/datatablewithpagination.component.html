@@ -1,0 +1,287 @@
+<mat-card style="margin-bottom: -1.24rem !important;" >
+    <!-- class="max-w-sm" -->
+
+    <div class="d-flex align-items-center justify-content-between pb-2 border-b">
+        <ng-content select="title"></ng-content>
+        <div class="d-flex align-items-center">
+            <mat-form-field style="margin-bottom: -1.25em;max-width: 24rem;" class="-mt-1">
+                <input type="text" 
+                [formControl]="searchText$"
+                matInput 
+                placeholder="{{'Search' | translate}}"
+                autocomplete="Off" style="margin-top: 0.0630em; border-bottom:#ccc solid 1px;"/>
+
+            </mat-form-field>
+            <!-- (keyup)="applyFilter($event)" -->
+            <!-- <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <div mat-menu-item [matMenuTriggerFor]="columnFilter">
+                    <mat-icon fontSet="material-icons-round">checklist</mat-icon>
+                    <span>Filter Columns</span>
+                </div>
+                <div mat-menu-item (click)="processExport()">
+                    <mat-icon fontSet="material-icons-round">file_download</mat-icon>
+                    <span>Export</span>
+                </div>
+            </mat-menu>
+
+            <mat-menu #columnFilter="matMenu" (click)="$event.stopPropagation()">
+                <div class="px-2 py-1" *ngFor="let col of allColumns" (click)="$event.stopPropagation()">
+                    <mat-checkbox class="block" [checked]="col.show" (change)="col.show = $event.checked"
+                        color="primary">{{ col.name }}</mat-checkbox>
+                </div>
+            </mat-menu> -->
+            <!-- <mat-select [formControl]="displayedColumns" multiple class="border">
+          <mat-option *ngFor="let column of columns" [value]="column.def">{{
+            column.name
+          }}</mat-option>
+        </mat-select> -->
+
+            <!-- <div *ngIf="isQuestion == true">
+          <button mat-button color="primary" (click)="onFilterClick()">
+          <mat-icon>filter_list</mat-icon>
+        </button>
+        </div> -->
+        </div>
+    </div>
+
+    <mat-card-content class="relative w-100" style="overflow-x:auto !important;overflow-y: auto !important;height:500px !important;" >
+        <table  mat-table [dataSource]="dataSource" matSort class="w-100"  (matSortChange)="onClick('a',$event)">
+            <ng-container *ngFor="let column of filteredColumns" class="w-100 ml-5 mr-5">
+            <ng-container [matColumnDef]="column.def" [sticky]="column?.isSticky" class="w-100">
+                
+                    <ng-container *ngIf="column.noSort; else noSort" class="w-100">
+                        <th  class=" px-2 text-center whitespace-nowrap w-100" (click)="onHeadingClick(column.name,$event)" style="width: fit-content !important;" mat-header-cell *matHeaderCellDef mat-sort-header
+                        style="font-size: 16px;font-weight: 600;color: #3F4040;white-space: nowrap;cursor:pointer;">
+                            {{ column.name | translate}}
+                          
+                        </th>
+                        
+                    </ng-container>
+                    <ng-template #noSort class="w-100">
+                        <th class=" px-2 text-center whitespace-nowrap w-100" mat-header-cell *matHeaderCellDef mat-sort-header
+                            style="font-size: 16px;font-weight: 600;color: #3F4040;white-space: nowrap;cursor:pointer;" (click)="onHeadingClick(column,$event)">
+                            <mat-checkbox style="margin-top:1rem !important;" *ngIf="column.name == 'Compare'" (change)="onHeaderCheckBoxTick($event)"></mat-checkbox> 
+                            &nbsp;&nbsp;
+                            {{ column.name | translate}}
+                        </th>
+                    </ng-template>
+
+                <td class="px-2 whitespace-nowrap" mat-cell *matCellDef="let element" class="w-100 px-3">
+                    <ng-container *ngIf="column.projection" class="w-100 px-3">
+                        <ng-template *ngTemplateOutlet="
+                  templateOutlet;
+                  context: {
+                    $implicit: column,
+                    element: element,
+                    value: columnValue(element, column)
+                  }
+                " class="w-100 px-3"></ng-template>
+                    </ng-container>
+                    <span *ngIf="!column.projection" class="w-100 px-3">
+                      {{
+                        columnValue(element, column)
+                        }}</span>
+                </td>
+            </ng-container>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true" class="w-100"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns" class="w-100"></tr>
+
+            <tr *matNoDataRow class="w-100">
+                <td class="p-2 text-danger  whitespace-nowrap" colspan="100%">
+                    <span *ngIf="fetching">'No Record'</span>
+                    <span *ngIf="!fetching && !dataSource?.length">'No Record'</span>
+                </td>
+            </tr>
+        </table>
+    </mat-card-content>
+
+
+    <mat-paginator
+      [length]="totalRecords"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="paginatorUpdated($event)"
+      aria-label="Select page of search results"
+    ></mat-paginator>
+</mat-card>
+
+
+
+
+<!-- <mat-card> -->
+
+    <!-- <div class="d-flex align-items-center justify-content-between pb-2 border-b">
+      <ng-content select="title"></ng-content>
+      <div class="d-flex align-items-center">
+        <mat-form-field
+          class="max-w-sm"
+          style="margin-bottom: -1.25em"
+          class="-mt-1"
+        >
+          <mat-label>Search</mat-label>
+          <input
+            type="text"
+            class=""
+            matInput
+            placeholder="Search Here ..."
+            autocomplete="Off"
+          /> -->
+          <!-- <div matSuffix class="d-flex items-center">
+            <ng-container >
+              <svg
+                class="w-5 h-5 animate-spin text-indus-blue"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+              <div
+                mat-icon-button
+                class="cursor-pointer"
+              >
+                <mat-icon class="" fontSet="material-icons-round">
+                  clear
+                </mat-icon>
+              </div>
+            </ng-container>
+            <mat-icon class="" fontSet="material-icons-round">
+              search
+            </mat-icon>
+          </div> -->
+        <!-- </mat-form-field>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <div mat-menu-item [matMenuTriggerFor]="columnFilter">
+            <mat-icon fontSet="material-icons-round">checklist</mat-icon>
+            <span>Filter Columns</span>
+          </div>
+          <div mat-menu-item >
+            <mat-icon fontSet="material-icons-round">file_download</mat-icon>
+            <span>Export</span>
+          </div>
+        </mat-menu>
+  
+        <mat-menu #columnFilter="matMenu" (click)="$event.stopPropagation()">
+          <div
+            class="px-2 py-1"
+            *ngFor="let col of allColumns"
+            (click)="$event.stopPropagation()"
+          >
+            <mat-checkbox
+              class="block"
+              [checked]="col.show"
+              (change)="col.show = $event.checked"
+              color="primary"
+              >{{ col.name }}</mat-checkbox
+            >
+          </div>
+        </mat-menu> -->
+        <!-- <mat-select [formControl]="displayedColumns" multiple class="border">
+          <mat-option *ngFor="let column of columns" [value]="column.def">{{
+            column.name
+          }}</mat-option>
+        </mat-select> -->
+  
+        <!-- <div *ngIf="isQuestion == true">
+          <button mat-button color="primary" (click)="onFilterClick()">
+          <mat-icon>filter_list</mat-icon>
+        </button>
+        </div>
+      </div>
+    </div> -->
+  
+    <!-- <mat-card-content class="relative ">
+      <table
+      
+        mat-table
+        [dataSource]="dataSource"
+        matSort
+        [matSortActive]="sortBy"
+        matSortDisableClear
+        matSortDirection="asc"
+        class="w-100"
+        style="overflow-x:auto !important;"
+        
+      >
+        <ng-container
+          [matColumnDef]="column.def"
+          *ngFor="let column of filteredColumns"
+        >
+          <ng-container *ngIf="column.noSort; else noSort">
+            <th
+              class=" px-2 text-center whitespace-nowrap"
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+            >
+              {{ column.name }}
+            </th>
+          </ng-container>
+          <ng-template #noSort>
+            <th
+              class=" px-2 text-center whitespace-nowrap"
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+            >
+              {{ column.name }}
+            </th>
+          </ng-template>
+  
+          <td class="px-2 whitespace-nowrap" mat-cell *matCellDef="let element">
+            <ng-container *ngIf="column.projection">
+              <ng-template
+                *ngTemplateOutlet="
+                  templateOutlet;
+                  context: {
+                    $implicit: column,
+                    element: element,
+                    value: columnValue(element, column)
+                  }
+                "
+              ></ng-template>
+            </ng-container>
+            <span *ngIf="!column.projection">{{
+              columnValue(element, column)
+            }}</span>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  
+        <tr *matNoDataRow>
+          <td class="p-2  whitespace-nowrap" colspan="100%">
+            <span *ngIf="fetching">Loading...</span>
+            <span *ngIf="!fetching && !dataSource.length">No Record</span>
+          </td>
+        </tr>
+      </table>
+    </mat-card-content>
+  
+  
+    <mat-paginator
+      [length]="totalRecords"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="paginatorUpdated($event)"
+      aria-label="Select page of search results"
+    ></mat-paginator>
+  </mat-card> -->

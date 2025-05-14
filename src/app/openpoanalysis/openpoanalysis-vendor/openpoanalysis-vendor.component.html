@@ -1,0 +1,401 @@
+<!-- Filter Begin -->
+<div>
+    <div class="card p-4" style="padding-bottom:6px!important;padding-top: 35px!important;">
+        <div class="row">
+            
+            <div class="col-md-3">
+                <div class="d-flex">
+                    <span class="vendor-per pt-2">{{'Plant' | translate}}:</span>
+                    <select class="form-control plant-select" (change)="changePlanCode()" [(ngModel)]="filters.plantCode">
+                        <option selected="selected" value="All">All</option>
+                        <option *ngFor="let plant of allPlants" [value]="plant.item_id">{{plant.item_text+" "+plant.item_id}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-3" *ngIf="loggedInUser.vendorCode === null">
+                <div class="d-flex">
+                    <span class="vendor-per pt-2">{{"Vendor" | translate}}</span>
+                    <mat-form-field appearance="fill" class="">
+                        <mat-select class="analysis-multi" (selectionChange)="onSelection($event)" placeholder="Multiple Selection" [(ngModel)]="filters.VendorCode" multiple>
+                            <mat-option *ngFor="let vendor of allVendors"
+                                [value]="vendor.item_id">
+                                {{vendor.item_text}} <span class="right-code">{{vendor.item_id === 'ALL' ? '' : vendor.item_id}}</span>
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                   
+                </div>
+            </div>
+            
+            <div class="col-md-2">
+                <div class="d-flex">
+                    <span class="vendor-per pt-2">{{'Buffer Days' | translate}}:</span>
+                    <input type="number" [(ngModel)]="filters.bufferDays" placeholder="3" class="form-control plant-select"
+                    oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+                </div>
+            </div>
+            
+            <div class="col-md-2">
+                <div class="d-flex">
+                    <span class="vendor-per pt-2">{{'Future Days' | translate}}:</span>
+                    <input type="number" [(ngModel)]="filters.selfdefinedfuturedays" placeholder="14" class="form-control plant-select"
+                    oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+                </div>
+            </div>
+
+            <div class="col-md-2 ml-auto">
+                <div class="form-group">                
+                    <button type="submit" (click)="Search()" class="btn btn-primary" style="border-radius: 50px;width: 100%;white-space:nowrap;">{{'Execute' | translate}}</button>                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Filter End -->
+
+<div class="row mb-3">
+    <div class="col-xl-12 col-lg-12 pr-4 vendorscorecard-table2 vendor-second-t-sectable">
+        <app-podatatable 
+        style="margin-top: 22px" 
+        defaultSortBy="name"
+        [columns]="avrgTabelHeading" 
+        [dataSourceForTable]="avrgTabelRecords"
+        [filters] ="filters"
+        >
+        </app-podatatable>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 pr-4 vendorscorecard-table2 vendor-second-t-sectable">
+        <!-- <app-podatatable 
+        style="margin-top: 22px" 
+        defaultSortBy="name"
+        [columns]="columns" 
+        [dataSourceForTable]="records"
+        [totalRecordsForTable]="totalRecords"
+        [filters] ="filters"
+        >
+        </app-podatatable> -->
+
+        <app-data-table 
+        style="margin-top: 10px" 
+        defaultSortBy="name"
+        [columns]="columns" 
+        [dataSourceForTable]="records"
+        
+        ></app-data-table>
+    </div>
+</div>
+<div class="row pb-2 mt-4">
+    <div class="col-lg-12 col-md-12" style="text-align: right;">
+        <div class="btn-group">
+            <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="processExport()">{{"Download Data" | translate}}</a>
+            <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="toggle()"
+                id="bt">{{buttonName | translate}}</a>
+        </div>                       
+    </div>
+</div>
+
+<!-- Chart Begin -->
+<ng-container *ngIf="show">
+    <div class="row">
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Vendor Open PO Value" | translate}}
+                        <span *ngIf="OpenPOValueChartShow;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openPieChartDialogNew('Vendor Open PO Value',OpenPOValue)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="OpenPOValueChartShow;else OpenPOValueElseTemplate">
+                        <app-openpoanalysis-piechart [executeData]="OpenPOValue" ></app-openpoanalysis-piechart>
+                    </div>
+                    <ng-template #OpenPOValueElseTemplate>
+                        <h4>{{'No Record' | translate}}</h4>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Vendor Open PO Line" | translate}}
+                        <span *ngIf="OpenPOLineChartShow;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openPieChartDialogNew('Vendor Open PO Line',OpenPOLine)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="OpenPOLineChartShow;else OpenPOLineElseTemplate">
+                        <app-openpoanalysis-piechart [executeData]="OpenPOLine" ></app-openpoanalysis-piechart>
+                    </div>
+                    <ng-template #OpenPOLineElseTemplate>
+                        <h4>{{'No Record' | translate}}</h4>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Vendor PastDue PO Value" | translate}}
+                        <span *ngIf="PastDuePOValueChartShow" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openPieChartDialogNew('Vendor PastDue PO Value',PastDuePOValue)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="PastDuePOValueChartShow;else PastDuePOValueElseTemplate">
+                        <app-openpoanalysis-piechart [executeData]="PastDuePOValue" ></app-openpoanalysis-piechart>
+                    </div>
+                    <ng-template #PastDuePOValueElseTemplate>
+                        <h4>{{'No Record' | translate}}</h4>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Vendor PastDue PO Line" | translate}}
+                        <span *ngIf="PastDuePOLineChartShow;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openPieChartDialogNew('Vendor PastDue PO Line',PastDuePOLine)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="PastDuePOLineChartShow;else PastDuePOLineElseTemplate">
+                        <app-openpoanalysis-piechart [executeData]="PastDuePOLine" ></app-openpoanalysis-piechart>
+                    </div>
+                    <ng-template #PastDuePOLineElseTemplate>
+                        <h4>{{'No Record' | translate}}</h4>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Vendor Ack’d Needed PO Value" | translate}}
+                        <span *ngIf="AckdNeededPOValueChartShow;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openPieChartDialogNew('Vendor Ack’d Needed PO Value',AckdNeededPOValue)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="AckdNeededPOValueChartShow;else AckdNeededPOValueElseTemplate">
+                        <app-openpoanalysis-piechart [executeData]="AckdNeededPOValue" ></app-openpoanalysis-piechart>
+                    </div>
+                    <ng-template #AckdNeededPOValueElseTemplate>
+                        <h4>{{'No Record' | translate}}</h4>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Vendor Ack’d Needed PO Line" | translate}}
+                        <span *ngIf="AckdNeededPOLineChartShow;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openPieChartDialogNew('Vendor Ack’d Needed PO Line',AckdNeededPOLine)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="AckdNeededPOLineChartShow;else AckdNeededPOLineElseTemplate">
+                        <app-openpoanalysis-piechart [executeData]="AckdNeededPOLine" ></app-openpoanalysis-piechart>
+                    </div>
+                    <ng-template #AckdNeededPOLineElseTemplate>
+                        <h4>{{'No Record' | translate}}</h4>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Vendor Future Past PO Value" | translate}}
+                        <span *ngIf="FuturePastPOValueChartShow;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openPieChartDialogNew('Vendor Future Past PO Value',FuturePastPOValue)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="FuturePastPOValueChartShow;else FuturePastPOValueElseTemplate">
+                        <app-openpoanalysis-piechart [executeData]="FuturePastPOValue" ></app-openpoanalysis-piechart>
+                    </div>
+                    <ng-template #FuturePastPOValueElseTemplate>
+                        <h4>{{'No Record' | translate}}</h4>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Vendor Future Past PO Line" | translate}}
+                        <span *ngIf="FuturePastPOLineChartShow;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openPieChartDialogNew('Vendor Future Past PO Line',FuturePastPOLine)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="FuturePastPOLineChartShow;else FuturePastPOLineElseTemplate">
+                        <app-openpoanalysis-piechart [executeData]="FuturePastPOLine" ></app-openpoanalysis-piechart>
+                    </div>
+                    <ng-template #FuturePastPOLineElseTemplate>
+                        <h4>{{'No Record' | translate}}</h4>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+       
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Vendor Lead Time Check PO value" | translate}}
+                        <span *ngIf="LeadTimeCheckPOValueChartShow;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openPieChartDialogNew('Vendor Lead Time Check PO value',LeadTimeCheckPOValue)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="LeadTimeCheckPOValueChartShow;else LeadTimeCheckPOValueElseTemplate">
+                        <app-openpoanalysis-piechart [executeData]="LeadTimeCheckPOValue" ></app-openpoanalysis-piechart>
+                    </div>
+                    <ng-template #LeadTimeCheckPOValueElseTemplate>
+                        <h4>{{'No Record' | translate}}</h4>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Vendor Lead Time Check PO line" | translate}}
+                        <span *ngIf="LeadTimeCheckPOLineChartShow;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openPieChartDialogNew('Vendor Lead Time Check PO line',LeadTimeCheckPOLine)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="LeadTimeCheckPOLineChartShow;else LeadTimeCheckPOLineElseTemplate">
+                        <app-openpoanalysis-piechart [executeData]="LeadTimeCheckPOLine" ></app-openpoanalysis-piechart>
+                    </div>
+                    <ng-template #LeadTimeCheckPOLineElseTemplate>
+                        <h4>{{'No Record' | translate}}</h4>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="row">
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Open PO %" | translate}}
+                        <span *ngIf="!OpenPONoRecord;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openBarChartDialogNew('Open PO %',OpenPO)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <h4 *ngIf="OpenPONoRecord;" class="text-center">{{"No Record" | translate}}</h4>
+                    <app-openpoanalysis-barchart [executeData]="OpenPO"></app-openpoanalysis-barchart>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"PastDue PO %" | translate}}
+                        <span *ngIf="!PastDuePONoRecord;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openBarChartDialogNew('PastDue PO %',PastDuePO)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <h4 *ngIf="PastDuePONoRecord;" class="text-center">{{"No Record" | translate}}</h4>
+                    <app-openpoanalysis-barchart [executeData]="PastDuePO"></app-openpoanalysis-barchart>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Ack'd Order %" | translate}}
+                        <span *ngIf="!AckNeededPONoRecord;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openBarChartDialogNew('Ack\'d Order %',AckNeededPO)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <h4 *ngIf="AckNeededPONoRecord;" class="text-center">{{"No Record" | translate}}</h4>
+                    <app-openpoanalysis-barchart [executeData]="AckNeededPO"></app-openpoanalysis-barchart>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Future PastDue %" | translate}}
+                        <span *ngIf="!FuturePastPONoRecord;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openBarChartDialogNew('Future PastDue %',FuturePastPO)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <h4 *ngIf="FuturePastPONoRecord;" class="text-center">{{"No Record" | translate}}</h4>
+                    <app-openpoanalysis-barchart [executeData]="FuturePastPO"></app-openpoanalysis-barchart>
+                </div>
+            </div>
+        </div>
+       
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Leadtime Check %" | translate}}
+                        <span *ngIf="!LeadTimeCheckPONoRecord;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openBarChartDialogNew('Leadtime Check %',LeadTimeCheckPO)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <h4 *ngIf="LeadTimeCheckPONoRecord;" class="text-center">{{"No Record" | translate}}</h4>
+                    <app-openpoanalysis-barchart [executeData]="LeadTimeCheckPO"></app-openpoanalysis-barchart>
+                </div>
+            </div>
+        </div>
+   
+    </div>
+</ng-container>
+<!-- Chart Begin -->
+
+
+<!-- <div class="card-body noRecorodsMiddel">
+    <div *ngIf="LeadTimeCheckPOValueChartShow;else LeadTimeCheckPOValueElseTemplate">
+        <app-openpoanalysis-piechart [executeData]="LeadTimeCheckPOValue" ></app-openpoanalysis-piechart>
+    </div>
+    <ng-template #LeadTimeCheckPOValueElseTemplate>
+        <h4>{{'No Record' | translate}}</h4>
+    </ng-template>
+</div> -->

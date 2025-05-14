@@ -1,0 +1,108 @@
+<!--**********************************
+    Content body start
+***********************************-->
+<div class="content-body">
+    <!-- row -->
+    <div class="container-fluid">
+        <app-postatus-filterby-dropdown></app-postatus-filterby-dropdown>
+
+        <app-po-newuserreg></app-po-newuserreg>
+
+        <div class="row">
+            <div class="col-md-4">
+                <app-po-vendor-manager></app-po-vendor-manager>
+            </div>
+            <div class="col-md-8">
+                <app-po-vendor-average-performance></app-po-vendor-average-performance>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">
+                            Current Open PO Status<span class="pr-3" style="float: right;cursor: pointer;" mat-button
+                                (click)="openDialogpograph()">
+                                <i class="fa fa-expand" aria-hidden="true"></i></span>
+                        </h3>
+                        <p class="text-center mb-0">
+                            <span class="total-red-new-ven">FuturedueLine%</span>
+                            <span class="total-red-new-ven po-status">FuturedueValue%</span>
+                            <span class="total-red-new-ven">Ack'dNeededLine%</span>
+                            <span class="total-red-new-ven">Ack'd needed value%</span>
+                            <span class="total-red-new-ven">PastdueLine%</span>
+                            <span class="total-red-new-ven">PastdueValue%</span>
+                        </p>
+                        <app-current-open-po-status-tablegraph></app-current-open-po-status-tablegraph>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-12 w-100">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+
+                            <div class="col-md-12 mx-auto text-right">
+                                <h3 class="text-center pt-3 pb-3"><span
+                                        style="font-size:17px; color:#131523;font-weight: 600;">Total Open PO
+                                        Line</span><span class="pr-3" style="float: right;cursor: pointer;" mat-button
+                                        (click)="openDialog()">
+                                        <i class="fa fa-expand" aria-hidden="true"></i></span></h3>
+
+                                <p class="text-center mb-0">
+                                    <span class="total-red-new-ven">All Pastdue Lines</span>
+                                    <span class="total-red-new-ven">All Ack'd Needed Lines</span>
+                                    <span class="total-red-new-ven">All Future 14 Days Pastdue Lines</span>
+                                </p>
+
+                                <app-totalscore-graph class="text-center"></app-totalscore-graph>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5 mb-5">
+            <div class="col-md-12 w-100">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+
+                            <div class="col-md-12 mx-auto text-right">
+                                <h3 class="text-center pt-3 pb-3">
+                                    <span style="font-size: 17px;color: #131523;font-weight: 600;">Total Open PO
+                                        Value</span><span class="pr-3" style="float: right;cursor: pointer;" mat-button
+                                        (click)="openDialog()">
+                                        <i class="fa fa-expand" aria-hidden="true"></i></span></h3>
+
+                                <p class="text-center mb-0">
+                                    <span class="total-red-new-ven">All Pastdue Value</span>
+                                    <span class="total-red-new-ven">All Ack'd Needed Value</span>
+                                    <span class="total-red-new-ven">All Future 14 Days Pastdue Value</span>
+                                </p>
+
+                                <app-totalscore-graph class="text-center"></app-totalscore-graph>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--**********************************
+    Content body end
+***********************************-->

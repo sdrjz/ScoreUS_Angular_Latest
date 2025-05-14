@@ -1,0 +1,75 @@
+<div clss="card p-4">
+    <div class="row pt-3">
+        <div class="col-md-5">
+            <p class="larec pt-4"> {{subtitle + ' Color Zone' | translate}} </p>
+        </div>
+        <div class="col-md-7 pl-0 pr-0 text-right">
+            <div clss="red-row" style="display: flex !important;flex-wrap: wrap !important;">
+                <div class="col-md-12 mb-2 pl-0 pr-0">
+                    <div class="ml-auto pr-0">
+                        <div class="float-right">
+                            <span class="vendor-per" *ngIf="colorZoneStat && colorZoneStat.length<1">25%</span>
+
+                            <span class="vendor-per" *ngIf="colorZoneStat.length > 0">
+                                {{ (getPercentage(colorZoneStat[0][2], colorZoneStat[0][3]) === 0) ? 'N/A' : getPercentage(colorZoneStat[0][2], colorZoneStat[0][3]) + '%' }}
+                              </span>
+
+
+                            <!-- <span class="vendor-per" *ngIf="colorZoneStat.length>0" style="margin-right:2px !important;" >{{getPercentage(colorZoneStat[0][2],colorZoneStat[0][3])}}%</span> -->
+                            <span [attr.class]="redIsNeg == true? 'red-num':'co1'"
+                                *ngIf="(colorZoneStat?.length>1 && (redPercentageComparison<0 || redPercentageComparison>=0))" [style]="getRedYellowTextColor(redPercentageComparison)" style="margin-right:2px !important;">{{redPercentageComparison}}%</span>
+                            
+                                    <img *ngIf="colorZoneStat?.length>1 "
+                                [src]="getRedYellowImage(redPercentageComparison)" alt="" [style]="getRedYellowTextColor(redPercentageComparison)">
+                            <span *ngIf="colorZoneStat?.length>1 " class="vendor-than">{{redSentance | translate}}</span>
+                        </div>
+                        <img src="../../../assets" alt="">
+                        <div class="float-right">
+                            <span class="red-num pr-3">{{'Red' | translate}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-2 pl-0 pr-0">
+                    <div class="ml-auto pr-0">
+                        <div class="float-right">
+                            <span class="vendor-per pl-1" *ngIf="colorZoneStat && colorZoneStat.length<1">30%</span>
+                            
+                            <span class="vendor-per" *ngIf="colorZoneStat.length > 0">
+                                {{ (getPercentage(colorZoneStat[0][2], colorZoneStat[0][3]) === 0) ? 'N/A' : getPercentage(colorZoneStat[0][2], colorZoneStat[0][3]) + '%' }}
+                              </span>
+                            <!-- <span class="vendor-per pl-1"
+                                *ngIf="colorZoneStat?.length>0" style="margin-right:2px !important;">{{getPercentage(colorZoneStat[0][1],colorZoneStat[0][3])}}%</span> -->
+                            <span [attr.class]="yellowIsNeg == true ?'red-num': 'co1'"
+                                *ngIf="(colorZoneStat?.length>1 && (yellowPercentageComparison<0 || yellowPercentageComparison>=0))" [style]="getRedYellowTextColor(yellowPercentageComparison)" style="margin-right:2px !important;" >{{yellowPercentageComparison}}%</span>
+                            <img *ngIf="colorZoneStat?.length>1 " [src]="getRedYellowImage(yellowPercentageComparison)" [style]="getRedYellowTextColor(yellowPercentageComparison)" alt="">
+                            <span *ngIf="colorZoneStat?.length>1 " class="vendor-than">{{yellowSentance | translate}}</span>
+                        </div>
+                        <div class="float-right">
+                            <span class="co-yellow2 pr-2">{{ 'Yellow' | translate }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-2 pl-0 pr-0">
+                    <div class="ml-auto pr-0">
+                        <div class="float-right">
+                            <span class="vendor-per pl-1" *ngIf="colorZoneStat && colorZoneStat.length<1">35%</span>
+                            
+                            <span class="vendor-per" *ngIf="colorZoneStat.length > 0">
+                                {{ (getPercentage(colorZoneStat[0][2], colorZoneStat[0][3]) === 0) ? 'N/A' : getPercentage(colorZoneStat[0][2], colorZoneStat[0][3]) + '%' }}
+                              </span>
+                            <!-- <span class="vendor-per pl-1"
+                                *ngIf="colorZoneStat.length>0" style="margin-right:2px !important;">{{getPercentage(colorZoneStat[0][0],colorZoneStat[0][3])}}%</span> -->
+                            <span [attr.class]="greenIsNeg == true? 'red-num':'co1'"
+                                *ngIf="(colorZoneStat?.length>1 && (greenPercentageComparison<0 ||greenPercentageComparison>=0))" [style]="getTextColor(greenPercentageComparison)" style="margin-right:2px !important;">{{greenPercentageComparison}}%</span>
+                            <img *ngIf="colorZoneStat?.length>1 " [src]="getImage(greenPercentageComparison)"  style="width:14px !important; margin-right: 2px !important;" alt="">
+                            <span *ngIf="colorZoneStat?.length>1" class="vendor-than">{{greenSentance | translate}}</span>
+                        </div>
+                        <div class="float-right">
+                            <span class="co1 pr-2">{{ 'Green' | translate }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

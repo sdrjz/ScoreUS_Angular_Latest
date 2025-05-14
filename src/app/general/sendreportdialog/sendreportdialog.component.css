@@ -1,0 +1,43 @@
+.small-button{
+    width:fit-content;
+    height:fit-content;
+    padding:3px;
+    background-color: #f72b50;
+    color:white;
+    font: bold;
+    outline: none;
+    border-style: none;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+
+
+.button_background{
+    background-color: none !important;
+    background: none !important;
+    padding:0px !important;
+    outline:none !important;
+    border:none !important;
+}
+
+.material-icons{
+    color:#bc1a20;
+}
+.material-icons:hover{
+    color:black;
+    transition: all 0.5s;
+}
+
+.add_cc_btn{
+    background: none !important;
+    border: none !important;
+}
+
+.cc_div{
+    display: flex !important;
+}
+
+.cc_delete{
+    display : flex !important;
+    
+}

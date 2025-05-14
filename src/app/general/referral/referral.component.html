@@ -1,0 +1,266 @@
+<!-- row -->
+<div class="row">
+    <div class="col-lg-12 mt-5">
+        <div class="profile card card-body">
+            <div class="profile-head">
+                <div class="row">
+                    <div class="profile-name pt-2 col-lg-12 pl-3 pr-3 pb-0">
+                        <h4 class="mb-3 pro-name uer-font">{{'Step by step guide to show you how to use referrals to earn' | translate }}
+                            {{'free months of membership on Score Us products.' | translate }}</h4>
+                        <p class="mb-0">{{'1. Refer your connections from our referral tab.' | translate }}</p>
+                        <p class="mb-0">{{'2. Enter their email address and name.' | translate }}</p>
+                        <p class="mb-0">{{'3. Send them invite' | translate }}</p>
+                        <p class="mb-0">{{'4. If they accept and become paid subscribers of Score Us products then you will get 1 month of free membership for you and your users.'| translate }}</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- row -->
+<div class="row">
+    <div class="col-lg-12">
+        <!-- <app-totalscore
+            subtitle="Total Free Month Services Earned."
+            numberScore="5" class="mt-5" style="width: 100%;
+        display: table;height: 200px !important;"></app-totalscore> -->
+        <app-vendor-total-score [totalscorename]="message"></app-vendor-total-score>
+    </div>
+    <div class="col-lg-12">
+        <div class="profile card card-body px-3 pt-3 pb-0 mt-3">
+            <div class="profile-head">
+                <div class="row">
+                    <div class="profile-name px-3 pt-2 col-lg-3">
+                        <h4 class="mb-0 pro-name uer-font">{{'Referral' | translate }}</h4>
+                    </div>
+                    <div class="col-lg-5  col-sm-3 ml-auto text-right">
+                        <a [routerLink]="['/user/referafriend']" type="submit"
+                            class="btn btn-primary profi-btn mb-4 pl-5 pr-5 mt-2 pt-3 pb-3">{{'Refer a Professional' | translate }}</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="row">
+                <div class="col-lg-12">
+                  <div class="profile card card-body px-3 pt-3 pb-0 mt-5">
+                    <div class="profile-head">
+                      <div class="profile-name px-3 pt-2">
+                    
+                      </div>
+                    </div>
+                    <div class="pro-form pt-4" *ngIf="loggedInUser.roleID == 6 || loggedInUser.roleID == 7 || loggedInUser.roleID == 8">
+                      <div class="row">
+                        <div class="col-xl-12 col-lg-12 pl-4 pr-4 manage-u pohistory-entrie activeusers">
+              
+              
+                      <app-datatablewithpagination 
+                      class="sendReportTable"
+                      style="margin-top: 22px!important; overflow-x: auto !important; overflow-y: auto !important;" 
+                      defaultSortBy="name"
+                      [url]="getProjectsUrl"
+                      [defaultPageSize] = 1000
+                      [columns]="poRowcolumns" 
+                    
+                    
+                      >
+                      <div ngProjectAs="title">
+                          <h4 class="text-lg font-medium">{{'Referral'| translate }}
+                             
+                          </h4>
+                          </div>
+              
+                          <ng-template let-column let-data="element" let-value="value">
+                              <div *ngIf="column.def == 'status'" class="flex items-center space-x-2">
+                                  <mat-slide-toggle [checked]="value == true" (change)="onToggleChange($event, data)">
+                                  </mat-slide-toggle>
+                              </div>
+              
+                              <div *ngIf="column.def == 'compare'" sticky>
+                                  <mat-checkbox [checked]="isVendorSelected(data)" (change)="onCheckBoxClick($event,data)"></mat-checkbox>
+                              </div>
+              
+              
+                              <span *ngIf="column.def == 'inviteDate'" class="px-3">
+                                {{ (data.inviteDate | date: 'MM/dd/yyyy')  }}
+                              </span>
+                              <span *ngIf="column.def == 'renewalDate'" class="px-3">
+                                {{ (data.renewalDate | date: 'MM/dd/yyyy')  }}
+                              </span>
+                              <span *ngIf="column.def == 'expiryDate'" class="px-3">
+                                {{ (data.expiryDate | date: 'MM/dd/yyyy')  }}
+                              </span>
+                              <span *ngIf="column.def == 'createdAt'" class="px-3">
+                                {{ (data.createdAt | date: 'MM/dd/yyyy')  }}
+                              </span>
+                              <span *ngIf="column.def == 'updatedAt'" class="px-3">
+                                {{ (data.updatedAt | date: 'MM/dd/yyyy')  }}
+                              </span>
+              
+              
+                              <div *ngIf="column.def == 'view'" class="flex flex-row justify-start">
+                                  <button mat-stroked-button color="primary">
+                                      {{'Delete' | translate }}
+                                  </button>
+                                  <button mat-stroked-button color="primary">
+                                      {{'Update' | translate }}
+                                  </button>
+                              </div>
+                          </ng-template>
+                      </app-datatablewithpagination>
+              
+              
+              
+              
+              
+                    </div>
+                  </div>
+                </div>
+                </div>
+                </div>
+                </div>
+
+
+
+<!-- 
+            <div class="pro-form pt-4">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 pl-4 pr-4 manage-u pohistory-entrie activeusers">
+
+                        <table datatable class="row-border hover" style="height:200px">
+                            <thead>
+                                <tr>
+                                    <th class="text-left pl-0">Name</th>
+                                    <th>Invite Date</th>
+                                    <th>Company Name</th>
+                                    <th>Renewal Date</th>
+                                    <th>Expiration Date</th>
+                                    <th>Subscribed</th>
+                                    <th>Subscription Type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Dr. Jackson</td>
+                                    <td>2008/11/28</td>
+                                    <td>Lorem Ipsum</td>
+                                    <td>2008/11/28</td>
+                                    <td>2008/11/28</td>
+                                    <td>Yes</td>
+                                    <td>Yearly</td>
+                                </tr>
+                                <tr>
+                                    <td>Dr. Jackson</td>
+                                    <td>2008/11/28</td>
+                                    <td>Lorem Ipsum</td>
+                                    <td>2008/11/28</td>
+                                    <td>2008/11/28</td>
+                                    <td>Yes</td>
+                                    <td>Yearly</td>
+                                </tr>
+                                <tr>
+                                    <td>Dr. Jackson</td>
+                                    <td>2008/11/28</td>
+                                    <td>Lorem Ipsum</td>
+                                    <td>2008/11/28</td>
+                                    <td>2008/11/28</td>
+                                    <td>Yes</td>
+                                    <td>Yearly</td>
+                                </tr>
+                                <tr>
+                                    <td>Dr. Jackson</td>
+                                    <td>2008/11/28</td>
+                                    <td>Lorem Ipsum</td>
+                                    <td>2008/11/28</td>
+                                    <td>2008/11/28</td>
+                                    <td>Yes</td>
+                                    <td>Yearly</td>
+                                </tr>
+                                <tr>
+                                    <td>Dr. Jackson</td>
+                                    <td>2008/11/28</td>
+                                    <td>Lorem Ipsum</td>
+                                    <td>2008/11/28</td>
+                                    <td>2008/11/28</td>
+                                    <td>Yes</td>
+                                    <td>Yearly</td>
+                                </tr>
+                                <tr>
+                                    <td>Dr. Jackson</td>
+                                    <td>2008/11/28</td>
+                                    <td>Lorem Ipsum</td>
+                                    <td>2008/11/28</td>
+                                    <td>2008/11/28</td>
+                                    <td>Yes</td>
+                                    <td>Yearly</td>
+                                </tr>
+                                <tr>
+                                    <td>Dr. Jackson</td>
+                                    <td>2008/11/28</td>
+                                    <td>Lorem Ipsum</td>
+                                    <td>2008/11/28</td>
+                                    <td>2008/11/28</td>
+                                    <td>Yes</td>
+                                    <td>Yearly</td>
+                                </tr>
+                                <tr>
+                                    <td>Dr. Jackson</td>
+                                    <td>2008/11/28</td>
+                                    <td>Lorem Ipsum</td>
+                                    <td>2008/11/28</td>
+                                    <td>2008/11/28</td>
+                                    <td>Yes</td>
+                                    <td>Yearly</td>
+                                </tr>
+                                <tr>
+                                    <td>Dr. Jackson</td>
+                                    <td>2008/11/28</td>
+                                    <td>Lorem Ipsum</td>
+                                    <td>2008/11/28</td>
+                                    <td>2008/11/28</td>
+                                    <td>Yes</td>
+                                    <td>Yearly</td>
+                                </tr>
+                                <tr>
+                                    <td>Dr. Jackson</td>
+                                    <td>2008/11/28</td>
+                                    <td>Lorem Ipsum</td>
+                                    <td>2008/11/28</td>
+                                    <td>2008/11/28</td>
+                                    <td>Yes</td>
+                                    <td>Yearly</td>
+                                </tr>
+                                <tr>
+                                    <td>Dr. Jackson</td>
+                                    <td>2008/11/28</td>
+                                    <td>Lorem Ipsum</td>
+                                    <td>2008/11/28</td>
+                                    <td>2008/11/28</td>
+                                    <td>Yes</td>
+                                    <td>Yearly</td>
+                                </tr>
+                                <tr>
+                                    <td>Dr. Jackson</td>
+                                    <td>2008/11/28</td>
+                                    <td>Lorem Ipsum</td>
+                                    <td>2008/11/28</td>
+                                    <td>2008/11/28</td>
+                                    <td>Yes</td>
+                                    <td>Yearly</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>

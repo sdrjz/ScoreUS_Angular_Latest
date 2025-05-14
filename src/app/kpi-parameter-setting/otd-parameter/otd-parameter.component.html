@@ -1,0 +1,57 @@
+<div class="profile-head">
+    <div class="profile-name px-3 pt-2">
+        <h4 class="mb-0 pro-name uer-font">{{'OTD Parameter' | translate}}</h4>
+        <div class="row">
+            <div class="col-md-6 otd-para pr-0">
+                <h3>{{'Percentage' | translate }} </h3>
+                <form>
+                    <div class="form-group">
+                        <div *ngFor="let item of listOTD" class="d-flex row">
+                            <label class="pr-0 col-lg-3 col-sm-5">{{item?.condition}}</label>
+                            <input type="number" class="form-control input-default col-lg-8 col-sm-5" 
+                            [name]="item.id"
+                            [disabled]="loggedInUser.roleID == 9 || loggedInUser.roleID == 11"
+                            (change)="onPercentageInput($event,item)"
+                             [value]="item.percentage"
+                              [(ngModel)]="item.percentage">
+                        </div>
+                        <!-- <div class="d-flex"><label class="pr-2">>=</label> <input type="text" class="form-control input-default " placeholder="0.99" readonly></div>
+                           <div class="d-flex"><label class="pr-2">>=</label> <input type="text" class="form-control input-default " placeholder="0.99" readonly></div>
+                           <div class="d-flex"><label class="pr-2">>=</label> <input type="text" class="form-control input-default " placeholder="0.99" readonly></div>
+                           <div class="d-flex"><label class="pr-2">>=</label> <input type="text" class="form-control input-default " placeholder="0.99" readonly></div>
+                           <div class="d-flex"><label class="pr-2">>=</label> <input type="text" class="form-control input-default " placeholder="0.99" readonly></div>
+                           <div class="d-flex"><label class="pr-2">>=</label> <input type="text" class="form-control input-default " placeholder="0.99" readonly></div>
+                           <div class="d-flex"><label class="pr-2">>=</label> <input type="text" class="form-control input-default " placeholder="0.99" readonly></div>
+                           <div class="d-flex"><label class="pr-2">>=</label> <input type="text" class="form-control input-default " placeholder="0.99" readonly></div>
+                           <div class="d-flex"><label class="pr-3">></label> <input type="text" class="form-control input-default " placeholder="0.99" readonly></div> -->
+
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6 otd-para">
+                <h3>{{'Score' | translate }}</h3>
+                <form>
+                    <div class="form-group">
+                        <ng-container *ngFor="let item of listOTD">
+                            <input type="number" 
+                            class="form-control input-default "
+                             [name]="item.id"
+                            (focusout)="onInput($event,item)"
+                            [disabled]="loggedInUser.roleID == 9 || loggedInUser.roleID == 11"
+                            [value]="item.score" [(ngModel)]="item.score">
+                        </ng-container>
+                        <!-- <input type="text" class="form-control input-default " placeholder="35" readonly>
+                            <input type="text" class="form-control input-default " placeholder="35" readonly>
+                            <input type="text" class="form-control input-default " placeholder="35" readonly>
+                            <input type="text" class="form-control input-default " placeholder="35" readonly>
+                            <input type="text" class="form-control input-default " placeholder="35" readonly>
+                            <input type="text" class="form-control input-default " placeholder="35" readonly>
+                            <input type="text" class="form-control input-default " placeholder="35" readonly>
+                            <input type="text" class="form-control input-default " placeholder="35" readonly>
+                            <input type="text" class="form-control input-default " placeholder="35" readonly> -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

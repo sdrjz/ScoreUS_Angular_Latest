@@ -1,0 +1,110 @@
+<!--**********************************
+	Content body start
+***********************************-->
+<div class="content-body">
+    <div class="container-fluid">
+
+        <!-- row -->
+        <div class="row">
+            <div class="col-lg-12 mt-5">
+                <div class="profile card card-body">
+                    <div class="profile-head">
+                        <div class="row">
+                            <div class="profile-name pt-2 col-lg-12 pl-3 pr-3 pb-0">
+                                <h4 class="mb-3 pro-name uer-font">{{'For referral' | translate}}</h4>
+                                <p class="mb-0">{{'Your organization can earn one month bonus subscription every time you refer a professional to become a paid member. Your referred new professional can choose either monthly or yearly subscription and you get one month subscription free for your entire organization' | translate}}.</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="profile card card-body px-3 pt-3 pb-0">
+                    <div class="profile-head">
+                        <div class="profile-name px-3 pt-2">
+                            <h4 class="mb-0 pro-name uer-font invite-hd">{{'Refer a Professional' | translate}}</h4>
+                        </div>
+                    </div>
+                    <div class="pro-form pt-4">
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 `pl-4 pr-4 udetail">
+                                <div class="card-body pl-0">
+                                    <div class="form-validation">
+                                        <div class="row mb-3">
+                                        <ng-container *ngFor="let item of listReferFriend" class="mb-2" >
+                                            <div class="col-md-5 col-sm-8">{{item.fullName}}</div>
+                                            <div class="col-md-5 col-sm-8">{{item.email}}</div>
+                                            <div class="col-md-2 d-flex flex-row col-sm-2">
+                                                <button (click)="onEditClick(item)" class="button_background" matTooltip="Click to edit email"><span class="material-icons">edit</span>
+                                                </button>
+                                                <button (click)="onDeleteClick(item)" class="button_background" matTooltip="Click to delete email"><span class="material-icons">delete_outline</span>
+                                                </button>
+
+                                            </div>
+                                        </ng-container>
+                                        </div>
+                                        <form class="form-valide" *ngIf="angForm"  [formGroup]="angForm"
+                                            >
+                                            <div class="form-group row">
+                                                <div class="col-lg-5">
+                                                    <input type="text" class="form-control" id="firstname"
+                                                        formControlName="firstName"  [placeholder]="'Full Name' | translate"
+                                                        maxlength="50">
+                                                    <div *ngIf="angForm.controls['firstName'].invalid && (angForm.controls['firstName'].dirty || angForm.controls['firstName'].touched)"
+                                                        class="text-danger fs-13 mt-1">
+                                                        <div *ngIf="angForm.controls['firstName'].errors.required">
+                                                            Full Name is required.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-5">
+                                                    <input type="text" class="form-control" id="email"
+                                                        formControlName="email" [placeholder]="'Email Address' | translate">
+                                                    <div *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)"
+                                                        class="text-danger fs-13 mt-1">
+                                                        <div *ngIf="angForm.controls['email'].errors.required">
+                                                            Email Address is required.
+                                                        </div>
+                                                        <div *ngIf="angForm.controls['email'].errors.pattern">
+                                                            Email must be a valid email address.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <button 
+                                                    (click)="onSaveClick()" 
+                                                    class="button_background "  
+                                                    matTooltip="Click to save email">
+                                                    {{'Add Professional' | translate}}
+                                                </button>
+                                            </div>
+                                                <!-- <span class="material-icons">add</span> -->
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                <div class="col-lg-5">
+                                                    <button type="submit"
+                                                        class="btn btn-primary profi-btn mb-4 pl-5 pr-5 pt-2 pb-2"
+                                                        (click)="onReferClick()">{{'Refer' | translate}}</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--**********************************
+	Content body end
+***********************************-->

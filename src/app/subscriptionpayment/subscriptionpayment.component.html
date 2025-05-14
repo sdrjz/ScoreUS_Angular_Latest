@@ -1,0 +1,42 @@
+<!--**********************************
+	Content body start
+***********************************-->
+
+<div class="content-body pt-0" *ngIf="[6,7,8,9,10,11].includes(loggedInUser.roleID)">
+    <div class="container-fluid">
+
+        <div class="row mt-5">
+            <div class="col-lg-12 mt-5">
+                <mat-tab-group mat-align-tabs="center" class="subcrition-nav">
+                 
+                    <mat-tab [label]="'Active Users' | translate">
+                        <app-activeusers></app-activeusers>
+                    </mat-tab> 
+                   
+                    <mat-tab [label]="'Referral' | translate" *ngIf="isReferralAllowed">
+                        <app-referral></app-referral>
+                    </mat-tab>
+                    <mat-tab [label]="'My Plan' | translate" *ngIf="[6,7,8].includes(loggedInUser.roleID)">
+                        <app-myplan></app-myplan>
+                    </mat-tab>
+                    <mat-tab [label]="'Billing' | translate">
+                        <app-billing></app-billing>
+                       
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+<!-- <div class="content-body pt-0" *ngIf="loggedInUser.roleID == 9 || loggedInUser.roleID == 11">
+    <app-referral></app-referral>
+</div>
+ -->
+
+<!--**********************************
+      Content body end
+  ***********************************-->
+  

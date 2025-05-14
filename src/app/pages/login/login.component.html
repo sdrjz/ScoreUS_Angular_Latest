@@ -1,0 +1,81 @@
+<div class="authincation h-100 login-bg">
+    <div class="container w-100 vh-100">
+        <div class="row justify-content-center h-100 align-items-center">
+            <!-- <span *ngIf="showLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> -->
+            <div class="col-lg-5 col-md-7">
+                <div class="text-center pb-5">
+                    <!-- <a [routerLink]="['/admin/index']"></a> -->
+                    <img src="assets/images/login-logo--(2).png" width="200" alt="">
+                </div>
+                <div class="authincation-content w-100">
+                    <div class="row no-gutters">
+                        <div class="col-sm-12">
+                            <div class="auth-form">
+                                <h4 class="text-center mb-4">Sign in to continue to</h4>
+                                <h4 class="text-center mb-3" style="font-weight: 600;">{{'Your company site' | translate }}</h4>
+
+                                <form [formGroup]="loginForm">
+
+                                    <!-- type="email" name="email"  -->
+                                    <input matInput class="form-control w-100" placeholder="email@address.com"
+                                        formControlName="email" />
+                                    <mat-error *ngIf="isControlHasError('email','required')">
+                                        <p>{{'Email Required' | translate }}</p>
+                                    </mat-error>
+                                    <mat-error *ngIf="isControlHasError('email','pattern')">
+                                        <p>{{'Please enter a valid email address' | translate}}</p>
+                                    </mat-error>
+
+                                    <div class="positive-relative mt-4">
+                                    <input name="password" [type]="showPassword ? 'text' : 'password'"
+                                        class="form-control pwd-control w-100" id="password-field" placeholder="Password"
+                                        formControlName="password" />
+                                    <div class="eyeico2">
+                                        <i alt="show" class="fa fa-eye-slash eye-show fa-lg"
+                                            (click)="showPassword = !showPassword" [class.hide]="showPassword"></i>
+                                        <i alt="hide" class="fa fa-eye eye-hide fa-lg"
+                                            (click)="showPassword = !showPassword" [class.hide]="!showPassword"></i>
+                                    </div>
+                                    <mat-error *ngIf="isControlHasError('password','required')">
+                                        <p>{{'Password Required' | translate }}</p>
+                                    </mat-error>
+                                    </div>
+
+                                    <div class="form-row d-flex justify-content-between mt-4 mb-2">
+                                        <div class="form-group ml-3">                                            
+                                            <div class="form-check">
+                                                <input class="form-check-input mt-1" type="checkbox" [checked]="rememberMe"  (change)="setValue()"
+                                                    id="defaultCheck1">
+                                                <label class="form-check-label mt-0" for="defaultCheck1"
+                                                    style="color:#3F4040;">
+                                                    {{'Remember' | translate }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <a [routerLink]="['/forgot-password']"
+                                                style="color:#3F4040;cursor: pointer;">{{'Forgot Password' | translate }}?</a>
+                                        </div>
+                                    </div>
+                                    <div class="text-center mt-3 mb-4  pl-5 pr-5">
+                                        <!-- <button type="submit" class="btn btn-primary btn-block">Sign in</button> -->
+                                        <!-- [routerLink]="['/admin/maindashboard']" -->
+                                        <button (click)="onsubmit()" class="btn btn-primary btn-block mb-4">{{'Sign in' | translate }}</button>
+
+                                    </div>
+                                </form>
+
+                                <div class="new-account mt-3 pt-4" style="border-top: 1px solid #3F4040;">
+                                    <p class="sinp">{{'Do not have an account'| translate}}? <a class="text-primary"
+                                            [routerLink]="['/signupwizard']"
+                                            style="color:#3F4040;cursor: pointer;"><b>{{'Sign up' | translate }}</b></a></p>
+                                    <!-- <p>Don't have an account? <a class="text-primary" [routerLink]="['/page-register']">Sign up</a></p> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

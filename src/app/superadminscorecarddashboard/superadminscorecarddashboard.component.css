@@ -1,0 +1,13 @@
+app-totalscore .total-reven {
+    padding-top: 50px !important;
+}
+
+
+.button_background{
+    background-color: none !important;
+    background: none !important;
+    padding:0px !important;
+    outline:none !important;
+    border:none !important;
+
+}

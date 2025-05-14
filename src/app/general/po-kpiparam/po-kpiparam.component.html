@@ -1,0 +1,40 @@
+<div class="content-body ">
+    <div class="container-fluid ">
+        <!-- row -->
+        <div class="row">
+            <div class="col-lg-12 deliver-nav">
+                <div class="profile card card-body px-3 pt-3 pb-3">                    
+                    <div class="row">
+                        
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-4 deliver-nav pt-4" *ngFor="let record of records">                                           
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label pr-0 larec pt-1">{{loggedInUser.roleID}}{{record.attribute | translate}}:
+                                    <!-- <button class="toolbutton" >?</button> -->
+                                </label>
+                                <div class="col-sm-4 otd-para pl-0">
+                                    <input type="number" class="form-control"  [value]="record.value"  [(ngModel)]="record.value" [disabled]="loggedInUser.roleID == 10 || loggedInUser.roleID == 11" 
+                                    oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" (input)="onInputChange($event)">
+                                </div>
+                            </div>
+                        </div> 
+                       
+                        <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-4 deliver-nav pt-4">               
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label pr-0 larec pt-1">{{'Receiving Buffer Days' | translate}}:
+                                </label>
+                                <div class="col-sm-4 otd-para pl-0">
+                                    <input type="number" class="form-control" [value]="filters.receivingBufferDays"  [(ngModel)]="filters.receivingBufferDays">
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-4 deliver-nav pt-4">               
+                            <button type="submit" class="btn btn-primary" style="border-radius: 50px;width: 30%;border:0px;white-space:nowrap;" (click)="onSubmit()" [disabled]="loggedInUser.roleID == 10">{{'Save' | translate}}</button>
+                        </div>
+                    
+                    </div>                     
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

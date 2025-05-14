@@ -1,0 +1,12 @@
+.right-code {
+    right: 0 !important;
+    position: absolute!important;
+    padding-right: 10px!important;
+}
+
+.noRecorodsMiddel {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

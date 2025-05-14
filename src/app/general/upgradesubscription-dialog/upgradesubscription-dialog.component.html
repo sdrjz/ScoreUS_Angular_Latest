@@ -1,0 +1,52 @@
+<div style="display:table !important;width:700px;">
+    <!-- <h1 mat-dialog-title>Upgrade Subscription!</h1> -->
+    <div mat-dialog-content>
+        <div *ngIf="(currentPlan.name == 'PO MANAGER' || currentPlan.name == 'SCORECARD') && (selectedPlan.name == 'SCORECARD' || selectedPlan.name == 'PO MANAGER');else else_content">
+            <p>Your subscription from <strong>{{currentPlan.descriptions | translate}}</strong> will be discontinued and switched to <strong>{{selectedPlan.descriptions | translate}}</strong></p>
+            <p><strong>From</strong> Product will be -> {{currentPlan.descriptions | translate}}</p>
+            <p><strong>To</strong> Product will be -> {{selectedPlan.descriptions | translate}}</p>
+            <p>
+                <strong>Agreement Terms:</strong> When you change your subscription type, a new agreement term for the newly selected service will begin from {{ today | date:'fullDate' }}. 
+                You will be billed for the new service right away according to the yearly or monthly subscription option from <strong>{{ today | date:'fullDate' }}</strong>. 
+            </p>
+            <p>
+                <strong>Pro-Rated Billing Adjustment:</strong> Any remaining balance from the previous subscription will be pro-rated, the difference of which will be calculated, billed or re-imbursed within 7 to 10 business days. Please contact administrator for further process at <a href="mailto:contact@scoreus.com">contact&#64;scoreus.com</a>
+            </p>
+            <p>
+                <strong>Auto-Renewals</strong> Subscriptions will automatically renew at the end of each billing period unless the subscription is canceled before the renewal date,
+                 in which case there will be no issuance of refund. 
+            </p>
+            <p>By Proceeding, you acknowledge & agree to these terms </p>
+        </div>
+        <ng-template #else_content>
+            <div *ngIf="(currentPlan.name == 'PO MANAGER' || currentPlan.name == 'SCORECARD' || currentPlan.name == 'COMPLETE') && (selectedPlan.name == 'COMPLETE');">
+                <p>Your subscription from <strong>{{currentPlan.descriptions | translate}}</strong> will be discontinued and switched to <strong>{{selectedPlan.descriptions | translate}}</strong></p>
+                <p><strong>From</strong> Product will be -> {{currentPlan.descriptions | translate}}</p>
+                <p><strong>To</strong> Product will be -> {{selectedPlan.descriptions | translate}}</p>
+                
+                <p>
+                    <strong>No Product changes during Contract Term:</strong> Upgrading to Complete product avails you access to the entire product lines. 
+                    <strong>No downgrades</strong> to Scorecard or PO Manager will be allowed during the contract term. Cancellation will result in no refunds being issued. 
+                </p>
+
+                <p>
+                    <strong>Changes at End of Term:</strong> If you wish to downgrade from Complete product, 
+                    please cancel your subscription and re-subscribe to PO Manager or Scorecard products. 
+                    <strong>No refunds</strong> will be issued, or you can choose to wait until the current subscription is up for renewal, 
+                    cancel it and then subscribe to other products. 
+                </p>
+
+                <p>
+                    <strong>Auto-Renewals</strong> Subscriptions will automatically renew at the end of each billing period unless the subscription is canceled before the renewal date,
+                    in which case there will be no issuance of refund. 
+                </p>
+                <p>By Proceeding, you acknowledge & agree to these terms </p>
+            </div>
+        </ng-template>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-dialog-close (click)="onClose('')" class="profi-btn-yes mt-4" style="width: auto;color:#fff;
+        margin: 0px auto;margin-right: 20px;">Read & Proceed</button>
+        <button mat-dialog-close (click)="onClose(null)" class="profi-btn-no mt-4" style="width: auto;margin: 0px auto;margin-left: 0px;">Cancel</button>
+    </div>
+</div>

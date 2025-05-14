@@ -1,0 +1,19 @@
+
+tr{
+    width:fit-content;
+  }
+
+  .mat-form-field{
+    padding:10px;
+    display: block;
+    position: relative;
+    flex: auto;
+    min-width: 0;
+    width: 200px;
+  }
+
+  .sub-heading {
+    display: block;
+    font-size: 0.75em; /* Adjust size as needed */
+    color: red; /* Adjust color as needed */
+  }

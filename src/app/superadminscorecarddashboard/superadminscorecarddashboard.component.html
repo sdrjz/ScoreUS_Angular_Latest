@@ -1,0 +1,329 @@
+<!--**********************************
+    Content body start
+***********************************-->
+<div class="content-body">
+    <!-- row -->
+    <!-- <div  style="width:450px !important;">
+        <div class="row">
+            <div class="col-md-9 ml-auto mt-3">
+              <div class="d-flex mb-3">
+                <p class="filter-text pr-2"><b>{{'Filter by' | translate }}</b></p>
+                <select class="red-btn" (change)="onClick($event)" [(ngModel)]="adminSetting">
+                  <option value="" selected="selected">Select</option>
+                  <option *ngFor="let item of listDropDown" [value]="item.id" >{{item.value}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+    </div> -->
+<div class="container-fluid">
+    <!-- <app-newuserreg></app-newuserreg> -->
+        
+    <div class="row" >
+      <div class="col-12" >
+              <div class="row d-flex">
+                  <div class="col-md-4 col-sm-12">
+                      <div class="d-flex mb-4"
+                      >
+                      <!-- [formControl]="startDateControl"   -->
+                      <span class="vendor-per pt-2 w-25">{{'Start date' | translate}}</span>
+                      <mat-form-field appearance="fill">
+                        <input matInput 
+                        id="startingDate"
+                        [matDatepicker]="startingDate"
+                        [formControl]="startDateControl" 
+                                style="border-radius:15px;padding-left: 15px !important;" 
+                                class="px-2" 
+                                (dateChange)="onStartDateChange($event)"
+                              >
+                              <mat-datepicker-toggle matSuffix [for]="startingDate"></mat-datepicker-toggle>
+                              <mat-datepicker #startingDate></mat-datepicker>
+                          </mat-form-field>
+                      </div>
+                      <!-- <app-comparison-ranges></app-comparison-ranges> -->
+                  </div>
+                  <div class="col-md-4 col-sm-12 mb-3 mt-3">
+                      <div class="d-flex" style="top: -16px;position: relative;"
+                      
+                      >
+                      <!-- [formControl]="endDateControl"  -->
+                      <span class="vendor-per pt-2  w-25">{{'End date' | translate }}</span>
+                      <mat-form-field appearance="fill">
+                        <input matInput 
+                        id="endingDate"
+                        [matDatepicker]="endingDate" 
+                        [formControl]="endDateControl"  
+                                style="border-radius:15px;padding-left: 15px !important;"
+                                class="px-2"
+                                (dateChange)="onEndDateChange($event)"
+                              >
+                              <mat-datepicker-toggle matSuffix [for]="endingDate"></mat-datepicker-toggle>
+                              <mat-datepicker #endingDate></mat-datepicker>
+                          </mat-form-field>
+                      </div>
+                     
+                  </div>
+                  <div class="col-md-4 col-sm-12 d-flex">
+                    <p class="filter-text pr-2"><b>{{'Filter by' | translate }}</b></p>
+                    <select class="red-btn" style="width:65%;"  (change)="onFiterChange($event)" [(ngModel)]="adminSetting">
+                      <option value="null" selected="selected">{{'Custom Date' | translate }}</option>
+                      <option *ngFor="let item of listDropDown" [value]="item.id" >{{item.value}}</option>
+                    </select>
+                  </div>
+              </div>
+      </div>
+
+  </div>
+ 
+  
+    
+    <app-superregboxes [superAdminCounts]="superAdminCounts" [dateDiff]="dateDiff" [name]="'scorecard'"></app-superregboxes>
+    <div class="row">
+        <div class="col-md-5 mb-3 pr-0">
+            <app-totalscore id="score-admin" subtitle="Total Revenue" numberScore="$2,253,258" 
+            [superAdminCounts]="superAdminCounts" 
+            [dateDiff]="dateDiff"
+            [name]="'scorecard'"
+            ></app-totalscore>
+        </div>
+     
+     
+        <div class="col-md-7">
+            <app-year-month-sign-up [name]="'scorecard'" [superAdminCounts]="superAdminCounts" [dateDiff]="dateDiff" ></app-year-month-sign-up>
+        </div>
+        
+        
+        <div class="col-sm-12 mb-3" id="totalscore" #score>
+            <mat-card class="example-card">
+              <div class="d-flex">
+                <div class="mr-auto"></div>
+                <button (click)="popUpChart('Revenue')" class="button_background"
+                  matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                </button>
+              </div>
+              <div>
+                <div class="d-flex justify-content-center w-100 pb-3">
+                  <div class="justify-content-end">
+                    <h3>{{'Revenue' | translate }}</h3>
+                  </div>
+                </div>
+      
+              </div>
+              <mat-card-content>
+                <app-twoline-basic-line-chart [superAdminVendorDashboardGraphData]="graphData" [heading]="'revenue'" (charDataEmitter)="getChartData($event)"
+                  [executeData]="executeData"></app-twoline-basic-line-chart>
+              </mat-card-content>
+            </mat-card>
+          </div>
+    </div>
+
+
+
+
+    <div class="row mb-3">
+
+        <div class="col-sm-6 mb-3" id="totalscore" #score>
+            <mat-card class="example-card">
+              <div class="d-flex">
+                <div class="mr-auto"></div>
+                <button (click)="popUpChart('New User Registration')" class="button_background"
+                  matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                </button>
+              </div>
+              <div>
+                <div class="d-flex justify-content-center w-100 pb-3">
+                  <div class="justify-content-end">
+                    <h3>{{'New User Registration' | translate }}</h3>
+                  </div>
+                </div>
+      
+              
+              </div>
+              <mat-card-content>
+                <app-twoline-basic-line-chart [superAdminVendorDashboardGraphData]="graphData" [heading]="'newUserRegistration'" (charDataEmitter)="getChartData($event)"
+                  [executeData]="executeData"></app-twoline-basic-line-chart>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <div class="col-sm-6 mb-3" id="totalscore" #score>
+            <mat-card class="example-card">
+              <div class="d-flex">
+                <div class="mr-auto"></div>
+                <button (click)="popUpChart('Active User')" class="button_background"
+                  matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                </button>
+              </div>
+              <div>
+                <div class="d-flex justify-content-center w-100 pb-3">
+                  <div class="justify-content-end">
+                    <h3>{{'Active User' | translate }}</h3>
+                  </div>
+                </div>
+      
+              </div>
+              <mat-card-content>
+                <app-twoline-basic-line-chart [superAdminVendorDashboardGraphData]="graphData" [heading]="'activeUser'" (charDataEmitter)="getChartData($event)"
+                  [executeData]="executeData"></app-twoline-basic-line-chart>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+
+
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-6 mb-3" id="totalscore" #score>
+            <mat-card class="example-card">
+              <div class="d-flex">
+                <div class="mr-auto"></div>
+                <button (click)="popUpChart('Active Time On Site')" class="button_background"
+                  matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                </button>
+              </div>
+              <div>
+                <div class="d-flex justify-content-center w-100 pb-3">
+                  <div class="justify-content-end">
+                    <h3>{{'Active Time On Site' | translate }}</h3>
+                  </div>
+                </div>
+      
+              </div>
+              <mat-card-content>
+                <app-twoline-basic-line-chart [superAdminVendorDashboardGraphData]="graphData" [heading]="'activeTimeOnSite'" (charDataEmitter)="getChartData($event)"
+                  [executeData]="executeData"></app-twoline-basic-line-chart>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <div class="col-sm-6 mb-3" id="totalscore" #score>
+            <mat-card class="example-card">
+              <div class="d-flex">
+                <div class="mr-auto"></div>
+                <button (click)="popUpChart('Referral SignUp')" class="button_background"
+                  matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                </button>
+              </div>
+              <div>
+                <div class="d-flex justify-content-center w-100 pb-3">
+                  <div class="justify-content-end">
+                    <h3>{{'Referral Sign Up' | translate }}</h3>
+                  </div>
+                </div>
+      
+              </div>
+              <mat-card-content>
+                <app-twoline-basic-line-chart [superAdminVendorDashboardGraphData]="graphData" [heading]="'referralSignUp'" (charDataEmitter)="getChartData($event)"
+                  [executeData]="executeData"></app-twoline-basic-line-chart>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+    </div>
+
+    <div class="row mb-3">
+
+   
+        <div class="col-sm-6 mb-3" id="totalscore" #score>
+            <mat-card class="example-card">
+              <div class="d-flex">
+                <div class="mr-auto"></div>
+                <button (click)="popUpChart('Discontinued Registration')" class="button_background"
+                  matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                </button>
+              </div>
+              <div>
+                <div class="d-flex justify-content-center w-100 pb-3">
+                  <div class="justify-content-end">
+                    <h3>{{'Discontinued Registration' | translate }}</h3>
+                  </div>
+                </div>
+      
+              </div>
+              <mat-card-content>
+                <app-twoline-basic-line-chart [superAdminVendorDashboardGraphData]="graphData" [heading]="'discontinuedRegistration'" (charDataEmitter)="getChartData($event)"
+                  [executeData]="executeData"></app-twoline-basic-line-chart>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <div class="col-sm-6 mb-3" id="totalscore" #score>
+            <mat-card class="example-card">
+              <div class="d-flex">
+                <div class="mr-auto"></div>
+                <button (click)="popUpChart('Cancel Registration')" class="button_background"
+                  matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                </button>
+              </div>
+              <div>
+                <div class="d-flex justify-content-center w-100 pb-3">
+                  <div class="justify-content-end">
+                    <h3>{{'Cancel Registration' | translate }}</h3>
+                  </div>
+                </div>
+      
+              </div>
+              <mat-card-content>
+                <app-twoline-basic-line-chart [superAdminVendorDashboardGraphData]="graphData" [heading]="'cancelRegistration'" (charDataEmitter)="getChartData($event)"
+                  [executeData]="executeData"></app-twoline-basic-line-chart>
+              </mat-card-content>
+            </mat-card>
+          </div>
+    </div>
+
+    <div class="row mb-3">
+
+        <div class="col-sm-6 mb-3" id="totalscore" #score>
+            <mat-card class="example-card">
+              <div class="d-flex">
+                <div class="mr-auto"></div>
+                <button (click)="popUpChart('Yearly Subscription')" class="button_background"
+                  matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                </button>
+              </div>
+              <div>
+                <div class="d-flex justify-content-center w-100 pb-3">
+                  <div class="justify-content-end">
+                    <h3>{{'Yearly Subscription' | translate }}</h3>
+                  </div>
+                </div>
+      
+              </div>
+              <mat-card-content>
+                <app-twoline-basic-line-chart [superAdminVendorDashboardGraphData]="graphData" [heading]="'yearlySubscription'" (charDataEmitter)="getChartData($event)"
+                  [executeData]="executeData"></app-twoline-basic-line-chart>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <div class="col-sm-6 mb-3" id="totalscore" #score>
+            <mat-card class="example-card">
+              <div class="d-flex">
+                <div class="mr-auto"></div>
+                <button (click)="popUpChart('Monthly Subscription')" class="button_background"
+                  matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                </button>
+              </div>
+              <div>
+                <div class="d-flex justify-content-center w-100 pb-3">
+                  <div class="justify-content-end">
+                    <h3>{{'Monthly Subscription' | translate }}</h3>
+                  </div>
+                </div>
+      
+              </div>
+              <mat-card-content>
+                <app-twoline-basic-line-chart [superAdminVendorDashboardGraphData]="graphData" [heading]="'monthlySubscription'" (charDataEmitter)="getChartData($event)"
+                  [executeData]="executeData"></app-twoline-basic-line-chart>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+    </div>
+</div>
+</div>
+
+<!--**********************************
+    Content body end
+***********************************-->

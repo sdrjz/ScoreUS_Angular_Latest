@@ -1,0 +1,22 @@
+.export-button{
+    background: #EC1C24;
+  border: 0;
+  font-size: 20px;
+  font-weight: 500;
+  border-radius: 25px;
+  color: #fff !important;
+  width: 243px;
+  height: 42px;
+  margin-left: 28px;
+}
+
+
+.export-button:hover{
+    background-color: #444;
+    
+}
+.mat-form-field-infix {
+    top: 0px !important;
+    }
+
+ 

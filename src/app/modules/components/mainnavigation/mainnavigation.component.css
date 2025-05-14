@@ -1,0 +1,15 @@
+.child-li:hover
+{
+    padding-left: 4.5rem;
+    text-decoration: none;
+}
+
+/* .child-li > span:hover{
+    color: #bc1a20 !important;
+
+} */
+.child-nav:hover{
+    color: #bc1a20 !important;
+
+}
+

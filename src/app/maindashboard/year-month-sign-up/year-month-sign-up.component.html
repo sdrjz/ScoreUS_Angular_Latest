@@ -1,0 +1,69 @@
+<div class="new-use active-user pl-5 pr-5" style="height: 93%;">
+    <div class="row">
+        <div class="col-md-6 col-sm-5">
+        <p>{{'Yearly Sign-Up' | translate }}</p>
+            <h2 *ngIf="superAdminCounts && name == 'all'">{{superAdminCounts[0]?.yearlyOverALLSubsctription}}</h2>
+            <h3 *ngIf="name == 'all'">{{getPercentageValue('yearlyOverALLSubsctription')}}% <img [attr.src]="getPercentageValue('yearlyOverALLSubsctription') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>            
+        
+            <h2 *ngIf="superAdminCounts && name == 'po'">{{superAdminCounts[0]?.yearlyPOSubsctription}}</h2>
+            <h3 *ngIf="name == 'po'">{{getPercentageValue('yearlyPOSubsctription')}}% <img [attr.src]="getPercentageValue('yearlyPOSubsctription') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>            
+        
+            <h2 *ngIf="superAdminCounts && name == 'scorecard'">{{superAdminCounts[0]?.yearlyVendorSubsctription}}</h2>
+            <h3 *ngIf="name == 'scorecard'">{{getPercentageValue('yearlyVendorSubsctription')}}% <img [attr.src]="getPercentageValue('yearlyPOSubsctription') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>            
+        
+            <h2 *ngIf="superAdminCounts && name == 'complete'">{{superAdminCounts[0]?.yearlyALLSubsctription}}</h2>
+            <h3 *ngIf="name == 'complete'">{{getPercentageValue('yearlyALLSubsctription')}}% <img [attr.src]="getPercentageValue('yearlyALLSubsctription') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>            
+        
+        </div>
+        <div class="col-md-6 col-sm-5 ml-auto">
+            <p>{{'Monthly Sign-Up' |  translate }}</p>
+            <h2 *ngIf="superAdminCounts && name == 'all'">{{superAdminCounts[0]?.monthlyOverALLSubsctription}}</h2>
+            <h3 *ngIf="name == 'all'">{{getPercentageValue('monthlyOverALLSubsctription')}}% <img [attr.src]="getPercentageValue('monthlyOverALLSubsctription') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>           
+        
+            <h2 *ngIf="superAdminCounts && name == 'po'">{{superAdminCounts[0]?.monthlyPOSubsctription}}</h2>
+            <h3 *ngIf="name == 'po'">{{getPercentageValue('monthlyPOSubsctription')}}% <img [attr.src]="getPercentageValue('monthlyPOSubsctription') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>           
+        
+            <h2 *ngIf="superAdminCounts && name == 'scorecard'">{{superAdminCounts[0]?.monthlyVendorSubsctription}}</h2>
+            <h3 *ngIf="name == 'scorecad'">{{getPercentageValue('monthlyVendorSubsctription')}}% <img [attr.src]="getPercentageValue('monthlyVendorSubsctription') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>           
+        
+            <h2 *ngIf="superAdminCounts && name == 'complete'">{{superAdminCounts[0]?.monthlyALLSubsctription}}</h2>
+            <h3 *ngIf="name == 'complete'">{{getPercentageValue('monthlyALLSubsctription')}}% <img [attr.src]="getPercentageValue('monthlyALLSubsctription') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>           
+        
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-5 mt-3 pt-3">
+            <p>{{'Cancel Users' | translate }}</p>
+            
+            <h2 *ngIf="superAdminCounts && name== 'all'">{{superAdminCounts[0]?.cancelOverALLSubscription}}</h2>
+            <h3 *ngIf="name == 'all'">{{getPercentageValue('cancelOverALLSubscription')}}% <img [attr.src]="getPercentageValue('cancelOverALLSubscription') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>            
+        
+            <h2 *ngIf="superAdminCounts && name== 'po'">{{superAdminCounts[0]?.cancelPOSubscription}}</h2>
+            <h3 *ngIf="name == 'po'">{{getPercentageValue('cancelPOSubscription')}}% <img [attr.src]="getPercentageValue('cancelPOSubscription') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>            
+        
+            <h2 *ngIf="superAdminCounts && name== 'scorecard'">{{superAdminCounts[0]?.cancelVendorSubscription}}</h2>
+            <h3 *ngIf="name == 'scorecard'">{{getPercentageValue('cancelVendorSubscription')}}% <img [attr.src]="getPercentageValue('cancelVendorSubscription') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>            
+        
+            <h2 *ngIf="superAdminCounts && name== 'complete'">{{superAdminCounts[0]?.cancelALLSubscription}}</h2>
+            <h3 *ngIf="name == 'complete'">{{getPercentageValue('cancelALLSubscription')}}% <img [attr.src]="getPercentageValue('cancelALLSubscription') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>            
+        
+        </div>
+        <div class="col-md-6 col-sm-5 ml-auto mt-3 pt-3">
+            <p>{{'Discontinued Users' | translate }}</p>
+            
+            <h2 *ngIf="superAdminCounts && name == 'all'">{{superAdminCounts[0]?.discontinuedOverALL}}</h2>
+            <h3 *ngIf="name == 'all'">{{getPercentageValue('discontinuedOverALL')}}% <img [attr.src]="getPercentageValue('discontinuedOverALL') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>           
+        
+            <h2 *ngIf="superAdminCounts && name == 'scorecard'">{{superAdminCounts[0]?.discontinuedVendor}}</h2>
+            <h3 *ngIf="name == 'po'">{{getPercentageValue('discontinuedVendor')}}% <img [attr.src]="getPercentageValue('discontinuedVendor') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>           
+        
+            <h2 *ngIf="superAdminCounts && name == 'po'">{{superAdminCounts[0]?.discontinuedPO}}</h2>
+            <h3 *ngIf="name == 'scorecard'">{{getPercentageValue('discontinuedPO')}}% <img [attr.src]="getPercentageValue('discontinuedPO') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>           
+        
+            <h2 *ngIf="superAdminCounts && name == 'complete'">{{superAdminCounts[0]?.discontinuedALL}}</h2>
+            <h3 *ngIf="name == 'complete'">{{getPercentageValue('discontinuedALL')}}% <img [attr.src]="getPercentageValue('discontinuedALL') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate }}</span></h3>           
+        
+        
+        </div>
+    </div>
+</div>

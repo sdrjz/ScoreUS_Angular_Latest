@@ -1,0 +1,42 @@
+<div class="content-body pt-0">
+    <div class="container-fluid">
+        
+        <div class="row mt-5">
+            <div class="col-lg-12 mt-5">
+                <mat-tab-group mat-align-tabs="center" class="subcrition-nav">
+                    <mat-tab *ngIf="[6,8,10,11].includes(loggedInUser?.roleID)" [label]="'Open Order Report' | translate" >
+                      <!-- OPENORDER -->
+                       
+                       
+                      <app-po-open-order-report style="margin-bottom: -3rem !important;"></app-po-open-order-report>
+                    </mat-tab>
+                    
+                    <mat-tab *ngIf="[6,7,9,11].includes(loggedInUser?.roleID)" [label]="'PO History' | translate" >
+                        <app-po-history-info style="margin-bottom: -3rem !important;"></app-po-history-info>
+                    </mat-tab>
+                    <mat-tab *ngIf="[6,7,9,11].includes(loggedInUser?.roleID)" [label]="'Non conformance report' | translate">
+                        <app-non-conformance-report style="margin-bottom: -1.24rem !important;"></app-non-conformance-report>
+                    </mat-tab>
+                    <mat-tab   [label]="'Buyer' | translate">
+                        <app-buyer style="margin-bottom: -1.24rem !important;"></app-buyer>
+                    </mat-tab>
+                    <mat-tab  [label]="'Vendor-Commodity' | translate">
+                        <app-vendor-commodity style="margin-bottom: -1.24rem !important;"></app-vendor-commodity>
+                    </mat-tab>
+                    <mat-tab  [label]="'Plant' | translate">
+                        <app-plant></app-plant>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+    
+
+
+
+
+
+

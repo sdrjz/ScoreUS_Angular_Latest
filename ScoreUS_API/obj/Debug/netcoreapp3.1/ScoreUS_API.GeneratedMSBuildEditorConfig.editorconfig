@@ -1,0 +1,5 @@
+is_global = true
+build_property.RootNamespace = ScoreUS_API
+build_property.ProjectDir = C:\ScoreUS_Project\Frontend\ScoreUS_API\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

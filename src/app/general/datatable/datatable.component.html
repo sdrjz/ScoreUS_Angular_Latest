@@ -1,0 +1,167 @@
+<mat-card >
+    <!-- class="max-w-sm" -->
+    <div class="responsive" style="width: 100%!important;">
+        <div class="d-flex align-items-center justify-content-between pb-2 border-b">
+            <ng-content select="title"></ng-content>
+            <div class="d-flex align-items-center">
+                <mat-form-field style="margin-bottom: -1.25em;max-width: 24rem;" class="-mt-1">
+                    <mat-label>{{'Search' | translate }}</mat-label>
+                    <input type="text" (keyup)="applyFilter($event)" matInput placeholder="Search Here ..."
+                        autocomplete="Off" />
+                </mat-form-field>
+
+                <!-- <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <div mat-menu-item [matMenuTriggerFor]="columnFilter">
+                        <mat-icon fontSet="material-icons-round">checklist</mat-icon>
+                        <span>Filter Columns</span>
+                    </div>
+                    <div mat-menu-item (click)="processExport()">
+                        <mat-icon fontSet="material-icons-round">file_download</mat-icon>
+                        <span>Export</span>
+                    </div>
+                </mat-menu>
+
+                <mat-menu #columnFilter="matMenu" (click)="$event.stopPropagation()">
+                    <div class="px-2 py-1" *ngFor="let col of allColumns" (click)="$event.stopPropagation()">
+                        <mat-checkbox class="block" [checked]="col.show" (change)="col.show = $event.checked"
+                            color="primary">{{ col.name }}</mat-checkbox>
+                    </div>
+                </mat-menu> -->
+                <!-- <mat-select [formControl]="displayedColumns" multiple class="border">
+            <mat-option *ngFor="let column of columns" [value]="column.def">{{
+                column.name
+            }}</mat-option>
+            </mat-select> -->
+
+                <!-- <div *ngIf="isQuestion == true">
+            <button mat-button color="primary" (click)="onFilterClick()">
+            <mat-icon>filter_list</mat-icon>
+            </button>
+            </div> -->
+            </div>
+        </div>
+
+        <!-- <mat-card-content class="relative " style="overflow-x:auto !important;" >
+            <table 
+            style="overflow-x:auto;" mat-table 
+            [dataSource]="dataSource" 
+            matSort 
+            class="w-75" >
+                <ng-container *ngFor="let column of filteredColumns">
+                <ng-container [matColumnDef]="column.def" [sticky]="column?.isSticky" >
+                    
+                        <ng-container *ngIf="column.noSort; else noSort">
+                            <th  class=" px-2 text-center whitespace-nowrap" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{ column.name | translate }} 
+                            
+                            </th>
+                        </ng-container>
+                        <ng-template #noSort>
+                            <th class=" px-2 text-center whitespace-nowrap" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                <mat-checkbox style="margin-top:1rem !important;" *ngIf="column.name == 'Compare'" (change)="onHeaderCheckBoxTick($event)"></mat-checkbox> 
+                                &nbsp;&nbsp;
+                                {{ column.name | translate }}  
+                            </th>
+                        </ng-template>
+
+                    <td class="px-2 whitespace-nowrap" mat-cell *matCellDef="let element">
+                        <ng-container *ngIf="column.projection" class="px-2">
+                            <ng-template *ngTemplateOutlet="
+                    templateOutlet;
+                    context: {
+                        $implicit: column,
+                        element: element,
+                        value: columnValue(element, column)
+                    }
+                    "></ng-template>
+                        </ng-container>
+                        <span *ngIf="!column.projection" class="px-2">
+                        {{
+                            columnValue(element, column)
+                            }}</span>
+                    </td>
+                </ng-container>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+                <tr *matNoDataRow>
+                    <td class="p-2 text-danger  whitespace-nowrap" colspan="100%">
+                        <span *ngIf="fetching">{{'No Record' | translate}}</span>
+                        <span *ngIf="!fetching && !dataSource?.length">{{'No Record' | translate }}</span>
+                    </td>
+                </tr>
+            </table>
+        </mat-card-content> -->
+
+
+        <mat-card-content class="relative w-100" style="overflow-x:auto !important;overflow-y: auto !important;height:500px !important;" >
+            <table  mat-table [dataSource]="dataSource" matSort class="w-100"  (matSortChange)="onClick('a',$event)">
+                <ng-container *ngFor="let column of filteredColumns" class="w-100 ml-5 mr-5">
+                <ng-container [matColumnDef]="column.def" [sticky]="column?.isSticky" class="w-100">
+                    
+                        <ng-container *ngIf="column.noSort; else noSort" class="w-100">
+                            <th  class=" px-2 text-center whitespace-nowrap w-100" (click)="onHeadingClick(column.name,$event)" style="width: fit-content !important;" mat-header-cell *matHeaderCellDef mat-sort-header
+                            style="font-size: 16px;font-weight: 600;color: #3F4040;white-space: nowrap;cursor:pointer;">
+                                {{ column.name | translate}}
+                              
+                            </th>
+                            
+                        </ng-container>
+                        <ng-template #noSort class="w-100">
+                            <th class=" px-2 text-center whitespace-nowrap w-100" mat-header-cell *matHeaderCellDef mat-sort-header
+                                style="font-size: 16px;font-weight: 600;color: #3F4040;white-space: nowrap;cursor:pointer;" (click)="onHeadingClick(column,$event)">
+                                <mat-checkbox style="margin-top:1rem !important;" *ngIf="column.def == 'compare'" (change)="onHeaderCheckBoxTick($event)"></mat-checkbox> 
+                                &nbsp;&nbsp;
+                                <div style="text-align: left;">
+                                    <span>{{ column.name | translate }}</span>
+                                
+                                    <span class="sub-heading" *ngIf="column.hasOwnProperty('subHeading')" >{{column.subHeading}}</span>
+                                </div>
+                            </th>
+                        </ng-template>
+    
+                    <td class="px-2 whitespace-nowrap" mat-cell *matCellDef="let element" class="w-100 px-3">
+                        <ng-container *ngIf="column.projection" class="w-100 px-3">
+                            <ng-template *ngTemplateOutlet="
+                      templateOutlet;
+                      context: {
+                        $implicit: column,
+                        element: element,
+                        value: columnValue(element, column)
+                      }
+                    " class="w-100 px-3"></ng-template>
+                        </ng-container>
+                        <span *ngIf="!column.projection" class="w-100 px-3">
+                          {{
+                            columnValue(element, column)
+                            }}</span>
+                    </td>
+                </ng-container>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true" class="w-100"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns" class="w-100"></tr>
+    
+                <tr *matNoDataRow class="w-100">
+                    <td class="p-2 text-danger  whitespace-nowrap" colspan="100%">
+                        <span *ngIf="fetching">'No Record'</span>
+                        <span *ngIf="!fetching && !dataSource?.length">'No Record'</span>
+                    </td>
+                </tr>
+            </table>
+        </mat-card-content>
+
+        
+        
+        <mat-paginator 
+        [pageSize]="pageSize" 
+        [pageSizeOptions]="pageSizeOption" 
+        aria-label="Select page of search results">
+        </mat-paginator>
+    </div>
+</mat-card>
+<!-- (page)="paginatorUpdated($event)" 
+      [length]="totalRecords" -->

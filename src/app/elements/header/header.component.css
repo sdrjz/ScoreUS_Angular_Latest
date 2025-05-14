@@ -1,0 +1,21 @@
+.mat-dialog-container {
+    display: table !important;
+    width: 25% !important;
+    min-width: 25%;
+    display: block !important;
+    position: absolute;
+    resize: both;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    height: auto !important;
+    margin: 0 auto;
+    top: 20% !important;
+  }
+
+  .language{
+      margin-top: 22px;
+      padding: 10px;
+      background: none;
+      border: none;
+  }

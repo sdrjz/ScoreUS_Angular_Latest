@@ -1,0 +1,14 @@
+<div class="w-100 h-100">
+<h1 mat-dialog-title>{{heading}}</h1>
+<div mat-dialog-content>{{message}}</div>
+<div mat-dialog-actions class="d-flex">
+    <button mat-raised-button  color="warn" (click)="onClose(null)">No</button>
+    <div class="flex flex-grow-1 justify-content-start">
+
+    </div>
+    <div>
+        <button mat-raised-button  color="primary" (click)="onClose('')">Yes</button>
+
+    </div>
+</div>
+</div>

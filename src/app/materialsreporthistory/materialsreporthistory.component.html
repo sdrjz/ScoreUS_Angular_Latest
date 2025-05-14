@@ -1,0 +1,72 @@
+<!--**********************************
+	Content body start
+***********************************-->
+<div class="content-body">
+    <div class="container-fluid">
+        <!-- <app-reporthistorydetail subtitle="Vendors Report History"></app-reporthistorydetail> -->
+        <app-app-datahistorytable 
+        style="margin-top: 22px!important; overflow-x: auto !important; overflow-y: auto !important;" 
+        defaultSortBy="name"
+        [requestType]="'GET'"
+        [apiRequestData]="apiRequestData"
+        [url]="getProjectsUrl"
+        [columns]="columns" 
+        [route]="getProjectsUrl"
+        >
+        <div ngProjectAs="title">
+          <div class="d-flex flex-row">
+            <h4 class="text-lg font-medium">{{'Material report history' | translate }}</h4>
+            <button style="margin-left:5px;height:23px" class="toolbutton" [matTooltip]="tips.poHistoryRawDataSetting" [matTooltipPosition]="'above'" >?</button>
+          </div>
+          </div>
+
+            <ng-template let-column let-data="element" let-value="value">
+                <div *ngIf="column.def == 'status'" class="flex items-center space-x-2">
+                    <mat-slide-toggle [checked]="value == true" (change)="onToggleChange($event, data)">
+                    </mat-slide-toggle>
+                </div>
+
+                <div *ngIf="column.def == 'compare'" sticky>
+                    <mat-checkbox [checked]="isVendorSelected(data)" (change)="onCheckBoxClick($event,data)"></mat-checkbox>
+                </div>
+
+
+                <div *ngIf="column.def == 'action'" class="flex flex-row justify-start">
+                  <span><a style="color:#fff!important;" href="{{data.path}}" target="_blank"
+                          class="profi-btn mb-4 pl-3 pr-3 mt-3 pt-2 pb-2"> {{'Download' | translate }} </a></span>
+              </div>
+
+
+                <span *ngIf="column.def == 'pO_Post_Rec_Date'" class="px-3">
+                  {{ (data.pO_Post_Rec_Date.split(" ")[0])  }}
+                </span>
+                <span *ngIf="column.def == 'pO_Frist_Delivery_Date'" class="px-3">
+                  {{ (data.pO_Frist_Delivery_Date.split(" ")[0])  }}
+                </span>
+                <span *ngIf="column.def == 'pO_Issue_Date'" class="px-3">
+                  {{ (data.pO_Issue_Date.split(" ")[0])  }}
+                </span>
+                <span *ngIf="column.def == 'createdAt'" class="px-3">
+                  {{ (data.createdAt.split(" ")[0] ) }}
+                </span>
+                <span *ngIf="column.def == 'updatedAt'" class="px-3">
+                  {{ (data.updatedAt.split(" ")[0])  }}
+                </span>
+
+
+                <div *ngIf="column.def == 'view'" class="flex flex-row justify-start">
+                    <button mat-stroked-button color="primary">
+                        {{'Delete' | translate }}
+                    </button>
+                    <button mat-stroked-button color="primary">
+                        {{'Update' | translate }}
+                    </button>
+                </div>
+            </ng-template>
+        </app-app-datahistorytable>
+  
+    </div>
+  </div>
+  <!--**********************************
+      Content body end
+  ***********************************-->

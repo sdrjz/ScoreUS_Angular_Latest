@@ -1,0 +1,456 @@
+<!--**********************************
+    Content body start
+***********************************-->
+<div class="content-body">
+    <!-- (change)="onClick($event)" [(ngModel)]="adminSetting" -->
+    
+    <!-- row -->
+    <div class="container-fluid">
+        
+        
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="row" style="font-weight: bold;">
+                    <div class="col-md-4">{{'Open PO Up To' | translate}}:</div>
+                    <div class="col-md-8">{{result?.upToPoIssueDate}}</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <!-- <div class="row">
+                    <div class="col-md-5">
+                        <label >Filter By</label>
+                    </div>
+                    <div class="col-md-7 pr-4">
+                        <select class="red-btn" (change)="changeCardDays()" [(ngModel)]="selectFilter">
+                            <option value="currentMonth">Current Month</option>
+                            <option value="currentYear">Current Year</option>
+                        </select>
+                    </div>
+                </div> -->
+                <select class="red-btn" style="width: 300px;float: right;" (change)="exportDetailReport()" [(ngModel)]="exportReportName">
+                    <option value="">{{'Detail Report' | translate}}</option>
+                    <option value="allopenorder">{{'All Open Order' | translate}}</option>
+                    <option value="pastdueorders">{{'Pastdue Orders' | translate }}</option>
+                    <option value="ackneededorders">{{"Ack'd Needed Orders" | translate }}</option>
+                    <option value="futurepastdueorders">{{"Future Pastdue Orders" | translate}}</option>
+                    <option value="leadtimecheckorders">{{"Lead Time Check Orders" | translate}}</option>
+                </select>
+            </div>
+
+        </div>
+        
+        <!-- <app-pouser-filterby-dropdown></app-pouser-filterby-dropdown> -->
+        
+        <div *ngIf="showCards">
+            <div class="row" >
+                <div class="col-xl-3 col-md-3 col-sm-6 m-6 mb-4">
+                    <div class="new-use  ">
+                        <p class="pb-4 mb-3">{{"Pastdue PO" | translate}}</p>
+                        <div class="row">
+                            <div class="col-xl-8 col-md-12 col-sm-12 col-12">
+                                <h2 style="white-space: nowrap;">{{result.totalPastduePO[0]?.pastLineCount}} {{'Lines' | translate}} </h2>
+                            </div>
+                            <div class="col-xl-4 col-md-12 col-sm-12 col-12" style="padding: 0px;margin: 0px;">
+                                <h2>{{result.totalPastduePO[0]?.pastLineCountPercentage}}%</h2>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-xl-8 col-md-12 col-sm-12 col-12">
+                                <h2>${{result.totalPastduePO[0]?.pastTotalValue.toLocaleString()}}</h2></div>
+                            <div class="col-xl-4 col-md-12 col-sm-12 col-12" style="padding: 0px;margin: 0px;">
+                                <h2>{{result.totalPastduePO[0]?.pastTotalValuePercentage}}%</h2>
+                            </div>
+                        </div>
+
+                        <div class="new-use-red-b active-user-box">
+                            <div class="align-items-center"><img src="../assets/images/activeuser.png" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-md-3 col-sm-6 mb-4">
+                    <div class="new-use active-user">
+                        <p class="pb-4 mb-3">{{"Ack'd Needed PO" | translate}}</p>
+                        <div class="row">
+                            <div class="col-xl-8 col-md-12 col-sm-12 col-12">
+                                <h2 style="white-space: nowrap;">{{result.totalAcknowledgementPO[0]?.acknowledgementLineCount}} {{'Lines' | translate}} </h2>
+                            </div>
+                            <div class="col-xl-4 col-md-12 col-sm-12 col-12" style="padding: 0px;margin: 0px;">
+                                <h2>{{result.totalAcknowledgementPO[0]?.acknowledgementLineCountPercentage}}%</h2>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xl-8 col-md-12 col-sm-12 col-12">
+                                <h2>${{result.totalAcknowledgementPO[0]?.acknowledgementTotalValue.toLocaleString()}}</h2></div>
+                            <div class="col-xl-4 col-md-12 col-sm-12 col-12" style="padding: 0px;margin: 0px;">
+                                <h2>{{result.totalAcknowledgementPO[0]?.acknowledgementTotalValuePercentage}}%</h2>
+                            </div>
+                        </div>
+
+                        <!-- <h2>{{result.totalAcknowledgementPO[0]?.acknowledgementLineCount}} Lines <span class="pl-3">{{result.totalAcknowledgementPO[0]?.acknowledgementLineCountPercentage}}%</span></h2>
+                        <h2>${{result.totalAcknowledgementPO[0]?.acknowledgementTotalValue.toLocaleString()}} <span class="pl-3">{{result.totalAcknowledgementPO[0]?.acknowledgementTotalValuePercentage}}%</span></h2> -->
+                        <div class="new-use-red-b">
+                            <div class="align-items-center"><img src="../assets/images/ppv.png" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-md-3 col-sm-6 mb-4">
+                    <div class="new-use ">
+                        <p class="pb-0 mb-0">{{"Future Pastdue PO" | translate}}</p>
+                        <div class="form-group row mb-1">
+                            <div class="col-sm-3 otd-para pl-1 pr-2 pb-1">
+                                <input type="number" class="form-control" min="0" placeholder="14" (change)="changeCardDays()" [(ngModel)]="cardDays" :value="{{filters.days}}" 
+                                oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
+                                style="width:50px;text-align: center;margin-left: 10px;">
+                            </div>
+                            <label class="col-sm-6 col-form-label larec pt-0 ms-2"
+                                style="color:#fff;font-size: 16px;font-weight: 400;">{{'Days' | translate}}</label>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-8 col-md-12 col-sm-12 col-12">
+                                <h2 style="white-space: nowrap;">{{result.totalFuturePastPO[0]?.futurePastLineCount}} {{'Lines' | translate}} </h2>
+                            </div>
+                            <div class="col-xl-4 col-md-12 col-sm-12 col-12" style="padding: 0px;margin: 0px;">
+                                <h2>{{result.totalFuturePastPO[0]?.futurePastLineCountPercentage}}%</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-8 col-md-12 col-sm-12 col-12">
+                                <h2>${{result.totalFuturePastPO[0]?.futurePastTotalValue.toLocaleString()}}</h2></div>
+                            <div class="col-xl-4 col-md-12 col-sm-12 col-12" style="padding: 0px;margin: 0px;">
+                                <h2>{{result.totalFuturePastPO[0]?.futurePastTotalValuePercentage}}%</h2>
+                            </div>
+                        </div>
+                        <!-- <h2>{{result.totalFuturePastPO[0]?.futurePastLineCount}} Lines <span class="pl-3">{{result.totalFuturePastPO[0]?.futurePastLineCountPercentage}}%</span></h2>
+                        <h2>${{result.totalFuturePastPO[0]?.futurePastTotalValue.toLocaleString()}} <span class="pl-3">{{result.totalFuturePastPO[0]?.futurePastTotalValuePercentage}}%</span></h2> -->
+                        <div class="new-use-red-b active-user-box">
+                            <div class="align-items-center"><img src="../assets/images/materialregistrations-icon.png" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-md-3 col-sm-6 mb-4">
+                    <div class="new-use active-user">
+                        <p class="pb-4 mb-3">{{"Lead Time Check PO" | translate}}</p>
+                        <div class="row">
+                            <div class="col-xl-8 col-md-12 col-sm-12 col-12">
+                                <h2 style="white-space: nowrap;">{{result.totalLeadTimeCheackLinePO[0]?.leadTimeCheackLineCount}} {{'Lines' | translate}} </h2>
+                            </div>
+                            <div class="col-xl-4 col-md-12 col-sm-12 col-12" style="padding: 0px;margin: 0px;">
+                                <h2>{{result.totalLeadTimeCheackLinePO[0]?.leadTimeCheackCountPercentage}}%</h2>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xl-8 col-md-12 col-sm-12 col-12">
+                                <h2>${{result.totalLeadTimeCheackLinePO[0]?.leadTimeCheackTotalValue.toLocaleString()}}</h2></div>
+                            <div class="col-xl-4 col-md-12 col-sm-12 col-12" style="padding: 0px;margin: 0px;">
+                                <h2>{{result.totalLeadTimeCheackLinePO[0]?.leadTimeCheackTotalValuePercentage}}%</h2>
+                            </div>
+                        </div>
+
+                        <!-- <h2>{{result.totalLeadTimeCheackLinePO[0]?.leadTimeCheackLineCount}} Lines <span class="pl-3">{{result.totalLeadTimeCheackLinePO[0]?.leadTimeCheackCountPercentage}}%</span></h2>
+                        <h2>${{result.totalLeadTimeCheackLinePO[0]?.leadTimeCheackTotalValue.toLocaleString()}} <span class="pl-3">{{result.totalLeadTimeCheackLinePO[0]?.leadTimeCheackTotalValuePercentage}}%</span></h2> -->
+                        <div class="new-use-red-b">
+                            <div class="align-items-center"><img src="../assets/images/newuser.png" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" >
+                <div class="col-xl-3 col-md-3 col-sm-6 mb-4">
+                    <div class="new-use " style="background-color: #2e2e2ec4;">
+                        <p class="pb-4 mb-3">{{"All Open PO" | translate }}</p>
+                        <div class="row">
+                            <div class="col-5">
+                                <h2 style="white-space: nowrap;">{{result.totalOpenPO[0]?.lines}} {{'Lines' | translate}} </h2>
+                            </div>
+                            <div class="col-7">
+                                <h2>${{result.totalOpenPO[0]?.all_Spend.toLocaleString() | number:'1.2-2'}}</h2>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-5">
+                                <h2>{{'Total Material' | translate}}</h2>
+                            </div>
+                            <div class="col-7">
+                                <h2>{{result.totalOpenPO[0]?.totalMaterial}}</h2>
+                            </div>
+                        </div>
+
+                        <!-- <h2>{{result.totalOpenPO[0]?.lines}} Lines <span class="pl-3">${{result.totalOpenPO[0]?.all_Spend.toLocaleString() | number:'1.2-2'}}</span></h2>
+                        <h2>Total Material {{result.totalOpenPO[0]?.totalMaterial}}</h2> -->
+                        <div class="new-use-red-b active-user-box">
+                            <div class="align-items-center"><img src="../assets/images/activeuser.png" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-9 col-md-9 col-sm-6 mb-4">
+                    <!-- <div class="row">
+                        <div class="col-3">
+                            <div class="otd-para pl-1 pr-2 pb-1" style="display: flex;">
+                                <label class="col-form-label larec pt-0">Avg Days</label>
+                                <input type="number" class="form-control" min="0" placeholder="14" (change)="changeCardDays()" [(ngModel)]="cardDays" :value="{{filters.days}}" 
+                                oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
+                                style="width:50%;text-align: center;margin-left: 5px;">
+                            </div>
+                        </div>
+                        <div class="col-2"></div>
+                        <div class="col-2">Spend%</div>
+                        <div class="col-2">Line%</div>
+                        <div class="col-3">Time</div>
+                    </div> -->
+                    <div class="card">
+                        <div class="card-body">
+                            <table  class="perfrmanceTable">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">
+                                            {{"Average Performance" | translate }}
+                                        </th>
+                                        <th>{{"Spend%" | translate }}</th>
+                                        <th>{{"Line%" | translate }}</th>
+                                        <th>{{"Time" | translate }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- <tr>
+                                        <td rowspan="4" style="justify-content: center; align-items: center;">
+                                            <div class="otd-para pl-1 pr-2 pb-1" style="display: flex;">
+                                                <label class="col-form-label larec pt-0">Avg Days</label>
+                                                <input type="number" class="form-control" min="0" placeholder="14" (change)="changeCardDays()" [(ngModel)]="cardDays" :value="{{filters.days}}" 
+                                                oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
+                                                style="width:50%;text-align: center;margin-left: 5px;">
+                                            </div>
+                                        </td>
+                                        <td>Need Ack'd</td>
+                                        <td>Spend</td>
+                                        <td>Line</td>
+                                        <td>Time</td>
+                                    </tr> -->
+
+                                    <tr *ngFor="let row of performanceData; let i = index">
+                                        <ng-container *ngIf="i === 0">
+                                          <td rowspan="4" style="justify-content: center; align-items: center;">
+                                            <div class="otd-para pl-1 pr-2 pb-1" style="display: flex;">
+                                              <label class="col-form-label larec pt-0">{{"Avg Days" | translate }}</label>
+                                              <input type="number" class="form-control" min="0" placeholder="5" (change)="changeAvgDays()" [(ngModel)]="filters.avgDays" 
+                                                    [value]="filters.avgDays"
+                                                    (input)="this.value = !!this.value && Math.abs(this.value) >= 1 ? Math.abs(this.value) : null"
+                                                    style="width:40%; text-align: center; margin-left: 5px;"
+                                                    >
+                                                    <!-- [disabled]="changeAvgDaysDisabled -->
+                                            </div>
+                                          </td>
+                                        </ng-container>
+                                        <!-- <td>{{ row.name | translate }}</td> -->
+                                        <td>
+                                            <span  *ngIf="row.name.includes('Due in')"  >
+                                                 <span>{{'Due in' | translate}}</span> <span> {{cardDays}} &nbsp;</span> <span>{{ 'Days' | translate}}</span>
+                                            </span>
+ 
+                                            <span  *ngIf="!row.name.includes('Due in')"  >
+                                             {{ row.name | translate}}
+                                        </span>
+ 
+                                            <!-- {{ (row.name ? (row.name | translate) : '') }}
+                                             {{ (row.name.includes('Due in') ? ('Due in' | translate) : '') }}
+                                             {{ (row.name.includes('Due in') ? row.name.split('Due in')[1].split('Days')[0].trim() : "") }}
+                                             {{ (row.name.includes('Days') ? ('Days' | translate) : '') }} -->
+ 
+                                         </td>
+                                        <td>{{ row.spend | translate }}</td>
+                                        <td>{{ row.linepercent | translate }}</td>
+                                        <td>{{ row.time | translate }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+            
+            
+        <!-- <app-pomanageruserreg></app-pomanageruserreg> -->
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body" *ngIf="showCards">
+
+                        <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">
+                            {{"Current Open PO Status" | translate}}
+                            <span class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openBarComponentDialog('Current Open PO Status',result,'dashboard-current-open-po-status')">
+                                <i class="fa fa-expand" aria-hidden="true"></i>
+                            </span>
+                        </h3>
+                        <!-- <p class="text-center mb-0">
+                            <span class="total-red-new-ven">FuturedueLine%</span>
+                            <span class="total-red-new-ven po-status">FuturedueValue%</span>
+                            <span class="total-red-new-ven">Ack'dNeededLine%</span>
+                            <span class="total-red-new-ven">Ack'd needed value%</span>
+                            <span class="total-red-new-ven">PastdueLine%</span>
+                            <span class="total-red-new-ven">PastdueValue%</span>
+                        </p>
+                        <app-current-open-po-status-tablegraph></app-current-open-po-status-tablegraph> -->
+                        <app-bar [chartData]="result" [chartFor]="'dashboard-current-open-po-status'"></app-bar>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row" *ngIf="showCards">
+            <div class="col-xl-3 col-sm-6 mb-4">
+                <div class="new-use">
+                    <p>{{"Plant Counts" | translate }}</p>
+                    <h2><b>{{result.allCounts[0]?.plantCount}}</b></h2>
+
+                    <!-- <h3 *ngIf="result.dashboardYearToYear[0]?.plantCountPercentage > 0;else elseContent1">{{result.dashboardYearToYear[0]?.plantCountPercentage}}% <img src="../assets/images/ic-arrow-narrow-up.svg" alt="">
+                        <span>than last year</span>
+                    </h3>
+
+                    <ng-template #elseContent1>
+                        <h3 class="red-num" >
+                            {{result.dashboardYearToYear[0]?.plantCountPercentage}}% <img src="../assets/images/arrow-narrow-up.png" alt="">
+                            <span>than last year</span>
+                        </h3>
+                    </ng-template> -->
+
+                    <div class="new-use-red-b">
+                        <div class="align-items-center"><img src="../assets/images/newuser.png" alt=""></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-sm-6 mb-4">
+                <div class="new-use active-user ">
+                    <p>{{"Vendor Counts" | translate }}</p>
+                    <h2><b>{{result.allCounts[0]?.vendorCount}}</b></h2>
+
+                    <!-- <h3 *ngIf="result.dashboardYearToYear[0]?.vendorCountPercentage > 0;else elseContent2"  >
+                        {{result.dashboardYearToYear[0]?.vendorCountPercentage}}% <img src="../assets/images/ic-arrow-narrow-up.svg" alt="">
+                        <span>than last year</span>
+                    </h3>
+                    <ng-template #elseContent2>
+                        <h3 class="red-num" >
+                            {{result.dashboardYearToYear[0]?.vendorCountPercentage}}% <img src="../assets/images/arrow-narrow-up.png" alt="">
+                            <span>than last year</span>
+                        </h3>
+                    </ng-template> -->
+
+                    <div class="new-use-red-b active-user-box">
+                        <div class="align-items-center"><img src="../assets/images/activeuser.png" alt=""></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-sm-6 mb-4">
+                <div class="new-use">
+                    <p>{{"Buyer Counts" | translate }}</p>
+                    <h2><b>{{result.allCounts[0]?.buyerCount}}</b></h2>
+                    
+
+                    <!-- <h3 *ngIf="result.dashboardYearToYear[0]?.buyerCountPercentage > 0;else elseContent3"  >
+                        {{result.dashboardYearToYear[0]?.buyerCountPercentage}}% <img src="../assets/images/ic-arrow-narrow-up.svg" alt="">
+                        <span>than last year</span>
+                    </h3>
+                    <ng-template #elseContent3>
+                        <h3 class="red-num" >
+                            {{result.dashboardYearToYear[0]?.buyerCountPercentage}}% <img src="../assets/images/arrow-narrow-up.png" alt="">
+                            <span>than last year</span>
+                        </h3>
+                    </ng-template> -->
+
+                    <div class="new-use-red-b">
+                        <div class="align-items-center"><img src="../assets/images/ppv.png" alt=""></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-sm-6 mb-4">
+                <div class="new-use active-user">
+                    <p>{{"Material Counts" | translate }}</p>
+                    <h2><b>{{result.totalOpenPO[0]?.totalMaterial}}</b></h2>
+
+                    <!-- <h3 *ngIf="result.dashboardYearToYear[0]?.lineCountPercentage > 0;else elseContent4"  >
+                        {{result.dashboardYearToYear[0]?.lineCountPercentage}}% <img src="../assets/images/ic-arrow-narrow-up.svg" alt="">
+                        <span>than last year</span>
+                    </h3>
+                    <ng-template #elseContent4>
+                        <h3 class="red-num" >
+                            {{result.dashboardYearToYear[0]?.lineCountPercentage}}% <img src="../assets/images/arrow-narrow-up.png" alt="">
+                            <span>than last year</span>
+                        </h3>
+                    </ng-template> -->
+
+                    <div class="new-use-red-b active-user-box">
+                        <div class="align-items-center"><img src="../assets/images/materialregistrations-icon.png" alt=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- row 1 -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="profile card card-body px-3 pt-3 pb-0">
+                  
+                    <div class="row mt-4 mb-4">
+                        <div class="col-md-12" style="position: relative;">
+                            <h3 class="text-center pt-3 pb-3"
+                                style="font-size:17px; color:#131523;font-weight: 600;">
+                                {{"Total Open PO Line" | translate }} <span class="pr-3" style="float: right;cursor: pointer;" mat-button
+                                (click)="openPouserdashboardLinechart('Total Open PO Line',resultGraph,'DashboardPoLine')">
+                                <i class="fa fa-expand" aria-hidden="true"></i></span>
+                            </h3>
+                            <input type="number" placeholder="14" (change)="changeCardDays()" [(ngModel)]="cardDays" :value="{{filters.days}}" class="text-center ml-1 mr-1 filed-ma" maxlength="2" 
+                            oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+                            <app-pouserdashboard-linechart class="text-center" [executeData]="resultGraph" [chartFor]="'DashboardPoLine'"></app-pouserdashboard-linechart>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- row 2 -->
+        <div class="row" style="margin-bottom: 60px;">
+            <div class="col-lg-12">
+                <div class="profile card card-body px-3 pt-3 pb-0">
+                    
+                    <div class="row mt-4 mb-4">
+                        <div class="col-md-12">
+                            <h3 class="text-center pt-3 pb-3"
+                                style="font-size:17px; color:#131523;font-weight: 600;">
+                                {{"Total Open PO Value" | translate }} <span class="pr-3" style="float: right;cursor: pointer;" mat-button
+                                    (click)="openPouserdashboardLinechart('Total Open PO Value',resultGraph,'DashboardPoValue')">
+                                    <i class="fa fa-expand" aria-hidden="true"></i></span>
+                            </h3>
+                            <input type="number" placeholder="14" (change)="changeCardDays()" [(ngModel)]="cardDays" :value="{{filters.days}}" class="text-center ml-1 mr-1 filed-ma2" maxlength="2" 
+                            oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
+                            >
+                            <app-pouserdashboard-linechart class="text-center" [executeData]="resultGraph" [chartFor]="'DashboardPoValue'"></app-pouserdashboard-linechart>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--**********************************
+    Content body end
+***********************************-->

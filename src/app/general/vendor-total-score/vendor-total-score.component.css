@@ -1,0 +1,16 @@
+/* .total-reven-score {
+    height: 160px;
+} */
+.total-reven p {
+    padding-top: 10px;
+    margin-bottom: 0px;
+}
+.total-reven h3 {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.total-reven h2 {
+    padding-top: 0px;
+    margin-bottom: 0px;
+    line-height: 40px;
+}

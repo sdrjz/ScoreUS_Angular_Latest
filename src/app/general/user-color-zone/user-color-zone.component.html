@@ -1,0 +1,219 @@
+<!-- class=" Vendor-registrations-box" -->
+<div class="col-md-12 color_zone img">
+<div class="row">
+     
+    <div class="col-xl-16 col-sm-6 mb-4">
+            <div class="new-use vcz-m-grey">
+                <p>{{'Vendor Color Zone' | translate }}</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div clss="red-row" style="display: flex !important;flex-wrap: wrap !important;">
+                            <div class="col-md-6 pl-0"><span class="red-num">{{'Red' | translate }}</span></div>
+                            <div class="col-md-6 pr-0 "><span class="mr-2" style="color: white !important;" *ngIf="vendorColorZoneStats">{{getPercentage(vendorColorZoneStats[0][2],vendorColorZoneStats[0][3])}}%</span> 
+                                <span style="margin-left:3px !important;" [attr.class]="vendorRedPercentageComparison<=0? 'red-num':'co1'"
+                                *ngIf="(vendorRedPercentageComparison<0 || vendorRedPercentageComparison>=0)" [style]="getTextColor(vendorRedPercentageComparison)">{{vendorRedPercentageComparison}}%</span>
+                            <img 
+                                [attr.src]="getImage(vendorRedPercentageComparison)" width="15px" style="margin-left:2px !important;" alt="">
+                            <span class="vendor-than ml-2" style="color: white !important;">{{sentance | translate}}</span>
+                            
+                            </div>
+                            
+                            <div class="col-md-6 pl-0"><span class="co-yellow2">{{'Yellow' | translate }}</span></div>
+                            <div class="col-md-6 pr-0"><span class="mr-2" style="color: white !important;" *ngIf="vendorColorZoneStats">{{getPercentage(vendorColorZoneStats[0][1],vendorColorZoneStats[0][3])}}%</span> 
+                                <span style="margin-left:3px !important;" [attr.class]="vendorYellowPercentageComparison<=0? 'red-num':'co1'"
+                                *ngIf="(vendorYellowPercentageComparison<0 || vendorYellowPercentageComparison>=0)" [style]="getTextColor(vendorYellowPercentageComparison)">{{vendorYellowPercentageComparison}}%</span>
+                            <img 
+                                [attr.src]="getImage(vendorYellowPercentageComparison)" width="15px;" style="margin-left:2px !important;" alt="">
+                            <span class="vendor-than ml-2" style="color: white !important;">{{sentance | translate }}</span>
+                            
+                            </div>
+                            <div class="col-md-6 pl-0"><span class="co1">{{'Green' | translate }}</span></div>
+                            <div class="col-md-6 pr-0"><span class="mr-2" style="color: white !important;" *ngIf="vendorColorZoneStats">{{getPercentage(vendorColorZoneStats[0][0],vendorColorZoneStats[0][3])}}%</span> 
+                                <span style="margin-left:3px !important;" [attr.class]="vendorGreenPercentageComparison<=0? 'red-num':'co1'"
+                                *ngIf="(vendorGreenPercentageComparison<0 || vendorGreenPercentageComparison>=0)" [style]="getTextGreenColor(vendorGreenPercentageComparison)">{{vendorGreenPercentageComparison}}%</span>
+                            <img 
+                                [attr.src]="getGreenImage(vendorGreenPercentageComparison)" width="15px;" style="margin-left:2px !important;" alt="">
+                            <span class="vendor-than ml-2" style="color: white !important;">{{sentance | translate}}</span>
+                            
+                            </div>
+                                </div>
+                    </div>
+                    <!-- <div class="col-md-4 pl-0 pr-0">
+                        <p class="pt-4">than last year</p>  
+                    </div> -->
+                </div>
+            </div>
+        </div>
+  
+        <div class="col-xl-6 col-sm-6 mb-4">
+            <div class="new-use vcz-d-grey ">
+                <p>{{'Buyer Color Zone' | translate }}</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div clss="red-row" style="display: flex !important;flex-wrap: wrap !important;">
+                            <div class="col-md-6 pl-0"><span class="red-num">{{'Red' | translate }}</span></div>
+                            <div class="col-md-6 pr-0"><span class="mr-2" style="color: white !important;" *ngIf="buyerColorZoneStats">{{getPercentage(buyerColorZoneStats[0][2],buyerColorZoneStats[0][3])}}%</span> 
+                                <span style="margin-left:3px !important;" [attr.class]="buyerRedPercentageComparison<=0? 'red-num':'co1'"
+                                *ngIf="(buyerRedPercentageComparison<0 || buyerRedPercentageComparison>=0)" [style]="getTextColor(buyerRedPercentageComparison)">{{buyerRedPercentageComparison}}%</span>
+                            <img 
+                                [attr.src]="getImage(buyerRedPercentageComparison)" width="15px;" style="margin-left:2px !important;" alt="">
+                            <span class="vendor-than ml-2" style="color: white !important;">{{sentance | translate }}</span>
+                            
+                            </div>
+                            
+                            <div class="col-md-6 pl-0"><span class="co-yellow2">{{'Yellow' | translate }} </span></div>
+                            <div class="col-md-6 pr-0"><span class="mr-2" style="color: white !important;" *ngIf="buyerColorZoneStats">{{getPercentage(buyerColorZoneStats[0][1],buyerColorZoneStats[0][3])}}%</span> 
+                                <span style="margin-left:3px !important;" [attr.class]="buyerYellowPercentageComparison<=0? 'red-num':'co1'"
+                                *ngIf="(buyerYellowPercentageComparison<0 || buyerYellowPercentageComparison>=0)" [style]="getTextColor(buyerYellowPercentageComparison)">{{buyerYellowPercentageComparison}}%</span>
+                            <img 
+                                [attr.src]="getImage(buyerYellowPercentageComparison)" width="15px;" style="margin-left:2px !important;" alt="">
+                            <span class="vendor-than ml-2" style="color: white !important;">{{sentance | translate}}</span>
+                            
+                            </div>
+                           
+                            <div class="col-md-6 pl-0"><span class="co1">{{'Green' | translate }}</span></div>
+                            <div class="col-md-6 pr-0"><span class="mr-2" style="color: white !important;" *ngIf="buyerColorZoneStats">{{getPercentage(buyerColorZoneStats[0][0],buyerColorZoneStats[0][3])}}%</span> 
+                                <span style="margin-left:3px !important;" [attr.class]="buyerGreenPercentageComparison<=0? 'red-num':'co1'"
+                                *ngIf="(buyerGreenPercentageComparison<0 || buyerGreenPercentageComparison>=0)" [style]="getTextGreenColor(buyerGreenPercentageComparison)">{{buyerGreenPercentageComparison}}%</span>
+                            <img 
+                                [attr.src]="getGreenImage(buyerGreenPercentageComparison)" width="15px" style="margin-left:2px !important;" alt="">
+                            <span class="vendor-than ml-2" style="color: white !important;">{{sentance | translate }}</span>
+                            
+                            </div>
+                                </div>
+                    </div>
+                    <!-- <div class="col-md-4 pl-0 pr-0">
+                        <p class="pt-4">than last year</p>  
+                    </div> -->
+                </div>
+            </div>
+        </div>
+ 
+        <div class="col-xl-6 col-sm-6 mb-4">
+            <div class="new-use vcz-m-grey">
+                <p>{{'Commodity Color Zone' | translate }} </p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div clss="red-row" style="display: flex !important;flex-wrap: wrap !important;">
+                            <div class="col-md-6 pl-0"><span class="red-num">{{'Red' | translate }}</span></div>
+                            <div class="col-md-6 pr-0"><span class="mr-2" style="color: white !important;" *ngIf="commodityColorZoneStats">{{getPercentage(commodityColorZoneStats[0][2],commodityColorZoneStats[0][3])}}%</span> 
+                                <span style="margin-left:3px !important;" [attr.class]="commodityRedPercentageComparison<=0? 'red-num':'co1'"
+                                *ngIf="(commodityRedPercentageComparison<0 || commodityRedPercentageComparison>=0)" [style]="getTextColor(commodityRedPercentageComparison)">{{commodityRedPercentageComparison}}%</span>
+                            <img 
+                                [attr.src]="getImage(commodityRedPercentageComparison)" width="15px;" style="margin-left:2px !important;" alt="">
+                            <span class="vendor-than ml-2" style="color: white !important;">{{sentance | translate}}</span>
+                            
+                            </div>
+                            <div class="col-md-6 pl-0"><span class="co-yellow2">{{'Yellow' | translate }}</span></div>
+                            <div class="col-md-6 pr-0"><span class="mr-2" style="color: white !important;" *ngIf="commodityColorZoneStats">{{getPercentage(commodityColorZoneStats[0][1],commodityColorZoneStats[0][3])}}%</span> 
+                                <span style="margin-left:3px !important;" [attr.class]="commodityYellowPercentageComparison<=0? 'red-num':'co1'"
+                                *ngIf="(commodityYellowPercentageComparison<0 || commodityYellowPercentageComparison>=0)" [style]="getTextColor(commodityYellowPercentageComparison)">{{commodityYellowPercentageComparison}}%</span>
+                            <img 
+                                [attr.src]="getImage(commodityYellowPercentageComparison)" width="15px;" style="margin-left:2px !important;" alt="">
+                            <span class="vendor-than ml-2" style="color: white !important;">{{sentance | translate }}</span>
+                            
+                            </div>
+                            <div class="col-md-6 pl-0"><span class="co1">{{'Green' | translate }}</span></div>
+                            <div class="col-md-6 pr-0"><span class="mr-2" style="color: white !important;" *ngIf="commodityColorZoneStats">{{getPercentage(commodityColorZoneStats[0][0],commodityColorZoneStats[0][3])}}%</span> 
+                                <span style="margin-left:3px !important;" [attr.class]="commodityGreenPercentageComparison<=0? 'red-num':'co1'"
+                                *ngIf="(commodityGreenPercentageComparison<0 || commodityGreenPercentageComparison>=0)" [style]="getTextGreenColor(commodityGreenPercentageComparison)">{{commodityGreenPercentageComparison}}%</span>
+                            <img 
+                                [attr.src]="getGreenImage(buyerGreenPercentageComparison)" width="15px;" style="margin-left:2px !important;" alt="">
+                            <span class="vendor-than ml-2" style="color: white !important;">{{sentance | translate }}</span>
+                            
+                            </div>
+                                </div>
+                    </div>
+                    <!-- <div class="col-md-4 pl-0 pr-0">
+                        <p class="pt-4">than last year</p>  
+                    </div> -->
+                </div>
+            </div>
+        </div>
+ 
+        <div class="col-xl-6 col-sm-6 mb-4">
+            <div class="new-use vcz-d-grey">
+                <p>{{'Plant Color Zone' | translate }} </p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div clss="red-row" style="display: flex !important;flex-wrap: wrap !important;">
+                            <div class="col-md-6 pl-0"><span class="red-num">{{'Red' | translate }}</span></div>
+                            <div class="col-md-6 pr-0"><span class="mr-2" style="color: white !important;" *ngIf="plantColorZoneStats">{{getPercentage(plantColorZoneStats[0][2],plantColorZoneStats[0][3])}}%</span> 
+                                <span style="margin-left:3px !important;" [attr.class]="plantRedPercentageComparison<=0? 'red-num':'co1'"
+                                *ngIf="(plantRedPercentageComparison<0 || plantRedPercentageComparison>=0)" [style]="getTextColor(plantRedPercentageComparison)">{{plantRedPercentageComparison}}%</span>
+                            <img 
+                                [attr.src]="getImage(plantRedPercentageComparison)" width="15px;" style="margin-left:2px !important;" alt="">
+                            <span class="vendor-than ml-2" style="color: white !important;">{{sentance | translate }}</span>
+                            
+                            </div>
+                            <div class="col-md-6 pl-0"><span class="co-yellow2">{{'Yellow' | translate }}</span></div>
+                            <div class="col-md-6 pr-0"><span class="mr-2" style="color: white !important;" *ngIf="plantColorZoneStats">{{getPercentage(plantColorZoneStats[0][1],plantColorZoneStats[0][3])}}%</span> 
+                                <span style="margin-left:3px !important;" [attr.class]="plantYellowPercentageComparison<=0? 'red-num':'co1'"
+                                *ngIf="(plantYellowPercentageComparison<0 || plantYellowPercentageComparison>=0)" [style]="getTextColor(plantYellowPercentageComparison)">{{plantYellowPercentageComparison}}%</span>
+                            <img 
+                                [attr.src]="getImage(plantYellowPercentageComparison)" width="15px;" style="margin-left:2px !important;" alt="">
+                            <span class="vendor-than ml-2" style="color: white !important;">{{sentance | translate }}</span>
+                            
+                            </div>
+                            <div class="col-md-6 pl-0"><span class="co1">{{'Green' | translate }} </span></div>
+                            <div class="col-md-6 pr-0"><span class="mr-2" style="color: white !important;" *ngIf="plantColorZoneStats">{{getPercentage(plantColorZoneStats[0][0],plantColorZoneStats[0][3])}}%</span> 
+                                <span style="margin-left:3px !important;" [attr.class]="plantGreenPercentageComparison<=0? 'red-num':'co1'"
+                                *ngIf="(plantGreenPercentageComparison<0 || plantGreenPercentageComparison>=0)" [style]="getTextGreenColor(plantGreenPercentageComparison)">{{plantGreenPercentageComparison}}%</span>
+                            <img 
+                                [attr.src]="getGreenImage(plantGreenPercentageComparison)" width="15px;" style="margin-left:2px !important;" alt="">
+                            <span class="vendor-than ml-2" style="color: white !important;">{{sentance | translate }}</span>
+                            
+                            </div>
+                                </div>
+                    </div>
+                    <!-- <div class="col-md-4 pl-0 pr-0">
+                        <p class="pt-4">than last year</p>  
+                    </div> -->
+                </div>
+            </div>
+        </div>
+   
+        <div class="col-xl-6 col-sm-6 mb-4">
+            <div class="new-use vcz-d-grey">
+                <p>{{'Material Color Zone' | translate}}</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div clss="red-row" style="display: flex !important;flex-wrap: wrap !important;">
+                            <div class="col-md-6 pl-0"><span class="red-num">{{'Red' | translate }}</span></div>
+                            <div class="col-md-6 pr-0"><span class="mr-2" style="color: white !important;" *ngIf="materialColorZoneStats">{{getPercentage(materialColorZoneStats[0][2],materialColorZoneStats[0][3])}}%</span> 
+                                <span style="margin-left:3px !important;" [attr.class]="materialGreenPercentageComparison<=0? 'red-num':'co1'"
+                                *ngIf="(materialRedPercentageComparison<0 || materialRedPercentageComparison>=0)" [style]="getTextColor(materialRedPercentageComparison)">{{materialRedPercentageComparison}}%</span>
+                            <img 
+                                [attr.src]="getImage(materialRedPercentageComparison)" width="15px;" style="margin-left:2px !important;" alt="">
+                            <span class="vendor-than ml-2" style="color: white !important;">{{sentance | translate}}</span>
+                            
+                            </div>
+                            <div class="col-md-6 pl-0"><span class="co-yellow2">{{'Yellow' | translate}}</span></div>
+                            <div class="col-md-6 pr-0"><span class="mr-2" style="color: white !important;" *ngIf="materialColorZoneStats">{{getPercentage(materialColorZoneStats[0][1],materialColorZoneStats[0][3])}}%</span> 
+                                <span style="margin-left:3px !important;" [attr.class]="materialYellowPercentageComparison<=0? 'red-num':'co1'"
+                                *ngIf="(materialYellowPercentageComparison<0 || materialYellowPercentageComparison>=0)" [style]="getTextColor(materialYellowPercentageComparison)">{{materialYellowPercentageComparison}}%</span>
+                            <img 
+                                [attr.src]="getImage(materialYellowPercentageComparison)" width="15px;" style="margin-left:2px !important;" alt="">
+                            <span class="vendor-than ml-2" style="color: white !important;">{{sentance | translate}}</span>
+                            
+                            </div>
+                            <div class="col-md-6 pl-0"><span class="co1">{{'Green' | translate }}</span></div>
+                            <div class="col-md-6 pr-0"><span class="mr-2" style="color: white !important;" *ngIf="materialColorZoneStats">{{getPercentage(materialColorZoneStats[0][0],materialColorZoneStats[0][3])}}%</span> 
+                                <span style="margin-left:3px !important;" [attr.class]="materialGreenPercentageComparison<=0? 'red-num':'co1'"
+                                *ngIf="(materialGreenPercentageComparison<0 || materialGreenPercentageComparison>=0)" [style]="getTextGreenColor(materialGreenPercentageComparison)">{{materialGreenPercentageComparison}}%</span>
+                            <img 
+                                [attr.src]="getGreenImage(materialGreenPercentageComparison)" width="15px;" style="margin-left:2px !important;" alt="">
+                            <span class="vendor-than ml-2" style="color: white !important;">{{sentance | translate }}</span>
+                            
+                            </div>
+                                </div>
+                    </div>
+                    <!-- <div class="col-md-4 pl-0 pr-0">
+                        <p class="pt-4">than last year</p>  
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<!-- row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="profile card card-body px-3 pt-3 pb-0">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-head">
+                        <div class="profile-name px-3 pt-2">
+                            <h4 class="mb-0 pro-name uer-font">{{subtitle | translate}} {{'ScoreCard' | translate}}</h4>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="pro-form pt-4">
+               
+                <div class="row pb-2 mt-2">
+                    <div class="col-lg-2 col-md-2">
+                       <button (click)="emitSelectedVendor()" style="color:#fff;background:#3F4040;font-size:20px;" class="btn btn-primary mb-3 ven-re-btn-ran w-100"  [matTooltip]="tips.compareVendorButton" [matTooltipPosition]="'above'"> {{'Plot graph' | translate }}
+                        </button>
+                        </div>
+                    <div class="col-lg-10 col-md-10 ml-auto">
+                        <div class="row justify-content-end">
+                            <div class="">
+                                <a class="btn btn-primary mr-2 mb-3 ven-re-btn" (click)="openModel('otdDetail')" [matTooltip]="tips.otdDetail" [matTooltipPosition]="'above'">{{'OTD Detail' | translate}}</a>
+                                <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran" (click)="openModel('nrcDetail')" [matTooltip]="tips.ncrDetail" [matTooltipPosition]="'above'">{{'NCR Detail' | translate }}</a>
+                                <a class="btn btn-primary mr-2 mb-3 ven-re-btn" (click)="openModel('ppvDetail')" [matTooltip]="tips.ppvDetail" [matTooltipPosition]="'above'" >{{'PPV Detail' | translate }}</a>
+                                <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran" (click)="openModel('ltaDetail')" [matTooltip]="tips.ltaDetail" [matTooltipPosition]="'above'">{{'LTA Detail' | translate }} </a>
+                            </div>
+                            <!-- <div class="ml-3">
+                                <mat-form-field appearance="fill">
+                                    <mat-select class="" placeholder="Select Report"  multiple [(ngModel)]="selected" 
+                                    (selectionChange)="onSelection($event)"
+                                    [matTooltip]="tips.selectReport" [matTooltipPosition]="'above'">
+                                        <mat-option *ngFor="let selectreport of listReport"
+                                            [value]="selectreport.id">
+                                            {{selectreport.value | translate}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                            </div> -->
+                            <!-- <div class="ml-3 mr-3">
+                                <button 
+                                [disabled]="onDisablePopUp()"
+                                (click)="openDialog()" 
+                                [matTooltip]="tips.sendReport" [matTooltipPosition]="'above'"
+                                class="btn btn-primary mb-3 ven-re-btn w-100">{{'Send Report' | translate }}</button>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ltaChart"></div>
+<div id="otdChart"></div>
+<div id="ncrChart"></div>
+<div id="ppvChart"></div>

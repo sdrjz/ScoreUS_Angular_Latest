@@ -1,0 +1,143 @@
+<!-- row -->
+<div class="row">
+  <div class="col-lg-12">
+    
+    <div class="profile card card-body px-3 pt-3 pb-0">
+      <div class="profile-head">
+        <div class="row">
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12  col-12">
+            <div class="profile-name px-3 pt-2">
+              <h4 class="mb-0 pro-name uer-font pb-0">PO Report Section</h4>
+            </div>
+          </div>
+          
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12  col-12 deliver-nav ml-auto">
+            <div class="px-0 pb-3">
+                <div class="row">
+                    <div class="col-md-3">
+                        <h2 class="pb-0 pt-3">PO Lines</h2>
+                    </div>
+                    <div class="col-md-3">
+                    <div class="grey-bg mt-1">
+                        <h2 class="mb-0 grey-h2 pt-3 text-center">120</h2>
+                    </div> 
+                  </div> 
+                    <div class="col-md-3">
+                        <h2 class="pb-0 pt-3">PO Spend</h2>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="grey-bg mt-1">
+                          <h2 class="mb-0 grey-h2 pt-3 text-center">$40</h2>
+                      </div> 
+                    </div> 
+                </div>   
+            </div>
+        </div>
+        </div>
+      </div>
+      <div class="pro-form">
+        <div class="row">
+            
+            <!-- manage-u -->
+
+            <div class="col-xl-12 col-lg-12 pl-0 pr-4 vendorscorecard-table" id="style-2">
+                <table datatable class="row-border hover tab-top-0 pl-0">
+                    <thead>
+                        <tr>
+                            <th class="ex-whi" style="width: 200px;padding: 0px;padding-right: 0px !important;">
+                                <div class="list-group-item" style="border: 0px;padding-left: 39px;">
+                                    <input type="checkbox" [(ngModel)]="masterSelected" name="list_name"
+                                        value="m1" (change)="checkUncheckAll()" /> <span
+                                        style="padding-left:15px;"></span>
+                                </div>
+                            </th>
+                            <th class="ex-whi">Vendor Code</th>
+                            <th class="ex-whi">Vendor Name</th>
+                            <th class="ex-whi" style="text-align:left;">All Order Line</th>
+                            <th class="ex-whi">Buyer Name</th>
+                            <th class="ex-whi">Contact</th>
+                            <th class="ex-whi">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of checklist">
+                            <td style="text-align:left;padding-left: 44px;">
+                                <div>
+                                    <input type="checkbox" [(ngModel)]="item.isSelected"
+                                        name="list_name{{item.id}}" value="{{item.id}}"
+                                        (change)="check(item.id)" />
+                                    {{item.value}}
+                                </div>
+                            </td>
+                            <td>Sample Data</td>
+                            <td>Sample Data</td>
+                            <td>Sample Data</td>
+                            <td>Sample Data</td>
+                            <td>Sample Data</td>
+                            <td>Sample Data</td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+
+            </div>
+
+
+
+        </div>
+        
+        <div class="row">
+          <div class="col-md-3 pr-0">
+            <div class="d-flex">
+              <span class="vendor-per pt-2 pr-2">Report Sending Option:</span>
+              <select class="form-control plant-select w-50">
+                <option value="">Select One</option>
+                <option value="">Plant Buyer</option>
+                <option value="">Buyer OTD</option>
+                <option value="">Buyer NCR</option>
+                <option value="">Buyer PPV</option>
+                <option value="">Buyer LTA</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="d-flex">
+              <span class="vendor-per pt-2">Send Report to:</span>
+              <select class="form-control plant-select w-50">
+                <option value="">Select One</option>
+                <option value="">Plant Buyer</option>
+                <option value="">Buyer OTD</option>
+                <option value="">Buyer NCR</option>
+                <option value="">Buyer PPV</option>
+                <option value="">Buyer LTA</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-3  pl-0 pr-0">
+            <div class="d-flex">
+              <span class="vendor-per pt-2 pl-0">Receiving Buffer Days:</span>
+              <select class="form-control plant-select w-50">
+                <option value="">All</option>
+                <option value="">Plant Buyer</option>
+                <option value="">Buyer OTD</option>
+                <option value="">Buyer NCR</option>
+                <option value="">Buyer PPV</option>
+                <option value="">Buyer LTA</option>
+              </select>
+            </div>
+          </div>
+  
+  
+          <div class="col-md-2 ml-auto">
+            <div class="form-group mt-1">
+              <button type="submit" class="btn btn-primary"
+                style="border-radius: 50px;width: 100%;border:0px;white-space:nowrap;">Send Report</button>
+            </div>
+          </div>
+        </div>
+    </div>
+      
+    </div>
+  </div>
+</div>

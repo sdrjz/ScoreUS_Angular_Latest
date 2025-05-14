@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
+        <div class="profile card card-body px-3 pt-3 pb-3">
+            <div class="text-center m-3">
+                 <p>
+                    <a [routerLink]="['/admin/openorders']"  style="color:#3F4040;font-weight: 600;">                        
+                        <img src="../assets/images/buyer-icon.svg" class="mb-4">
+                    <br>
+                        {{"Open Orders" | translate}}
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
+        <div class="profile card card-body px-3 pt-3 pb-3">
+            <div class="text-center m-3">
+                <p>
+                    <a [routerLink]="['/admin/pastdueorders']"  style="color:#3F4040;font-weight: 600;">                        
+                        <img src="../assets/images/buyer-icon2.svg" class="mb-4">
+                    <br>
+                    {{"Past Due Orders" | translate}} 
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
+        <div class="profile card card-body px-3 pt-3 pb-3">
+            <div class="text-center m-3">
+                <a [routerLink]="['/admin/ackNeededOrders']"  style="color:#3F4040;font-weight: 600;">                        
+                    <img src="../assets/images/buyer-icon.svg" class="mb-4">
+                <br>
+                {{"Ack Needed Orders" | translate}}
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
+        <div class="profile card card-body px-3 pt-3 pb-3">
+            <div class="text-center m-3">
+                <a [routerLink]="['/admin/futurepastdue']"  style="color:#3F4040;font-weight: 600;">                        
+                    <img src="../assets/images/buyer-icon2.svg" class="mb-4">
+                <br>
+                {{"Future Past Due Orders" | translate}}
+                </a>                
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
+        <div class="profile card card-body px-3 pt-3 pb-3">
+            <div class="text-center m-3">
+                <a [routerLink]="['/admin/leadtimecheck']"  style="color:#3F4040;font-weight: 600;">                        
+                    <img src="../assets/images/buyer-icon2.svg" class="mb-4">
+                <br>
+                {{"Lead Time Check" | translate}}
+                </a>                 
+            </div>
+        </div>
+    </div>    
+</div>

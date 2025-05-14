@@ -1,0 +1,29 @@
+<div class="row" style="margin-top:10%;">
+     <div class="col-3"></div>
+     <div class="col-9">
+      <div class="container">
+        <mat-card appearance="outlined">
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-4 mt-2"><b>Referral Management :</b></div>
+                    <div class="col-8">
+                      
+                      
+                        <mat-radio-group [value]="superAdminReferralSetting" (change)="updateReferalManagement(superAdminReferralSetting)">
+                            <mat-radio-button [value]="'1'">Enable</mat-radio-button>
+                            <mat-radio-button [value]="'0'" style="margin-left:10px !important;">Disable</mat-radio-button>
+                          </mat-radio-group>
+                      
+                      
+                        <!-- <button mat-raised-button  (click)="updateReferalManagement(superAdminReferralSetting)"
+                        [ngClass]="{'success': superAdminReferralSetting === '1', 
+                                    'fail': superAdminReferralSetting === '0'}">
+                  {{ superAdminReferralSetting === '1' ? 'Enable' : 'Disable' }}
+                </button> -->
+                    </div>
+                </div>
+            </mat-card-content>
+          </mat-card>
+      </div>
+     </div>
+</div>

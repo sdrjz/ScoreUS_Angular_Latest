@@ -1,0 +1,13 @@
+ /* @media (max-width: 700px) {
+    .table-width{
+        width:70rem !important;
+    }
+    
+
+  }
+ */
+
+  .table-width{
+  /* width:90rem !important; */
+width:100% !important;  
+} 

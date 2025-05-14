@@ -1,0 +1,40 @@
+<div class="total-reven reven-width">
+
+    <p>{{subtitle | translate}}</p>
+    <!-- <h2 *ngIf="!data">no data</h2> -->
+    <h3 *ngIf="numberScore?.currentStatus" style="color:white !important;" >{{ numberScore?.currentStatus[0]?.totalScore}}/100 </h3>        
+    
+    <h3 *ngIf="superAdminCounts && name == 'all'" >{{ superAdminCounts[0]?.sumOverALLTotalPrice | currency:'USD':'symbol':'1.2-2'}} </h3>        
+    <h3 *ngIf="superAdminCounts && name == 'all'"> {{getPercentageValue('sumOverALLTotalPrice')}}%  <img [attr.src]="getPercentageValue('sumOverALLTotalPrice') < 0 ?  '../../../assets/images/arrow-narrow-up.png': '../../../assets/images/ic-arrow-narrow-up.svg'" alt="" class="pb-0"> <span>{{sentance | translate}}</span></h3>
+   
+    <h3 *ngIf="superAdminCounts && name == 'scorecard'" >{{superAdminCounts[0]?.sumVendorTotalPrice | currency:'USD':'symbol':'1.2-2'}} </h3>        
+    <h3 *ngIf="superAdminCounts && name == 'scorecard'"> {{getPercentageValue('sumVendorTotalPrice')}}%  <img [attr.src]="getPercentageValue('sumVendorTotalPrice') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt="" class="pb-0"> <span>{{sentance | translate}}</span></h3>
+    
+    <h3 *ngIf="superAdminCounts && name == 'po'" >{{superAdminCounts[0]?.sumPOTotalPrice | currency:'USD':'symbol':'1.2-2'}} </h3>        
+    <h3 *ngIf="superAdminCounts && name == 'po'"> {{getPercentageValue('sumPOTotalPrice')}}%  <img [attr.src]="getPercentageValue('sumPOTotalPrice') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt="" class="pb-0"> <span>{{sentance | translate}}</span></h3>
+    
+    <h3 *ngIf="superAdminCounts && name == 'complete'" >{{superAdminCounts[0]?.sumALLTotalPrice | currency:'USD':'symbol':'1.2-2'}}</h3>        
+    <h3 *ngIf="superAdminCounts && name == 'complete'"> {{getPercentageValue('sumALLTotalPrice')}}%  <img [attr.src]="getPercentageValue('sumALLTotalPrice') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt="" class="pb-0"> <span>{{sentance | translate}}</span></h3>
+        
+
+   <ng-container *ngIf="totalScoreChange !== null && totalScoreChange !== undefined">
+    <h3 [style]="getTextColor()"> 
+      {{ totalScoreChange }}%  
+      <img [src]="getImage()" alt="" style="width:20px !important;" class="pb-0"> 
+      <span>{{sentance | translate}}</span>
+    </h3>
+
+  
+</ng-container>
+
+
+  <div class="new-use-red-b pos"><img src="../assets/images/newuser.png" alt=""></div>
+
+
+</div>
+
+
+
+
+
+

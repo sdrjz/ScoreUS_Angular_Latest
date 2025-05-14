@@ -1,0 +1,341 @@
+<!-- row -->
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="profile card card-body px-3 pt-3 pb-0 mt-5">
+            <div class="profile-head">
+                <div class="row">
+                    <div class="profile-name px-3 pt-2 col-lg-3">
+                        <!-- <h4 class="mb-0 pro-name uer-font">Billing</h4> -->
+                    </div>
+                    <!-- <div class="col-lg-6 col-sm-6 ml-auto text-right">
+                        <h5>Your next bill of <span class="red">$200</span> will be due on <span class="red">Jan 2,
+                                2022</span></h5>
+                    </div> -->
+                </div>
+            </div>
+            <div class="pro-form pt-4">
+                <div *ngIf="currentUrl === '/user/mybills'" id="row" class="row">
+                    <!-- col-xl-12 col-lg-12 pl-4 pr-4 manage-u pohistory-entrie activeusers -->
+                    <div class="col-3"></div>
+                    <div id="col-12" class="col-9  pl-2 pr-4 manage-u pohistory-entrie activeusers" >
+
+
+                        <app-datatablewithpagination
+                            style="margin-top: 22px!important; overflow-x: auto !important; overflow-y: auto !important;"
+                            defaultSortBy="name" [url]="getProjectsUrl" [columns]="poRowcolumns"
+                            class="sendReportTable"
+                            >
+                            
+                            <div ngProjectAs="title">
+                                <h4 class="text-lg font-medium">{{'Billing' | translate}}</h4>
+                            </div>
+
+                            <ng-template let-column let-data="element" let-value="value">
+                                <div *ngIf="column.def == 'status'" class="flex items-center space-x-2">
+                                    <span *ngIf="data.status == 'Paid'" style="color: green !important;">{{'Paid' | translate }}</span>
+                                    <span *ngIf="data.status != 'Paid'" style="color: red !important;">{{'Pending' | translate }}</span>
+                                </div>
+
+                                <div *ngIf="column.def == 'compare'" sticky>
+                                    <mat-checkbox [checked]="isVendorSelected(data)"
+                                        (change)="onCheckBoxClick($event,data)"></mat-checkbox>
+                                </div>
+
+
+                                <span *ngIf="column.def == 'renewelDate'" class="px-3">
+                                    {{ (data.ncR_Date | date: 'MM/dd/yyyy') }}
+                                </span>
+                                <span *ngIf="column.def == 'ncR_Date'" class="px-3">
+                                    {{ (data.ncR_Date | date: 'MM/dd/yyyy') }}
+                                </span>
+                                <span *ngIf="column.def == 'completionDate'" class="px-3">
+                                    {{ (data.completionDate | date: 'MM/dd/yyyy') }}
+                                </span>
+                                <span *ngIf="column.def == 'renewalDate'" class="px-3">
+                                    {{ (data.pO_Issue_Date | date: 'MM/dd/yyyy') }}
+                                </span>
+                                <span *ngIf="column.def == 'createdAt'" class="px-3">
+                                    {{ (data.createdAt | date: 'MM/dd/yyyy') }}
+                                </span>
+                                <span *ngIf="column.def == 'updatedAt'" class="px-3">
+                                    {{ (data.updatedAt | date: 'MM/dd/yyyy') }}
+                                </span>
+                                <span *ngIf="column.def == 'billingDate'" class="px-3">
+                                    {{ (data.billingDate.split(" ")[0]) }}
+                                </span>
+
+                                <div *ngIf="column.def == 'cancel'" class="flex flex-row justify-start">
+                                    <mat-slide-toggle [color]="primary" [checked]="true"
+                                        (change)="onToggleClick($event,data)">
+                                    </mat-slide-toggle>
+                                </div>
+
+                                <div *ngIf="column.def == 'action'" class="flex flex-row justify-start">
+                                    <span><button style="color:#fff!important;" (click)="getBillDetail(data)"
+                                            class="profi-btn mb-4 pl-3 pr-3 mt-3 pt-2 pb-2"> {{'Download' | translate }} </button></span>
+                                </div>
+                                <div *ngIf="column.def == 'view'" class="flex flex-row justify-start">
+                                    <button mat-stroked-button color="primary">
+                                        Delete
+                                    </button>
+                                    <button mat-stroked-button color="primary">
+                                        Update
+                                    </button>
+                                </div>
+                            </ng-template>
+                        </app-datatablewithpagination>
+
+                        <!-- <table datatable class="row-border hover" style="height:auto;display: table;">
+                            <thead>
+                                <tr>
+                                    <th style="padding-left: 16px;">#</th>
+                                    <th>Item</th>
+                                    <th>Invoice Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>1x user added</td>
+                                    <td>21/05/2022</td>
+                                    <td>$ 100.00</td>
+                                    <td class="green">Paid</td>
+                                    <td><span class="downlo-text">Download
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-download ml-3 mb-1"
+                                                viewBox="0 0 16 16">
+                                                <path
+                                                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                                <path
+                                                    d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                            </svg>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>1x user added</td>
+                                    <td>21/05/2022</td>
+                                    <td>$ 100.00</td>
+                                    <td class="green">Paid</td>
+                                    <td><span class="downlo-text">Download
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-download ml-3 mb-1"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                            <path
+                                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                        </svg>
+                                    </span>
+                                </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>1x user added</td>
+                                    <td>21/05/2022</td>
+                                    <td>$ 100.00</td>
+                                    <td class="green">Paid</td>
+                                    <td><span class="downlo-text">Download
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-download ml-3 mb-1"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                            <path
+                                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                        </svg>
+                                    </span>
+                                </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>1x user added</td>
+                                    <td>21/05/2022</td>
+                                    <td>$ 100.00</td>
+                                    <td class="red-pen">Pending</td>
+                                    <td><span class="downlo-text">Download
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-download ml-3 mb-1"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                            <path
+                                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                        </svg>
+                                    </span>
+                                </td>
+                                </tr>
+                            </tbody>
+                        </table>  -->
+
+                    </div>
+                </div>
+
+                <div *ngIf="currentUrl !== '/user/mybills'" id="row" class="row">
+                    <!-- col-xl-12 col-lg-12 pl-4 pr-4 manage-u pohistory-entrie activeusers -->
+                    <div id="col-12" class="col-xl-12 col-lg-12 pl-4 pr-4 manage-u pohistory-entrie activeusers" >
+
+
+                        <app-datatablewithpagination
+                            style="margin-top: 22px!important; overflow-x: auto !important; overflow-y: auto !important;"
+                            defaultSortBy="name" [url]="getProjectsUrl" [columns]="poRowcolumns"
+                            class="sendReportTable"
+                            >
+                            <div ngProjectAs="title">
+                                <h4 class="text-lg font-medium">{{'Billing' | translate}}</h4>
+                            </div>
+
+                            <ng-template let-column let-data="element" let-value="value">
+                                <div *ngIf="column.def == 'status'" class="flex items-center space-x-2">
+                                    <span *ngIf="data.status == 'Paid'" style="color: green !important;">{{'Paid' | translate }}</span>
+                                    <span *ngIf="data.status != 'Paid'" style="color: red !important;">{{'Pending' | translate }}</span>
+                                </div>
+
+                                <div *ngIf="column.def == 'compare'" sticky>
+                                    <mat-checkbox [checked]="isVendorSelected(data)"
+                                        (change)="onCheckBoxClick($event,data)"></mat-checkbox>
+                                </div>
+
+
+                                <span *ngIf="column.def == 'renewelDate'" class="px-3">
+                                    {{ (data.ncR_Date | date: 'MM/dd/yyyy') }}
+                                </span>
+                                <span *ngIf="column.def == 'ncR_Date'" class="px-3">
+                                    {{ (data.ncR_Date | date: 'MM/dd/yyyy') }}
+                                </span>
+                                <span *ngIf="column.def == 'completionDate'" class="px-3">
+                                    {{ (data.completionDate | date: 'MM/dd/yyyy') }}
+                                </span>
+                                <span *ngIf="column.def == 'renewalDate'" class="px-3">
+                                    {{ (data.pO_Issue_Date | date: 'MM/dd/yyyy') }}
+                                </span>
+                                <span *ngIf="column.def == 'createdAt'" class="px-3">
+                                    {{ (data.createdAt | date: 'MM/dd/yyyy') }}
+                                </span>
+                                <span *ngIf="column.def == 'updatedAt'" class="px-3">
+                                    {{ (data.updatedAt | date: 'MM/dd/yyyy') }}
+                                </span>
+                                <span *ngIf="column.def == 'billingDate'" class="px-3">
+                                    {{ (data.billingDate.split(" ")[0]) }}
+                                </span>
+
+                                <div *ngIf="column.def == 'cancel'" class="flex flex-row justify-start">
+                                    <mat-slide-toggle [color]="primary" [checked]="true"
+                                        (change)="onToggleClick($event,data)">
+                                    </mat-slide-toggle>
+                                </div>
+
+                                <div *ngIf="column.def == 'action'" class="flex flex-row justify-start">
+                                    <span><button style="color:#fff!important;" (click)="getBillDetail(data)"
+                                            class="profi-btn mb-4 pl-3 pr-3 mt-3 pt-2 pb-2"> {{'Download' | translate }} </button></span>
+                                </div>
+                                <div *ngIf="column.def == 'view'" class="flex flex-row justify-start">
+                                    <button mat-stroked-button color="primary">
+                                        Delete
+                                    </button>
+                                    <button mat-stroked-button color="primary">
+                                        Update
+                                    </button>
+                                </div>
+                            </ng-template>
+                        </app-datatablewithpagination>
+
+                        <!-- <table datatable class="row-border hover" style="height:auto;display: table;">
+                            <thead>
+                                <tr>
+                                    <th style="padding-left: 16px;">#</th>
+                                    <th>Item</th>
+                                    <th>Invoice Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>1x user added</td>
+                                    <td>21/05/2022</td>
+                                    <td>$ 100.00</td>
+                                    <td class="green">Paid</td>
+                                    <td><span class="downlo-text">Download
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-download ml-3 mb-1"
+                                                viewBox="0 0 16 16">
+                                                <path
+                                                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                                <path
+                                                    d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                            </svg>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>1x user added</td>
+                                    <td>21/05/2022</td>
+                                    <td>$ 100.00</td>
+                                    <td class="green">Paid</td>
+                                    <td><span class="downlo-text">Download
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-download ml-3 mb-1"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                            <path
+                                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                        </svg>
+                                    </span>
+                                </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>1x user added</td>
+                                    <td>21/05/2022</td>
+                                    <td>$ 100.00</td>
+                                    <td class="green">Paid</td>
+                                    <td><span class="downlo-text">Download
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-download ml-3 mb-1"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                            <path
+                                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                        </svg>
+                                    </span>
+                                </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>1x user added</td>
+                                    <td>21/05/2022</td>
+                                    <td>$ 100.00</td>
+                                    <td class="red-pen">Pending</td>
+                                    <td><span class="downlo-text">Download
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-download ml-3 mb-1"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                            <path
+                                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                        </svg>
+                                    </span>
+                                </td>
+                                </tr>
+                            </tbody>
+                        </table>  -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

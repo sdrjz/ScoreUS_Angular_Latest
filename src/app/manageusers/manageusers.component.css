@@ -1,0 +1,22 @@
+.link-refer{
+    display: flex !important;
+    flex-flow:row wrap !important;
+    color:red !important;
+}
+
+table {
+    width: 100%;
+}
+
+.active{
+    border : 1px solid forestgreen;
+    color:forestgreen;
+
+}
+
+
+.inactive{
+    border : 1px solid #EE3232;
+    color:#EE3232;
+
+}

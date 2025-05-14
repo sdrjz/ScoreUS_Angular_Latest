@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "tbGSNeI79m4=",
+  "success": true,
+  "projectFilePath": "C:\\ScoreUS_Project\\Frontend\\ScoreUS_Common\\ScoreUS_Common.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Dell\\.nuget\\packages\\ci.servermap\\0.0.1\\ci.servermap.0.0.1.nupkg.sha512",
+    "C:\\Users\\Dell\\.nuget\\packages\\microsoft.aspnetcore.http.features\\3.1.9\\microsoft.aspnetcore.http.features.3.1.9.nupkg.sha512",
+    "C:\\Users\\Dell\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.9\\microsoft.extensions.primitives.3.1.9.nupkg.sha512",
+    "C:\\Users\\Dell\\.nuget\\packages\\system.io.pipelines\\4.7.3\\system.io.pipelines.4.7.3.nupkg.sha512"
+  ],
+  "logs": []
+}

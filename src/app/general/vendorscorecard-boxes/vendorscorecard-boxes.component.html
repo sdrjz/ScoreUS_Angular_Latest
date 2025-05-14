@@ -1,0 +1,64 @@
+<div class="row" >
+    <div class="col-xl-3 col-sm-6 mb-4" [matTooltip]="tips.otdStatistics" [matTooltipPosition]="'above'">
+        <div class="new-use pb-0">
+            <!-- <p>Vendor OTD</p> -->
+            <p>{{subtitle | translate}} OTD</p>
+            <!-- <h2 *ngIf="!data"> No data</h2> -->
+            <h2 *ngIf="data && data?.currentStatus?.length > 0">{{'Score' | translate }} {{ data?.currentStatus[0]?.otd_score}}/{{ data?.currentStatus[0]?.otd_max_score}}</h2>
+            <h2 *ngIf="data && data?.currentStatus?.length > 0">{{'Percent' | translate }} {{ data?.currentStatus[0]?.otd_percentage.toFixed(2) }}%</h2>
+            <h3 *ngIf="(data?.previousStatus !== null && (otdDiff<=0 || otdDiff>0))" [style]="getTextColor(otdDiff)"> {{otdDiff}}%  <img [attr.src]="getImage(otdDiff)" width="15px;" alt=""> </h3>
+            <h3 *ngIf="(data?.previousStatus !== null && (otdDiff<=0 || otdDiff>0))"><span id="text4">{{sentance | translate}}</span></h3>
+            <div class="new-use-red-b" >
+                <div class="align-items-center"><img src="../assets/images/newuser.png" alt=""></div>
+            </div>
+        </div>
+    </div>
+  
+    <div class="col-xl-3 col-sm-6 mb-4" [matTooltip]="tips.ncrStatistics" [matTooltipPosition]="'above'">
+        <div class="new-use active-user pb-0">
+            <p>{{subtitle | translate}} NCR</p>
+            <!-- <h2 *ngIf="!data"> No data</h2> -->
+            <h2 *ngIf="data && data?.currentStatus?.length > 0">{{'Score' | translate }} {{  data?.currentStatus[0]?.ncr_score}}/ {{ data?.currentStatus[0]?.ncr_max_score}}</h2>
+            <h2 *ngIf="data && data?.currentStatus?.length > 0">{{'Percent' | translate }} {{  data?.currentStatus[0]?.ncr_percentage.toFixed(2) }}%</h2>
+            <h3 *ngIf="(data?.previousStatus !== null && (ncrDiff<=0 || ncrDiff>0))" [style]="getNCRPPVTextColor(ncrDiff)"> {{ncrDiff}}%  
+                <img [attr.src]="getNCRPPVImage(ncrDiff)" [style]="getNCRPPVStyle(ncrDiff)" alt=""> </h3>
+            <h3 *ngIf="(data?.previousStatus !== null && (ncrDiff<=0 || ncrDiff>0))" ><span id="text1">{{sentance | translate}}</span></h3>    
+            
+            <!-- <h3 class="red-num">2.3% <img src="../assets/images/arrow-narrow-up.png" alt=""> <p>than last year</p></h3> -->
+            <div class="new-use-red-b active-user-box" >
+                <div class="align-items-center"><img src="../assets/images/activeuser.png" alt=""></div>
+            </div>
+        </div>
+    </div>
+   
+    <div class="col-xl-3 col-sm-6 mb-4" [matTooltip]="tips.ppvStatistics" [matTooltipPosition]="'above'">
+        <div class="new-use pb-0">
+            <p>{{subtitle | translate}} PPV</p>
+            <!-- <h2 *ngIf="!data"> No data</h2> -->
+            <h2 *ngIf="data && data?.currentStatus?.length > 0">{{'Score' | translate}} {{  data?.currentStatus[0]?.ppv_score}}/{{ data?.currentStatus[0]?.ppv_max_score}}</h2>
+            <h2 *ngIf="data && data?.currentStatus?.length > 0">{{ 'Percent' | translate }} {{ data?.currentStatus[0]?.ppv_percentage.toFixed(2)}}%</h2>
+            <h3 *ngIf="(data?.previousStatus !== null && (ppvDiff<=0 || ppvDiff>0))" [style]="getNCRPPVTextColor(ppvDiff)"> {{ppvDiff}}%  <img [attr.src]="getNCRPPVImage(ppvDiff)" [style]="getNCRPPVStyle(ppvDiff)"  alt=""></h3>
+            <h3 *ngIf="(data?.previousStatus !== null && (ppvDiff<=0 || ppvDiff>0))" ><span>{{sentance | translate}}</span></h3>
+            <div class="new-use-red-b" >
+                <div class="align-items-center"><img src="../assets/images/ppv.png" alt=""></div>
+            </div>
+        </div>
+    </div>
+
+  
+    <div class="col-xl-3 col-sm-6 mb-4" [matTooltip]="tips.ltaStatistics" [matTooltipPosition]="'above'">
+        <div class="new-use active-user pb-0">
+            <p>{{subtitle | translate}} LTA</p>
+            <!-- <h2 *ngIf="!data"> No data</h2> -->
+            <h2 *ngIf="data && data?.currentStatus?.length > 0">{{'Score' | translate}} {{  data?.currentStatus[0]?.lta_score}}/{{ data?.currentStatus[0]?.lta_max_score}}</h2>
+            <h2 *ngIf="data && data?.currentStatus?.length > 0">{{'Percent' | translate }} {{ data?.currentStatus[0]?.lta_percentage.toFixed(2)}}%</h2>
+            <h3 *ngIf="(data?.previousStatus !== null && (ltaDiff<=0 || ltaDiff>0))" [style]="getTextColor(ltaDiff)"> {{ltaDiff}}%  <img [attr.src]="getImage(ltaDiff)" width="15px;" alt=""> </h3>
+            <h3 *ngIf="(data?.previousStatus !== null && (ltaDiff<=0 || ltaDiff>0))"><span id="text3">{{sentance | translate}}</span></h3>
+            <!-- <h3 class="red-num">2.3% <img src="../../../assets/images/arrow-narrow-up.png" alt=""> <p>than last year</p></h3> -->
+            <div class="new-use-red-b active-user-box" >
+                <div class="align-items-center"><img src="../assets/images/lta.png" alt=""></div>
+            </div>
+        </div>
+    </div>    
+
+</div>

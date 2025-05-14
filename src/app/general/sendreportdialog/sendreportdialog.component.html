@@ -1,0 +1,231 @@
+<h1 mat-dialog-title>Send Report
+  <i  (click)="close()" class="fa fa-times fa-lg" aria-hidden="true" style="color:#BC1A20;float:right;"></i>
+</h1>
+<div class="">
+
+<div class="row">
+<div class="col-7 pr-0">
+  <div  class="wizard-Signup-dialog sendreportdialog">
+
+    <div mat-dialog-content style="display: initial;">
+      <form class="">
+        <!-- <input type="email" class="form-control" placeholder="Email"> -->
+  
+  
+        
+  
+  
+        <div class="col-md-12 text-left  pl-0 pr-0">
+          <label class="report-dia">Subject</label>
+          <input [(ngModel)]="responseData.subject" name="message" placeholder="Enter subject for mail"
+            class="form-control" />
+  
+        </div>
+  
+        
+        <div  class="col-md-12 text-left  pl-0 pr-0">
+          <label class="report-dia">Message</label>
+          <div contenteditable="true" (focusout)="onContentChange($event)" (input)="onTyping($event)" [innerHTML]="responseData.message" ></div>
+  
+          <!-- <textarea [(ngModel)]="responseData.message" (keydown)="onContentChange($event)" placeholder="Enter message" name="message" rows="2" cols="50"
+            class="form-control">
+          </textarea> -->
+        </div>
+  
+     
+      </form>
+    </div>
+    
+  </div>
+  </div>
+ 
+  <div class="col-5 pl-0" style="text-align:left;">
+    <div class="wizard-Signup-dialog sendreportdialog">
+      <form [formGroup]="form" class="mt-3">
+        <div formArrayName="items">
+          <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="row mt-4 send-report-sep">
+            <div class="col-12">
+              <label *ngIf="isCommodity === null">Code :</label>
+              <label *ngIf="isCommodity !== null" >Commodity :</label>
+              <span style="margin-left:5px;">{{ item.get('code').value }}</span>
+            </div>
+
+            <div class="col-12">
+              <label hidden >Description :</label>
+              <span hidden style="margin-left:5px;">{{ item.get('description').value }}</span>
+            </div>
+            <div class="col-12">
+              <label>Name :</label>
+              <span style="margin-left:5px;" >{{ item.get('name').value }}</span>
+            </div>
+
+            <div class="col-12" *ngIf="sendFrom === 'expeditor' && sendTo === 'Buyer' && roleID != 13">
+              <label>Vendor :</label>
+              <span style="margin-left:5px;" >{{ item.get('vendorName').value }}</span>
+            </div>
+
+            <!-- <div class="col-12">
+              <label>Contact :</label>
+              <span>{{ item.get('contact').value }}</span>
+              <input  formControlName="contact" mask="(000) 000-0000" (keyup)="formatPhoneNumber(i)" class="form-control" />
+            </div> -->
+            <div class="col-12">
+              <label>Email :</label>
+              <div formArrayName="email">
+                <div *ngFor="let ccControl of item.get('email').controls; let j = index">
+                  <div class="cc_delete" id="add-email">
+                    <span>{{ ccControl.value }}</span>
+                    <!-- <button type="button" >Remove</button> -->
+                    <button (click)="removeEmail(i, j)" class="button_background" matTooltip="Click to delete email">
+                      <span class="material-icons">delete_outline</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="cc_div">
+                <!-- Input field for email -->
+                <input
+                  placeholder="Enter email"
+                  id="emaili{{i}}"
+                  class="form-control"
+                  (keyup.enter)="addEmail(i)"  
+                  (keydown.enter)="$event.preventDefault()"
+                />
+                <button type="button" class="add_cc_btn" (click)="addEmail(i)">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+            
+            
+         
+            
+         
+           
+            <div class="col-12">
+              <label>CC :</label>
+              <div formArrayName="cc">
+                <div *ngFor="let ccControl of item.get('cc').controls; let j = index">
+                  <div class="cc_delete">
+                  <span>{{ ccControl.value }}</span>
+                  <!-- <button type="button" >Remove</button> -->
+                  <button (click)="removeCC(i, j)" class="button_background" matTooltip="Click to delete email">
+                    <span class="material-icons">delete_outline</span>
+                  </button>
+                </div>
+                </div>
+              </div>
+              <div class="cc_div" >
+                <!-- formControlName="email" -->
+                <input placeholder="Enter email"  id="email{{i}}" class="form-control" 
+                (keyup.enter)="addCC(i)"  
+                (keydown.enter)="$event.preventDefault()"
+                />
+                <button type="button" class="add_cc_btn" [type]="submit" (click)="addCC(i)">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+         
+            <!-- <div class="col-12">
+              <label>Email :</label>
+              <div formArrayName="email">
+                <div *ngFor="let ccControl of item.get('email').controls; let j = index">
+                  <div class="cc_delete">
+                  <span>{{ ccControl.value }}</span>
+                
+                  <button (click)="removeEmail(i, j)" class="button_background" matTooltip="Click to delete email">
+                    <span class="material-icons">delete_outline</span>
+                  </button>
+                </div>
+                </div>
+              </div>
+              <div class="cc_div" >
+               
+                <input placeholder="Enter email"  id="emaili{{i}}" class="form-control" />
+                <button type="button" class="add_cc_btn" [type]="submit" (click)="addEmail(i)">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div> -->
+
+            
+         
+            
+         
+           
+            <!-- <div class="col-12">
+              <label>CC :</label>
+              <div formArrayName="cc">
+                <div *ngFor="let ccControl of item.get('cc').controls; let j = index">
+                  <div class="cc_delete">
+                  <span>{{ ccControl.value }}</span>
+                 
+                  <button (click)="removeCC(i, j)" class="button_background" matTooltip="Click to delete email">
+                    <span class="material-icons">delete_outline</span>
+                  </button>
+                </div>
+                </div>
+              </div>
+              <div class="cc_div" >
+              
+                <input placeholder="Enter email"  id="email{{i}}" class="form-control" />
+                <button type="button" class="add_cc_btn" [type]="submit" (click)="addCC(i)">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div> -->
+            
+          </div>
+        </div>
+      </form>
+      
+  
+      <!-- <div *ngFor="let item of responseData.listReportToSend" class="row">
+        <label class="col-4 report-dia">Code:</label>
+        <label class="col-8 report-dia">{{item.code}}</label>
+        <label class="col-4 report-dia">Name:</label>
+        <label class="col-8 report-dia">{{item.name}}</label>
+        <label class="col-4 report-dia">Contact:</label>
+        <label class="col-8 report-dia">{{item.contact}}</label>
+        <label class="col-2 report-dia">To:</label>
+        <label class="col-10 report-dia">{{item.email}}</label>
+        <label class="col-12 report-dia">CC:</label>
+        <label class="col-6 report-dia" *ngFor="let email of item.cc">{{email}}</label>
+        
+        <input  name="message" placeholder="Enter email"
+          class="form-control" />
+    
+        <span class="mt-5" ></span>
+      </div> -->
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div mat-dialog-actions class="d-flex" style="justify-content: center;
+    margin-top: 30px;">
+      <div class="col-3">
+        <button class="profi-btn-yes cancel-btn" style="width: 100%;" (click)="close()">Cancel</button>
+      </div>
+      <div class="col-3">
+        <button class="profi-btn-yes cancel-btn" style="width: 100%;" (click)="reset()">Reset</button>
+      </div>
+      <div class="col-3">
+        <button (click)="openDialog()" class="profi-btn-yes" style="color:#fff;margin: 0px auto;">Send</button> 
+      </div>
+    </div>
+  </div>  
+</div>
+
+
+</div>
+
+<!-- 
+<div class="col-12">
+  <label>Email :</label>
+  <input formControlName="email" class="form-control" />
+  </div> -->
+<!-- <span>{{ item.get('email').value }}</span> -->

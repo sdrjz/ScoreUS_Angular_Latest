@@ -1,0 +1,23 @@
+<!--**********************************
+	Content body start
+***********************************-->
+<div class="content-body">
+    <div class="container-fluid">
+  
+      <!-- row -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="profile card-body px-3 pt-3 pb-0">
+            <app-mapout-vendor-filed (vendorMapOutEmitter)="getListVendorRank($event)"></app-mapout-vendor-filed>            
+          </div>
+        </div>
+      </div>
+
+      <app-mapout-vendor-map [listRankedVendor]="listRankedVendor"></app-mapout-vendor-map>
+  
+    </div>
+  </div>
+  <!--**********************************
+      Content body end
+  ***********************************-->
+

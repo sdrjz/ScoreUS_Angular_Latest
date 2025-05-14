@@ -1,0 +1,656 @@
+<div class="">
+    <div class="card p-4" style="padding-bottom:6px!important;padding-top: 0px!important;">
+        <div class="row">
+            
+            <div class="col-md-4 pt-4">
+                <div class="d-flex">
+                    <span class="vendor-per pt-2">{{"Plant" | translate }}:</span>
+                    <select class="form-control plant-select" [(ngModel)]="filters.plantCode" (change)="changePlanCode()">
+                        <option selected="selected" value="All">All</option>
+                        <option *ngFor="let plant of allPlants" [value]="plant.item_id">{{plant.item_text+" "+plant.item_id}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-4 pt-4">
+                <div class="d-flex">
+                    <span class="vendor-per pt-2">{{"Buyer" | translate}}</span>
+                    <!-- <select class="form-control plant-select" [(ngModel)]="filters.BuyerCode">
+                        <option selected="selected" value="All">All</option>
+                        <option *ngFor="let buyer of allBuyers" [value]="buyer.item_id">{{buyer.item_text}}</option>
+                    </select> -->
+                    <mat-form-field appearance="fill" class="">
+                        <mat-select class="analysis-multi" placeholder="Multiple Selection" (selectionChange)="onSelection($event)" [(ngModel)]="filters.BuyerCode" multiple>
+                            <mat-option *ngFor="let buyer of allBuyers"
+                                [value]="buyer.item_id">
+                                {{buyer.item_text}}  <span class="right-code">{{buyer.item_id === 'ALL' ? "" : buyer.item_id}}</span>
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+    
+            <div class="col-md-4 pt-2">
+                <div class="range pl-3 pr-4">
+                    <!-- <div class="">
+                    </div> -->
+                    <div class="field">
+                        <div class="value left">1 {{"Day" | translate}}</div>
+                        <span style="text-align: center;position:absolute!important;top:-4px">{{filters.days}} {{"Days" | translate}}</span>
+                        <input type="range" [(ngModel)]="filters.days" min="1" max="30" value="1" steps="1" />
+                        <div class="value right">30 {{"Days" | translate}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 pt-2">
+                <div class="d-flex">
+                    <span class="vendor-per pt-2">{{"Buffer Days" | translate }}:</span>
+                    <input type="number" [(ngModel)]="filters.bufferDays" placeholder="3" class="form-control plant-select"
+                    oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+                </div>
+            </div>
+            
+            <div class="col-md-4 pt-2">
+                <div class="d-flex">
+                    <span class="vendor-per pt-2">{{"Future Days" | translate }}:</span>
+                    <input type="number" [(ngModel)]="filters.selfdefinedfuturedays" placeholder="14" class="form-control plant-select"
+                    oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+                </div>
+            </div>
+
+            <div class="col-md-2 ml-auto  pt-2">
+                <div class="form-group">                
+                    <button type="button" (click)="Search()" class="btn btn-primary" style="border-radius: 50px;width: 100%;white-space:nowrap;">{{"Execute" | translate}}</button>                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="">
+    <!--OpenPOorders_Lines-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class=" card card-body px-3 pt-3 p-4 pb-0">
+                <div>
+                    <div *ngIf="showOpenPOorders_Lines; else showOpenPOorders_LinesChart">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">{{"Average Daily PO Lines" | translate}}</h3>
+                            </div>
+                            <div class="col-xl-12 col-lg-12 pl-0  vendorscorecard-table vendor-second-t tre-sh" id="style-2">
+                                <!-- <app-podatatable 
+                                style="margin-top: 10px" 
+                                defaultSortBy="name"
+                                [columns]="columns" 
+                                [dataSourceForTable]="OpenPOorders_Lines"
+                                [totalRecordsForTable]="totalRecords"
+                                [route]=""
+                                [filters] ="filters"
+                                >
+                                </app-podatatable> -->
+                                <app-data-table 
+                                style="margin-top: 10px" 
+                                defaultSortBy="name"
+                                [columns]="columns" 
+                                [dataSourceForTable]="OpenPOorders_Lines"
+                                [totalRecordsForTable]="totalRecords"
+                                [filters] ="filters"
+                                ></app-data-table>
+
+                            </div>
+                        </div>
+                    </div>
+                    <ng-template #showOpenPOorders_LinesChart>
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">{{"Average Daily PO Lines" | translate}}<span class="pr-3" style="float: right;cursor: pointer;" mat-button
+                                        (click)="openDialogNew('Average Daily PO Lines',graphData.OpenPOorders_Lines)">
+                                        <i class="fa fa-expand" aria-hidden="true"></i></span>
+                                </h3>
+                                <!-- [yaxisTitle]="'Average Daily PO Lines Percentage'" -->
+                                <app-trendlines-pomanager-linechart [executeData]="graphData.OpenPOorders_Lines" [chartFor]="'Line'" ></app-trendlines-pomanager-linechart>
+                            </div>
+                        </div>
+                    </ng-template>
+
+                    <div class="row pb-2 mt-2">
+                        <div class="col-lg-12 col-md-12" style="text-align: right;">
+                            <div class="btn-group">
+                                <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="processExport(OpenPOorders_Lines,'Average Daily PO Lines')">{{"Download Data" | translate}}</a>
+                                <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="toggleOpenPOorders_Lines()" id="bt">{{btnOpenPOorders_Lines | translate}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--OpenPOorders_Lines-->
+    
+    <!--Pastdueorders_Lines-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="profile card card-body px-3 pt-3 p-4 pb-0">
+           
+                <div *ngIf="showPastdueorders_Lines; else showPastdueorders_LinesChart">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">{{"Average Daily Pastdue Lines" | translate }}</h3>
+                        </div>
+                        <div class="col-xl-12 col-lg-12 pl-0  vendorscorecard-table vendor-second-t tre-sh" id="style-2">
+                            <!-- <app-podatatable 
+                            style="margin-top: 10px" 
+                            defaultSortBy="name"
+                            [columns]="columns" 
+                            [dataSourceForTable]="Pastdueorders_Lines"
+                            [totalRecordsForTable]="totalRecords"
+                            [route]=""
+                            [filters] ="filters"
+                            >
+                            </app-podatatable> -->
+                            <app-data-table 
+                            style="margin-top: 10px" 
+                            defaultSortBy="name"
+                            [columns]="columns" 
+                            [dataSourceForTable]="Pastdueorders_Lines"
+                            [totalRecordsForTable]="totalRecords"
+                            [filters] ="filters"
+                            ></app-data-table>
+                            
+                        </div>
+                    </div>
+                </div>
+                <ng-template #showPastdueorders_LinesChart>
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">{{"Average Daily Pastdue Lines" | translate }}<span class="pr-3" style="float: right;cursor: pointer;" mat-button
+                                (click)="openDialogNew('Average Daily Pastdue Lines',graphData.Pastdueorders_Lines)">
+                                    <i class="fa fa-expand" aria-hidden="true"></i></span>
+                            </h3>
+                            <app-trendlines-pomanager-linechart [executeData]="graphData.Pastdueorders_Lines" [chartFor]="'Line'"></app-trendlines-pomanager-linechart>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <div class="row pb-2 mt-2">
+                    <div class="col-lg-12 col-md-12" style="text-align: right;">
+                        <div class="btn-group">
+                            <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="processExport(Pastdueorders_Lines,'Average Daily Pastdue Lines')">{{"Download Data" | translate}}</a>
+                            <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="togglePastdueorders_Lines()"
+                                id="bt">{{btnPastdueorders_Lines  | translate}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Pastdueorders_Lines-->
+
+    <!--Ackneededorders_Lines-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="profile card card-body px-3 pt-3 p-4 pb-0">
+           
+                <div *ngIf="showAckneededorders_Lines; else showAckneededorders_LinesChart">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">{{"Average Daily Ack'd Needed Lines" | translate}}</h3>
+                        </div>
+                        <div class="col-xl-12 col-lg-12 pl-0  vendorscorecard-table vendor-second-t tre-sh" id="style-2">
+                            <!-- <app-podatatable 
+                            style="margin-top: 10px" 
+                            defaultSortBy="name"
+                            [columns]="columns" 
+                            [dataSourceForTable]="Ackneededorders_Lines"
+                            [totalRecordsForTable]="totalRecords"
+                            [route]=""
+                            [filters] ="filters"
+                            >
+                            </app-podatatable> -->
+                            <app-data-table 
+                            style="margin-top: 10px" 
+                            defaultSortBy="name"
+                            [columns]="columns" 
+                            [dataSourceForTable]="Ackneededorders_Lines"
+                            [totalRecordsForTable]="totalRecords"
+                            [filters] ="filters"
+                            ></app-data-table>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #showAckneededorders_LinesChart>
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">{{"Average Daily Ack'd Needed Lines" | translate}}<span class="pr-3" style="float: right;cursor: pointer;" mat-button
+                                (click)="openDialogNew('Average Daily Ack\'d Needed Lines',graphData.Ackneededorders_Lines)">
+                                    <i class="fa fa-expand" aria-hidden="true"></i></span>
+                            </h3>
+                            <app-trendlines-pomanager-linechart [executeData]="graphData.Ackneededorders_Lines" [chartFor]="'Line'"></app-trendlines-pomanager-linechart>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <div class="row pb-2 mt-2">
+                    <div class="col-lg-12 col-md-12" style="text-align: right;">
+                        <div class="btn-group">
+                            <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="processExport(Ackneededorders_Lines,'Average Daily Ackd Needed Lines')">{{"Download Data" | translate}}</a>
+                            <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="toggleAckneededorders_Lines()"
+                                id="bt">{{btnAckneededorders_Lines  | translate}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Ackneededorders_Lines-->
+
+    <!--Futurepastdueorders_Lines-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="profile card card-body px-3 pt-3 p-4 pb-0">
+           
+                <div *ngIf="showFuturepastdueorders_Lines; else showFuturepastdueorders_LinesChart">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">{{"Average Daily Future Past Lines" | translate}}</h3>
+                        </div>
+                        <div class="col-xl-12 col-lg-12 pl-0  vendorscorecard-table vendor-second-t tre-sh" id="style-2">
+                            <!-- <app-podatatable 
+                            style="margin-top: 10px" 
+                            defaultSortBy="name"
+                            [columns]="columns" 
+                            [dataSourceForTable]="Futurepastdueorders_Lines"
+                            [totalRecordsForTable]="totalRecords"
+                            [route]=""
+                            [filters] ="filters"
+                            >
+                            </app-podatatable> -->
+                            <app-data-table 
+                            style="margin-top: 10px" 
+                            defaultSortBy="name"
+                            [columns]="columns" 
+                            [dataSourceForTable]="Futurepastdueorders_Lines"
+                            [totalRecordsForTable]="totalRecords"
+                            [filters] ="filters"
+                            ></app-data-table>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #showFuturepastdueorders_LinesChart>
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">{{"Average Daily Future Past Lines" | translate}}<span class="pr-3" style="float: right;cursor: pointer;" mat-button
+                                (click)="openDialogNew('Average Daily Future Past Lines',graphData.Futurepastdueorders_Lines)">
+                                    <i class="fa fa-expand" aria-hidden="true"></i></span>
+                            </h3>
+                            <app-trendlines-pomanager-linechart [executeData]="graphData.Futurepastdueorders_Lines" [chartFor]="'Line'"></app-trendlines-pomanager-linechart>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <div class="row pb-2 mt-2">
+                    <div class="col-lg-12 col-md-12" style="text-align: right;">
+                        <div class="btn-group">
+                            <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="processExport(Futurepastdueorders_Lines,'Average Daily Future Past Lines')">{{"Download Data" | translate}}</a>
+                            <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="toggleFuturepastdueorders_Lines()"
+                                id="bt">{{btnFuturepastdueorders_Lines | translate}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Futurepastdueorders_Lines-->
+
+    <!--Leadtimecheckorders_Lines-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="profile card card-body px-3 pt-3 p-4 pb-0">
+           
+                <div *ngIf="showLeadtimecheckorders_Lines; else showLeadtimecheckorders_LinesChart">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">{{"Average Daily LeadTime Check Lines" | translate}}</h3>
+                        </div>
+                        <div class="col-xl-12 col-lg-12 pl-0  vendorscorecard-table vendor-second-t tre-sh" id="style-2">
+                            <!-- <app-podatatable 
+                            style="margin-top: 10px" 
+                            defaultSortBy="name"
+                            [columns]="columns" 
+                            [dataSourceForTable]="Leadtimecheckorders_Lines"
+                            [totalRecordsForTable]="totalRecords"
+                            [route]=""
+                            [filters] ="filters"
+                            >
+                            </app-podatatable> -->
+                            <app-data-table 
+                            style="margin-top: 10px" 
+                            defaultSortBy="name"
+                            [columns]="columns" 
+                            [dataSourceForTable]="Leadtimecheckorders_Lines"
+                            [totalRecordsForTable]="totalRecords"
+                            [filters] ="filters"
+                            ></app-data-table>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #showLeadtimecheckorders_LinesChart>
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">{{"Average Daily LeadTime Check Lines" | translate}}<span class="pr-3" style="float: right;cursor: pointer;" mat-button
+                                (click)="openDialogNew('Average Daily LeadTime Check Lines',graphData.Leadtimecheckorders_Lines)">
+                                    <i class="fa fa-expand" aria-hidden="true"></i></span>
+                            </h3>
+                            <app-trendlines-pomanager-linechart [executeData]="graphData.Leadtimecheckorders_Lines" [chartFor]="'Line'"></app-trendlines-pomanager-linechart>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <div class="row pb-2 mt-2">
+                    <div class="col-lg-12 col-md-12" style="text-align: right;">
+                        <div class="btn-group">
+                            <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="processExport(Leadtimecheckorders_Lines,'LeadTime Check Lines')">{{"Download Data" |  translate}}</a>
+                            <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="toggleLeadtimecheckorders_Lines()"
+                                id="bt">{{btnLeadtimecheckorders_Lines | translate}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Leadtimecheckorders_Lines-->
+        
+    <!--OpenPOorders_Values-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="profile card card-body px-3 pt-3 p-4 pb-0">
+           
+                <div *ngIf="showOpenPOorders_Values; else showOpenPOorders_ValuesChart">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">{{"Average Daily PO Value" | translate}}</h3>
+                        </div>
+                        <div class="col-xl-12 col-lg-12 pl-0  vendorscorecard-table vendor-second-t tre-sh" id="style-2">
+                            <!-- <app-podatatable 
+                            style="margin-top: 10px" 
+                            defaultSortBy="name"
+                            [columns]="columns" 
+                            [dataSourceForTable]="OpenPOorders_Values"
+                            [totalRecordsForTable]="totalRecords"
+                            [route]=""
+                            [filters] ="filters"
+                            >
+                            </app-podatatable> -->
+                            <app-data-table 
+                            style="margin-top: 10px" 
+                            defaultSortBy="name"
+                            [columns]="columns" 
+                            [dataSourceForTable]="OpenPOorders_Values"
+                            [totalRecordsForTable]="totalRecords"
+                            [filters] ="filters"
+                            ></app-data-table>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #showOpenPOorders_ValuesChart>
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">{{"Average Daily PO Value" | translate}}<span class="pr-3" style="float: right;cursor: pointer;" mat-button
+                                (click)="openDialogNew('Average Daily PO Value',graphData.OpenPOorders_Values)">
+                                    <i class="fa fa-expand" aria-hidden="true"></i></span>
+                            </h3>
+                            <app-trendlines-pomanager-linechart [executeData]="graphData.OpenPOorders_Values" [chartFor]="'Value'"></app-trendlines-pomanager-linechart>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <div class="row pb-2 mt-2">
+                    <div class="col-lg-12 col-md-12" style="text-align: right;">
+                        <div class="btn-group">
+                            <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="processExport(OpenPOorders_Values,'Average Daily PO Value')">{{"Download Data" | translate}}</a>
+                            <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="toggleOpenPOorders_Values()"
+                                id="bt">{{btnOpenPOorders_Values | translate}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--OpenPOorders_Values-->
+
+    <!--Pastdueorders_Values-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="profile card card-body px-3 pt-3 p-4 pb-0">
+           
+                <div *ngIf="showPastdueorders_Values; else showPastdueorders_ValuesChart">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">{{"Average Daily Pastdue Value" | translate}}</h3>
+                        </div>
+                        <div class="col-xl-12 col-lg-12 pl-0  vendorscorecard-table vendor-second-t tre-sh" id="style-2">
+                            <!-- <app-podatatable 
+                            style="margin-top: 10px" 
+                            defaultSortBy="name"
+                            [columns]="columns" 
+                            [dataSourceForTable]="Pastdueorders_Values"
+                            [totalRecordsForTable]="totalRecords"
+                            [route]=""
+                            [filters] ="filters"
+                            >
+                            </app-podatatable> -->
+                            <app-data-table 
+                            style="margin-top: 10px" 
+                            defaultSortBy="name"
+                            [columns]="columns" 
+                            [dataSourceForTable]="Pastdueorders_Values"
+                            [totalRecordsForTable]="totalRecords"
+                            [filters] ="filters"
+                            ></app-data-table>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #showPastdueorders_ValuesChart>
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">{{"Average Daily Pastdue Value" | translate}}<span class="pr-3" style="float: right;cursor: pointer;" mat-button
+                                (click)="openDialogNew('Average Daily Pastdue Value',graphData.Pastdueorders_Values)">
+                                    <i class="fa fa-expand" aria-hidden="true"></i></span>
+                            </h3>
+                            <app-trendlines-pomanager-linechart [executeData]="graphData.Pastdueorders_Values" [chartFor]="'Value'"></app-trendlines-pomanager-linechart>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <div class="row pb-2 mt-2">
+                    <div class="col-lg-12 col-md-12" style="text-align: right;">
+                        <div class="btn-group">
+                            <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="processExport(Pastdueorders_Values,'Average Daily Pastdue Value')">{{"Download Data" | translate}}</a>
+                            <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="togglePastdueorders_Values()"
+                                id="bt">{{btnPastdueorders_Values | translate}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Pastdueorders_Values-->
+
+    <!--Ackneededorders_Values-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="profile card card-body px-3 pt-3 p-4 pb-0">
+           
+                <div *ngIf="showAckneededorders_Values; else showAckneededorders_ValuesChart">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">{{"Average Daily Ack'd Needed Value" | translate}}</h3>
+                        </div>
+                        <div class="col-xl-12 col-lg-12 pl-0  vendorscorecard-table vendor-second-t tre-sh" id="style-2">
+                            <!-- <app-podatatable 
+                            style="margin-top: 10px" 
+                            defaultSortBy="name"
+                            [columns]="columns" 
+                            [dataSourceForTable]="Ackneededorders_Values"
+                            [totalRecordsForTable]="totalRecords"
+                            [route]=""
+                            [filters] ="filters"
+                            >
+                            </app-podatatable> -->
+                            <app-data-table 
+                            style="margin-top: 10px" 
+                            defaultSortBy="name"
+                            [columns]="columns" 
+                            [dataSourceForTable]="Pastdueorders_Values"
+                            [totalRecordsForTable]="totalRecords"
+                            [filters] ="filters"
+                            ></app-data-table>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #showAckneededorders_ValuesChart>
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">{{"Average Daily Ack'd Needed Value" | translate}}<span class="pr-3" style="float: right;cursor: pointer;" mat-button
+                                (click)="openDialogNew('Average Daily Ack\'d Needed Value',graphData.Ackneededorders_Values)">
+                                    <i class="fa fa-expand" aria-hidden="true"></i></span>
+                            </h3>
+                            <app-trendlines-pomanager-linechart [executeData]="graphData.Ackneededorders_Values" [chartFor]="'Value'"></app-trendlines-pomanager-linechart>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <div class="row pb-2 mt-2">
+                    <div class="col-lg-12 col-md-12" style="text-align: right;">
+                        <div class="btn-group">
+                            <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="processExport(Ackneededorders_Values,'Average Daily Ackd Needed Value')">{{"Download Data" | translate}}</a>
+                            <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="toggleAckneededorders_Values()"
+                                id="bt">{{btnAckneededorders_Values | translate}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Ackneededorders_Values-->
+
+    <!--Futurepastdueorders_Values-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="profile card card-body px-3 pt-3 p-4 pb-0">
+           
+                <div *ngIf="showFuturepastdueorders_Values; else showFuturepastdueorders_ValuesChart">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">{{"Average Daily Future Past Value" | translate}}</h3>
+                        </div>
+                        <div class="col-xl-12 col-lg-12 pl-0  vendorscorecard-table vendor-second-t tre-sh" id="style-2">
+                            <!-- <app-podatatable 
+                            style="margin-top: 10px" 
+                            defaultSortBy="name"
+                            [columns]="columns" 
+                            [dataSourceForTable]="Futurepastdueorders_Values"
+                            [totalRecordsForTable]="totalRecords"
+                            [route]=""
+                            [filters] ="filters"
+                            >
+                            </app-podatatable> -->
+                            <app-data-table 
+                            style="margin-top: 10px" 
+                            defaultSortBy="name"
+                            [columns]="columns" 
+                            [dataSourceForTable]="Futurepastdueorders_Values"
+                            [totalRecordsForTable]="totalRecords"
+                            [filters] ="filters"
+                            ></app-data-table>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #showFuturepastdueorders_ValuesChart>
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">{{"Average Daily Future Past Value" | translate}}<span class="pr-3" style="float: right;cursor: pointer;" mat-button
+                                (click)="openDialogNew('Average Daily Future Past Value',graphData.Futurepastdueorders_Values)">
+                                    <i class="fa fa-expand" aria-hidden="true"></i></span>
+                            </h3>
+                            <app-trendlines-pomanager-linechart [executeData]="graphData.Futurepastdueorders_Values" [chartFor]="'Value'"></app-trendlines-pomanager-linechart>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <div class="row pb-2 mt-2">
+                    <div class="col-lg-12 col-md-12" style="text-align: right;">
+                        <div class="btn-group">
+                            <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="processExport(Futurepastdueorders_Values,'Average Daily Future Past Value')">{{"Download Data" | translate}}</a>
+                            <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="toggleFuturepastdueorders_Values()"
+                                id="bt">{{btnFuturepastdueorders_Values | translate}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Futurepastdueorders_Values-->
+
+    <!--Leadtimecheckorders_Values-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="profile card card-body px-3 pt-3 p-4 pb-0">
+           
+                <div *ngIf="showLeadtimecheckorders_Values; else showLeadtimecheckorders_ValuesChart">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">{{"Average Daily LeadTime Check Value" | translate}}</h3>
+                        </div>
+                        <div class="col-xl-12 col-lg-12 pl-0  vendorscorecard-table vendor-second-t tre-sh" id="style-2">
+                            <!-- <app-podatatable 
+                            style="margin-top: 10px" 
+                            defaultSortBy="name"
+                            [columns]="columns" 
+                            [dataSourceForTable]="Leadtimecheckorders_Values"
+                            [totalRecordsForTable]="totalRecords"
+                            [route]=""
+                            [filters] ="filters"
+                            >
+                            </app-podatatable> -->
+                            <app-data-table 
+                            style="margin-top: 10px" 
+                            defaultSortBy="name"
+                            [columns]="columns" 
+                            [dataSourceForTable]="Leadtimecheckorders_Values"
+                            [totalRecordsForTable]="totalRecords"
+                            [filters] ="filters"
+                            ></app-data-table>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #showLeadtimecheckorders_ValuesChart>
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">{{"Average Daily LeadTime Check Value" | translate}}              <span class="pr-3" style="float: right;cursor: pointer;" mat-button
+                                (click)="openDialogNew('Average Daily LeadTime Check Value',graphData.Leadtimecheckorders_Values)">
+                                    <i class="fa fa-expand" aria-hidden="true"></i></span>
+                            </h3>
+                            <app-trendlines-pomanager-linechart [executeData]="graphData.Leadtimecheckorders_Values" [chartFor]="'Value'"></app-trendlines-pomanager-linechart>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <div class="row pb-2 mt-2">
+                    <div class="col-lg-12 col-md-12" style="text-align: right;">
+                        <div class="btn-group">
+                            <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="processExport(Leadtimecheckorders_Values,'LeadTime Check Value')">{{"Download Data" | translate}}</a>
+                            <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="toggleLeadtimecheckorders_Values()"
+                                id="bt">{{btnLeadtimecheckorders_Values | translate}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Leadtimecheckorders_Values-->
+</div>

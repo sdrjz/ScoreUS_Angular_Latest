@@ -1,0 +1,363 @@
+<!-- row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="profile card card-body px-3 pt-3 pb-0">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-head">
+                        <div class="profile-name px-3 pt-2">
+                            <h4 class="mb-0 pro-name uer-font">{{analysissubtitle}}</h4>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="pro-form pt-4">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 pr-4 vendorscorecard-table2 vendor-second-t-sectable">
+                        <table datatable class="row-border hover tab-top-0 pl-2" style="height:104px;">
+
+                            <tbody>
+                                <tr>
+                                    <td class="ven-score-first-tab2 font-color-z">{{analysissubtitle}} Count</td>
+                                    <td class="ven-score-first-tabl font-color-z">Total Open Order Value</td>
+                                    <td class="ven-score-first-tabl font-color-z">Avg. Open Order Line</td>
+                                    <td class="ven-score-first-tabl font-color-z">Total Open Order Line</td>
+                                    <td class="ven-score-first-tabl font-color-z">Avg. PastDue Value</td>
+                                    <td class="ven-score-first-tabl font-color-z">Total PastDue Value</td>
+                                    <td class="ven-score-first-tabl font-color-z">Total PastDue Line</td>
+                                    <td class="ven-score-first-tabl font-color-z">Avg.Open Order Lines </td>
+                                    <td class="ven-score-first-tabl font-color-z">Avg.Ack Needed Order Value</td>
+                                    <td class="ven-score-first-tabl font-color-z">Ack Needed Order Value</td>
+                                    <td class="ven-score-first-tabl font-color-z">Avg.Ack Needed Order Line</td>
+                                    <td class="ven-score-first-tabl font-color-z">Ack Needed Order Line </td>
+                                    <td class="ven-score-first-tabl font-color-z">Avg.Future Past Due Order Value</td>
+                                    <td class="ven-score-first-tabl font-color-z">Future PastDue Order Value%</td>
+                                    <td class="ven-score-first-tabl font-color-z">Future PastDue Order Line</td>
+                                    <td class="ven-score-first-tabl font-color-z">Future PastDue Order Line%</td>
+                                </tr>
+                                <tr>
+                                    <td class="ven-score-first-tab2">Sample Data</td>
+                                    <td class="ven-score-first-tabl">Sample Data</td>
+                                    <td class="ven-score-first-tabl">Sample Data</td>
+                                    <td class="ven-score-first-tabl">Sample Data</td>
+                                    <td class="ven-score-first-tabl">Sample Data</td>
+                                    <td class="ven-score-first-tabl">Sample Data</td>
+                                    <td class="ven-score-first-tabl">Sample Data</td>
+                                    <td class="ven-score-first-tabl">Sample Data</td>
+                                    <td class="ven-score-first-tabl">Sample Data</td>
+                                    <td class="ven-score-first-tabl">Sample Data</td>
+                                    <td class="ven-score-first-tabl">Sample Data</td>
+                                    <td class="ven-score-first-tabl">Sample Data</td>
+                                    <td class="ven-score-first-tabl">Sample Data</td>
+                                    <td class="ven-score-first-tabl">Sample Data</td>
+                                    <td class="ven-score-first-tabl">Sample Data</td>
+                                    <td class="ven-score-first-tabl">Sample Data</td>
+
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+                    <!-- manage-u -->
+
+                    <div class="col-xl-12 col-lg-12 pl-0 pr-4 vendorscorecard-table vendor-second-t" id="style-2">
+                        <table datatable class="row-border hover tab-top-0 pl-0">
+                            <thead>
+                                <tr>
+                                    <th class="ex-whi" style="width: 200px;padding: 0px;padding-right: 0px !important;">
+                                        <div class="list-group-item" style="padding-left: 45px;">
+                                            <input type="checkbox" [(ngModel)]="masterSelected" name="list_name"
+                                                value="m1" (change)="checkUncheckAll()" /> <span
+                                                style="padding-left:15px;"></span>
+                                        </div>
+                                    </th>
+                                    <th class="ex-whi">{{analysissubtitle}} Count</th>
+                                    <th class="ex-whi">{{analysissubtitle}} Name</th>
+                                    <th class="ex-whi" style="text-align:left;">Open PO Value</th>
+                                    <th class="ex-whi">Open PO Value%</th>
+                                    <th class="ex-whi">Open PO Lines</th>
+                                    <th class="ex-whi">Open PO Lines%</th>
+                                    <th class="ex-whi">PastDue Value</th>
+                                    <th class="ex-whi">PastDue Value%</th>
+                                    <th class="ex-whi">Buyer Pastdue Lines</th>
+                                    <th class="ex-whi">PastDue Line%</th>
+                                    <th class="ex-whi">Ack'd Need Order Value</th>
+                                    <th class="ex-whi">Ack'd Need Order Value%</th>
+                                    <th class="ex-whi">Ack'd Need Order line</th>
+                                    <th class="ex-whi">Ack'd Need Order line%</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of checklist">
+                                    <td style="text-align:left;padding-left: 44px;">
+                                        <div>
+                                            <input type="checkbox" [(ngModel)]="item.isSelected"
+                                                name="list_name{{item.id}}" value="{{item.id}}"
+                                                (change)="check(item.id)" />
+                                            {{item.value}}
+                                        </div>
+                                    </td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data</td>
+                                    
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+
+                </div>
+                
+                <div class="row pb-2 mt-2">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="row justify-content-end">                           
+                                <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5">Download Data</a>
+                                <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="toggle()" id="bt">{{buttonName}}</a>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-container *ngIf="show">
+    <div class="row">
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">Buyer Open PO Value</h4>
+                    <p class="text-center mb-0">
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                    </p>
+                </div>
+                <div class="card-body">
+                    <app-pomanager-piechart></app-pomanager-piechart>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">Buyer Open PO Line</h4>
+                    <p class="text-center mb-0">
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                    </p>
+                </div>
+                <div class="card-body">
+                    <app-pomanager-piechart></app-pomanager-piechart>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">Buyer PastDue PO Value</h4>
+                    <p class="text-center mb-0">
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                    </p>
+                </div>
+                <div class="card-body">
+                    <app-pomanager-piechart></app-pomanager-piechart>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">Buyer PastDue PO Line</h4>
+                    <p class="text-center mb-0">
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                    </p>
+                </div>
+                <div class="card-body">
+                    <app-pomanager-piechart></app-pomanager-piechart>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">Buyer Ack'd Value</h4>
+                    <p class="text-center mb-0">
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                    </p>
+                </div>
+                <div class="card-body">
+                    <app-pomanager-piechart></app-pomanager-piechart>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">Buyer Ack'd Line</h4>
+                    <p class="text-center mb-0">
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                    </p>
+                </div>
+                <div class="card-body">
+                    <app-pomanager-piechart></app-pomanager-piechart>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">Buyer Future Due PO Value</h4>
+                    <p class="text-center mb-0">
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                    </p>
+                </div>
+                <div class="card-body">
+                    <app-pomanager-piechart></app-pomanager-piechart>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">Buyer Future Due PO Line</h4>
+                    <p class="text-center mb-0">
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                    </p>
+                </div>
+                <div class="card-body">
+                    <app-pomanager-piechart></app-pomanager-piechart>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table Chart -->
+
+    <div class="row">
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">Open PO%</h4>
+                    <p class="text-center mb-0">
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                    </p>
+                </div>
+                <div class="card-body">
+                    <app-pomanager-tablechart></app-pomanager-tablechart>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">PastDue PO%</h4>
+                    <p class="text-center mb-0">
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                    </p>
+                </div>
+                <div class="card-body">
+                    <app-pomanager-tablechart-two></app-pomanager-tablechart-two>
+                </div>
+            </div>
+        </div>        
+    </div>
+
+    <div class="row">
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">Ack'd Order%</h4>
+                    <p class="text-center mb-0">
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                    </p>
+                </div>
+                <div class="card-body">
+                    <app-pomanager-tablechart-two></app-pomanager-tablechart-two>
+                </div>
+            </div>
+        </div> 
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">Future PastDue%</h4>
+                    <p class="text-center mb-0">
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                    </p>
+                </div>
+                <div class="card-body">
+                    <app-pomanager-tablechart-two></app-pomanager-tablechart-two>
+                </div>
+            </div>
+        </div>        
+    </div>
+
+
+</ng-container>
+

@@ -1,0 +1,83 @@
+<!--**********************************
+	Content body start
+***********************************-->
+<div class="content-body">
+	<div class="container-fluid">
+		
+		<!-- row -->
+		<div class="row" *ngIf="user">
+			<div class="col-lg-12">
+				<div class="profile card card-body px-3 pt-3 pb-0">
+					<div class="profile-head">
+						<div class="profile-name px-3 pt-2">
+							<h4 class="mb-0 pro-name uer-font">{{'User Detail' | translate}}</h4>
+						</div>
+					</div>
+					<div class="pro-form pt-4">
+						<div class="row">
+							<div class="col-xl-6 col-lg-6 pl-4 pr-4 udetail">
+								<table class="table">
+									
+									<tbody>
+									  <tr>
+										<td>{{'Name' | translate }}</td>
+										<td>{{user.name}}</td>
+									  </tr>
+									  <tr>
+										<td>{{'Company' | translate }}</td>
+										<td>{{user.companyName}}</td>
+									  </tr>
+									  <!-- <tr>
+										<td>Company Website</td>
+										<td>{}}</td>
+									  </tr> -->
+									  <tr>
+										<td>{{'Email' | translate }}</td>
+										<td>{{user.userEmail}}</td>
+									  </tr>
+									  <tr>
+										<td>{{'Phone' | translate }}</td>
+										<td>{{  user.mobile != "N/A" ? getUSNumber(user.mobile): user.mobile}}</td>
+										<!-- <td>{{ getUSNumber(user.mobile)}}</td> -->
+									  </tr>
+									  
+									  <tr>
+										<td>{{'Office Phone' | translate }}</td>
+										<td>{{  user.officePhone != "N/A" ? getUSNumber(user.officePhone): user.officePhone}}</td>
+										<!-- <td>{{ getUSNumber(user.officePhone)}}</td> -->
+									  </tr>
+									  <tr>
+										<td>{{'Address' | translate }}</td>
+										<td>{{user.address}}</td>
+									  </tr>
+									  <tr>
+										<td>{{'City' | translate }}</td>
+										<td>{{user.cityName}}</td>
+									  </tr>
+									  <tr>
+										<td>{{'State' | translate }}</td>
+										<td>{{user.stateName}}</td>
+									  </tr>
+									  <tr>
+										<td>{{'Zip Code' | translate }}</td>
+										<td>{{user.zipcode}}</td>
+									  </tr>
+									</tbody>
+								  </table>
+
+								  <!-- <button (click)="openDialog()" id="submitBtn" type="submit" [disabled]="user.isActive === false? true:false" class="btn btn-primary profi-btn mb-4 pl-5 pr-5 mt-3">  {{ user.isActive ? ('Enabled' | translate) : ('Disabled' | translate) }} </button> -->
+								  <button id="submitBtn" type="button" [disabled]="!user.isActive" class="btn btn-primary profi-btn mb-4 pl-5 pr-5 mt-3">  {{ user.isActive ? ('Active' | translate) : ('Inactive' | translate) }} </button>
+							
+							</div>                                          
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div *ngIf="!user">Loading...</div>
+	</div>
+</div>
+<!--**********************************
+	Content body end
+***********************************-->

@@ -1,0 +1,80 @@
+<div class="content-body">
+    <div class="container-fluid">
+  
+      <!-- row -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="profile card card-body px-3 pt-3 pb-3">
+            <button class="toolbutton" [matTooltip]="tips.parameterTip" [matTooltipPosition]="'above'" >?</button>
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6" style="border-right: rgba(0, 0, 0, 0.4) solid 1px;">
+                    <app-otd-parameter  [listOTD]="listOtdParameter" (listOTDEmitter)="getListOTD($event)"  (errorOTDEmitter)="getErrorFromOTDParameters()"></app-otd-parameter>
+                </div>            
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6 bor-r" style="border-right: rgba(0, 0, 0, 0.4) solid 1px;">
+                    <app-ncr-parameter [listNCR]="listNcrParameter" (listNCREmitter)="getListNCR($event)" (errorNCREmitter)="getErrorFromNCRParameters()" ></app-ncr-parameter>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6" style="border-right: rgba(0, 0, 0, 0.4) solid 1px;">
+                    <app-ppv-parameter [listPPV]="listPpvParameter" (listPPVEmitter)="getListPPV($event)" (errorPPVEmitter)="getErrorFromPPVParameters()"></app-ppv-parameter>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <app-lta-parameter [listLTA]="listLtaParameter" (listLTAEmitter)="getListLTA($event)" (errorLTAEmitter)="getErrorFromLTAParameters()"></app-lta-parameter>
+                </div>
+            </div>            
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+
+  <div class="content-body pt-0">
+    <div class="container-fluid pt-0">
+  
+      <!-- row -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="profile card card-body px-3 pt-3 pb-3">
+            
+            <app-delivery [adminSettingList]="adminSettingList" (adminTimeDeliveryData)="getDeliveryTimeData($event)"></app-delivery>                     
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+
+  <div class="content-body pt-0">
+    <div class="container-fluid pt-0">
+  
+      <!-- row -->
+      <div class="row">
+        <div class="col-xl-12 col-lg-12   col-md-12 col-sm-12">
+          <div class="profile card card-body px-3 pt-3 pb-3">
+              <app-linechart-option [adminSettingList]="adminSettingList" (lineChartDataEmitter)="getLineChartData($event)"></app-linechart-option>
+          </div>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="profile card card-body px-3 pt-3 pb-3">
+      <app-metrics-weight [maxScores]="maxScores" ></app-metrics-weight>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="profile card card-body" stlye="margin-bottom:100rem; width:60%;">
+    <div class="form-group mt-1 d-flex justify-content-center">
+      <button type="submit" class="btn btn-primary"
+        style="border-radius: 50px;width: 30%;border:0px;white-space:nowrap;" (click)="onSubmit()" 
+        [disabled]="hasOTDError || hasNCRError || hasPPVError || hasLTAError">{{'Save' | translate}}</button>
+      <button type="submit" class="btn btn-primary"
+        style="border-radius: 50px;width: 30%;border:0px;white-space:nowrap; margin-left:15px;" (click)="onReset()">{{'Reset' | translate }}</button>
+    </div>
+  </div>
+
+  <!-- <div class="content-body pt-0">
+    <div class="container-fluid pt-0">
+  
+  <app-product-cat></app-product-cat>
+  
+  </div>
+  </div> -->

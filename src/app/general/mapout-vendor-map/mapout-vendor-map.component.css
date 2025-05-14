@@ -1,0 +1,25 @@
+.custom-info-box {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    padding: 10px;
+    width: 200px;
+    height: 100px;
+    /* Add any additional custom styles here */
+  }
+  
+  .vendor-name {
+    font-weight: bold;
+    color: #3366ff;
+  }
+  
+  .other-content {
+    color: #333333;
+  }
+
+  google-map > .map-container {
+    width: 100% !important;
+  }
+
+  /* .custom-info-window-text{
+    display: block!important;
+  } */

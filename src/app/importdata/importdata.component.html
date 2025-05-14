@@ -1,0 +1,412 @@
+<!--**********************************
+	Content body start
+***********************************-->
+<div class="content-body pt-0">
+  <div class="container-fluid">
+
+    <div class="row mt-5">
+      <div class="col-lg-12 mt-5">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="profile card card-body px-3 pt-3 pb-0">
+              <div class="profile-head">
+                <div class="row">
+                  <div class="profile-name px-3 pt-2 col-lg-12">
+                    <div class="import-data">
+                      <h2 class="pb-3">{{'Import File (STEP 1)' | translate }}</h2>
+                      <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12 d-flex impor">
+                          <select class="form-control import-data-select mr-4"  [matTooltip]="tips.uploadFile" [matTooltipPosition]="'above'"  [(ngModel)]="selectedFileType"
+                            (change)="onSelection($event)">
+                            <option [value]="null">{{'Select file type' | translate}} </option>
+                            <option *ngFor="let item of listImportData" [value]="item.id" class="my-2">{{item.value}}
+                            </option>
+
+                          </select>
+                          <!-- <button class="btn btn-primary profi-btn mb-4 pl-5 pr-5 pt-2 pb-2">Upload</button> -->
+                          <input type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                          onclick="this.value = null"
+                          class="file-input" 
+                          (change)="onFileSelected($event)"
+                           #fileUpload>
+
+
+                          <div class="file-upload w-100">
+                            <button class="btn btn-primary profi-btn pl-5 pr-5 pt-2 pb-2 upload-btn" [matTooltip]="tips.uploadFile" [matTooltipPosition]="'above'"
+                              (click)="fileUpload.click()" [disabled]="fileTypeId === null"    >{{'Upload' | translate }}</button>
+                          </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12 ml-auto d-flex justify-content-end">
+                          <select class="form-control import-data-select mr-4" (change)="onFileSampleSelect($event)"
+                          [matTooltip]="tips.importFile" [matTooltipPosition]="'above'"
+                          
+                          >
+                            <option [value]="null">Select file template </option>
+                            <option *ngFor="let item of listImportData" [value]="item.filePath" class="my-3">
+                              {{item.value}} </option>
+
+                          </select>
+                          
+                          <button type="submit" class="btn btn-primary profi-btn pl-5 pr-5 pt-2 pb-2"
+                          [matTooltip]="tips.downloadButton" [matTooltipPosition]="'above'" 
+                          (click)="downloadFile()">{{'Download' | translate}}</button>
+                          </div>
+                          <div class="col-md-9 ml-auto pt-3 pb-3"></div>
+                          <!-- <div class="col-md-9 ml-auto pt-3 pb-3">{{fileName || "No file."}}</div> -->
+                      </div>
+                    
+                      <div class="col-md-12 d-flex flex-row col-sm-12" *ngIf="errorMessage !== null">
+
+                        <div class="">
+                          <p class="text-danger" *ngIf="errorMessage !== null">{{errorMessage | translate }}</p>
+                        </div>
+                        <button (click)="onRemoveErrorClick()" class="button_background material-button"
+                          matTooltip="Click to remove error message"><span class="material-icons">{{'close' | translate}}</span>
+                        </button>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- data table for every report -->
+    <div class="row" *ngIf="showTable" >
+      <div class="col-lg-12">
+        <div class="profile card card-body px-3 pt-3 pb-0">
+          <div class="profile-head">
+            <div class="row">
+              <div class="profile-name px-3 pt-2 col-lg-12">
+                <div class="import-data">
+                  <h2 class="pb-3">{{'Verify your data (STEP 2)' | translate }}</h2>
+                  <div class="pro-form">
+                    <div class="row">
+                      <!-- manage-u -->
+
+                      <div class="col-xl-12 col-lg-12 pr-4 vendorscorecard-table vendor-second-t" id="style-2" *ngIf="hasErrorData">
+                       
+                        <app-data-table  [file]="apiDataforTable"
+                          (recordOutput)="gotData($event)" style="margin-top: 22px; width:80%; overflow-x: scroll !important;" defaultSortBy="name"
+                          (dataOutput)="errorDataInFile($event)" [columns]="columns"
+                          [isForCorrectData]="false">
+                         
+                          <ng-template let-column let-data="element" let-value="value">
+                            <div *ngIf="column.def == 'status'" class="d-flex items-center space-x-2">
+                              <mat-slide-toggle [checked]="value == true" (change)="onToggleChange($event, data)">
+                              </mat-slide-toggle>
+                            </div>
+
+                            <div *ngIf="column.def == 'description'" class="text-danger">
+                              {{data.description}}
+                            </div>
+
+                            <div *ngIf="column.def == 'compare'" sticky>
+                              <mat-checkbox [checked]="isVendorSelected(data)"
+                                (change)="onCheckBoxClick($event,data)"></mat-checkbox>
+                            </div>
+                            <span *ngIf="column.def == 'posting_Date'">
+                              {{ (data.posting_Date | date: 'MM/dd/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'stat_Rel_Del'">
+                              {{ (data.stat_Rel_Del | date: 'MM/dd/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'system_Lead_Time'">
+                              {{ (data.system_Lead_Time | date: 'MM/dd/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'pO_Post_Rec_Date'">
+                              {{ (data.pO_Post_Rec_Date | date: 'MM/dd/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'pO_Issue_Date'">
+                              {{ (data.pO_Issue_Date | date: 'MM/dd/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'pO_Frist_Delivery_Date'">
+                              {{ (data.pO_Frist_Delivery_Date | date: 'MM/dd/yyyy') }}
+                            </span>
+
+                            <span *ngIf="column.def == 'issue_Date'">
+                              {{ (data.issue_Date | date: 'dd/MM/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'completionDate'">
+                              {{ (data.completionDate | date: 'dd/MM/yyyy') }}
+                            </span>
+
+                            <span *ngIf="column.def == 'actual_Lead_Time'">
+                              {{ (data.actual_Lead_Time | date: 'MM/dd/yyyy') }}
+                            </span>
+
+                            <div *ngIf="column.def == 'view'" class="flex flex-row justify-start">
+                              <button mat-stroked-button color="primary">
+                                Delete
+                              </button>
+                              <button mat-stroked-button color="primary">
+                                Update
+                              </button>
+                            </div>
+                          </ng-template>
+                        </app-data-table>
+
+                      </div>
+
+
+
+                      <!-- <mat-tab-group mat-align-tabs="center" class="subcrition-nav col-lg-11" *ngIf="hasErrorData">
+                        <mat-tab label="Error Data" class="col-lg-12">
+                            
+                      <div class="col-xl-12 col-lg-12 pr-4 vendorscorecard-table vendor-second-t" id="style-2">
+                       
+                        <app-data-table  [file]="apiDataforTable"
+                          (recordOutput)="gotData($event)" style="margin-top: 22px; width:80%;overflow-x: scroll !important;" defaultSortBy="name"
+                          (dataOutput)="errorDataInFile($event)" [columns]="columns"
+                          [isForCorrectData]="false">
+                         
+                          <ng-template let-column let-data="element" let-value="value">
+                            <div *ngIf="column.def == 'status'" class="d-flex items-center space-x-2">
+                              <mat-slide-toggle [checked]="value == true" (change)="onToggleChange($event, data)">
+                              </mat-slide-toggle>
+                            </div>
+
+                            <div *ngIf="column.def == 'description'" class="text-danger">
+                              {{data.description}}
+                            </div>
+
+                            <div *ngIf="column.def == 'compare'" sticky>
+                              <mat-checkbox [checked]="isVendorSelected(data)"
+                                (change)="onCheckBoxClick($event,data)"></mat-checkbox>
+                            </div>
+                            <span *ngIf="column.def == 'posting_Date'">
+                              {{ (data.posting_Date | date: 'MM/dd/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'stat_Rel_Del'">
+                              {{ (data.stat_Rel_Del | date: 'MM/dd/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'system_Lead_Time'">
+                              {{ (data.system_Lead_Time | date: 'MM/dd/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'pO_Post_Rec_Date'">
+                              {{ (data.pO_Post_Rec_Date | date: 'MM/dd/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'pO_Issue_Date'">
+                              {{ (data.pO_Issue_Date | date: 'MM/dd/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'pO_Frist_Delivery_Date'">
+                              {{ (data.pO_Frist_Delivery_Date | date: 'MM/dd/yyyy') }}
+                            </span>
+
+                            <span *ngIf="column.def == 'issue_Date'">
+                              {{ (data.issue_Date | date: 'dd/MM/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'completionDate'">
+                              {{ (data.completionDate | date: 'dd/MM/yyyy') }}
+                            </span>
+
+                            <span *ngIf="column.def == 'actual_Lead_Time'">
+                              {{ (data.actual_Lead_Time | date: 'MM/dd/yyyy') }}
+                            </span>
+
+                            <div *ngIf="column.def == 'view'" class="flex flex-row justify-start">
+                              <button mat-stroked-button color="primary">
+                                Delete
+                              </button>
+                              <button mat-stroked-button color="primary">
+                                Update
+                              </button>
+                            </div>
+                          </ng-template>
+                        </app-data-table>
+
+                      </div>
+
+                        </mat-tab>
+
+                        <mat-tab label="Correct Data">
+                            
+                      <div class="col-xl-12 col-lg-12 pr-4 vendorscorecard-table vendor-second-t" id="style-2">
+                       
+                        <app-data-table [dataSourceForTable]="responseTableData" 
+                           style="margin-top: 22px; width:80%; overflow-x: scroll !important;" defaultSortBy="name"
+                          (dataOutput)="errorDataInFile($event)" [columns]="correctColumns"
+                          [isForCorrectData]="true">
+                      
+                          <ng-template let-column let-data="element" let-value="value">
+                            <div *ngIf="column.def == 'status'" class="d-flex items-center space-x-2">
+                              <mat-slide-toggle [checked]="value == true" (change)="onToggleChange($event, data)">
+                              </mat-slide-toggle>
+                            </div>
+
+                            <div *ngIf="column.def == 'description'" class="text-danger">
+                              {{data.description}}
+                            </div>
+
+                            <div *ngIf="column.def == 'compare'" sticky>
+                              <mat-checkbox [checked]="isVendorSelected(data)"
+                                (change)="onCheckBoxClick($event,data)"></mat-checkbox>
+                            </div>
+                            <span *ngIf="column.def == 'posting_Date'">
+                              {{ (data.posting_Date | date: 'MM/dd/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'stat_Rel_Del'">
+                              {{ (data.stat_Rel_Del | date: 'MM/dd/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'system_Lead_Time'">
+                              {{ (data.system_Lead_Time | date: 'MM/dd/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'pO_Post_Rec_Date'">
+                              {{ (data.pO_Post_Rec_Date | date: 'MM/dd/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'pO_Issue_Date'">
+                              {{ (data.pO_Issue_Date | date: 'MM/dd/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'pO_Frist_Delivery_Date'">
+                              {{ (data.pO_Frist_Delivery_Date | date: 'MM/dd/yyyy') }}
+                            </span>
+
+                            <span *ngIf="column.def == 'issue_Date'">
+                              {{ (data.issue_Date | date: 'dd/MM/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'completionDate'">
+                              {{ (data.completionDate | date: 'dd/MM/yyyy') }}
+                            </span>
+
+                            <span *ngIf="column.def == 'actual_Lead_Time'">
+                              {{ (data.actual_Lead_Time | date: 'MM/dd/yyyy') }}
+                            </span>
+
+                            <div *ngIf="column.def == 'view'" class="flex flex-row justify-start">
+                              <button mat-stroked-button color="primary">
+                                Delete
+                              </button>
+                              <button mat-stroked-button color="primary">
+                                Update
+                              </button>
+                            </div>
+                          </ng-template>
+                        </app-data-table>
+
+                      </div>
+
+                        </mat-tab>
+                    
+                      </mat-tab-group> -->
+
+
+                      <div class="col-xl-12 col-lg-12 pr-4 vendorscorecard-table vendor-second-t" id="style-2" *ngIf="!hasErrorData">
+                       
+                        <app-data-table [dataSourceForTable]="responseTableData" 
+                           style="margin-top: 22px; width:80%;height:500px !important; overflow-x: scroll !important;overflow-y: scroll !important;" defaultSortBy="name"
+                          (dataOutput)="errorDataInFile($event)" [columns]="correctColumns"
+                          [isForCorrectData]="true">
+                          <!-- <div>
+                            <h1 class="text-lg font-medium">All Programs</h1>
+                            <p>List of all Programs in Colleges</p>
+                            </div> -->
+
+                          <ng-template let-column let-data="element" let-value="value">
+                            <div *ngIf="column.def == 'status'" class="d-flex items-center space-x-2">
+                              <mat-slide-toggle [checked]="value == true" (change)="onToggleChange($event, data)">
+                              </mat-slide-toggle>
+                            </div>
+
+                            <div *ngIf="column.def == 'description'" class="text-danger">
+                              {{data.description}}
+                            </div>
+
+                            <div *ngIf="column.def == 'compare'" sticky>
+                              <mat-checkbox [checked]="isVendorSelected(data)"
+                                (change)="onCheckBoxClick($event,data)"></mat-checkbox>
+                            </div>
+                            <span *ngIf="column.def == 'posting_Date'">
+                              {{ (data.posting_Date | date: 'MM/dd/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'stat_Rel_Del'">
+                              {{ (data.stat_Rel_Del | date: 'MM/dd/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'system_Lead_Time'">
+                              {{ (data.system_Lead_Time | date: 'MM/dd/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'pO_Post_Rec_Date'">
+                              {{ (data.pO_Post_Rec_Date | date: 'MM/dd/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'pO_Issue_Date'">
+                              {{ (data.pO_Issue_Date | date: 'MM/dd/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'pO_Frist_Delivery_Date'">
+                              {{ (data.pO_Frist_Delivery_Date | date: 'MM/dd/yyyy') }}
+                            </span>
+
+                            <span *ngIf="column.def == 'issue_Date'">
+                              {{ (data.issue_Date | date: 'dd/MM/yyyy') }}
+                            </span>
+                            <span *ngIf="column.def == 'completionDate'">
+                              {{ (data.completionDate | date: 'dd/MM/yyyy') }}
+                            </span>
+
+                            <span *ngIf="column.def == 'actual_Lead_Time'">
+                              {{ (data.actual_Lead_Time | date: 'MM/dd/yyyy') }}
+                            </span>
+
+                            <div *ngIf="column.def == 'view'" class="flex flex-row justify-start">
+                              <button mat-stroked-button color="primary">
+                                Delete
+                              </button>
+                              <button mat-stroked-button color="primary">
+                                Update
+                              </button>
+                            </div>
+                          </ng-template>
+                        </app-data-table>
+
+                      </div>
+
+
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="showProcessButton">
+      <h2>{{'Upload file (STEP 3)' | translate }}</h2>
+    <button class="btn btn-primary profi-btn mb-4 pl-5 pr-5 pt-3 pb-3 mr-2" style="margin-bottom:13rem !important;"
+      (click)="onProceedClick()" [matTooltip]="tips.proceedButton" [matTooltipPosition]="'above'" >{{'Proceed' | translate}}</button>
+    <!-- <button class="btn btn-primary profi-btn mb-4 pl-5 pr-5 pt-3 pb-3 ml-4" style="margin-bottom:13rem !important;"
+      (click)="onResetClick()" >Reset</button> -->
+    </div>
+    <!-- <div class="row">
+      <div class="col-lg-12">
+        <div class="profile card card-body px-3 pt-3 pb-0">
+          <div class="profile-head">
+            <div class="row">
+              <div class="profile-name px-3 pt-3 pb-3 col-lg-12">
+                <div class="import-data">
+                  <h2 class="pb-3">Data has been Uploaded!</h2>
+                  <h3 class="pb-3">File_Name Uploaded</h3>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+ -->
+
+  </div>
+</div>
+<!--**********************************
+      Content body end
+  ***********************************-->

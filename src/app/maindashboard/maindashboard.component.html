@@ -1,0 +1,617 @@
+<!--**********************************
+    Content body start
+***********************************-->
+<div class="content-body">
+  <!-- row -->
+  <div class="container-fluid">
+      <div class="row" >
+        <div class="col-7">
+          <div class="row d-flex">
+            <!-- Start Date -->
+            <div class="col-md-6 col-sm-12">
+              <div class="d-flex mb-4">
+                <span class="vendor-per pt-2 w-25">{{ 'Start date' | translate }}</span>
+                <mat-form-field appearance="fill">
+                  <input matInput
+                         [formControl]="startDateControl"
+                         [matDatepicker]="startingDate"
+                         [disabled]="!isCustomDate"
+                         class="px-2"
+                         style="border-radius:15px; padding-left:15px !important;" />
+                  <mat-datepicker-toggle matSuffix [for]="startingDate"></mat-datepicker-toggle>
+                  <mat-datepicker #startingDate></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+        
+            <!-- End Date -->
+            <div class="col-md-6 col-sm-12 mb-3 mt-3">
+              <div class="d-flex" style="top: -16px; position: relative;">
+                <span class="vendor-per pt-2 w-25">{{ 'End date' | translate }}</span>
+                <mat-form-field appearance="fill">
+                  <input matInput
+                         [formControl]="endDateControl"
+                         [matDatepicker]="endingDate"
+                         [disabled]="!isCustomDate"
+                         class="px-2"
+                         style="border-radius:15px; padding-left:15px !important;" />
+                  <mat-datepicker-toggle matSuffix [for]="endingDate"></mat-datepicker-toggle>
+                  <mat-datepicker #endingDate></mat-datepicker>
+                </mat-form-field>
+        
+                <!-- Search Button -->
+                <div class="col-auto d-flex flex-column align-items-center justify-content-end pb-2 fade-toggle"
+                     [ngClass]="{ 'hidden': !isCustomDate }">
+                  <button type="button"
+                          class="custom-search-btn p-2 mat-tooltip-trigger"
+                          (click)="onApplyCustomDate()"
+                          matTooltip="Click to search with selected date range"
+                          matTooltipPosition="above">
+                    <i class="fas fa-search"></i>
+                  </button>
+                  <small>Search</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+          <div class="col-5">
+              <app-filter-by-dropdown-two (filterDataEmitter)="getDashBoardData($event)" [apiRoute]="'adminsetting/KPIParameterSettings'"></app-filter-by-dropdown-two>
+          </div>
+      </div>
+     
+      <app-newuserreg [data]="dashBoardStatistic" [dateDiff]="dateDiffSentance"></app-newuserreg>
+
+      <!-- <app-vendorscorecard-boxes subtitle="" [data]="vendorStatistic"
+      [dateDiff]="dateDiffSentance"></app-vendorscorecard-boxes> -->
+
+
+      <div class="row">
+          <div class="col-md-3 mt-4 mb-5">
+              <app-totalscore subtitle="Total Score" [numberScore]="dashBoardStatistic" [dateDiff]="dateDiffSentance"></app-totalscore>
+            
+          
+            </div>
+
+          <div class="col-md-9">
+              <div class="row">
+
+                  <div class="col-md-12 mx-auto my-auto text-right">
+                      <div class="card" 
+                          style="max-width: 100%;">
+
+                          <div class="row">
+
+                            <div class="col-sm-12 mb-3" id="totalscore" #score>
+                              <mat-card class="example-card">
+                                <div class="d-flex">
+                                  <div class="mr-auto"></div>
+                                  <button (click)="popUpChart('Total Score')" class="button_background"
+                                    matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                                  </button>
+                                </div>
+                                <div>   
+                                  <div class="d-flex justify-content-center w-100 pb-3">
+                                    <div class="justify-content-end">
+                                      <h3>{{ 'Total Score' | translate}}</h3>
+                                    </div>
+                                  </div>
+                        
+                                </div>
+                                <mat-card-content>
+                                  <app-twoline-basic-line-chart [vendorTotalScore]="totalScores" (charDataEmitter)="getChartData($event)"
+                                    [executeData]="apiPlantRequestData"></app-twoline-basic-line-chart>
+                                </mat-card-content>
+                              </mat-card>
+                            </div>
+                          </div>
+
+
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+
+
+      <app-registrations-dashboard [data]="dashBoardRegistration" [dateDiff]="dateDiffSentance"></app-registrations-dashboard>
+
+      <div class="row mb-3">
+
+          <div class="col-lg-6 mb-3" #otd%>
+            <mat-card class="example-card">
+              <div class="d-flex">
+                <div class="mr-auto"></div>
+                <button (click)="popUpChart('OTD Percentage')" class="button_background"
+                  matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                </button>
+              </div>
+              <mat-card-header>
+                <div class="d-flex flex-column w-100">
+                  <div class="text-center w-100" style="font-weight:700;">{{'OTD Percentage' | translate }}</div>
+    
+                  
+                </div>
+              </mat-card-header>
+              <mat-card-content>
+                <app-twoline-basic-line-chart 
+                  [poData]="poData" 
+                  (charDataEmitter)="getChartData($event)" 
+                  [poName]="'OTD Percentage'"
+                  [executeData]="executeData"
+                ></app-twoline-basic-line-chart>
+              </mat-card-content>
+            </mat-card>
+    
+    
+    
+          </div>
+    
+          <div class="col-lg-6 mb-3" #otd>
+            <mat-card class="example-card">
+              <div class="d-flex">
+                <div class="mr-auto"></div>
+                <button (click)="popUpChart('OTD Score')" class="button_background" matTooltip="Click to open popup chart"><span
+                    class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                </button>
+              </div>
+              <mat-card-header>
+                <div class="d-flex flex-column w-100">
+                  <div class="text-center w-100" style="font-weight:700;"> {{'OTD Score' | translate }}</div>
+    
+                 
+                </div>
+              </mat-card-header>
+              <mat-card-content>
+                <app-twoline-basic-line-chart 
+                  [poData]="poData" 
+                  (charDataEmitter)="getChartData($event)" 
+                  [poName]="'OTD Score'"
+                  [executeData]="executeData"
+                ></app-twoline-basic-line-chart>
+              </mat-card-content>
+            </mat-card>
+    
+    
+    
+          </div>
+        </div>
+    
+    
+        <!--div ncr  -->
+        <div class="row mb-3">
+    
+          <div class="col-lg-6 mb-3" id="ncrP" #ncr%>
+            <mat-card class="example-card">
+              <div class="d-flex">
+                <div class="mr-auto"></div>
+                <button (click)="popUpChart('NCR Percentage')" class="button_background"
+                  matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                </button>
+              </div>
+              <mat-card-header>
+                <div class="d-flex flex-column w-100">
+                  <div class="text-center w-100" style="font-weight:700;">{{'NCR Percentage' | translate }}</div>
+    
+                 
+                </div>
+              </mat-card-header>
+              <mat-card-content>
+                <app-twoline-basic-line-chart 
+                [poData]="poData" 
+                (charDataEmitter)="getChartData($event)" 
+                [poName]="'NCR Percentage'"
+                [executeData]="executeData"
+                ></app-twoline-basic-line-chart>
+              </mat-card-content>
+            </mat-card>
+    
+    
+    
+          </div>
+    
+          <div class="col-lg-6 mb-3" #ncr>
+            <mat-card class="example-card">
+              <div class="d-flex">
+                <div class="mr-auto"></div>
+                <button (click)="popUpChart('NCR Score')" class="button_background" matTooltip="Click to open popup chart"><span
+                    class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                </button>
+              </div>
+              <mat-card-header>
+                <div class="d-flex flex-column w-100">
+                  <div class="text-center w-100" style="font-weight:700;">{{'NCR Score' | translate}}</div>
+    
+                  
+                </div>
+              </mat-card-header>
+              <mat-card-content>
+                <app-twoline-basic-line-chart 
+                [poData]="poData" 
+                (charDataEmitter)="getChartData($event)" 
+                [poName]="'NCR Score'"
+                [executeData]="executeData"
+                ></app-twoline-basic-line-chart>
+              </mat-card-content>
+            </mat-card>
+    
+    
+    
+          </div>
+    
+        </div>
+    <!-- div ncr -->
+    
+        <!-- div ppv lta -->
+        <div class="row mb-3">
+    
+          <div class="col-lg-6 mb-3" #ppv%>
+            <mat-card class="example-card">
+              <div class="d-flex">
+                <div class="mr-auto"></div>
+                <button (click)="popUpChart('PPV Percentage')" class="button_background"
+                  matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                </button>
+              </div>
+              <mat-card-header>
+                <div class="d-flex flex-column w-100">
+                  <div class="text-center w-100" style="font-weight:700;">{{'PPV Percentage' | translate }}</div>
+    
+                  
+                </div>
+              </mat-card-header>
+              <mat-card-content>
+                <app-twoline-basic-line-chart 
+                [poData]="poData" 
+                (charDataEmitter)="getChartData($event)" 
+                [poName]="'PPV Percentage'"
+                [executeData]="executeData"
+                ></app-twoline-basic-line-chart>
+              </mat-card-content>
+            </mat-card>
+    
+    
+    
+          </div>
+    
+          <div class="col-lg-6 mb-3" #ppv>
+            <mat-card class="example-card">
+              <div class="d-flex">
+                <div class="mr-auto"></div>
+                <button (click)="popUpChart('PPV Score')" class="button_background" matTooltip="Click to open popup chart"><span
+                    class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                </button>
+              </div>
+              <mat-card-header>
+                <div class="d-flex flex-column w-100">
+                  <div class="text-center w-100" style="font-weight:700;">{{'PPV Score' | translate }}</div>
+    
+                </div>
+              </mat-card-header>
+              <mat-card-content>
+                <app-twoline-basic-line-chart 
+                [poData]="poData" 
+                (charDataEmitter)="getChartData($event)" 
+                [poName]="'PPV Score'"
+                [executeData]="executeData"
+                ></app-twoline-basic-line-chart>
+              </mat-card-content>
+            </mat-card>
+    
+    
+    
+          </div>
+    
+    
+    
+        </div>
+    
+        <div class="row mb-3">
+    
+          <div class="col-lg-6 mb-3" #ltaP>
+            <mat-card class="example-card">
+              <div class="d-flex">
+                <div class="mr-auto"></div>
+                <button (click)="popUpChart('LTA Percentage')" class="button_background"
+                  matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                </button>
+              </div>
+              <mat-card-header>
+                <div class="d-flex flex-column w-100">
+                  <div class="text-center w-100" style="font-weight:700;">{{'LTA Percentage' | translate }} </div>
+    
+                  
+                </div>
+              </mat-card-header>
+              <mat-card-content>
+                <app-twoline-basic-line-chart 
+                  [poData]="poData" 
+                  (charDataEmitter)="getChartData($event)" 
+                  [poName]="'LTA Percentage'"
+                  [executeData]="executeData"
+                ></app-twoline-basic-line-chart>
+              </mat-card-content>
+            </mat-card>
+    
+    
+    
+          </div>
+    
+          <div class="col-lg-6" #lta>
+            <mat-card class="example-card">
+              <div class="d-flex">
+                <div class="mr-auto"></div>
+                <button (click)="popUpChart('LTA Score')" class="button_background" matTooltip="Click to open popup chart"><span
+                    class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                </button>
+              </div>
+              <mat-card-header>
+                <div class="d-flex flex-column w-100">
+                  <div class="text-center w-100" style="font-weight:700;">{{'LTA Score' | translate }}</div>
+    
+                  
+                </div>
+              </mat-card-header>
+              <mat-card-content>
+                <app-twoline-basic-line-chart 
+                [poData]="poData" 
+                (charDataEmitter)="getChartData($event)" 
+                [poName]="'LTA Score'"
+                [executeData]="executeData"
+                ></app-twoline-basic-line-chart>
+              </mat-card-content>
+            </mat-card>
+    
+    
+    
+          </div>
+    
+    
+    
+        </div> 
+
+      <!-- <app-user-color-zone -->
+      <!-- [buyerColorZoneStats]="buyerColorZoneStats" -->
+      <!-- [materialColorZoneStats]="materialColorZoneStats" -->
+      <!-- [vendorColorZoneStats]="vendorColorZoneStats" -->
+      <!-- [commodityColorZoneStats]="commodityColorZoneStats" -->
+      <!-- [plantColorZoneStats]="plantColorZoneStats" -->
+      <!-- [dateDiff]="dateDiffSentance" -->
+      <!-- ></app-user-color-zone> -->
+
+
+      <!-- <div class="row mb-3"> -->
+          <!-- <div class="col-lg-12 col-sm-12 mb-3" id="colorZone" #colorZone> -->
+              <!-- <mat-card class="example-card"> -->
+                <!-- <div class="d-flex"> -->
+                  <!-- <div class="mr-auto"></div> -->
+                  <!-- <button (click)="popUpChart('plantColorZone')" class="button_background" -->
+                    <!-- matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span> -->
+                  <!-- </button> -->
+                <!-- </div> -->
+                <!-- <mat-card-header> -->
+                  <!-- <div mat-card-avatar class="example-header-image w-100 text-center">{{'Plant color zone' | translate }}</div> -->
+                  <!-- <mat-card-title class=""></mat-card-title> -->
+        
+                <!-- </mat-card-header> -->
+                <!-- <mat-card-content> -->
+                  <!-- <app-basic-line-chart [colorZoneGraphData]="plantColorZoneGraphData" -->
+                    <!-- [executeData]="executeData" (charDataEmitter)="getChartData($event)" [name]="'plantColorZone'"></app-basic-line-chart> -->
+                <!-- </mat-card-content> -->
+              <!-- </mat-card> -->
+        
+            <!-- </div> -->
+
+            <!-- <div class="col-lg-6 col-sm-6 mb-3" > -->
+              <!-- <mat-card class="example-card"> -->
+                <!-- <div class="d-flex"> -->
+                  <!-- <div class="mr-auto"></div> -->
+                  <!-- <button (click)="popUpChart('commodityColorZone')" class="button_background" -->
+                    <!-- matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span> -->
+                  <!-- </button> -->
+                <!-- </div> -->
+                <!-- <mat-card-header> -->
+                  <!-- <div mat-card-avatar class="example-header-image w-100 text-center">{{'Commodity color zone' | translate }} </div> -->
+                  <!-- <mat-card-title class=""></mat-card-title> -->
+        
+                <!-- </mat-card-header> -->
+                <!-- <mat-card-content> -->
+                  <!-- <app-basic-line-chart [colorZoneGraphData]="commodityColorZoneGraphData" -->
+                    <!-- [executeData]="executeData" (charDataEmitter)="getChartData($event)" [name]="'commodityColorZone'"></app-basic-line-chart> -->
+                <!-- </mat-card-content> -->
+              <!-- </mat-card> -->
+        
+            <!-- </div> -->
+          
+            <!-- <div class="col-lg-6 col-sm-6 mb-3" > -->
+              <!-- <mat-card class="example-card"> -->
+                <!-- <div class="d-flex"> -->
+                  <!-- <div class="mr-auto"></div> -->
+                  <!-- <button (click)="popUpChart('vendorColorZone')" class="button_background" -->
+                    <!-- matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span> -->
+                  <!-- </button> -->
+                <!-- </div> -->
+                <!-- <mat-card-header> -->
+                  <!-- <div mat-card-avatar class="example-header-image w-100 text-center">{{'Vendor color zone' | translate }}</div> -->
+                  <!-- <mat-card-title class=""></mat-card-title> -->
+        
+                <!-- </mat-card-header> -->
+                <!-- <mat-card-content> -->
+                  <!-- <app-basic-line-chart [colorZoneGraphData]="vendorColorZoneGraphData" -->
+                    <!-- [executeData]="executeData" (charDataEmitter)="getChartData($event)" [name]="'vendorColorZone'"></app-basic-line-chart> -->
+                <!-- </mat-card-content> -->
+              <!-- </mat-card> -->
+        
+            <!-- </div> -->
+
+
+            <!-- <div class="col-lg-6 col-sm-6 mb-3" > -->
+              <!-- <mat-card class="example-card"> -->
+                <!-- <div class="d-flex"> -->
+                  <!-- <div class="mr-auto"></div> -->
+                  <!-- <button (click)="popUpChart('buyerColorZone')" class="button_background" -->
+                    <!-- matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span> -->
+                  <!-- </button> -->
+                <!-- </div> -->
+                <!-- <mat-card-header> -->
+                  <!-- <div mat-card-avatar class="example-header-image w-100 text-center">{{'Buyer color zone' | translate }}</div> -->
+                  <!-- <mat-card-title class=""></mat-card-title> -->
+        
+                <!-- </mat-card-header> -->
+                <!-- <mat-card-content> -->
+                  <!-- <app-basic-line-chart [colorZoneGraphData]="buyerColorZoneGraphData" -->
+                    <!-- [executeData]="executeData" (charDataEmitter)="getChartData($event)" [name]="'buyerColorZone'"></app-basic-line-chart> -->
+                <!-- </mat-card-content> -->
+              <!-- </mat-card> -->
+        
+            <!-- </div> -->
+
+
+            <!-- <div class="col-lg-6 col-sm-6 mb-3" > -->
+              <!-- <mat-card class="example-card"> -->
+                <!-- <div class="d-flex"> -->
+                  <!-- <div class="mr-auto"></div> -->
+                  <!-- <button (click)="popUpChart('materialColorZone')" class="button_background" -->
+                    <!-- matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span> -->
+                  <!-- </button> -->
+                <!-- </div> -->
+                <!-- <mat-card-header> -->
+                  <!-- <div mat-card-avatar class="example-header-image w-100 text-center">{{'Material color zone' | translate }}</div> -->
+                  <!-- <mat-card-title class=""></mat-card-title> -->
+        
+                <!-- </mat-card-header> -->
+                <!-- <mat-card-content> -->
+                  <!-- <app-basic-line-chart [colorZoneGraphData]="materialColorZoneGraphData" -->
+                    <!-- [executeData]="executeData" (charDataEmitter)="getChartData($event)" [name]="'materialColorZone'"></app-basic-line-chart> -->
+                <!-- </mat-card-content> -->
+              <!-- </mat-card> -->
+        
+            <!-- </div> -->
+
+
+
+      <!-- </div> -->
+
+      <div class="mb-3">
+          <app-totalline-dashboard [dataStats]="dataStats" [dateDiff]="dateDiffSentance"></app-totalline-dashboard>
+      </div>
+
+      <div class="row mb-3">
+
+          <div class="col-lg-6 mb-3" #ppv%>
+              <mat-card class="example-card">
+                <div class="d-flex">
+                  <div class="mr-auto"></div>
+                  <button (click)="popUpChart('Total Po Spend')" class="button_background"
+                    matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                  </button>
+                </div>
+                <mat-card-header>
+                  <div class="d-flex flex-column w-100">
+                    <div class="text-center w-100" style="font-weight:700;">{{'Total PO Spend' | translate }}</div>
+      
+                    
+                  </div>
+                </mat-card-header>
+                <mat-card-content>
+                  <app-twoline-basic-line-chart [poData]="poData" (charDataEmitter)="getChartData($event)" [poName]="'poSpend'"
+                    [executeData]="executeData"></app-twoline-basic-line-chart>
+                </mat-card-content>
+              </mat-card>
+      
+      
+      
+            </div>
+
+            <div class="col-lg-6 mb-3" #ppv%>
+              <mat-card class="example-card">
+                <div class="d-flex">
+                  <div class="mr-auto"></div>
+                  <button (click)="popUpChart('Total Issued PO')" class="button_background"
+                    matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                  </button>
+                </div>
+                <mat-card-header>
+                  <div class="d-flex flex-column w-100">
+                    <div class="text-center w-100" style="font-weight:700;">{{'Total Issused PO Lines' | translate }}</div>
+      
+                    
+                  </div>
+                </mat-card-header>
+                <mat-card-content>
+                  <app-twoline-basic-line-chart [poData]="poData" (charDataEmitter)="getChartData($event)" [poName]="'issuePo'"
+                    [executeData]="executeData"></app-twoline-basic-line-chart>
+                </mat-card-content>
+              </mat-card>
+      
+      
+      
+            </div>
+
+
+ 
+
+      </div>
+
+      <div class="row mb-3">  
+
+          <div class="col-lg-6 mb-3" #ppv%>
+              <mat-card class="example-card">
+                <div class="d-flex">
+                  <div class="mr-auto"></div>
+                  <button (click)="popUpChart('Total Sourced Material')" class="button_background"
+                    matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                  </button>
+                </div>
+                <mat-card-header>
+                  <div class="d-flex flex-column w-100">
+                    <div class="text-center w-100" style="font-weight:700;">{{'Total Sourced Material' | translate }}</div>
+      
+                    
+                  </div>
+                </mat-card-header>
+                <mat-card-content>
+                  <app-twoline-basic-line-chart [poData]="poData" (charDataEmitter)="getChartData($event)" [poName]="'sourceMaterial'"
+                    [executeData]="executeData"></app-twoline-basic-line-chart>
+                </mat-card-content>
+              </mat-card>
+      
+      
+      
+            </div>
+
+
+            <div class="col-lg-6 mb-3" #ppv%>
+              <mat-card class="example-card">
+                <div class="d-flex">
+                  <div class="mr-auto"></div>
+                  <button (click)="popUpChart('Total Recieved PO')" class="button_background"
+                    matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
+                  </button>
+                </div>
+                <mat-card-header>
+                  <div class="d-flex flex-column w-100">
+                    <div class="text-center w-100" style="font-weight:700;">{{'Total Received PO Lines' | translate }}</div>
+      
+                    
+                  </div>
+                </mat-card-header>
+                <mat-card-content>
+                  <app-twoline-basic-line-chart 
+                    [poData]="poData" 
+                    (charDataEmitter)="getChartData($event)" 
+                    [poName]="'recievedPO'"
+                    [executeData]="executeData"></app-twoline-basic-line-chart>
+                </mat-card-content>
+              </mat-card>
+      
+            </div>
+      </div>
+  </div>
+</div>
+
+<!--**********************************
+  Content body end
+***********************************-->

@@ -1,0 +1,38 @@
+  <div  [style.width]="showWidht ? width : '505px'" style="padding-left: 10px;padding-right: 10px;" *ngIf="!isMessage">
+    <h1 mat-dialog-title class="mb-0">{{heading}}</h1>
+    <div mat-dialog-content style="display: initial;">
+      <p class="mb-0" [innerHTML]="message"></p>
+      <p *ngIf="noteMessage != ''">{{noteMessage}}</p>
+    </div>
+    <div mat-dialog-actions class="d-flex justify-content-center">
+      <button mat-raised-button  color="warn" (click)="onClose(null)">{{noBtn}}</button>
+      <button mat-raised-button  color="primary" (click)="onClose('')" class="mx-3">{{yesBtn}}</button>
+    </div>
+    
+  </div>
+
+  <div style="width:505px;padding-left: 10px;padding-right: 10px;" *ngIf="isMessage">
+    <h1 mat-dialog-title class="mb-0">{{heading}}</h1>
+    <div mat-dialog-content style="display: initial;">
+      <p class="mb-0">{{message}}</p>
+      <p *ngIf="noteMessage != ''">{{noteMessage}}</p>
+    </div>
+    <div mat-dialog-actions class="d-flex justify-content-center">
+        <button mat-raised-button  color="primary" (click)="onClose('')" class="mx-3">Ok</button>
+        </div>
+    
+  </div>
+
+
+<!-- <div class="w-75 h-100">
+    <h1 mat-dialog-title>{{heading}}</h1>
+    <div mat-dialog-content class="d-flex " style="width:100% !important;">{{message}}</div>
+    <div mat-dialog-actions class="d-flex justify-content-around">
+        <button mat-raised-button  color="warn" (click)="onClose(null)">No</button>
+        <button mat-raised-button  color="primary" (click)="onClose('')">Yes</button>
+        </div>
+        <div>
+    
+        </div> -->
+    <!-- </div>
+    </div>  -->

@@ -1,0 +1,1389 @@
+<div style="width: 98% !important;margin:0px auto">
+
+    <div *ngIf="heading==='Plant Target'">
+        <form [formGroup]="form" *ngIf="form && form.value">
+            <div class="w-100 d-flex justify-content-center">
+                <h3>{{heading}}</h3>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>Plant Code</mat-label>
+                        <input matInput formControlName="plantCode" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('vendorCode').hasError('required')">Vendor Code is required</mat-error> -->
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6">
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>Plant Name</mat-label>
+                        <input matInput formControlName="plantName" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('vendorCode').hasError('required')">Vendor Code is required</mat-error> -->
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row d-flex">
+                <div class="col-6">
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>NCR Percentage</mat-label>
+                        <input matInput formControlName="ncR_percentage" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('ncR_Percentage').hasError('required')">NCR Percentage is required</mat-error> -->
+                    </mat-form-field>
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>PPV Percentage</mat-label>
+                        <input matInput formControlName="pV_percentage" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('pV_Percentage').hasError('required')">PV Percentage is required</mat-error> -->
+                    </mat-form-field>
+                </div>
+
+                <div class="col-6">
+                    
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>OTD Percentagess</mat-label>
+                        <input matInput formControlName="otD_percentage" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('otD_pPercentage').hasError('required')">OTD Percentage is required</mat-error> -->
+                    </mat-form-field>
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>LTA Percentage</mat-label>
+                        <input matInput formControlName="ltA_percentage" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('ltA_Percentage').hasError('required')">LTA Percentage is required</mat-error> -->
+                    </mat-form-field>
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <button mat-raised-button color="primary" (click)="submitForm()">Submit</button>
+            <button mat-raised-button color="primary" (click)="onCancelClick()" class="ml-5">Close</button>
+        </form>
+    </div>
+
+    <div *ngIf="heading==='Vendor Target'">
+        <form [formGroup]="form" *ngIf="form && form.value">
+            <div class="w-100 d-flex justify-content-center">
+                <h3>{{heading}}</h3>
+            </div>
+            <div class="row d-flex">
+                <div class="col-6">
+                    <mat-form-field class=" m-3">
+                        <mat-label>Vendor Code</mat-label>
+                        <input matInput formControlName="vendorCode" disabled class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('vendorCode').hasError('required')">Vendor Code is required</mat-error> -->
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6">
+                    <mat-form-field class=" m-3">
+                        <mat-label>Vendor Name</mat-label>
+                        <input matInput formControlName="vendorName" disabled class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('vendorCode').hasError('required')">Vendor Code is required</mat-error> -->
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <mat-form-field class=" m-3">
+                        <mat-label>NCR Percentage</mat-label>
+                        <input matInput formControlName="ncR_percentage" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('ncR_Percentage').hasError('required')">NCR Percentage is required</mat-error> -->
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6">
+                    <mat-form-field class=" m-3">
+                        <mat-label>OTD Percentage</mat-label>
+                        <input matInput formControlName="otD_percentage" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('otD_pPercentage').hasError('required')">OTD Percentage is required</mat-error> -->
+                    </mat-form-field>
+                </div>
+           
+                <div class="col-lg-6">
+                    <mat-form-field class=" m-3">
+                        <mat-label>PPV Percentage</mat-label>
+                        <input matInput formControlName="pV_percentage" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('pV_Percentage').hasError('required')">PV Percentage is required</mat-error> -->
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6">
+                     
+                    <mat-form-field class=" m-3">
+                        <mat-label>LTA Percentage</mat-label>
+                        <input matInput formControlName="ltA_percentage" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('ltA_Percentage').hasError('required')">LTA Percentage is required</mat-error> -->
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <button mat-raised-button color="primary" (click)="submitForm()">Submit</button>
+            <button mat-raised-button color="primary" (click)="onCancelClick()" class="ml-5">Close</button>
+        </form>
+    </div>
+
+    <div *ngIf="heading==='Commodity Target'">
+        <form [formGroup]="form" *ngIf="form && form.value">
+            <div class="w-100 d-flex justify-content-center">
+                <h3>{{heading}}</h3>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>Plant</mat-label>
+                        <input matInput formControlName="plantCode" disabled class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('vendorCode').hasError('required')">Vendor Code is required</mat-error> -->
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6">
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>Commodity</mat-label>
+                        <input matInput formControlName="commodity" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('otD_pPercentage').hasError('required')">OTD Percentage is required</mat-error> -->
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row d-flex">
+                <div class="col-6">
+                   
+
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>NCR Percentage</mat-label>
+                        <input matInput formControlName="ncR_percentage" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('ncR_Percentage').hasError('required')">NCR Percentage is required</mat-error> -->
+                    </mat-form-field>
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>PPV Percentage</mat-label>
+                        <input matInput formControlName="pV_percentage" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('pV_Percentage').hasError('required')">PV Percentage is required</mat-error> -->
+                    </mat-form-field>
+
+                </div>
+
+                <div class="col-6">
+
+                   
+
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>OTD Percentage</mat-label>
+                        <input matInput formControlName="otD_percentage" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('otD_pPercentage').hasError('required')">OTD Percentage is required</mat-error> -->
+                    </mat-form-field>
+
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>LTA Percentage</mat-label>
+                        <input matInput formControlName="ltA_percentage" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('ltA_Percentage').hasError('required')">LTA Percentage is required</mat-error> -->
+                    </mat-form-field>
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <button mat-raised-button color="primary" (click)="submitForm()">Submit</button>
+            <button mat-raised-button color="primary" (click)="onCancelClick()" class="ml-5">Close</button>
+        </form>
+    </div>
+
+    <div *ngIf="heading==='Material Target'">
+        <form [formGroup]="form" *ngIf="form && form.value">
+            <div class="w-100 d-flex justify-content-center">
+                <h3>{{heading}}</h3>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>Plant</mat-label>
+                        <input matInput formControlName="plantCode" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('vendorCode').hasError('required')">Vendor Code is required</mat-error> -->
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-4">
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>Material Code</mat-label>
+                        <input matInput formControlName="material" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('otD_pPercentage').hasError('required')">OTD Percentage is required</mat-error> -->
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-4">
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>Material Description</mat-label>
+                        <input matInput formControlName="materialDescription" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('otD_pPercentage').hasError('required')">OTD Percentage is required</mat-error> -->
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row d-flex">
+                <div class="col-6">
+                  
+
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>NCR Percentage</mat-label>
+                        <input matInput formControlName="ncR_percentage" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('ncR_Percentage').hasError('required')">NCR Percentage is required</mat-error> -->
+                    </mat-form-field>
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>PPV Percentage</mat-label>
+                        <input matInput formControlName="pV_percentage" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('pV_Percentage').hasError('required')">PV Percentage is required</mat-error> -->
+                    </mat-form-field>
+
+                </div>
+
+                <div class="col-6">
+
+                  
+
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>OTD Percentage</mat-label>
+                        <input matInput formControlName="otD_percentage" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('otD_pPercentage').hasError('required')">OTD Percentage is required</mat-error> -->
+                    </mat-form-field>
+
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>LTA Percentage</mat-label>
+                        <input matInput formControlName="ltA_percentage" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('ltA_Percentage').hasError('required')">LTA Percentage is required</mat-error> -->
+                    </mat-form-field>
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <button mat-raised-button color="primary" (click)="submitForm()">Submit</button>
+            <button mat-raised-button color="primary" (click)="onCancelClick()" class="ml-5">Close</button>
+        </form>
+    </div>
+
+    <div *ngIf="heading==='Buyer Target'">
+        <form [formGroup]="form" *ngIf="form && form.value">
+            <div class="w-100 d-flex justify-content-center">
+                <h3>{{heading}}</h3>
+            </div>
+            <div class="row d-flex">
+                <div class="col-lg-4">
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>Buyer Code</mat-label>
+                        <input matInput formControlName="buyerCode" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('otD_pPercentage').hasError('required')">OTD Percentage is required</mat-error> -->
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                   
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>Buyer Name</mat-label>
+                        <input matInput formControlName="buyerName" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('otD_pPercentage').hasError('required')">OTD Percentage is required</mat-error> -->
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                   
+                    
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>Plant</mat-label>
+                        <input matInput formControlName="plantCode"  class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('vendorCode').hasError('required')">Vendor Code is required</mat-error> -->
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>NCR Percentage</mat-label>
+                        <input matInput formControlName="ncR_percentage" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('ncR_Percentage').hasError('required')">NCR Percentage is required</mat-error> -->
+                    </mat-form-field>
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>PPV Percentage</mat-label>
+                        <input matInput formControlName="pV_percentage" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('pV_Percentage').hasError('required')">PV Percentage is required</mat-error> -->
+                    </mat-form-field>
+
+                </div>
+
+                <div class="col-6">
+
+                   
+
+
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>OTD Percentage</mat-label>
+                        <input matInput formControlName="otD_percentage" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('otD_pPercentage').hasError('required')">OTD Percentage is required</mat-error> -->
+                    </mat-form-field>
+
+                    <mat-form-field class="w-100 m-3">
+                        <mat-label>LTA Percentage</mat-label>
+                        <input matInput formControlName="ltA_percentage" class="form-control py-1">
+                        <!-- <mat-error *ngIf="form.get('ltA_Percentage').hasError('required')">LTA Percentage is required</mat-error> -->
+                    </mat-form-field>
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <button mat-raised-button color="primary" (click)="submitForm()">Submit</button>
+            <button mat-raised-button color="primary" (click)="onCancelClick()" class="ml-5">Close</button>
+        </form>
+
+    </div>
+
+    <div *ngIf="heading==='PoHistory'">
+        <form [formGroup]="form" *ngIf="form && form.value">
+            <div class="w-100 d-flex justify-content-center">
+                <h3>{{heading}}</h3>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">Plant Code:</span>
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="plantCode" class="w-100 ml-5 py-1" >
+                          </mat-form-field>
+                        <!-- <mat-form-field appearance="outline">
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="plantInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="plant"
+                                (keyup)="onPlantInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #plant="matAutocomplete"
+                                (optionSelected)="onPlantSelection($event)">
+                                <mat-option *ngFor="let item of listPlant"
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field> -->
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">Commodity:</span>
+
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="commodity" class="w-100 ml-5 py-1" >
+                          </mat-form-field>
+                        <!-- <mat-form-field appearance="outline">
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="commodityInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="commodity"
+                                (keyup)="onCommodityInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #commodity="matAutocomplete"
+                                (optionSelected)="onCommoditySelection($event)">
+                                <mat-option *ngFor="let item of listCommodity"
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field> -->
+
+
+
+                    </div>
+                </div>
+            </div>
+       
+            <div class="row d-flex w-100">
+                <div class="col-6">
+
+                 
+
+                    <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">Vendor Code:</span>
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="vendorCode" class="w-100 ml-5 py-1" >
+                          </mat-form-field>
+                        <!-- <mat-form-field appearance="outline">
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="vendorInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="vendor"
+                                (keyup)="onVendorInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #vendor="matAutocomplete"
+                                (optionSelected)="onVendorSelection($event)">
+                                <mat-option *ngFor="let item of listVendor"
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field> -->
+                    </div>
+
+                    <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">Vendor Name:</span>
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="vendorName" class="w-100 ml-5 py-1" >
+                          </mat-form-field>
+                    </div>
+
+                    <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">Material Description:</span>
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="partDescription" class="w-100 ml-5 py-1" >
+                          </mat-form-field>
+                        <!-- <mat-form-field appearance="outline">
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="materialInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="material"
+                                (keyup)="onMaterialInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #material="matAutocomplete"
+                                (optionSelected)="onMaterialSelection($event)">
+                                <mat-option *ngFor="let item of listMaterial"
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field> -->
+                    </div>
+
+                    <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">Material No:</span>
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="partNo" class="w-100 ml-5 py-1" >
+                          </mat-form-field>
+                        <!-- <mat-form-field appearance="outline">
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="materialInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="material"
+                                (keyup)="onMaterialInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #material="matAutocomplete"
+                                (optionSelected)="onMaterialSelection($event)">
+                                <mat-option *ngFor="let item of listMaterial"
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field> -->
+                    </div>
+                 
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Currency:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="currency" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+                   
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Price:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="unitPrice" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+                
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Order Unit:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="orderUnit" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+                   
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Quantity:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="qty" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+                   
+    
+
+                    <!-- <mat-form-field class="w-100 m-3">
+                    <mat-label>PO NO</mat-label>
+                    <input matInput formControlName="ncR_percentage" class="form-control py-1">
+                </mat-form-field>
+
+                <mat-form-field class="w-100 m-3">
+                    <mat-label>PV Percentage</mat-label>
+                    <input matInput formControlName="pV_percentage" class="form-control py-1">
+                </mat-form-field>  -->
+
+                </div>
+
+
+                <div class="col-6 ">
+                   
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Buyer Code:</span>
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="buyerCode" class="w-100 ml-5 py-1" >
+                          </mat-form-field>
+                        <!-- <mat-form-field appearance="outline">
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="buyerInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="buyer"
+                                (keyup)="onBuyerInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #buyer="matAutocomplete"
+                                (optionSelected)="onBuyerSelection($event)">
+                                <mat-option *ngFor="let item of listBuyer"
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field> -->
+                    </div>
+
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Po:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="po" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Lead Time:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="leadTime" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+                   
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Order unit:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="orderUnit" class="w-100 ml-5 py-1" type="text">
+                      </mat-form-field>
+                    </div>
+                   
+                    <div class="d-flex mt-2"
+                    >
+                        <span class="vendor-per pt-2 w-25">Post rec date:</span>
+                        <mat-form-field appearance="fill">
+                            <input matInput formControlName="pO_Post_Rec_Date" [matDatepicker]="Post" 
+                                style="border-radius:15px;padding-left: 15px !important;" class="px-2" 
+                                >
+                            <mat-datepicker-toggle matSuffix [for]="Post"></mat-datepicker-toggle>
+                            <mat-datepicker #Post></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    
+                    <div class="d-flex mt-2"
+                    >
+                        <span class="vendor-per pt-2 w-25">Issue Date:</span>
+                        <mat-form-field appearance="fill">
+                            <input matInput formControlName="pO_Issue_Date" [matDatepicker]="Issue" 
+                                style="border-radius:15px;padding-left: 15px !important;" class="px-2" 
+                                >
+                            <mat-datepicker-toggle matSuffix [for]="Issue"></mat-datepicker-toggle>
+                            <mat-datepicker #Issue></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                   
+
+                    <div class="d-flex mt-2"
+                    >
+                        <span class="vendor-per pt-2 w-25">First delivery date:</span>
+                        <mat-form-field appearance="fill">
+                            <input matInput formControlName="pO_Frist_Delivery_Date" [matDatepicker]="pO" 
+                                style="border-radius:15px;padding-left: 15px !important;" class="px-2" 
+                                >
+                            <mat-datepicker-toggle matSuffix [for]="pO"></mat-datepicker-toggle>
+                            <mat-datepicker #pO></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+
+
+
+                    <!-- <mat-form-field class="w-100 m-3">
+                    <mat-label>OTD Percentage</mat-label>
+                    <input matInput formControlName="otD_percentage" class="form-control py-1">
+                </mat-form-field> -->
+
+                    <!-- <mat-form-field class="w-100 m-3">
+                    <mat-label>LTA Percentage</mat-label>
+                    <input matInput formControlName="ltA_percentage" class="form-control py-1">
+                </mat-form-field> -->
+
+                </div>
+
+
+            </div>
+            <button mat-raised-button color="primary" (click)="submitRawDataForm()" class="mt-2">Submit</button>
+            <button mat-raised-button color="primary" (click)="onCancelClick()" class="ml-5 mt-2    ">Close</button>
+        </form>
+
+
+    </div>
+
+
+    <div *ngIf="heading==='Open Order Report'">
+        <form [formGroup]="form" *ngIf="form && form.value">
+            <div class="w-100 d-flex justify-content-center">
+                <h3>{{heading}}</h3>
+            </div>
+       
+            <div class="row d-flex w-100">
+                <div class="col-4">
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">PO No:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="poNumber" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Line No:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="line" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Vendor Code:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="vendor" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Vendor Name:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="vendorName" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+                    <!-- <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">Vendor Name:</span>
+                        <mat-form-field appearance="outline">
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="vendorInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="vendor"
+                                (keyup)="onVendorInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #vendor="matAutocomplete"
+                                (optionSelected)="onVendorSelection($event)">
+                                <mat-option *ngFor="let item of listVendor"
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div> -->
+
+
+
+                    
+                    <div class="d-flex mt-2"
+                    >
+                        <span class="vendor-per pt-2 w-25">Po issue date:</span>
+                        <mat-form-field appearance="fill">
+                            <input matInput formControlName="poIssueDate" [matDatepicker]="pO" 
+                                style="border-radius:15px;padding-left: 15px !important;" class="px-2" 
+                                >
+                            <mat-datepicker-toggle matSuffix [for]="pO"></mat-datepicker-toggle>
+                            <mat-datepicker #pO></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Material Description:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="materialDescription" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+
+                    
+
+                   
+
+                    
+
+                 
+                </div>
+
+                <div class="col-lg-4">
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Order Quantity:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="orderQuantity" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Delivered Quantity:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="deliveredQty" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Unit Price:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="unitPrice" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+
+
+                    <div class="d-flex mt-2"
+                    >
+                        <span class="vendor-per pt-2 w-25">Due Date:</span>
+                        <mat-form-field appearance="fill">
+                            <input matInput formControlName="dueDate" [matDatepicker]="dueDate" 
+                                style="border-radius:15px;padding-left: 15px !important;" class="px-2" 
+                                >
+                            <mat-datepicker-toggle matSuffix [for]="dueDate"></mat-datepicker-toggle>
+                            <mat-datepicker #dueDate></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                    
+                    <div class="d-flex mt-2"
+                    >
+                        <span class="vendor-per pt-2 w-25">First Promised Date:</span>
+                        <mat-form-field appearance="fill">
+                            <input matInput formControlName="firstPromisedDate" [matDatepicker]="frstPrmisDate" 
+                                style="border-radius:15px;padding-left: 15px !important;" class="px-2" 
+                                >
+                            <mat-datepicker-toggle matSuffix [for]="frstPrmisDate"></mat-datepicker-toggle>
+                            <mat-datepicker #frstPrmisDate></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Currency:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="currency" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+                </div>
+
+
+                <div class="col-4 ">
+
+                    
+                   
+
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Order Unit:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="orderUnit" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Buyer Code:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="buyerCode" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Plant code:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="plant" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+
+
+                    <div class="d-flex mt-2"
+                    >
+                        <span class="vendor-per pt-2 w-25">Acknowledgement Date:</span>
+                        <mat-form-field appearance="fill">
+                            <input matInput formControlName="acknowledgementdate" [matDatepicker]="acknDate" 
+                                style="border-radius:15px;padding-left: 15px !important;" class="px-2" 
+                                >
+                            <mat-datepicker-toggle matSuffix [for]="acknDate"></mat-datepicker-toggle>
+                            <mat-datepicker #acknDate></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                    
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Lead Time:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="leadtime" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+
+                    
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Material:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="material" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+                   
+<!-- 
+                    <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">Plant:</span>
+                        <mat-form-field appearance="outline">
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="plantInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="plant"
+                                (keyup)="onPlantInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #plant="matAutocomplete"
+                                (optionSelected)="onPlantSelection($event)">
+                                <mat-option *ngFor="let item of listPlant"
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div> -->
+                    <!-- <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">Material:</span>
+                        <mat-form-field appearance="outline">
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="materialInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="material"
+                                (keyup)="onMaterialInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #material="matAutocomplete"
+                                (optionSelected)="onMaterialSelection($event)">
+                                <mat-option *ngFor="let item of listMaterial"
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div> -->
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <button mat-raised-button color="primary" (click)="submitRawDataForm()" class="mt-4">Submit</button>
+            <button mat-raised-button color="primary" (click)="onCancelClick()" class="ml-5 mt-4    ">Close</button>
+        </form>
+    </div>
+
+
+    <div *ngIf="heading==='Non conformance report'">
+        <form [formGroup]="form" *ngIf="form && form.value">
+            <div class="w-100 d-flex justify-content-center">
+                <h3>{{heading}}</h3>
+            </div>
+       
+            <div class="row d-flex w-100">
+                <div class="col-6">
+
+                    <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">Plant Code:</span>
+
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="plantCode" class="w-100 ml-5 py-1"  >
+                          </mat-form-field>
+                        <!-- <mat-form-field appearance="outline">
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="plantInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="plant"
+                                (keyup)="onPlantInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #plant="matAutocomplete"
+                                (optionSelected)="onPlantSelection($event)">
+                                <mat-option *ngFor="let item of listPlant"
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field> -->
+                    </div>
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 mt-2">Vendor Code:</span>
+                        
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="vendorCode" class="w-100 ml-5 py-1"  >
+                          </mat-form-field>
+                        <!-- <mat-form-field appearance="outline">
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="vendorInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="vendor"
+                                (keyup)="onVendorInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #vendor="matAutocomplete"
+                                (optionSelected)="onVendorSelection($event)">
+                                <mat-option *ngFor="let item of listVendor"
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field> -->
+                    </div>
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 mt-2">Vendor Name:</span>
+                        
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="vendorName" class="w-100 ml-5 py-1"  >
+                          </mat-form-field>
+                    </div>
+
+                   
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 mt-2">Material No:</span>
+
+                        
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="partNo" class="w-100 ml-5 py-1" type="text" >
+                          </mat-form-field>
+                        <!-- <mat-form-field appearance="outline">
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="materialInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="material"
+                                (keyup)="onMaterialInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #material="matAutocomplete"
+                                (optionSelected)="onMaterialSelection($event)">
+                                <mat-option *ngFor="let item of listMaterial"
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field> -->
+                    </div>
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 mt-2">Material Description:</span>
+
+                        
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="part_Description" class="w-100 ml-5 py-1"  >
+                          </mat-form-field>
+                    </div>
+                 
+                  
+                            
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Complaint quantitys:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="complaint_Qty" class="w-100 ml-5 py-1" type="number" >
+                      </mat-form-field>
+                    </div>
+             
+
+
+                    <!-- <mat-form-field class="w-100 m-3">
+                    <mat-label>PO NO</mat-label>
+                    <input matInput formControlName="ncR_percentage" class="form-control py-1">
+                </mat-form-field>
+
+                <mat-form-field class="w-100 m-3">
+                    <mat-label>PV Percentage</mat-label>
+                    <input matInput formControlName="pV_percentage" class="form-control py-1">
+                </mat-form-field>  -->
+
+                </div>
+
+
+                <div class="col-6 ">
+                    
+
+                    <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">Buyer:</span>
+                        
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="buyerCode" class="w-100 ml-5 py-1"  >
+                          </mat-form-field>
+                        <!-- <mat-form-field appearance="outline">
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="buyerInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="buyer"
+                                (keyup)="onBuyerInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #buyer="matAutocomplete"
+                                (optionSelected)="onBuyerSelection($event)">
+                                <mat-option *ngFor="let item of listBuyer"
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field> -->
+                    </div>
+
+
+                    <div class="d-flex mt-3">
+                        <span class="vendor-per w-25 mt-2 pt-2">PO line no:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="pO_lineno" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+
+                  
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Order Unit:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="order_Unit" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Order no:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="pO_Orderno" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+                   
+                 
+                   
+                    <div class="d-flex mt-2"
+                    >
+                        <span class="vendor-per pt-2 w-25">Completion date:</span>
+                        <mat-form-field appearance="fill">
+                            <input matInput formControlName="completionDate" [matDatepicker]="completion" 
+                                style="border-radius:15px;padding-left: 15px !important;" class="px-2" 
+                                >
+                            <mat-datepicker-toggle matSuffix [for]="completion"></mat-datepicker-toggle>
+                            <mat-datepicker #completion></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                   
+    
+                    <div class="d-flex mt-2"
+                    >
+                        <span class="vendor-per pt-2 w-25">NCR Date:</span>
+                        <mat-form-field appearance="fill">
+                            <input matInput formControlName="ncR_Date" [matDatepicker]="ncR" 
+                                style="border-radius:15px;padding-left: 15px !important;" class="px-2" 
+                                >
+                            <mat-datepicker-toggle matSuffix [for]="ncR"></mat-datepicker-toggle>
+                            <mat-datepicker #ncR></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <button mat-raised-button color="primary" (click)="submitRawDataForm()" class="mt-2">Submit</button>
+            <button mat-raised-button color="primary" (click)="onCancelClick()" class="ml-5 mt-2    ">Close</button>
+        </form>
+    </div>
+
+    <div *ngIf="heading==='Buyer data'">
+        <form [formGroup]="form" *ngIf="form && form.value">
+            <div class="w-100 d-flex justify-content-center">
+                <h3>{{heading}}</h3>
+            </div>
+       
+            <div class="row d-flex w-100">
+                <div class="col-6">
+
+                    <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">Plant:</span>
+                        <!-- <mat-form-field appearance="outline">
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="plantInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="plant"
+                                (keyup)="onPlantInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #plant="matAutocomplete"
+                                (optionSelected)="onPlantSelection($event)">
+                                <mat-option *ngFor="let item of listPlant"
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field> -->
+                    
+                           
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="plantCode" class="w-100 ml-5 py-1" type="text" >
+                          </mat-form-field>
+                       
+                    </div>
+
+                </div>
+
+
+                <div class="col-6 ">
+                    
+
+                    <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">Buyer Name:</span>
+                        <!-- <mat-form-field appearance="outline">
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="buyerInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="buyer"
+                                (keyup)="onBuyerInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #buyer="matAutocomplete"
+                                (optionSelected)="onBuyerSelection($event)">
+                                <mat-option *ngFor="let item of listBuyer"
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field> -->
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="buyerName" class="w-100 ml-5 py-1" type="text" >
+                          </mat-form-field>
+                       
+                    </div>
+
+                </div>
+
+                
+                <div class="col-6 ">
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Email:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="email" class="w-100 ml-5 py-1" type="email" >
+                      </mat-form-field>
+                    </div>
+
+                </div>
+                <div class="col-6 ">
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Buyer Code:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="buyerCode" class="w-100 ml-5 py-1" type="text" >
+                      </mat-form-field>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <button mat-raised-button color="primary" (click)="submitRawDataForm()" class="mt-2">Submit</button>
+            <button mat-raised-button color="primary" (click)="onCancelClick()" class="ml-5 mt-2    ">Close</button>
+        </form>
+    </div>
+
+    <div *ngIf="heading==='Plant data'">
+        <form [formGroup]="form" *ngIf="form && form.value">
+            <div class="w-100 d-flex justify-content-center">
+                <h3>{{heading}}</h3>
+            </div>
+       
+            <div class="row d-flex w-100">
+                <div class="col-6">
+
+                    <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">Plant Code:</span>
+                        <!-- <mat-form-field appearance="outline">
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="plantInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="plant"
+                                (keyup)="onPlantInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #plant="matAutocomplete"
+                                (optionSelected)="onPlantSelection($event)">
+                                <mat-option *ngFor="let item of listPlant"
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field> -->
+
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="plantCode" class="w-100 ml-5 py-1" type="email" >
+                          </mat-form-field>
+                    </div>
+
+
+                </div>
+                <div class="col-6">
+
+                    <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">Plant Name:</span>
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="plantName" class="w-100 ml-5 py-1" type="email" >
+                          </mat-form-field>
+                    </div>
+
+
+                </div>
+
+                
+                                <div class="col-6">
+                                    <div class="d-flex mt-2">
+                                        <span class="vendor-per w-25 pt-2">Email:</span>
+                                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                                        <input matInput formControlName="repEmail" class="w-100 ml-5 py-1" type="email" >
+                                      </mat-form-field>
+                                    </div>
+                                </div>
+                <div class="col-6 ">
+                       
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25">Contact name:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="contactName" class="w-100 ml-5 py-1" type="text" >
+                      </mat-form-field>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <button mat-raised-button color="primary" (click)="submitRawDataForm()" class="mt-2">Submit</button>
+            <button mat-raised-button color="primary" (click)="onCancelClick()" class="ml-5 mt-2    ">Close</button>
+        </form>
+    </div>
+  
+    <div *ngIf="heading==='Commodity data'">
+        <form [formGroup]="form" *ngIf="form && form.value">
+            <div class="w-100 d-flex justify-content-center">
+                <!-- <h3>{{heading}}</h3> -->
+                <h3>VENDOR/COMMODITY DATA</h3>
+            </div>
+
+            <div class="row">
+                <!-- <div class="col-lg-6">
+                    <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">Plant Code:</span>
+                        <mat-form-field appearance="outline">
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="plantInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="plant"
+                                (keyup)="onPlantInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #plant="matAutocomplete"
+                                (optionSelected)="onPlantSelection($event)">
+                                <mat-option *ngFor="let item of listPlant"
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="plantCode" class="w-100 ml-5 py-1"  >
+                          </mat-form-field>
+                    </div>
+                </div> -->
+                
+                <!--<div class="col-lg-6">
+                         
+                    <div class="d-flex">
+                        <span class="vendor-per w-25 ">Vendor Code:</span>
+                         <mat-form-field appearance="outline">
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="vendorInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="vendor"
+                                (keyup)="onVendorInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #vendor="matAutocomplete"
+                                (optionSelected)="onVendorSelection($event)">
+                                <mat-option *ngFor="let item of listVendor"
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field> 
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="vendorCode" class="w-100 ml-5 py-1"  >
+                          </mat-form-field>
+                    </div>
+
+                </div>-->
+            </div>
+       
+            <div class="row d-flex w-100">
+                <div class="col-6">
+
+                    <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">Plant Code:</span>
+                        <!-- <mat-form-field appearance="outline">
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="plantInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="plant"
+                                (keyup)="onPlantInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #plant="matAutocomplete"
+                                (optionSelected)="onPlantSelection($event)">
+                                <mat-option *ngFor="let item of listPlant"
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field> -->
+
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="plantCode" class="w-100 ml-5 py-1"  >
+                          </mat-form-field>
+                    </div>
+
+                    <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">Commodity:</span>
+                        <!-- <mat-form-field appearance="outline">
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="commodityInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="commodity"
+                                (keyup)="onCommodityInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #commodity="matAutocomplete"
+                                (optionSelected)="onCommoditySelection($event)">
+                                <mat-option *ngFor="let item of listCommodity"
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field> -->
+
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="commodity" class="w-100 ml-5 py-1"  >
+                          </mat-form-field>
+
+                        </div>
+
+                   
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Email:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="email" class="w-100 ml-5 py-1" type="email" >
+                      </mat-form-field>
+                    </div>
+
+                    <!-- <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 ">Phone number:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="phoneNo" class="w-100 ml-5 py-1"   >
+                      </mat-form-field>
+                    </div> -->
+                    
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Address:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="address" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+                    
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">Country:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="country" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+
+
+                    <!-- <mat-form-field class="w-100 m-3">
+                    <mat-label>PO NO</mat-label>
+                    <input matInput formControlName="ncR_percentage" class="form-control py-1">
+                </mat-form-field>
+
+                <mat-form-field class="w-100 m-3">
+                    <mat-label>PV Percentage</mat-label>
+                    <input matInput formControlName="pV_percentage" class="form-control py-1">
+                </mat-form-field>  -->
+
+                </div>
+
+
+                <div class="col-6 ">
+
+                    <!-- <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">Plant Name:</span>
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="plantName" class="w-100 ml-5 py-1"  >
+                          </mat-form-field>
+                    </div> -->
+                       
+                    <div class="d-flex">
+                        <span class="vendor-per w-25 ">Vendor Code:</span>
+                        <!-- <mat-form-field appearance="outline">
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="vendorInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="vendor"
+                                (keyup)="onVendorInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #vendor="matAutocomplete"
+                                (optionSelected)="onVendorSelection($event)">
+                                <mat-option *ngFor="let item of listVendor"
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field> -->
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="vendorCode" class="w-100 ml-5 py-1"  >
+                          </mat-form-field>
+                    </div>
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25">Vendor Name:</span>
+                        <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                            <input matInput formControlName="vendorName" class="w-100 ml-5 py-1"  >
+                          </mat-form-field>
+                    </div>
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25">Contact name:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="contactName" class="w-100 ml-5 py-1"  >
+                      </mat-form-field>
+                    </div>
+                    
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">ZipCode:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="zipCode" class="w-100 ml-5 py-1"  maxlength="5" minlength="5" >
+                      </mat-form-field>
+                    </div>
+
+                    <div class="d-flex mt-2">
+                        <span class="vendor-per w-25 pt-2">City:</span>
+                    <mat-form-field class="d-flex " class="width:1000px !important;" appearance="fill">
+                        <input matInput formControlName="city" class="w-100 ml-5 py-1" >
+                      </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <button mat-raised-button color="primary" (click)="submitRawDataForm()" class="mt-2">Submit</button>
+            <button mat-raised-button color="primary" (click)="onCancelClick()" class="ml-5 mt-2    ">Close</button>
+        </form>
+    </div>
+
+</div>

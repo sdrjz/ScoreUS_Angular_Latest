@@ -1,0 +1,36 @@
+<br>
+<div class="card p-4" style="padding-bottom:6px!important;padding-top: 35px!important;">
+    <div class="row">
+        
+        <div class="col-md-4">
+            <div class="d-flex">
+                <span class="vendor-per pt-2">Plant:</span>
+                <select class="form-control plant-select">
+                    <option value="">All</option>
+                    <option value="">Open PO Expeditor</option>
+                    <option value="">Open PO Trendlines</option>                 
+                </select>
+                
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="d-flex">
+                <span class="vendor-per pt-2">Buyer:</span>
+                <mat-form-field appearance="fill" class="">
+                    <mat-select class="analysis-multi" placeholder="Select Report" [(value)]="selected" multiple>
+                        <mat-option *ngFor="let selectreport of selectreports"
+                            [value]="selectreport.value">
+                            {{selectreport.value}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        
+        <div class="col-md-2 ml-auto">
+            <div class="form-group">                
+                    <button type="submit" class="btn btn-primary" style="border-radius: 50px;width: 100%;white-space:nowrap;">Execute</button>                
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+<!-- <div class="" style="width: 3rem; height: 3rem;position: absolute;left: 48%;right: 48%;top: 50%;z-index: 999;" role="status" *ngIf="loader">
+    <span class="visually-hidden text-center"><mat-spinner></mat-spinner> Loading...</span>
+  </div> -->
+  <!-- <ngx-ui-loader [fgsColor]="'#cc0000'"    [fgsSize]="50" [logoSize]="120" [logoUrl]="'../assets/images/loading.png '"></ngx-ui-loader> -->
+  <app-loader *ngIf="loader"></app-loader>
+
+<router-outlet></router-outlet>

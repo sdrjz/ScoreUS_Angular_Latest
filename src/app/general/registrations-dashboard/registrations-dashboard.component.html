@@ -1,0 +1,76 @@
+<!-- class="Vendor-registrations-box" -->
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-xl-4 col-sm-6 mb-4">
+            <div class="new-use">
+                <p>{{'Vendor Accounts created' | translate }}</p>
+                <h2 class="nu1" *ngIf="data && !isEmpty()">{{data.currentRegistration.invitedVendor}}</h2>
+                <h3 *ngIf="(vendorDiff<=0 || vendorDiff>0)" [style]="getTextColor(Absolute(invitedVendorDiff))"> {{Absolute(invitedVendorDiff)}}%  <img [attr.src]="getImage(invitedVendorDiff)" width="15px;" class="mr-2" alt=""> <span id="text3">{{sentance | translate}}</span></h3>
+            <div class="new-use-red-b active-user-box">
+                <div class="align-items-center"><img src="../assets/images/lta.png" alt=""></div>
+            </div>
+              
+            </div>
+        </div>
+        <div class="col-xl-4 col-sm-6 mb-4">
+            <div class="new-use">
+                <p>{{'Vendor Counts' | translate }}</p>
+                <h2 class="nu1" *ngIf="data && !isEmpty()">{{data.currentRegistration.registeredVendor}}</h2>
+                <h3 *ngIf="(vendorDiff<=0 || vendorDiff>0)" [style]="getTextColor(Absolute(vendorDiff))"> {{Absolute(vendorDiff)}}%  <img [attr.src]="getImage(vendorDiff)"  width="15px;" class="mr-2" alt=""> <span id="text3">{{sentance | translate }}</span></h3>
+            <div class="new-use-red-b active-user-box">
+                <div class="align-items-center"><img src="../assets/images/lta.png" alt=""></div>
+            </div>
+              
+            </div>
+        </div>
+        <div class="col-xl-4 col-sm-6 mb-4">
+            <div class="new-use active-user ">
+                <p>{{'Buyer Counts' | translate }}</p>
+                <h2 class="nu1" *ngIf="data && !isEmpty()"> {{data.currentRegistration.registeredBuyer}}</h2>
+                
+                <h3 *ngIf="(buyerDiff<=0 || buyerDiff>0)" [style]="getTextColor(Absolute(buyerDiff))"> {{Absolute(buyerDiff)}}%  <img [attr.src]="getImage(buyerDiff)" width="15px;" class="mr-2" alt=""> <span id="text3">{{sentance | translate}}</span></h3>
+            <div class="new-use-red-b active-user-box">
+                <div class="align-items-center"><img src="../assets/images/lta.png" alt=""></div>
+            </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-sm-6 mb-4">
+            <div class="new-use">
+                <p>{{'Commodity Counts' | translate}}</p>
+                <h2 class="nu1" *ngIf="data && !isEmpty()">{{data.currentRegistration.registeredCommodity}}</h2>
+                
+                <h3 *ngIf="(commodityDiff<=0 || commodityDiff>0)" [style]="getTextColor(commodityDiff)"> {{Absolute(commodityDiff)}}%  <img [attr.src]="getImage(commodityDiff)" width="15px;" class="mr-2" alt=""> <span id="text3">{{sentance | translate}}</span></h3>
+            <div class="new-use-red-b active-user-box">
+                <div class="align-items-center"><img src="../assets/images/lta.png" alt=""></div>
+            </div>
+               
+            </div>
+        </div>
+        <div class="col-xl-4 col-sm-6 mb-4">
+            <div class="new-use active-user">
+                <p>{{'Plant Counts' | translate }}</p>
+                <h2 class="nu1" *ngIf="data && !isEmpty()">{{data.currentRegistration.registeredPlant}}</h2>
+               
+                <h3 *ngIf="(plantDiff<=0 || plantDiff>0)" [style]="getTextColor(plantDiff)"> {{Absolute(plantDiff)}}%  <img [attr.src]="getImage(plantDiff)" width="15px;" class="mr-2" alt=""> <span id="text3">{{ sentance | translate}}</span></h3>
+                <div class="new-use-red-b active-user-box">
+                    <div class="align-items-center"><img src="../assets/images/lta.png" alt=""></div>
+                </div>
+                  
+            </div>
+        </div>
+        <div class="col-xl-4 col-sm-6 mb-4">
+            <div class="new-use active-user">
+                <p>{{'Material Counts' | translate}}</p>
+                <h2 class="nu1" *ngIf="data && !isEmpty()">{{data.currentRegistration.registeredMaterial}}</h2>
+                
+                <h3 *ngIf="(materialDiff<=0 || materialDiff>0)" [style]="getTextColor(materialDiff)"> {{Absolute(materialDiff)}}%  <img [attr.src]="getImage(materialDiff)" width="15px;" class="mr-2" alt=""> <span id="text3">{{sentance | translate }}</span></h3>
+            <div class="new-use-red-b active-user-box">
+                <div class="align-items-center"><img src="../assets/images/lta.png" alt=""></div> 
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,68 @@
+<div class="row">
+    <h2 class="ml-3">{{'Metrics Weight' | translate }} 
+    </h2>
+    <button class="toolbutton" [matTooltip]="tips.metricsWeightMessage" [matTooltipPosition]="'above'" style="height:fit-content;margin-left:4px;margin-top:5px;" >?</button>
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 form-group">
+                <label class="col-form-label py-2">{{'On time delivery' | translate }}</label>
+                <input
+                [disabled]="loggedInUser.roleID == 9 || loggedInUser.roleID == 11"
+                type="number" #otdInput [(ngModel)]="replicaData.timeDelivery" (change)="otdWeightChange(otdInput)" class="form-control lare-in"/>
+            </div>
+            <div class="col-md-6 col-sm-6 form-group">
+                <label class="col-form-label ">{{'Non conformance report' | translate}}</label>
+                <input
+                [disabled]="loggedInUser.roleID == 9 || loggedInUser.roleID == 11"
+                type="number" #ncrInput  [(ngModel)]="replicaData.nonConformanceReport" (change)="ncrWeightChange(ncrInput)" class="form-control lare-in"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 form-group">
+                <label class="col-form-label py-2">{{'Purchase price variance' | translate }} </label>
+                <input [disabled]="loggedInUser.roleID == 9 || loggedInUser.roleID == 11" type="number" [(ngModel)]="replicaData.purchasePriceVariance" #ppvInput (change)="ppvWeightChange(ppvInput)" class="form-control lare-in"/>
+            </div>
+            <div class="col-md-6 col-sm-6 form-group">
+                <label class="col-form-label py-2">{{'Lead time accuracy' | translate }}</label>
+                <ng-container class="otd-par">
+                <input [disabled]="loggedInUser.roleID == 9 || loggedInUser.roleID == 11" type="number"  [(ngModel)]="replicaData.leadTimeAccuracy" #ltaInput (change)="ltaWeightChange(ltaInput)" class="form-control lare-in"/>
+            </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- 
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-12 deliver-nav">   
+        <h2>Metrics Weight</h2>            
+        <div class="form-group">
+            <label class="col-sm-12 col-form-label pr-0 larec pl-0">On Time Delivery</label>
+            <div class="col-sm-12 otd-para pl-0 d-flex">
+                <input type="number" class="form-control lare-in" disabled [(ngModel)]="maxScores.timeDelivery"/>
+            <label class="col-sm-12 col-form-label pr-0 larec pl-0">Non Conformance Report:</label>
+            <div class="col-sm-12 otd-para pl-0">
+                <input type="number" class="form-control lare-in" disabled [(ngModel)]="maxScores.nonConformanceReport">
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-5 col-lg-5 col-md-12 col-12 deliver-nav pl-0 pr-0">   
+        <div class="form-group pt-4 mt-3">
+            <label class="col-sm-12 col-form-label pr-0 larec pl-0">Purchase Price Variance</label>
+            <div class="col-sm-12 otd-para pl-0 d-flex">
+                <input type="number" class="form-control lare-in" disabled [(ngModel)]="maxScores.purchasePriceVariance">
+            </div>
+            <label class="col-sm-12 col-form-label pr-0 larec pl-0">Lead Time Accuracy</label>
+            <div class="col-sm-12 otd-para pl-0">
+                <input type="text" class="form-control lare-in" disabled [(ngModel)]="maxScores.leadTimeAccuracy">
+            </div>
+        </div>
+    </div>
+</div> -->

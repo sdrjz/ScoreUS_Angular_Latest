@@ -1,0 +1,52 @@
+<div class="revenue-nav">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="ttps">
+                <h2 style="font-weight:normal;">{{'Total PO Spend' | translate }}</h2>
+                <h3 class="tota-po" *ngIf="dataStats && dataStats.currentData.totalSpend != null">$ {{formatNumber(dataStats.currentData.totalSpend) }}</h3>
+                <h3 *ngIf="(totalPOSpendDiff<=0 || totalPOSpendDiff>0)"> {{totalPOSpendDiff}}%  <img [attr.src]="totalPOSpendDiff <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text3">{{ sentance | translate}}</span></h3>
+                
+                
+                <!-- <div class="new-use tps pl-0">
+                    <h3 class="text-left"><span class="co1">2.3% </span><img src="../assets/images/ic-arrow-narrow-up.svg" alt=""> <span class="color-black">than last year</span></h3>
+                </div> -->
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="ttps">
+                <h2 style="font-weight:normal;">{{ 'Total Issued PO Lines' | translate }} </h2>
+                <h3 class="tota-po" *ngIf="dataStats && dataStats.currentData.issuePOLines != null">{{formatNumber(dataStats.currentData.issuePOLines)  }}</h3>
+                <h3 *ngIf="(totalIssuePODiff<=0 || totalIssuePODiff>0)"> {{totalIssuePODiff}}%  <img [attr.src]="totalIssuePODiff <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text3">{{ sentance | translate}}</span></h3>
+                
+                
+                
+                <!-- <div class="new-use tps pl-0">
+                    <h3 class="text-left"><span class="red-num">1.2% </span><img src="../assets/images/arrow-narrow-up.png" alt=""> <span class="color-black">than last year</span></h3>
+                </div> -->
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="ttps">
+                <h2 style="font-weight:normal;">{{'Total Sourced Matl.' | translate }} </h2>
+                <h3 class="tota-po" *ngIf="dataStats && dataStats.currentData.sourced_Items != null">{{ formatNumber(dataStats.currentData.sourced_Items)  }}</h3>
+                <h3 *ngIf="(totalSourcedItemDiff<=0 || totalSourcedItemDiff>0)"> {{totalSourcedItemDiff}}%  <img [attr.src]="totalSourcedItemDiff <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text3">{{ sentance | translate}}</span></h3>
+                
+                <!-- <div class="new-use tps pl-0">
+                    <h3 class="text-left"><span class="co1">2.3% </span><img src="../assets/images/ic-arrow-narrow-up.svg" alt=""> <span class="color-black">than last year</span></h3>
+                </div> -->
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="ttps">
+                <h2 style="font-weight:normal;">{{'Total Recv Po Line' | translate }}</h2>
+                <h3 class="tota-po" *ngIf="dataStats && dataStats.currentData.receivedPOLines != null">{{formatNumber(dataStats.currentData.receivedPOLines)  }}</h3>
+                <h3 *ngIf="(totalRecievedPOLineDiff<=0 || totalRecievedPOLineDiff>0)"> {{totalRecievedPOLineDiff}}%  <img [attr.src]="totalRecievedPOLineDiff <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text3">{{ sentance | translate}}</span></h3>
+                
+                
+                <!-- <div class="new-use tps pl-0">
+                    <h3 class="text-left"><span class="red-num">2.3% </span><img src="../assets/images/arrow-narrow-up.png" alt=""> <span class="color-black">than last year</span></h3>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+<div class="content-body">
+    <div class="container-fluid">
+  
+      <!-- row -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="profile card card-body px-3 pt-3 pb-0">
+            <div class="profile-head">
+              <div class="profile-name px-3 pt-2">
+                <h4 class="mb-0 pro-name uer-font">{{heading}}</h4>
+              </div>
+            </div>
+            <h1>sort/search</h1>
+            <!-- <mat-form-field appearance="outline" class="h-3">
+                <mat-label>Select an option</mat-label>
+                <mat-select >
+                  <mat-option>None</mat-option>
+                  <mat-option value="option1">Option 1</mat-option>
+                  <mat-option value="option2">Option 2</mat-option>
+                  <mat-option value="option3">Option 3</mat-option>
+                </mat-select>
+              </mat-form-field> -->
+            <div class="pro-form pt-4">
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 pl-4 pr-4 manage-u refermana">
+  
+                  <table datatable class="row-border hover table">
+                    <thead>
+                      <tr>
+                        <th *ngFor="let item of columns" class="p-3">
+                            {{item?.name}}
+                        </th>
+                        <!-- <th style="text-align:left;padding-left: 13px;">Referee</th>
+                        <th>Referee Company</th>
+                        <th>Referee Subscription <br>Type/Product</th>
+                        <th>Referee Subscription<br> Date</th>
+                        <th style="padding-left: 13px;">Referrer</th>
+                        <th>Referrer Company</th>
+                        <th>Referrer Subscription <br> Type</th>
+                        <th>Referrer Member <br> Since</th> -->
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of tableData" >
+                        <td *ngFor="let columnsItem of columns">
+                            {{item[columnsItem?.def]}}</td>
+                        </tr>
+                      <!-- <tr >
+                        <td>
+                          <div class="text-center">
+                            <a [routerLink]="['/admin/userdetail']" class="drjack"> Dr. Jackson </a>
+                          </div>
+                        </td>
+                        <td>Lorem Ipsum</td>
+                        <td>Monthly/ScoreCard</td>
+                        <td>2022/02/12</td>
+                        <td>
+                          <div class="text-center">
+                            <a [routerLink]="['/admin/userdetail']" class="drjack"> Dr. Jackson </a>
+                          </div>
+                        </td>
+                        <td>Lorem Ipsum</td>
+                        <td>Monthly/Complete</td>
+                        <td>2022/02/12</td>
+                      </tr> -->
+                      
+                    </tbody>
+                  </table>
+                  
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div>pagination</div>
+
+        </div>
+      </div>
+  
+    </div>
+  </div>

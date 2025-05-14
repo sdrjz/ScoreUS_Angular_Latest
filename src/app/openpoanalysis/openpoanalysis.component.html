@@ -1,0 +1,36 @@
+<!--**********************************
+	Content body start
+***********************************-->
+<div class="content-body pt-0">
+    <div class="container-fluid">
+
+        <div class="row mt-5">
+            <div class="col-lg-12 mt-5" *ngIf="loggedInUser.roleID != 13;else elseTemplate">
+                <div class="openPoDate">
+                    {{"Open PO Up To" | translate}}: {{formatDate(fields.poIssueDate)}}
+                </div>
+                <mat-tab-group mat-align-tabs="center" class="openpoanalysis-tab">
+                    <mat-tab label="{{'Buyer' | translate}}">
+                        <app-openpoanalysis-buyer (eventDataEmitter)="getDataFromChild($event)"></app-openpoanalysis-buyer>
+                    </mat-tab>
+                    <mat-tab label="{{'Vendor' | translate}}">
+                        <app-openpoanalysis-vendor></app-openpoanalysis-vendor>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+            
+            <ng-template #elseTemplate>
+                <div class="col-lg-12 mt-5">
+                    <div class="openPoDateForVendor">
+                        {{"Open PO Up To" | translate}}: {{fields.poIssueDate}}
+                    </div>
+                    <app-openpoanalysis-buyer (eventDataEmitter)="getDataFromChild($event)"></app-openpoanalysis-buyer>
+                </div>
+            </ng-template>
+        </div>
+        
+    </div>
+</div>
+<!--**********************************
+      Content body end
+  ***********************************-->

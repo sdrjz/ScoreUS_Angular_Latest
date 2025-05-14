@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Send Report<i (click)="close()" class="fa fa-times fa-lg" aria-hidden="true" style="color:#BC1A20;float:right;"></i>
+</h1>
+<div style="width:815px;" class="wizard-Signup-dialog">
+    <div mat-dialog-content style="display: initial;">
+        <form class="">
+           
+            <div class="col-md-12 text-left  pl-0 pr-0">
+                <label class="report-dia">Subject</label>
+                <input name="message" [(ngModel)]="params.subject" placeholder="Enter subject for mail" class="form-control" />
+            </div>
+
+            <div class="col-md-12 text-left mt-3 pl-0 pr-0">
+                <label class="report-dia">Subject</label>
+                <div contenteditable="true" [innerHTML]="params.body" (input)="onInput($event)"></div>
+            </div>
+        </form>
+    </div>
+    <div mat-dialog-actions class="d-flex">
+        <button class="profi-btn-yes cancel-btn" style="width:40%;
+    margin: 0px auto;" (click)="close()">Cancel</button>
+        <button class="profi-btn-yes" style="color:#fff; width:40%;
+    margin: 0px auto;" (click)="submit()">Send</button>
+    </div>
+</div>

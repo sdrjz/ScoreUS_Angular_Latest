@@ -1,0 +1,595 @@
+<!-- Filter Begin -->
+<div>
+    <div class="card p-4" style="padding-bottom:6px!important;padding-top: 35px!important;">
+        <!-- <div class="row mb-4">
+            <div class="col-md-4">
+                <label class="vendor-per pt-2">Open PO up to</label>
+            </div>
+
+            <div class="col-md-4">
+                <label class="vendor-per pt-2">Buffer Days</label>
+                <input type="number" [(ngModel)]="filters.bufferDays" placeholder="3" 
+                oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
+                style="width:50px;text-align: center;margin-left: 10px;">
+            </div>
+
+            <div class="col-md-4">
+                <label class="vendor-per pt-2">Future Days</label>
+                <input type="number" [(ngModel)]="filters.selfdefinedfuturedays" placeholder="14" 
+                oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
+                style="width:50px;text-align: center;margin-left: 10px;">
+            </div>
+        </div>        -->
+        
+        <div class="row">
+            
+            <div class="col-md-3">
+                <div class="d-flex">
+                    <span class="vendor-per pt-2">{{'Plant' | translate}}:</span>
+                    <select class="form-control plant-select" [(ngModel)]="filters.plantCode" (change)="changePlanCode()">
+                        <option selected="selected" value="All">All</option>
+                        <option *ngFor="let plant of allPlants" [value]="plant.item_id">{{plant.item_text}} <span class="right-code">{{plant.item_id}}</span></option>
+                    </select>
+                </div>
+            </div>
+          
+            <div class="col-md-3">
+                <div class="d-flex">
+                    <span class="vendor-per pt-2">{{'Buyer' | translate}}</span>
+                    <mat-form-field appearance="fill" class="">
+                        <mat-select class="analysis-multi" (selectionChange)="onSelection($event)" placeholder="Multiple Selection" [(ngModel)]="filters.BuyerCode" multiple>
+                            <mat-option *ngFor="let buyer of allBuyers"
+                                [value]="buyer.item_id">
+                                {{buyer.item_text}} <span class="right-code">{{buyer.item_id === 'ALL' ? '' : buyer.item_id}}</span>
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <!-- <ng-multiselect-dropdown style="width: 100%;"
+                        [placeholder]="'custom placeholder'"
+                        [settings]="dropdownSettings"
+                        [data]="allBuyers"
+                        [(ngModel)]="filters.BuyerCode"
+                        (onSelect)="onItemSelect($event)"
+                        (onSelectAll)="onSelectAll($event)"
+                        >
+                    </ng-multiselect-dropdown> -->
+                    <!-- <mat-form-field appearance="fill" class="">
+                        <mat-select class="analysis-multi" (selectionChange)="selectionChange($event)" placeholder="Multiple Selection" [(ngModel)]="filters.BuyerCode" multiple>
+                            <mat-option *ngFor="let buyer of allBuyers" [value]="buyer.item_id">
+                                {{ buyer.item_text }} <span class="right-code">{{ buyer.item_id }}</span>
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+
+                    <!-- <mat-form-field appearance="fill" class="">
+                        <mat-select
+                          class="analysis-multi"
+                          placeholder="Multiple Selection"
+                          [(value)]="filters.BuyerCode"
+                          multiple
+                          (selectionChange)="selectionChange($event)"
+                        >
+                          <mat-option
+                            (click)="toggleAllSelection()"
+                            [ngClass]="{ 'mat-selected': allSelected }"
+                          >
+                            {{ allSelected ? 'Deselect All' : 'Select All' }}
+                          </mat-option>
+                          <mat-option
+                            *ngFor="let buyer of allBuyers"
+                            [value]="buyer.item_id"
+                          >
+                            {{ buyer.item_text }} <span class="right-code">{{ buyer.item_id }}</span>
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field> -->
+                </div>
+            </div>
+            
+            <div class="col-md-2">
+                <div class="d-flex">
+                    <span class="vendor-per pt-2">{{'Buffer Days' | translate}}:</span>
+                    <input type="number" [(ngModel)]="filters.bufferDays" placeholder="3" class="form-control plant-select"
+                    oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+                </div>
+            </div>
+            
+            <div class="col-md-2">
+                <div class="d-flex">
+                    <span class="vendor-per pt-2">{{'Future Days' | translate}}:</span>
+                    <input type="number" [(ngModel)]="filters.selfdefinedfuturedays" placeholder="14" class="form-control plant-select"
+                    oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+                </div>
+            </div>
+
+            <div class="col-md-2 ml-auto">
+                <div class="form-group">                
+                    <button type="submit" (click)="Search()" class="btn btn-primary" style="border-radius: 50px;width: 100%;white-space:nowrap;">{{'Execute' | translate}}</button>                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Filter End -->
+
+<div class="row mb-3">
+    <div class="col-xl-12 col-lg-12 pr-4 vendorscorecard-table2 vendor-second-t-sectable">
+        <app-podatatable 
+        style="margin-top: 22px" 
+        defaultSortBy="name"
+        [columns]="avrgTabelHeading" 
+        [dataSourceForTable]="avrgTabelRecords"
+        [filters] ="filters"
+        >
+        </app-podatatable>
+    </div>
+</div>
+
+
+<!-- Table Begin -->
+<div class="row">
+    
+    <div class="col-xl-12 col-lg-12 pr-4 vendorscorecard-table2 vendor-second-t-sectable">
+        <!-- <app-podatatable 
+        style="margin-top: 22px" 
+        defaultSortBy="name"
+        [columns]="columns" 
+        [dataSourceForTable]="records"
+        [totalRecordsForTable]="totalRecords"
+        [filters] ="filters"
+        >
+        </app-podatatable> -->
+
+        <app-data-table 
+        style="margin-top: 10px" 
+        defaultSortBy="name"
+        [columns]="columns" 
+        [dataSourceForTable]="records"
+        
+        ></app-data-table>
+    </div>
+</div>
+
+<div class="row pb-2 mt-4">
+    <div class="col-lg-12 col-md-12" style="text-align: right;">
+        <div class="btn-group">
+            <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="processExport()">{{"Download Data" | translate}}</a>
+            <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="toggle()"
+                id="bt">{{buttonName | translate}}</a>
+        </div>                       
+    </div>
+</div>
+
+<!--
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="profile card card-body px-3 pt-3 pb-0">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-head">
+                            <div class="profile-name px-3 pt-2">
+                                <h4 class="mb-0 pro-name uer-font">PO Analysis Buyer</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pro-form pt-4">
+
+                    
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 pr-4 vendorscorecard-table2 vendor-second-t-sectable">
+                            <table datatable class="row-border hover tab-top-0 pl-2" style="height:104px;">
+
+                                <tbody>
+                                    <tr>
+                                        <td class="ven-score-first-tab2 font-color-z">{{analysissubtitle}} Count</td>
+                                        <td class="ven-score-first-tabl font-color-z">Total Open Order Value</td>
+                                        <td class="ven-score-first-tabl font-color-z">Avg. Open Order Line</td>
+                                        <td class="ven-score-first-tabl font-color-z">Total Open Order Line</td>
+                                        <td class="ven-score-first-tabl font-color-z">Avg. PastDue Value</td>
+                                        <td class="ven-score-first-tabl font-color-z">Total PastDue Value</td>
+                                        <td class="ven-score-first-tabl font-color-z">Total PastDue Line</td>
+                                        <td class="ven-score-first-tabl font-color-z">Avg.Open Order Lines </td>
+                                        <td class="ven-score-first-tabl font-color-z">Avg.Ack Needed Order Value</td>
+                                        <td class="ven-score-first-tabl font-color-z">Ack Needed Order Value</td>
+                                        <td class="ven-score-first-tabl font-color-z">Avg.Ack Needed Order Line</td>
+                                        <td class="ven-score-first-tabl font-color-z">Ack Needed Order Line </td>
+                                        <td class="ven-score-first-tabl font-color-z">Avg.Future Past Due Order Value</td>
+                                        <td class="ven-score-first-tabl font-color-z">Future PastDue Order Value%</td>
+                                        <td class="ven-score-first-tabl font-color-z">Future PastDue Order Line</td>
+                                        <td class="ven-score-first-tabl font-color-z">Future PastDue Order Line%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ven-score-first-tab2">Sample Data</td>
+                                        <td class="ven-score-first-tabl">Sample Data</td>
+                                        <td class="ven-score-first-tabl">Sample Data</td>
+                                        <td class="ven-score-first-tabl">Sample Data</td>
+                                        <td class="ven-score-first-tabl">Sample Data</td>
+                                        <td class="ven-score-first-tabl">Sample Data</td>
+                                        <td class="ven-score-first-tabl">Sample Data</td>
+                                        <td class="ven-score-first-tabl">Sample Data</td>
+                                        <td class="ven-score-first-tabl">Sample Data</td>
+                                        <td class="ven-score-first-tabl">Sample Data</td>
+                                        <td class="ven-score-first-tabl">Sample Data</td>
+                                        <td class="ven-score-first-tabl">Sample Data</td>
+                                        <td class="ven-score-first-tabl">Sample Data</td>
+                                        <td class="ven-score-first-tabl">Sample Data</td>
+                                        <td class="ven-score-first-tabl">Sample Data</td>
+                                        <td class="ven-score-first-tabl">Sample Data</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                        <div class="col-xl-12 col-lg-12 pl-0 pr-4 vendorscorecard-table vendor-second-t" id="style-2">
+                            <table datatable class="row-border hover tab-top-0 pl-0">
+                                <thead>
+                                    <tr>
+                                        <th class="ex-whi" style="width: 200px;padding: 0px;padding-right: 0px !important;">
+                                            <div class="list-group-item" style="padding-left: 45px;">
+                                                <input type="checkbox" [(ngModel)]="masterSelected" name="list_name"
+                                                    value="m1" (change)="checkUncheckAll()" /> <span
+                                                    style="padding-left:15px;"></span>
+                                            </div>
+                                        </th>
+                                        <th class="ex-whi">{{analysissubtitle}} Count</th>
+                                        <th class="ex-whi">{{analysissubtitle}} Name</th>
+                                        <th class="ex-whi" style="text-align:left;">Open PO Value</th>
+                                        <th class="ex-whi">Open PO Value%</th>
+                                        <th class="ex-whi">Open PO Lines</th>
+                                        <th class="ex-whi">Open PO Lines%</th>
+                                        <th class="ex-whi">PastDue Value</th>
+                                        <th class="ex-whi">PastDue Value%</th>
+                                        <th class="ex-whi">Buyer Pastdue Lines</th>
+                                        <th class="ex-whi">PastDue Line%</th>
+                                        <th class="ex-whi">Ack'd Need Order Value</th>
+                                        <th class="ex-whi">Ack'd Need Order Value%</th>
+                                        <th class="ex-whi">Ack'd Need Order line</th>
+                                        <th class="ex-whi">Ack'd Need Order line%</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of checklist">
+                                        <td style="text-align:left;padding-left: 44px;">
+                                            <div>
+                                                <input type="checkbox" [(ngModel)]="item.isSelected"
+                                                    name="list_name{{item.id}}" value="{{item.id}}"
+                                                    (change)="check(item.id)" />
+                                                {{item.value}}
+                                            </div>
+                                        </td>
+                                        <td>Sample Data</td>
+                                        <td>Sample Data</td>
+                                        <td>Sample Data</td>
+                                        <td>Sample Data</td>
+                                        <td>Sample Data</td>
+                                        <td>Sample Data</td>
+                                        <td>Sample Data</td>
+                                        <td>Sample Data</td>
+                                        <td>Sample Data</td>
+                                        <td>Sample Data</td>
+                                        <td>Sample Data</td>
+                                        <td>Sample Data</td>
+                                        <td>Sample Data</td>
+                                        <td>Sample Data</td>
+                                        
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="row pb-2 mt-2">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="btn-group">
+                                <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5">Download Data</a>
+                                <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="toggle()"
+                                    id="bt">{{buttonName}}</a>
+                            </div>                       
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+-->
+<!-- Table End -->
+
+<!-- Chart Begin -->
+<ng-container *ngIf="show">
+    <div class="row">
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{'Buyer Open PO Value' | translate}} 
+                        <span *ngIf="OpenPOValueChartShow;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openPieChartDialogNew('Buyer Open PO Value',OpenPOValue)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="OpenPOValueChartShow;else OpenPOValueElseTemplate">
+                        <app-openpoanalysis-piechart [executeData]="OpenPOValue" ></app-openpoanalysis-piechart>
+                    </div>
+                    <ng-template #OpenPOValueElseTemplate>
+                        <h4>{{'No Record' | translate}}</h4>
+                    </ng-template>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Buyer Open PO Line" | translate}}
+                        <span *ngIf="OpenPOLineChartShow;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openPieChartDialogNew('Buyer Open PO Line',OpenPOLine)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="OpenPOLineChartShow;else OpenPOLineElseTemplate">
+                        <app-openpoanalysis-piechart [executeData]="OpenPOLine" ></app-openpoanalysis-piechart>
+                    </div>
+                    <ng-template #OpenPOLineElseTemplate>
+                        <h4>{{"No Record" | translate}}</h4>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4  class="card-title">{{"Buyer PastDue PO Value" | translate}} 
+                        <span *ngIf="PastDuePOValueChartShow;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openPieChartDialogNew('Buyer PastDue PO Value',PastDuePOValue)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="PastDuePOValueChartShow;else PastDuePOValueElseTemplate">
+                        <app-openpoanalysis-piechart [executeData]="PastDuePOValue" ></app-openpoanalysis-piechart>
+                    </div>
+                    <ng-template #PastDuePOValueElseTemplate>
+                        <h4>{{"No Record" | translate}}</h4>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Buyer PastDue PO Line" | translate}}
+                        <span *ngIf="PastDuePOLineChartShow;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openPieChartDialogNew('Buyer PastDue PO Line',PastDuePOLine)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="PastDuePOLineChartShow;else PastDuePOLineElseTemplate">
+                        <app-openpoanalysis-piechart [executeData]="PastDuePOLine" ></app-openpoanalysis-piechart>
+                    </div>
+                    <ng-template #PastDuePOLineElseTemplate>
+                        <h4>{{"No Record" | translate}}</h4>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Buyer Ack’d Needed PO Value" | translate}}
+                        <span *ngIf="AckdNeededPOValueChartShow;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openPieChartDialogNew('Buyer Ack’d Needed PO Value',AckdNeededPOValue)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="AckdNeededPOValueChartShow;else AckdNeededPOValueElseTemplate">
+                        <app-openpoanalysis-piechart [executeData]="AckdNeededPOValue" ></app-openpoanalysis-piechart>
+                    </div>
+                    <ng-template #AckdNeededPOValueElseTemplate>
+                        <h4>{{"No Record" | translate}}</h4>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Buyer Ack’d Needed PO Line" | translate}}
+                        <span *ngIf="AckdNeededPOLineChartShow;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openPieChartDialogNew('Buyer Ack’d Needed PO Line',AckdNeededPOLine)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="AckdNeededPOLineChartShow;else AckdNeededPOLineElseTemplate">
+                        <app-openpoanalysis-piechart [executeData]="AckdNeededPOLine" ></app-openpoanalysis-piechart>
+                    </div>
+                    <ng-template #AckdNeededPOLineElseTemplate>
+                        <h4>{{"No Record" | translate}}</h4>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Buyer Future Past PO Value" | translate}}
+                        <span *ngIf="FuturePastPOValueChartShow;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openPieChartDialogNew('Buyer Future Past PO Value',FuturePastPOValue)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="FuturePastPOValueChartShow;else FuturePastPOValueElseTemplate">
+                        <app-openpoanalysis-piechart [executeData]="FuturePastPOValue" ></app-openpoanalysis-piechart>
+                    </div>
+                    <ng-template #FuturePastPOValueElseTemplate>
+                        <h4>{{"No Record" | translate}}</h4>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Buyer Future Past PO Line" | translate}}
+                        <span *ngIf="FuturePastPOLineChartShow;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openPieChartDialogNew('Buyer Future Past PO Line',FuturePastPOLine)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="FuturePastPOLineChartShow;else FuturePastPOLineElseTemplate">
+                        <app-openpoanalysis-piechart [executeData]="FuturePastPOLine" ></app-openpoanalysis-piechart>
+                    </div>
+                    <ng-template #FuturePastPOLineElseTemplate>
+                        <h4>{{"No Record" | translate}}</h4>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Buyer Lead Time Check PO Value" | translate}}
+                        <span *ngIf="LeadTimeCheckPOValueChartShow;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openPieChartDialogNew('Buyer Lead Time Check PO Value',LeadTimeCheckPOValue)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="LeadTimeCheckPOValueChartShow;else leadTimeCheckPOValueElseTemplate">
+                        <app-openpoanalysis-piechart [executeData]="LeadTimeCheckPOValue" ></app-openpoanalysis-piechart>
+                    </div>
+                    <ng-template #leadTimeCheckPOValueElseTemplate>
+                        <h4>{{"No Record" | translate}}</h4>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Buyer Lead Time Check PO Line" | translate}}
+                        <span *ngIf="LeadTimeCheckPOLineChartShow;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openPieChartDialogNew('Buyer Lead Time Check PO Line',LeadTimeCheckPOLine)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="LeadTimeCheckPOLineChartShow;else LeadTimeCheckPOLineElseTemplate">
+                        <app-openpoanalysis-piechart [executeData]="LeadTimeCheckPOLine" ></app-openpoanalysis-piechart>
+                    </div>
+                    <ng-template #LeadTimeCheckPOLineElseTemplate>
+                        <h4>{{"No Record" | translate}}</h4>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Open PO %" | translate}}
+                        <span *ngIf="OpenPOBarChartShow != false;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openBarChartDialogNew('Open PO %',OpenPO)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                    <!-- <p class="text-center mb-0">
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                        <span class="pie-chat-bulit">Buyer Name</span>
+                    </p> -->
+                </div>
+                <div class="card-body">
+                    <h4 *ngIf="OpenPOBarChartShow == false;" class="text-center">{{"No Record" | translate}}</h4>
+                    <app-openpoanalysis-barchart [executeData]="OpenPO"></app-openpoanalysis-barchart>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"PastDue PO %" | translate}}
+                        <span *ngIf="PastDuePOBarChartShow != false;" class="pr-3" style="float: right;cursor: pointer;" (click)="openBarChartDialogNew('PastDue PO %',PastDuePO)" mat-button>
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <h4 *ngIf="PastDuePOBarChartShow == false;" class="text-center">{{"No Record" | translate}}</h4>
+                    <app-openpoanalysis-barchart [executeData]="PastDuePO"></app-openpoanalysis-barchart>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Ack'd Order %" | translate}}
+                        <span *ngIf="AckNeededPOBarChartShow != false;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openBarChartDialogNew('Ack\'d Order %',AckNeededPO)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <h4 *ngIf="AckNeededPOBarChartShow ==  false;" class="text-center">{{"No Record" | translate}}</h4>
+                    <app-openpoanalysis-barchart [executeData]="AckNeededPO"></app-openpoanalysis-barchart>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Future PastDue %" | translate}}
+                        <span *ngIf="FuturePastPOBarChartShow != false;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openBarChartDialogNew('Future PastDue %',FuturePastPO)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <h4 *ngIf="FuturePastPOBarChartShow == false;" class="text-center">{{"No Record" | translate}}</h4>
+                    <app-openpoanalysis-barchart [executeData]="FuturePastPO"></app-openpoanalysis-barchart>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6">
+            <div class="card">
+                <div class="d-block text-center pt-4 mt-1">
+                    <h4 class="card-title">{{"Leadtime Check %" | translate}}
+                        <span *ngIf="LeadTimeCheckPOBarChartShow != false;" class="pr-3" style="float: right;cursor: pointer;" mat-button (click)="openBarChartDialogNew('Leadtime Check %',LeadTimeCheckPO)">
+                            <i class="fa fa-expand" aria-hidden="true"></i>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <h4 *ngIf="LeadTimeCheckPOBarChartShow == false;" class="text-center">{{"No Record" | translate}}</h4>
+                    <app-openpoanalysis-barchart [executeData]="LeadTimeCheckPO"></app-openpoanalysis-barchart>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+<!-- Chart Begin -->
+

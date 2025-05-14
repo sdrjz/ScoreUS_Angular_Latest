@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12  col-6 deliver-nav">
+        <h2 class="mb-0">{{'On Time Delivery Option' | translate}} </h2>
+        
+        <fieldset class="form-group">
+            <div class="row">                
+                <div class="form-check pr-5 col-6" style="padding-left: 36px;">
+                    <input 
+                    [disabled]="loggedInUser.roleID == 9 || loggedInUser.roleID == 11"
+                    class="form-check-input" type="radio" name="isEarly"  [checked]="isAcceptEarlyDelivery" (change)="handleIsEarlyDelivery($event)">
+                    <label class="form-check-label">
+                        {{'Accept Early Delivery' | translate }}
+                        <button class="toolbutton" [matTooltip]="tips.onTimeDeliveryTip" [matTooltipPosition]="'above'" >?</button>
+                    </label>
+                </div>
+                <div class="form-check  col-6">
+                    <input 
+                    [disabled]="loggedInUser.roleID == 9 || loggedInUser.roleID == 11"
+                    class="form-check-input" type="radio" name="isEarly"  [checked]="!isAcceptEarlyDelivery" (change)="handleIsNotEarlyDelivery($event)">
+                    <label class="form-check-label">
+                       {{ 'Not Accept Early Delivery' | translate }}
+                        <button class="toolbutton" [matTooltip]="tips.onTimeDeliveryTip" [matTooltipPosition]="'above'" >?</button>
+                        </label>
+                </div>
+            </div>
+        </fieldset>
+        <div class="form-group row">
+            <label class="col-sm-5 col-form-label pr-0 larec pt-1">{{'Receiving Buffer Days' | translate}}:
+                <button class="toolbutton" [matTooltip]="tips.recievingBufferDayTip" [matTooltipPosition]="'above'" >?</button>
+
+            </label>
+            <div class="col-sm-4 otd-para pl-0">
+                <input 
+                [disabled]="loggedInUser.roleID == 9 || loggedInUser.roleID == 11"
+                type="number" class="form-control" [value]="bufferDays"  (change)="isBufferNumber($event)" [(ngModel)]="bufferDays">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-6 deliver-nav pt-4">               
+        <div class="form-group row pt-1">
+            <label class="col-sm-6 col-form-label pr-0 larec">{{'Price Variance Day Range' | translate }}
+                <button class="toolbutton" [matTooltip]="tips.priceDayVarianceMessage" [matTooltipPosition]="'above'" >?</button>
+                
+            </label>
+            <div class="col-sm-4 otd-para pl-0 d-flex mt-1">
+                <input 
+                [disabled]="loggedInUser.roleID == 9 || loggedInUser.roleID == 11"
+                type="number" class="form-control" [(ngModel)]="minRange" (change)="isMinNumber($event)">
+                <i class="fa fa-long-arrow-right pl-2 pr-2 pt-1"></i>
+                <input 
+                [disabled]="loggedInUser.roleID == 9 || loggedInUser.roleID == 11"
+                    type="number" class="form-control" [(ngModel)]="maxRange" (change)="isMaxNumber($event)">
+            </div>
+            <!-- <label class="col-sm-6 col-form-label pr-0 larec">{{'Order Acknowledging Days' | translate }}:
+                <button class="toolbutton" [matTooltip]="tips.orderAcknowledgeDay" [matTooltipPosition]="'above'" >?</button>
+                
+            </label>
+            <div class="col-sm-4 otd-para pl-0">
+                <input 
+                [disabled]="loggedInUser.roleID == 9"
+                type="number" class="form-control" [(ngModel)]="orderAcknowledgeDays" (change)="isOrderNumber($event)">
+            </div> -->
+        </div>
+    </div>
+
+</div> 
+

@@ -1,0 +1,260 @@
+<div class="authincation h-100 login-bg">
+    <div class="container vh-100">
+        <div class="row justify-content-center h-100 align-items-center">
+            <div class="col-lg-5 col-md-7">
+                <div class="wizard-boulit mb-5">
+                    <ul>
+                        <li></li>
+                        <li class="active"></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div class="authincation-content">
+                    <div class="row no-gutters">
+                        <div class="col-xl-12 wizard-num">
+                            <div class="auth-form pr-3">
+                                <h4 class="text-center mb-3" style="font-weight: 500;">Welcome! Please Add Details</h4>
+                                <form [formGroup]="signupForm" class="secstep wizard-Signup-dialog" autocomplete="off">
+                                    <label style="font-size:14;color:#3F4040;font-weight:600;padding-top:10px;">Referral code</label>
+                                    <div class="form-control mb-3">
+                                        <input matInput class="border-0" placeholder="Referral Code" value=""
+                                            formControlName="refCode">
+                                    </div>
+                                    <label style="font-size:14;color:#3F4040;font-weight:600;">Your Information</label>
+                                   <p></p>
+                                    <label style="font-size:14;color:#3F4040;font-weight:600;padding-top:10px;">First Name*</label>
+                                    <div class="form-control mb-4">
+                                        <input matInput class="border-0" placeholder="First Name*" value=""
+                                            formControlName="firstName">
+                                        <mat-error *ngIf="isControlHasError('firstName','required')">
+                                            <p   class="pt-2">First Name Required</p>
+                                        </mat-error>
+                                    </div>
+                                    
+                                    
+                                    <label style="font-size:14;color:#3F4040;font-weight:600;padding-top:10px;">Last Name*</label>
+                                    <div class="form-control mb-4">
+                                        <input matInput class="border-0" placeholder="Last Name*" value=""
+                                            formControlName="lastName">
+                                        <mat-error *ngIf="isControlHasError('lastName','required')">
+                                            <p class="pt-2">Last Name Required</p>
+                                        </mat-error>
+                                    </div>
+                                    
+                                    
+                                    <label style="font-size:14;color:#3F4040;font-weight:600;padding-top:10px;">Email*</label>
+                                    <div class="form-control mb-4">
+                                        <input matInput class="border-0" placeholder="Email Address*" value=""
+                                            formControlName="email" >
+                                        <mat-error *ngIf="isControlHasError('email','required')">
+                                            <p class="pt-2">Email Required</p>
+                                        </mat-error>
+                                        <mat-error *ngIf="isControlHasError('email','pattern')">
+                                            <p class="pt-2">Please enter a valid email address</p>
+                                        </mat-error>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <div class="position-relative mt-4">
+                                            <label style="font-size:14;color:#3F4040;font-weight:600;padding-top:10px;">Password*</label>
+                                            <input name="password" [type]="showPassword ? 'text' : 'password'"
+                                                class="form-control pwd-control" placeholder="Password"
+                                                formControlName="password" />
+                                            <div class="eyeico">
+                                                <i alt="show" class="fa fa-eye-slash eye-show fa-lg"
+                                                    (click)="showPassword = !showPassword"
+                                                    [class.hide]="showPassword"></i>
+                                                <i alt="hide" class="fa fa-eye eye-hide fa-lg"
+                                                    (click)="showPassword = !showPassword"
+                                                    [class.hide]="!showPassword"></i>
+                                            </div>
+                                            <mat-error *ngIf="isControlHasError('password','required')">
+                                                <p class="pt-2">Password Required</p>
+                                            </mat-error>
+                                        </div>
+                                    </div>
+                                  
+                                    <div class="mb-4">
+                                        <div class="position-relative mt-4">
+                                            <label style="font-size:14;color:#3F4040;font-weight:600;padding-top:10px;">Confirm Password*</label>
+                                            <input [type]="showconfirmPassword ? 'text' : 'password'"
+                                                class="form-control pwd-control" placeholder="Confirm Your Password*"
+                                                formControlName="confirmpassword" />
+                                            <div class="eyeico">
+                                                <i alt="show" class="fa fa-eye-slash eye-show fa-lg"
+                                                    (click)="showconfirmPassword = !showconfirmPassword"
+                                                    [class.hide]="showconfirmPassword"></i>
+                                                <i alt="hide" class="fa fa-eye eye-hide fa-lg"
+                                                    (click)="showconfirmPassword = !showconfirmPassword"
+                                                    [class.hide]="!showconfirmPassword"></i>
+                                            </div>
+                                            <mat-error *ngIf="isControlHasError('confirmpassword','required')">
+                                                <p>Confirm Password Required</p>
+                                            </mat-error>
+                                            <mat-error *ngIf="signupForm.controls['confirmpassword'].value !== signupForm.controls['password'].value">
+                                                <p>Password didn't match.</p>
+                                            </mat-error>
+                                        </div>
+                                    </div>
+                                    <label style="font-size:14;color:#3F4040;font-weight:600;padding-top:10px;">Company
+                                        Information</label>
+                                    <div class="form-control mb-4">
+                                        <input matInput class="border-0" placeholder="Company Name*"
+                                            formControlName="companyName">
+                                        <mat-error *ngIf="isControlHasError('companyName','required')">
+                                            <p class="pt-2">Company Name Required</p>
+                                        </mat-error>
+                                    </div>
+
+                                    <label style="font-size:14;color:#3F4040;font-weight:600;padding-top:10px;">Phone no*</label>
+                                    <div class="form-control mb-4">
+                                        <!-- prefix="+7" -->
+                                        <input type="text" matInput class="border-0" mask="(000) 000-0000" placeholder="Phone Number*" formControlName="phone"/>
+                                        <mat-error *ngIf="isControlHasError('phone','required')">
+                                            <p class="pt-2">Phone Required</p>
+                                        </mat-error>
+                                        <mat-error *ngIf="isControlHasError('phone','pattern')">
+                                            <p class="pt-2">Not a Valid Number </p>
+                                        </mat-error>
+                                    </div>
+
+                                    <label style="font-size:14;color:#3F4040;font-weight:600;padding-top:10px;">Address*</label>
+                                    <div class="form-control mb-4">
+                                        <input matInput class="border-0" placeholder="Address"
+                                            formControlName="address">
+                                        <mat-error *ngIf="isControlHasError('address','required')">
+                                            <p class="pt-2">Address Required</p>
+                                        </mat-error>
+                                    </div>
+                                    <div appearance="fill">
+                                        <mat-label>Country *</mat-label>
+                                        <mat-select formControlName="countryId" #countryDropdown
+                                            (selectionChange)='signup_service.getStates(countryDropdown.value)'
+                                            class="form-control mb-3">
+                                            <mat-option *ngFor="let item of signup_service.countryDropDown"
+                                                disabled="false" [value]="item.countryName">
+                                                {{item.countryName}}
+                                            </mat-option>
+
+                                        </mat-select>
+                                        <mat-error *ngIf="isControlHasError('countryId','required')">
+                                            <p class="pt-2">Country Required</p>
+                                        </mat-error>
+                                    </div>
+<!--                             
+                                    <div appearance="fill">
+                                        <mat-label>State*</mat-label>
+                                        <mat-select formControlName="stateId" #stateDropDownID
+                                            (selectionChange)='signup_service.getCities(stateDropDownID.value,countryDropdown.value)'
+                                            class="form-control mb-3">
+                                            <mat-option *ngFor="let item of signup_service.stateDropDown"
+                                                disabled="false" [value]='item.stateName'>
+                                                {{item.stateName}}
+                                            </mat-option>
+                                           
+                                        </mat-select>
+                                        <mat-error *ngIf="isControlHasError('stateId','required')">
+                                            <p class="pt-2">State Required</p>
+                                        </mat-error>
+                                    </div>
+                                  
+                                    <div appearance="fill">
+                                        <mat-label>City*</mat-label>
+                                        <mat-select formControlName="cityId" class="form-control mb-3">
+                                            <mat-option *ngFor="let item of signup_service.cityDropDown"
+                                                disabled="false" [value]="item.cityId">
+                                                {{item.cityName}}
+                                            </mat-option>
+                                            
+                                        </mat-select>
+                                        <mat-error *ngIf="isControlHasError('cityId','required')">
+                                            <p class="pt-2">City Required</p>
+                                        </mat-error>
+                                    </div> -->
+
+                                    <div appearance="fill">
+                                        <mat-label>State*</mat-label>
+                                        <mat-select formControlName="stateId" #stateDropDownID
+                                          (selectionChange)='signup_service.getCities(stateDropDownID.value, countryDropdown.value)'
+                                          class="form-control mb-3">
+                                          <mat-option *ngFor="let item of signup_service.stateDropDown"
+                                            [value]='item.stateName'>
+                                            {{item.stateName}}
+                                          </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="isControlHasError('stateId','required')">
+                                          <p class="pt-2">State Required</p>
+                                        </mat-error>
+                                      </div>
+                                      
+                                      <div appearance="fill">
+                                        <mat-label>City*</mat-label>
+                                        <mat-select formControlName="cityId" class="form-control mb-3">
+                                       
+                                          <mat-option *ngIf="!signup_service.cityDropDown || signup_service.cityDropDown.length === 0" [value]="stateDropDownID.value" >
+                                            {{ stateDropDownID.value}}
+                                          </mat-option>
+                                          <mat-option *ngFor="let item of signup_service.cityDropDown"
+                                            [value]="item.cityName">
+                                            {{ item.cityName }}
+                                          </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="isControlHasError('cityId','required')">
+                                          <p class="pt-2">City Required</p>
+                                        </mat-error>
+                                      </div>
+
+                                      <!-- <div appearance="fill">
+                                        <mat-label>City*</mat-label>
+                                        <mat-select formControlName="cityId" class="form-control mb-3">
+                                       
+                                          <mat-option *ngIf="!signup_service.cityDropDown || signup_service.cityDropDown.length === 0" [value]="stateDropDownID.value" >
+                                            {{ stateDropDownID.value}}
+                                          </mat-option>
+                                          <mat-option *ngFor="let item of signup_service.cityDropDown"
+                                            [value]="item.cityId">
+                                            {{ item.cityName }}
+                                          </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="isControlHasError('cityId','required')">
+                                          <p class="pt-2">City Required</p>
+                                        </mat-error>
+                                      </div> -->
+                                      
+                                    
+                                   
+                                    <label style="font-size:14;color:#3F4040;font-weight:600;padding-top:10px;">Zip code*</label>
+                                    <div class="form-control mb-4">
+                                        <input type="text" 
+                                        matInput class="border-0" 
+                                        placeholder="Zip Code"
+                                        formControlName="zipCode"
+                                        minlength="4"
+                                        maxlength="10"
+                                        (keydown)="onZipCode($event)">
+                                            <mat-error *ngIf="isControlHasError('zipCode','required')">
+                                                <p class="pt-2">Zipcode required </p>
+                                            </mat-error>
+                                            <mat-error *ngIf="isControlHasError('zipCode','maxlength')">
+                                                <p class="pt-2">Zipcode must be ten character long </p>
+                                            </mat-error>
+                                            <mat-error *ngIf="isControlHasError('zipCode','minlength')">
+                                                <p class="pt-2">Zipcode must be four character long </p>
+                                            </mat-error>
+                                    </div>
+                                    
+                                    <div class="text-center mt-4 mb-3 wizard-padding">
+                                        <!-- <button type="submit" class="btn btn-primary btn-block">Sign in</button> -->
+                                        <button (click)="onNext()" class="btn btn-primary btn-block mb-4">Next</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

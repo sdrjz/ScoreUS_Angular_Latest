@@ -1,0 +1,154 @@
+<!--**********************************
+	Content body start
+***********************************-->
+<div class="content-body mb-5">
+	<div class="container-fluid">
+		<!-- <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4>Hi, welcome back!</h4>
+                    <p class="mb-0">Your business dashboard template</p>
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">App</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Profile</a></li>
+                </ol>
+            </div>
+        </div> -->
+		<!-- row -->
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="profile card card-body px-3 pt-3 pb-0">
+					<div class="profile-head col-md-2 col-sm-3 mx-auto">
+						<div class="profile-photo mt-2 text-center position-relative">
+							<input type=file id="fileUpload" accept="image/*" (change)="onFileSelected($event)"
+								hidden />
+							<img src="{{userData.image}}" class="img-fluid rounded-circle" alt="">
+							<div class="edit-ico" (click)="openDialog()"><i class="fa fa-edit"
+									style="color: #fff;padding-top: 7px;padding-left: 3px;"></i></div>
+						</div>
+						<div class="profile-name px-3 pt-2 text-center">
+							<h4 *ngIf="!userData" class="mb-0 text-center pro-name">John Doe</h4>
+							<p *ngIf="!userData" class="text-center pro-us">User Admin</p>
+
+							<h4 *ngIf="userData" class="mb-0 text-center pro-name">{{ userData?.firstName}} &nbsp;
+								{{userData.lastName}}</h4>
+							<p *ngIf="userData" class="text-center pro-us">{{userData?.roleName}}</p>
+						</div>
+					</div>
+					<div class="pro-form pt-4">
+						<div class="row">
+							<div class="col-xl-12 col-lg-12 pl-4 pr-4">
+
+								<form *ngIf="ProfileForm" [formGroup]="ProfileForm">
+									<div class="row profile-nav">
+										<div class="form-group col-md-6">
+											<label>{{'First Name' | translate }} *</label>
+											<input type="text"
+											matInput class="form-control" maxlength="50"
+												formControlName="firstName">
+											<!-- <mat-error *ngIf="isControlHasError('firstName','required')">
+													<p class="pt-2">Name Required</p>
+												</mat-error> -->
+										</div>
+										<div class="form-group col-md-6">
+											<label>{{'Last Name' | translate }} *</label>
+											<input type="text"
+											matInput class="form-control" maxlength="50"
+												formControlName="lastName">
+										</div>
+										<!-- <div class="form-group col-md-6">
+											<label>Email *</label>
+											<input type="email" matInput class="form-control" formControlName="email">
+										</div> -->
+										<div class="form-group col-md-6">
+											<label class="mb-1">{{'Contact' | translate }}</label>
+											<input type="text" matInput class="form-control" mask="(000) 000-0000"
+												formControlName="contact">
+										</div>
+										
+										<!-- <div class="form-group col-md-4">
+											<mat-label>{{'Country'|  translate}} *</mat-label>
+											<mat-select formControlName="countryId"
+											(selectionChange)='onCountrySelect()' class="form-control mb-3 mat-select-panel-wrap-profile">
+											<mat-option *ngFor="let item of listCountry" disabled="false"
+											[value]="item.countryId">
+											{{item.countryName}}
+										</mat-option>
+									</mat-select>
+									<mat-error *ngIf="isControlHasError('countryId','required')">
+												<p class="pt-2">{{'Country Required' | translate }}</p>
+											</mat-error>
+										</div> -->
+										<!-- <div class="form-group col-md-4">
+											<mat-label>{{'State' | translate }} *</mat-label>
+											<mat-select formControlName="stateId" (selectionChange)='onStateSelect()'
+												class="form-control mb-3 mat-select-panel-wrap-profile">
+												<mat-option *ngFor="let item of listState"
+												[disabled]="ProfileForm.controls['countryId'].value==''"
+												[value]='item.stateId'>
+													{{item.stateName}}
+												</mat-option>
+
+											</mat-select>
+											<mat-error *ngIf="isControlHasError('stateId','required')">
+												<p class="pt-2">{{'State Required' | translate }}</p>
+											</mat-error>
+										</div> -->
+										<!-- <div class="form-group col-md-4">
+											<mat-label>{{'City' | translate }} *</mat-label>
+											<mat-select formControlName="cityId" class="form-control mb-3 mat-select-panel-wrap-profile">
+												<mat-option *ngFor="let item of listCity"
+													[disabled]="ProfileForm.controls['stateId'].value==''"
+													[value]="item.cityId">
+													{{item.cityName}}
+												</mat-option>
+
+											</mat-select>
+											<mat-error *ngIf="isControlHasError('cityId','required')">
+												<p class="pt-2">{{'City Required' | translate }}</p>
+											</mat-error>
+										</div> -->
+										<div class="form-group col-md-12">
+											<label>{{'Address'| translate}}</label>
+											<input type="text" class="form-control" formControlName="address">
+										</div>
+										
+										<div class="form-group col-md-4">
+											<label>{{'Country' | translate }}</label>
+											<input type="text" class="form-control" formControlName="countryId">
+										
+										</div>
+
+										<div class="form-group col-md-4">
+											<label>{{'State' | translate }}</label>
+											<input type="text" class="form-control" formControlName="stateId">
+										
+										</div>
+
+										<div class="form-group col-md-4">
+											<label>{{'City' | translate }}</label>
+											<input type="text" class="form-control" formControlName="cityId">
+										
+										</div>
+
+										<div class="form-group col-md-4">
+											<label>{{'Zip' | translate }}</label>
+											<input type="text" class="form-control" formControlName="zipCode">
+										
+										</div>
+									</div>
+									<button mat-raised-button (click)=toggleDisplay() [disabled]="isLoading"
+								class="btn btn-primary profi-btn mb-4">{{'Save' | translate }}</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

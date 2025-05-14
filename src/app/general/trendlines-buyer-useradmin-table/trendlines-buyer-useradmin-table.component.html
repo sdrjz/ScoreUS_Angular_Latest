@@ -1,0 +1,1307 @@
+<!-- row 1 -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="profile card card-body px-3 pt-3 pb-0">
+            <div class="pro-form pt-4" *ngIf="show; else dvchart">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="profile-head">
+                            <div class="profile-name px-3 pt-2">
+                                <h4 class="mb-0 pro-name uer-font">Average Daily PO Lines</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 pl-0 pr-4 vendorscorecard-table vendor-second-t tre-sh" id="style-2">
+                        <table datatable class="row-border hover tab-top-0 pl-0">
+                            <thead>
+                                <tr>
+                                    <th class="ex-whi" style="text-align:left;">Buyer Code</th>
+                                    <th class="ex-whi">Buyer Name</th>
+                                    <th class="ex-whi">01 Days</th>
+                                    <th class="ex-whi">03 Days</th>
+                                    <th class="ex-whi">05 Days</th>
+                                    <th class="ex-whi">07 Days</th>
+                                    <th class="ex-whi">09 Days</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <ng-template #dvchart>
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">
+                            {{openpotreuser}}OpenPOLine<span class="pr-3" style="float: right;cursor: pointer;" mat-button
+                                (click)="openDialog()">
+                                <i class="fa fa-expand" aria-hidden="true"></i></span>
+                        </h3>
+                        <p class="text-center mb-0">
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven po-status">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                        </p>
+                        <app-totalscore-graph class="text-center"></app-totalscore-graph>
+                    </div>
+                </div>
+            </ng-template>
+
+
+
+
+
+
+
+            <div class="row pb-2 mt-2">
+                <div class="col-lg-12 col-md-12">
+                    <div class="row justify-content-end">
+                        <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5">Download Data</a>
+                        <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="toggle()"
+                            id="bt">{{buttonName}}</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- row 2 -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="profile card card-body px-3 pt-3 pb-0">
+            <div class="pro-form pt-4" *ngIf="show2; else dvchart2">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="profile-head">
+                            <div class="profile-name px-3 pt-2">
+                                <h4 class="mb-0 pro-name uer-font">Average Daily Past Due PO Lines</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- manage-u -->
+
+                    <div class="col-xl-12 col-lg-12 pl-0 pr-4 vendorscorecard-table vendor-second-t tre-sh" id="style-2">
+                        <table datatable class="row-border hover tab-top-0 pl-0">
+                            <thead>
+                                <tr>
+                                    <th class="ex-whi" style="text-align:left;">Buyer Code</th>
+                                    <th class="ex-whi">Buyer Name</th>
+                                    <th class="ex-whi">01 Days</th>
+                                    <th class="ex-whi">03 Days</th>
+                                    <th class="ex-whi">05 Days</th>
+                                    <th class="ex-whi">07 Days</th>
+                                    <th class="ex-whi">09 Days</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+            <ng-template #dvchart2>
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">
+                            {{openpotreuser}}PastPOLine<span class="pr-3" style="float: right;cursor: pointer;" mat-button
+                                (click)="openDialog()">
+                                <i class="fa fa-expand" aria-hidden="true"></i></span>
+                        </h3>
+                        <p class="text-center mb-0">
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven po-status">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                        </p>
+                        <app-totalscore-graph class="text-center"></app-totalscore-graph>
+                    </div>
+                </div>
+            </ng-template>
+
+            <div class="row pb-2 mt-2">
+                <div class="col-lg-12 col-md-12">
+                    <div class="row justify-content-end">
+                        <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5">Download Data</a>
+                        <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="toggle2()"
+                            id="bt2">{{buttonName2}}</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- row 3 -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="profile card card-body px-3 pt-3 pb-0">
+            <div class="pro-form pt-4" *ngIf="show3; else dvchart3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="profile-head">
+                            <div class="profile-name px-3 pt-2">
+                                <h4 class="mb-0 pro-name uer-font">Average Daily Ack'd Needed PO Lines</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-xl-12 col-lg-12 pl-0 pr-4 vendorscorecard-table vendor-second-t tre-sh" id="style-2">
+                        <table datatable class="row-border hover tab-top-0 pl-0">
+                            <thead>
+                                <tr>
+                                    <th class="ex-whi" style="text-align:left;">Buyer Code</th>
+                                    <th class="ex-whi">Buyer Name</th>
+                                    <th class="ex-whi">01 Days</th>
+                                    <th class="ex-whi">03 Days</th>
+                                    <th class="ex-whi">05 Days</th>
+                                    <th class="ex-whi">07 Days</th>
+                                    <th class="ex-whi">09 Days</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+            <ng-template #dvchart3>
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">
+                            {{openpotreuser}}Ack'dNeededLines<span class="pr-3" style="float: right;cursor: pointer;" mat-button
+                                (click)="openDialog()">
+                                <i class="fa fa-expand" aria-hidden="true"></i></span>
+                        </h3>
+                        <p class="text-center mb-0">
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven po-status">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                        </p>
+                        <app-totalscore-graph class="text-center"></app-totalscore-graph>
+                    </div>
+                </div>
+            </ng-template>
+
+
+
+
+
+
+
+            <div class="row pb-2 mt-2">
+                <div class="col-lg-12 col-md-12">
+                    <div class="row justify-content-end">
+                        <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5">Download Data</a>
+                        <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="toggle3()"
+                            id="bt">{{buttonName3}}</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- row 4 -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="profile card card-body px-3 pt-3 pb-0">
+            <div class="pro-form pt-4" *ngIf="show4; else dvchart4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="profile-head">
+                            <div class="profile-name px-3 pt-2">
+                                <h4 class="mb-0 pro-name uer-font">Average Daily Future (Self-Defined) Past PO Lines</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-xl-12 col-lg-12 pl-0 pr-4 vendorscorecard-table vendor-second-t tre-sh" id="style-2">
+                        <table datatable class="row-border hover tab-top-0 pl-0">
+                            <thead>
+                                <tr>
+                                    <th class="ex-whi" style="text-align:left;">Buyer Code</th>
+                                    <th class="ex-whi">Buyer Name</th>
+                                    <th class="ex-whi">01 Days</th>
+                                    <th class="ex-whi">03 Days</th>
+                                    <th class="ex-whi">05 Days</th>
+                                    <th class="ex-whi">07 Days</th>
+                                    <th class="ex-whi">09 Days</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+            <ng-template #dvchart4>
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">
+                            {{openpotreuser}}FuturePastLines<span class="pr-3" style="float: right;cursor: pointer;" mat-button
+                                (click)="openDialog()">
+                                <i class="fa fa-expand" aria-hidden="true"></i></span>
+                        </h3>
+                        <p class="text-center mb-0">
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven po-status">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                        </p>
+                        <app-totalscore-graph class="text-center"></app-totalscore-graph>
+                    </div>
+                </div>
+            </ng-template>
+
+
+
+
+
+
+
+            <div class="row pb-2 mt-2">
+                <div class="col-lg-12 col-md-12">
+                    <div class="row justify-content-end">
+                        <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5">Download Data</a>
+                        <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="toggle4()"
+                            id="bt4">{{buttonName4}}</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- row 5 -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="profile card card-body px-3 pt-3 pb-0">
+            <div class="pro-form pt-4" *ngIf="show5; else dvchart5">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="profile-head">
+                            <div class="profile-name px-3 pt-2">
+                                <h4 class="mb-0 pro-name uer-font">Average Daily PO Value</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-xl-12 col-lg-12 pl-0 pr-4 vendorscorecard-table vendor-second-t tre-sh" id="style-2">
+                        <table datatable class="row-border hover tab-top-0 pl-0">
+                            <thead>
+                                <tr>
+                                    <th class="ex-whi" style="text-align:left;">Buyer Code</th>
+                                    <th class="ex-whi">Buyer Name</th>
+                                    <th class="ex-whi">01 Days</th>
+                                    <th class="ex-whi">03 Days</th>
+                                    <th class="ex-whi">05 Days</th>
+                                    <th class="ex-whi">07 Days</th>
+                                    <th class="ex-whi">09 Days</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+            <ng-template #dvchart5>
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">
+                            {{openpotreuser}}OpenPOValue<span class="pr-3" style="float: right;cursor: pointer;" mat-button
+                                (click)="openDialog()">
+                                <i class="fa fa-expand" aria-hidden="true"></i></span>
+                        </h3>
+                        <p class="text-center mb-0">
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven po-status">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                        </p>
+                        <app-totalscore-graph class="text-center"></app-totalscore-graph>
+                    </div>
+                </div>
+            </ng-template>
+
+
+
+
+
+
+
+            <div class="row pb-2 mt-2">
+                <div class="col-lg-12 col-md-12">
+                    <div class="row justify-content-end">
+                        <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5">Download Data</a>
+                        <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="toggle5()"
+                            id="bt5">{{buttonName5}}</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- row 6 -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="profile card card-body px-3 pt-3 pb-0">
+            <div class="pro-form pt-4" *ngIf="show6; else dvchart6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="profile-head">
+                            <div class="profile-name px-3 pt-2">
+                                <h4 class="mb-0 pro-name uer-font">Average Daily Future (Self-Defined) Past PO Value</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-xl-12 col-lg-12 pl-0 pr-4 vendorscorecard-table vendor-second-t tre-sh" id="style-2">
+                        <table datatable class="row-border hover tab-top-0 pl-0">
+                            <thead>
+                                <tr>
+                                    <th class="ex-whi" style="text-align:left;">Buyer Code</th>
+                                    <th class="ex-whi">Buyer Name</th>
+                                    <th class="ex-whi">01 Days</th>
+                                    <th class="ex-whi">03 Days</th>
+                                    <th class="ex-whi">05 Days</th>
+                                    <th class="ex-whi">07 Days</th>
+                                    <th class="ex-whi">09 Days</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+            <ng-template #dvchart6>
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">
+                            {{openpotreuser}}PastDueValue <span class="pr-3" style="float: right;cursor: pointer;" mat-button
+                                (click)="openDialog()">
+                                <i class="fa fa-expand" aria-hidden="true"></i></span>
+                        </h3>
+                        <p class="text-center mb-0">
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven po-status">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                        </p>
+                        <app-totalscore-graph class="text-center"></app-totalscore-graph>
+                    </div>
+                </div>
+            </ng-template>
+
+
+
+
+
+
+
+            <div class="row pb-2 mt-2">
+                <div class="col-lg-12 col-md-12">
+                    <div class="row justify-content-end">
+                        <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5">Download Data</a>
+                        <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="toggle6()"
+                            id="bt6">{{buttonName6}}</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- row 7 -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="profile card card-body px-3 pt-3 pb-0">
+            <div class="pro-form pt-4" *ngIf="show7; else dvchart7">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="profile-head">
+                            <div class="profile-name px-3 pt-2">
+                                <h4 class="mb-0 pro-name uer-font">Average Daily Past Due Pro Value</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-xl-12 col-lg-12 pl-0 pr-4 vendorscorecard-table vendor-second-t tre-sh" id="style-2">
+                        <table datatable class="row-border hover tab-top-0 pl-0">
+                            <thead>
+                                <tr>
+                                    <th class="ex-whi" style="text-align:left;">Buyer Code</th>
+                                    <th class="ex-whi">Buyer Name</th>
+                                    <th class="ex-whi">01 Days</th>
+                                    <th class="ex-whi">03 Days</th>
+                                    <th class="ex-whi">05 Days</th>
+                                    <th class="ex-whi">07 Days</th>
+                                    <th class="ex-whi">09 Days</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+            <ng-template #dvchart7>
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">
+                            {{openpotreuser}}Ack'sNeededValue<span class="pr-3" style="float: right;cursor: pointer;" mat-button
+                                (click)="openDialog()">
+                                <i class="fa fa-expand" aria-hidden="true"></i></span>
+                        </h3>
+                        <p class="text-center mb-0">
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven po-status">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                        </p>
+                        <app-totalscore-graph class="text-center"></app-totalscore-graph>
+                    </div>
+                </div>
+            </ng-template>
+
+
+
+
+
+
+
+            <div class="row pb-2 mt-2">
+                <div class="col-lg-12 col-md-12">
+                    <div class="row justify-content-end">
+                        <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5">Download Data</a>
+                        <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="toggle7()"
+                            id="bt7">{{buttonName7}}</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- row 8 -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="profile card card-body px-3 pt-3 pb-0">
+            <div class="pro-form pt-4" *ngIf="show8; else dvchart8">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="profile-head">
+                            <div class="profile-name px-3 pt-2">
+                                <h4 class="mb-0 pro-name uer-font">Average Daily Ack'd Needed PO Value</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-xl-12 col-lg-12 pl-0 pr-4 vendorscorecard-table vendor-second-t tre-sh" id="style-2">
+                        <table datatable class="row-border hover tab-top-0 pl-0">
+                            <thead>
+                                <tr>
+                                    <th class="ex-whi" style="text-align:left;">Buyer Code</th>
+                                    <th class="ex-whi">Buyer Name</th>
+                                    <th class="ex-whi">01 Days</th>
+                                    <th class="ex-whi">03 Days</th>
+                                    <th class="ex-whi">05 Days</th>
+                                    <th class="ex-whi">07 Days</th>
+                                    <th class="ex-whi">09 Days</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">Sample Data</td>
+                                    <td>Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                    <td>Sample Data Sample Data</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+            <ng-template #dvchart8>
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <h3 class="text-center pt-3 pb-3" style="font-size:17px; color:#131523;font-weight: 600;">
+                            {{openpotreuser}}FuturePastValue<span class="pr-3" style="float: right;cursor: pointer;" mat-button
+                                (click)="openDialog()">
+                                <i class="fa fa-expand" aria-hidden="true"></i></span>
+                        </h3>
+                        <p class="text-center mb-0">
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven po-status">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                            <span class="total-red-new-ven">Buyer Name</span>
+                        </p>
+                        <app-totalscore-graph class="text-center"></app-totalscore-graph>
+                    </div>
+                </div>
+            </ng-template>
+            <div class="row pb-2 mt-2">
+                <div class="col-lg-12 col-md-12">
+                    <div class="row justify-content-end">
+                        <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5">Download Data</a>
+                        <a class="btn btn-primary mr-2 mb-3 ven-re-btn-ran  pl-5 pr-5" (click)="toggle8()"
+                            id="bt8">{{buttonName8}}</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

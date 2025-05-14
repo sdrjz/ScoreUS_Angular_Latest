@@ -1,0 +1,255 @@
+<!-- row -->
+<div class="row">
+    <div class="col-lg-12">
+      <div class="profile card card-body px-3 pt-3 pb-0 mt-5">
+        <div class="profile-head">
+          <div class="profile-name px-3 pt-2">
+        
+          </div>
+        </div>
+        <div class="pro-form pt-4">
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 pl-4 pr-4 manage-u pohistory-entrie activeusers">
+
+
+
+
+
+
+
+
+      <app-datatablewithpagination 
+      style="margin-top: 22px!important; overflow-x: auto !important; overflow-y: auto !important;" 
+      defaultSortBy="name"
+      [url]="getProjectsUrl"
+      [columns]="poRowcolumns" 
+      [defaultPageSize] = 1000
+      [isUpdated]="isUpdated"
+      class="sendReportTable"
+      >
+          <div ngProjectAs="title">
+          <h4 class="text-lg font-medium">{{'Users' | translate }}</h4>
+          </div>
+
+          <ng-template let-column let-data="element" let-value="value">
+              <div *ngIf="column.def == 'status'" class="flex items-center space-x-2">
+                 
+                <mat-slide-toggle [checked]="value !== true" (change)="onToggleChange($event, data)">
+                  </mat-slide-toggle>
+              </div>
+
+              <div *ngIf="column.def == 'compare'" sticky>
+                  <mat-checkbox [checked]="isVendorSelected(data)" (change)="onCheckBoxClick($event,data)"></mat-checkbox>
+              </div>
+
+
+              <span *ngIf="column.def == 'ncR_Date'" class="px-3">
+                {{ (data.ncR_Date | date: 'MM/dd/yyyy')  }}
+              </span>
+              <span *ngIf="column.def == 'completionDate'" class="px-3">
+                {{ (data.completionDate | date: 'MM/dd/yyyy')  }}
+              </span>
+              <span *ngIf="column.def == 'renewalDate'" class="px-3">
+                {{ (data.pO_Issue_Date | date: 'MM/dd/yyyy')  }}
+              </span>
+              <span *ngIf="column.def == 'createdAt'" class="px-3">
+                {{ (data.createdAt | date: 'MM/dd/yyyy')  }}
+              </span>
+              <span *ngIf="column.def == 'updatedAt'" class="px-3">
+                {{ (data.updatedAt | date: 'MM/dd/yyyy')  }}
+               </span>
+
+               <div *ngIf="column.def == 'cancel'" class="flex flex-row justify-start">
+                <!-- <button [disabled]="[9,10,11].includes(loggedInUser.roleID)" mat-raised-button [ngClass]="{'active': data.isActive, 'inactive': !data.isActive}" class="inactive" (click)="onToggleClick($event,data)">{{data.isActive ? 'Active' : 'Inactive' }} </button> -->
+                <!-- <mat-slide-toggle
+                [color]="primary"
+                [checked]="data.isActive"
+                (change)="onToggleClick($event,data)"
+                >
+            </mat-slide-toggle> -->
+            <mat-radio-group [disabled]="[9,10,11].includes(loggedInUser.roleID)" [value]="data.isActive" (change)="onToggleChange($event, data)">
+              <mat-radio-button [value]="true">Renew</mat-radio-button>
+              <mat-radio-button [value]="false" style="margin-left:10px !important;">Cancel</mat-radio-button>
+            </mat-radio-group>
+            </div>
+
+              <div *ngIf="column.def == 'view'" class="flex flex-row justify-start">
+                  <button mat-stroked-button color="primary">
+                      {{'Delete' | translate }}
+                  </button>
+                  <button mat-stroked-button color="primary">
+                      {{ 'Update' | translate }}
+                  </button>
+              </div>
+          </ng-template>
+      </app-datatablewithpagination>
+
+
+
+
+
+
+
+<!-- 
+              <table datatable class="row-border hover tab-t" style="height:auto;">
+                <thead>
+                  <tr>
+                    <th class="text-left sholist pl-0">Name</th>
+                    <th>Role</th>
+                    <th>Company Name</th>
+                    <th>Email Address</th>
+                    <th>Renewal Date</th>
+                    <th>Cancel/Renew</th>
+                  </tr>
+                </thead>
+                <tbody>                    
+                  <tr>
+                    <td class="text-left pl-0">Dr. Jackson</td>
+                    <td>Vendor</td>
+                    <td>Lorem Ipsum</td>
+                    <td>name@domain.com</td>
+                    <td>2008/11/28</td>
+                    <td><mat-slide-toggle></mat-slide-toggle></td>                      
+                  </tr>
+                  <tr>
+                    <td class="text-left pl-0">Dr. Jackson</td>
+                    <td>User</td>
+                    <td>Lorem Ipsum</td>
+                    <td>name@domain.com</td>
+                    <td>2008/11/28</td>
+                    <td><mat-slide-toggle></mat-slide-toggle></td>                      
+                  </tr>
+                  <tr>
+                    <td class="text-left pl-0">Dr. Jackson</td>
+                    <td>Vendor</td>
+                    <td>Lorem Ipsum</td>
+                    <td>name@domain.com</td>
+                    <td>2008/11/28</td>
+                    <td><mat-slide-toggle></mat-slide-toggle></td>                      
+                  </tr>
+                  <tr>
+                    <td class="text-left pl-0">Dr. Jackson</td>
+                    <td>User</td>
+                    <td>Lorem Ipsum</td>
+                    <td>name@domain.com</td>
+                    <td>2008/11/28</td>
+                    <td><mat-slide-toggle></mat-slide-toggle></td>                      
+                  </tr>
+                  <tr>
+                    <td class="text-left pl-0">Dr. Jackson</td>
+                    <td>Vendor</td>
+                    <td>Lorem Ipsum</td>
+                    <td>name@domain.com</td>
+                    <td>2008/11/28</td>
+                    <td><mat-slide-toggle></mat-slide-toggle></td>                      
+                  </tr>
+                  <tr>
+                    <td class="text-left pl-0">Dr. Jackson</td>
+                    <td>User</td>
+                    <td>Lorem Ipsum</td>
+                    <td>name@domain.com</td>
+                    <td>2008/11/28</td>
+                    <td><mat-slide-toggle></mat-slide-toggle></td>                      
+                  </tr>
+                  <tr>
+                    <td class="text-left pl-0">Dr. Jackson</td>
+                    <td>Vendor</td>
+                    <td>Lorem Ipsum</td>
+                    <td>name@domain.com</td>
+                    <td>2008/11/28</td>
+                    <td><mat-slide-toggle></mat-slide-toggle></td>                      
+                  </tr>
+                  <tr>
+                    <td class="text-left pl-0">Dr. Jackson</td>
+                    <td>User</td>
+                    <td>Lorem Ipsum</td>
+                    <td>name@domain.com</td>
+                    <td>2008/11/28</td>
+                    <td><mat-slide-toggle></mat-slide-toggle></td>                      
+                  </tr>
+                  <tr>
+                    <td class="text-left pl-0">Dr. Jackson</td>
+                    <td>Vendor</td>
+                    <td>Lorem Ipsum</td>
+                    <td>name@domain.com</td>
+                    <td>2008/11/28</td>
+                    <td><mat-slide-toggle></mat-slide-toggle></td>                      
+                  </tr>
+                  <tr>
+                    <td class="text-left pl-0">Dr. Jackson</td>
+                    <td>User</td>
+                    <td>Lorem Ipsum</td>
+                    <td>name@domain.com</td>
+                    <td>2008/11/28</td>
+                    <td><mat-slide-toggle></mat-slide-toggle></td>                      
+                  </tr>
+                  <tr>
+                    <td class="text-left pl-0">Dr. Jackson</td>
+                    <td>Vendor</td>
+                    <td>Lorem Ipsum</td>
+                    <td>name@domain.com</td>
+                    <td>2008/11/28</td>
+                    <td><mat-slide-toggle></mat-slide-toggle></td>                      
+                  </tr>
+                  <tr>
+                    <td class="text-left pl-0">Dr. Jackson</td>
+                    <td>User</td>
+                    <td>Lorem Ipsum</td>
+                    <td>name@domain.com</td>
+                    <td>2008/11/28</td>
+                    <td><mat-slide-toggle></mat-slide-toggle></td>                      
+                  </tr>
+                </tbody>
+              </table> -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <ng-template #reviewModal let-modal>
+    <div class="modal-header text-center">
+        <h4 class="modal-title text-center">Cancel User Account</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body text-center">
+       <p>Please note the following important information about canceling your subscription:
+        <strong>No Reimbursement:</strong> Once you cancel your subscription, you will not receive any reimbursement for the current billing period.
+        </p>
+        <p><strong>Immediate Termination: </strong>The user subscription will stop immediately, and access will be terminated.</p>
+        <p>Please choose your preferred cancellation option below.</p>
+       <div class="d-flex align-items-center">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          Cancel Immediately
+      </button>
+
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        Keep My Subscription
+    </button>
+       </div>
+    </div>
+</ng-template> -->
+
+<ng-template #reviewModal let-modal>
+  <div class="modal-header text-center">
+      <h4 class="modal-title text-center">Cancel User Account</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body text-center">
+      <p>Please note the following important information about canceling your subscription:
+          <strong>No Reimbursement:</strong> Once you cancel your subscription, you will not receive any reimbursement for the current billing period.
+      </p>
+      <p><strong>Immediate Termination: </strong>The user subscription will stop immediately, and access will be terminated.</p>
+      <p>Please choose your preferred cancellation option below.</p>
+      <div class="d-flex align-items-center">
+          <button type="button" (click)="cancelUser($event, data)">Cancel Immediately</button>
+          <button type="button" (click)="modal.dismiss()">Keep My Subscription</button>
+      </div>
+  </div>
+</ng-template>

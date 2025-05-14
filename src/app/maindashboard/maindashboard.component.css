@@ -1,0 +1,51 @@
+/* .total-reven{
+    padding-top: 140px !important;
+    padding-bottom: 140px !important;
+} */
+.button_background{
+    background-color: none !important;
+    background: none !important;
+    padding:0px !important;
+    outline:none !important;
+    border:none !important;
+
+}
+
+/* Prevent line breaks */
+.nowrap-label {
+    white-space: nowrap;
+  }
+
+
+  .fade-toggle {
+    transition: visibility 0.3s ease, opacity 0.3s ease;
+    opacity: 1;
+  }
+  .fade-toggle.hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .custom-search-btn {
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    background-color: black;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .custom-search-btn:hover {
+    background-color: red;
+  }
+  
+  .custom-search-btn i {
+    color: white;
+  }
+  
+  
+ 
+

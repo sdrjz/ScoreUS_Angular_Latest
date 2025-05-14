@@ -1,0 +1,120 @@
+<!-- style="width:90rem !important;" -->
+<div class=" d-flex flex-column table-width">
+    <div class="mb-3">
+       <h2><b> {{heading}}</b></h2>
+    </div>
+    <div>
+    <app-data-table
+    *ngIf="apiRequestData === undefined || apiRequestData === null" 
+    style="margin-top: 22px;overflow-x: scroll;" 
+    defaultSortBy="name"
+    [columns]="columns"
+    [isPopUp]="true"
+    [totalRecords]="totalRecords"
+    [dataSourceForTable]="tableData"
+    [sortBy] = "sortBy" 
+    >
+        <ng-template let-column let-data="element" let-value="value">
+            <div *ngIf="column.def == 'status'" class="flex items-center space-x-2">
+                <mat-slide-toggle [checked]="value == true" (change)="onToggleChange($event, data)">
+                </mat-slide-toggle>
+            </div>
+
+            <div *ngIf="column.def == 'compare'" sticky>
+                <mat-checkbox [checked]="isVendorSelected(data)" (change)="onCheckBoxClick($event,data)"></mat-checkbox>
+            </div>
+            <span *ngIf="column.def == 'posting_Date'">
+                {{ (data.posting_Date | date: 'dd/MM/yyyy')  }}
+              </span>
+              <span *ngIf="column.def == 'stat_Rel_Del'">
+                {{ (data.stat_Rel_Del |  date: 'dd/MM/yyyy')  }}
+              </span>
+              <span *ngIf="column.def == 'system_Lead_Time'">
+                {{ (data.system_Lead_Time |  date: 'dd/MM/yyyy') }}
+              </span>
+              
+              <span *ngIf="column.def == 'issue_Date'">
+                {{ (data.issue_Date |  date: 'dd/MM/yyyy') }}
+              </span>
+              
+              <span *ngIf="column.def == 'actual_Lead_Time'">
+                {{ (data.actual_Lead_Time |  date: 'dd/MM/yyyy') }}
+              </span>
+
+              <span *ngIf="column.def == 'latestPostingDate'" class="px-3">
+                {{ (data.latestPostingDate | date: 'MM/dd/yyyy')  }}
+              </span>
+            <span *ngIf="column.def == 'lastPostingDate'" class="px-3">
+                {{ (data.lastPostingDate | date: 'MM/dd/yyyy')  }}
+              </span>
+            <div *ngIf="column.def == 'view'" class="flex flex-row justify-start">
+                <button mat-stroked-button color="primary">
+                    Delete
+                </button>
+                <button mat-stroked-button color="primary">
+                    Update
+                </button>
+            </div>
+        </ng-template>
+    </app-data-table>
+  
+    <app-app-datahistorytable 
+    *ngIf="apiRequestData"
+    style="margin-top: 22px;;overflow-x: scroll;" 
+    defaultSortBy="name"
+    [columns]="columns"
+    
+    [dataSourceForTable]="tableData" 
+    [route]="apiUrl"
+    [apiRequestData]="apiRequestData"
+    >
+  
+
+        <ng-template let-column let-data="element" let-value="value">
+            <div *ngIf="column.def == 'status'" class="flex items-center space-x-2">
+                <mat-slide-toggle [checked]="value == true" (change)="onToggleChange($event, data)">
+                </mat-slide-toggle>
+            </div>
+
+            <div *ngIf="column.def == 'compare'" sticky>
+                <mat-checkbox [checked]="isVendorSelected(data)" (change)="onCheckBoxClick($event,data)"></mat-checkbox>
+            </div>
+            <span *ngIf="column.def == 'posting_Date'">
+                {{ (data.posting_Date | date: 'dd/MM/yyyy')  }}
+              </span>
+              <span *ngIf="column.def == 'stat_Rel_Del'">
+                {{ (data.stat_Rel_Del |  date: 'dd/MM/yyyy')  }}
+              </span>
+              <span *ngIf="column.def == 'system_Lead_Time'">
+                {{ (data.system_Lead_Time |  date: 'dd/MM/yyyy') }}
+              </span>
+              
+              <span *ngIf="column.def == 'issue_Date'">
+                {{ (data.issue_Date |  date: 'dd/MM/yyyy') }}
+              </span>
+              
+              <span *ngIf="column.def == 'actual_Lead_Time'">
+                {{ (data.actual_Lead_Time |  date: 'dd/MM/yyyy') }}
+              </span>
+
+              <span *ngIf="column.def == 'latestPostingDate'" class="px-3">
+                {{ (data.latestPostingDate | date: 'MM/dd/yyyy')  }}
+              </span>
+            <span *ngIf="column.def == 'lastPostingDate'" class="px-3">
+                {{ (data.lastPostingDate | date: 'MM/dd/yyyy')  }}
+              </span>
+            <div *ngIf="column.def == 'view'" class="flex flex-row justify-start">
+                <button mat-stroked-button color="primary">
+                    Delete
+                </button>
+                <button mat-stroked-button color="primary">
+                    Update
+                </button>
+            </div>
+        </ng-template>
+    </app-app-datahistorytable>
+</div>
+<div class="d-flex flex-row  justify-content-end mt-4">
+    <button mat-flat-button color="primary" (click)="onCloseClick()">Close</button>
+</div>
+</div>

@@ -1,0 +1,7 @@
+.sub-menu {
+    display: none;
+}
+
+li.mm-active ul {
+    display: block!important;
+}

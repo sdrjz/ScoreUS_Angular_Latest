@@ -1,0 +1,1194 @@
+<div class="deznav">
+    <div class="deznav-scroll">
+
+        <!-- ============= Supper Admin Dasdboard ============= -->
+
+        <ul class="metismenu" id="menu" metis-menu *ngIf="loggedInUser.roleName == 'Super Admin' ">
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/superadmindashboard' }">
+                <a [routerLink]="['/admin/superadmindashboard']"
+                    class="{{(currentHref == '/admin/superadmindashboard') ? 'mm-active' : ''}}">
+                    <span><img src="assets/images/dashboard.png" class="pr-3" alt=""></span>
+                    <span class="nav-text">{{'Dashboard' | translate}}</span>
+                </a>
+            </li>
+            
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class="flaticon-381-referral"><img src="./assets/images/scorecard.png" alt=""></i>
+                    <span class="nav-text">{{'ScoreCard' | translate }}</span>
+                </a>
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/superadminscorecarddashboard']"
+                            class="{{(currentHref == '/admin/superadmindashboard') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{'Dashboard' | translate }}</span>
+                        </a>
+                    </li>
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/managescorecardusers']"
+                            class="{{(currentHref == '/admin/managescorecardusers') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{'Manage Users' | translate }}</span>
+                        </a>
+                    </li>
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/referralscorecardmanagement']"
+                            class="{{(currentHref == '/admin/referralscorecardmanagement') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{'Referral Management' | translate}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class="flaticon-381-referral"><img src="./assets/images/pomanager.png" alt=""></i>
+                    <span class="nav-text">{{'PO Manager' | translate }}</span>
+                </a>
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/superadminpodashboard']"
+                            class="{{(currentHref == '/admin/superadmindashboard') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{'Dashboard' | translate}}</span>
+                        </a>
+                    </li>
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/managepousers']"
+                            class="{{(currentHref == '/admin/managepousers') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{'Manage Users' | translate}}</span>
+                        </a>
+                    </li>
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/referralpomanagement']"
+                            class="{{(currentHref == '/admin/referralpomanagement') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{'Referral Management' | translate}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+       <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class="flaticon-381-referral"><img src="./assets/images/complate.png" alt=""></i>
+                    <span class="nav-text">{{'Complete'| translate }}</span>
+                </a>
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/superadmincompletedashboard']"
+                            class="{{(currentHref == '/admin/superadmindashboard') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{'Dashboard' | translate}}</span>
+                        </a>
+                    </li>
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/managecompleteusers']"
+                            class="{{(currentHref == '/admin/managecompleteusers') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{'Manage Users' | translate }}</span>
+                        </a>
+                    </li>
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/referralusermanagement']"
+                            class="{{(currentHref == '/admin/referralusermanagement') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{'Referral Management' | translate }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li class="kpi">
+                <a [routerLink]="['/admin/refSettings']"
+                class="{{(currentHref == '/admin/refSettings') ? 'mm-active ' : ''}}"
+                (click)="onClick('Settings')">
+                <span><img src="./assets/images/admin.png" alt="" class="pr-3"></span>
+                <span class="nav-text">{{'Settings' | translate }}</span>
+            </a>
+            </li>
+               </ul>
+
+
+        <!-- ============= Supper Admin Dasdboard ============= -->
+
+
+
+        <!-- ============= Po Manager Vendor Dasdboard ============= -->
+
+        <ul class="metismenu" id="menu" metis-menu *ngIf="loggedInUser.roleID === 13 && loggedInUser.isCancelled === false">
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/pouserdashboard' }">
+                <a [routerLink]="['/admin/pouserdashboard']"
+                    class="{{(currentHref == '/admin/pouserdashboard') ? 'mm-active' : ''}}">
+                    <span><img src="assets/images/dashboard.png" class="pr-3" alt=""></span>
+                    <span class="nav-text">{{"Dashboard" | translate}}</span>
+                </a>
+            </li>
+            
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class="flaticon-381-referral"><img src="./assets/images/pomanager.png" alt=""></i>
+                    <span class="nav-text">{{"PO Manager" | translate}}</span>
+                </a>
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/openpoexpeditor']"
+                            class="{{(currentHref == '/admin/openpoexpeditor') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{"Open PO Expeditor" | translate}}</span>
+                        </a>
+                    </li>
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/openpotrendlinesuseradmin']"
+                            class="{{(currentHref == '/admin/openpotrendlinesuseradmin') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{"Open PO Trendlines" | translate}}</span>
+                        </a>
+                    </li>
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/openpoanalysis']"
+                            class="{{(currentHref == '/admin/openpoanalysis') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{"Open PO Analysis" | translate}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            
+            <!-- <li (click)="mainMenuClick($event)"  *ngIf="isReferralAllowed" [ngClass]="{'mm-active': currentHref == '/user/referafriend'}">
+                <a [routerLink]="['/user/referafriend']"
+                    class="{{(currentHref == '/user/referafriend') ? 'mm-active' : ''}}">
+                    <i class="flaticon-381-referral"><img src="./assets/images/admin.png" alt=""></i>
+                    <span class="nav-text">{{"Referral" | translate}}</span>
+                </a>
+            </li> -->
+
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/howtouse'}">
+                <a [routerLink]="['/admin/howtouse']" class="{{(currentHref == '/admin/howtouse') ? 'mm-active' : ''}}">
+                    <i class="flaticon-381-referral"><img src="./assets/images/howtouse.png" alt=""></i>
+                    <span class="nav-text">{{"How to Use" | translate}}</span>
+                </a>
+            </li>
+
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/aboutscoreus'}">
+                <a [routerLink]="['/admin/aboutscoreus']"
+                    class="{{(currentHref == '/admin/aboutscoreus') ? 'mm-active' : ''}}">
+                    <i class="flaticon-381-referral"><img src="./assets/images/about.png" alt=""></i>
+                    <span class="nav-text">{{"About ScoreUs" | translate}}</span>
+                </a>
+            </li>
+
+        </ul>
+        <!-- ============= Po Manager Vendor Dasdboard ============= -->
+
+        <!-- ============= Po Manager User Dasdboard ============= -->
+
+        <ul class="metismenu" id="menu" metis-menu *ngIf="loggedInUser.roleID === 10 && loggedInUser.isCancelled === false">
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/pouserdashboard' }">
+                <a [routerLink]="['/admin/pouserdashboard']"
+                    class="{{(currentHref == '/admin/pouserdashboard') ? 'mm-active' : ''}}">
+                    <span><img src="assets/images/dashboard.png" class="pr-3" alt=""></span>
+                    <span class="nav-text">{{"Dashboard" | translate }}</span>
+                </a>
+            </li>
+            
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class="flaticon-381-referral"><img src="./assets/images/pomanager.png" alt=""></i>
+                    <span class="nav-text">{{"PO Manager" | translate}}</span>
+                </a>
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/openpoexpeditor']"
+                            class="{{(currentHref == '/admin/openpoexpeditor') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{"Open PO Expeditor" | translate}}</span>
+                        </a>
+                    </li>
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/openpotrendlinesuseradmin']"
+                            class="{{(currentHref == '/admin/openpotrendlinesuseradmin') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{"Open PO Trendlines" | translate}}</span>
+                        </a>
+                    </li>
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/openpoanalysis']"
+                            class="{{(currentHref == '/admin/openpoanalysis') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{"Open PO Analysis" | translate}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li (click)="mainMenuClick($event)"  [ngClass]="{'mm-active': currentHref == '/admin/poreporthistory'}">
+                <a [routerLink]="['/admin/poreporthistory']"
+                    class="{{(currentHref == '/admin/poreporthistory') ? 'mm-active' : ''}}">
+                    <i class="flaticon-381-referral"><img src="./assets/images/reporthistory.png" alt=""></i>
+                    <span class="nav-text">{{"Report History" | translate}}</span>
+                </a>
+            </li>
+
+            <li (click)="mainMenuClick($event)"  [ngClass]="{'mm-active': currentHref == '/admin/subscriptionpayment'}">
+                <a [routerLink]="['/admin/subscriptionpayment']"
+                    class="{{(currentHref == '/admin/subscriptionpayment') ? 'mm-active' : ''}}">
+                    <i class="flaticon-381-referral"><img src="./assets/images/subscriptionpayment.png" alt=""></i>
+                    <span class="nav-text">{{"Subscription & Payment" | translate}}</span>
+                </a>
+            </li>
+         
+            <li (click)="mainMenuClick($event)"  [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class=""><img src="./assets/images/admin.png" alt=""></i>
+                    <span class="nav-text">{{"Admin" | translate}} </span>
+                </a>
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                    <li class="kpi"><a [routerLink]="['/admin/kpiparam']"
+                            class="{{(currentHref == '/admin/kpiparam') ? 'mm-active' : ''}}">{{"KPI Parameter(View Only)" | translate}}</a></li>
+                        <li class="kpi"><a [routerLink]="['/user/rawdatasetting']"
+                                class="{{(currentHref == '/user/rawdatasetting') ? 'mm-active' : ''}}"
+                                (click)="onClick('Raw Data')">{{'Raw Data Setting' | translate }}</a></li>
+                </ul>
+            </li>
+            
+
+            <li  (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class=""><img src="./assets/images/datalog.png" alt=""></i>
+                    <span class="nav-text">{{"Data" | translate}}</span>
+                </a>
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                    
+                    <li class="import"><a [routerLink]="['/admin/datalog']"
+                            class="{{(currentHref == '/admin/datalog') ? 'mm-active' : ''}}">{{"Logs" | translate}}</a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/howtouse'}">
+                <a [routerLink]="['/admin/howtouse']" class="{{(currentHref == '/admin/howtouse') ? 'mm-active' : ''}}">
+                    <i class="flaticon-381-referral"><img src="./assets/images/howtouse.png" alt=""></i>
+                    <span class="nav-text">{{"How to Use" |  translate}}</span>
+                </a>
+            </li>
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/aboutscoreus'}">
+                <a [routerLink]="['/admin/aboutscoreus']"
+                    class="{{(currentHref == '/admin/aboutscoreus') ? 'mm-active' : ''}}">
+                    <i class="flaticon-381-referral"><img src="./assets/images/about.png" alt=""></i>
+                    <span class="nav-text">{{"About ScoreUs" | translate}}</span>
+                </a>
+            </li>
+
+        </ul>
+        <!-- ============= Po Manager User Dasdboard ============= -->
+
+
+
+        <!-- ============= Po Manager User Admin Dasdboard ============= -->
+
+        <ul class="metismenu" id="menu" metis-menu *ngIf="loggedInUser.roleID === 8 && loggedInUser.isCancelled === false">
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/pouserdashboard' }">
+                <a [routerLink]="['/admin/pouserdashboard']"
+                    class="{{(currentHref == '/admin/pouserdashboard') ? 'mm-active' : ''}}">
+                    <span><img src="assets/images/dashboard.png" class="pr-3" alt=""></span>
+                    <span class="nav-text">{{"Dashboard" | translate}}</span>
+                </a>
+            </li>
+            
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class="flaticon-381-referral"><img src="./assets/images/pomanager.png" alt=""></i>
+                    <span class="nav-text">{{"PO Manager" | translate}}</span>
+                </a>
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/openpoexpeditor']"
+                            class="{{(currentHref == '/admin/openpoexpeditor') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{"Open PO Expeditor" | translate }}</span>
+                        </a>
+                    </li>
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/openpotrendlinesuseradmin']"
+                            class="{{(currentHref == '/admin/openpotrendlinesuseradmin') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{"Open PO Trendlines" | translate }}</span>
+                        </a>
+                    </li>
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/openpoanalysis']"
+                            class="{{(currentHref == '/admin/openpoanalysis') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{"Open PO Analysis" | translate }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li (click)="mainMenuClick($event)"  [ngClass]="{'mm-active': currentHref == '/admin/poreporthistory'}">
+                <a [routerLink]="['/admin/poreporthistory']"
+                    class="{{(currentHref == '/admin/poreporthistory') ? 'mm-active' : ''}}">
+                    <i class="flaticon-381-referral"><img src="./assets/images/reporthistory.png" alt=""></i>
+                    <span class="nav-text">{{"Report History" | translate }}</span>
+                </a>
+            </li>
+            
+            <li (click)="mainMenuClick($event)"  [ngClass]="{'mm-active': currentHref == '/admin/subscriptionpayment'}">
+                <a [routerLink]="['/admin/subscriptionpayment']"
+                    class="{{(currentHref == '/admin/subscriptionpayment') ? 'mm-active' : ''}}">
+                    <i class="flaticon-381-referral"><img src="./assets/images/subscriptionpayment.png" alt=""></i>
+                    <span class="nav-text">{{"Subscription & Payment" | translate}}</span>
+                </a>
+            </li>
+      
+      
+            <li (click)="mainMenuClick($event)"  [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class=""><img src="./assets/images/admin.png" alt=""></i>
+                    <span class="nav-text">{{"Admin" | translate }} </span>
+                </a>
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                    <li class="kpi"><a [routerLink]="['/admin/kpiparam']"
+                            class="{{(currentHref == '/admin/kpiparam') ? 'mm-active' : ''}}">{{"KPI Parameter" | translate }}</a></li>
+                    <li class="kpi"><a [routerLink]="['/user/rawdatasetting']"
+                                class="{{(currentHref == '/user/rawdatasetting') ? 'mm-active' : ''}}"
+                                (click)="onClick('Raw Data')">{{'Raw Data Setting' | translate }}</a></li>
+                </ul>
+            </li>
+            
+            
+            
+            <li  (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class=""><img src="./assets/images/datalog.png" alt=""></i>
+                    <span class="nav-text">{{"Data" | translate }}</span>
+                </a>
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                    <li class="import"><a [routerLink]="['/admin/importdata']"
+                            class="{{(currentHref == '/admin/importdata') ? 'mm-active' : ''}}">{{"Import Data" | translate}}</a>
+                    </li>
+                    <li class="import"><a [routerLink]="['/admin/datalog']"
+                            class="{{(currentHref == '/admin/datalog') ? 'mm-active' : ''}}">{{"Logs" | translate }}</a>
+                    </li>
+                </ul>
+            </li>
+       
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/howtouse'}">
+                <a [routerLink]="['/admin/howtouse']" class="{{(currentHref == '/admin/howtouse') ? 'mm-active' : ''}}">
+                    <i class="flaticon-381-referral"><img src="./assets/images/howtouse.png" alt=""></i>
+                    <span class="nav-text">{{"How to Use" | translate}}</span>
+                </a>
+            </li>
+     
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/aboutscoreus'}">
+                <a [routerLink]="['/admin/aboutscoreus']"
+                    class="{{(currentHref == '/admin/aboutscoreus') ? 'mm-active' : ''}}">
+                    <i class="flaticon-381-referral"><img src="./assets/images/about.png" alt=""></i>
+                    <span class="nav-text">{{"About ScoreUs" | translate }}</span>
+                </a>
+            </li>
+
+        </ul>
+
+        <!-- ============= Po Manager User Admin Dasdboard ============= -->
+
+
+
+        <!-- ============= User Scorecard ============= -->
+        <ul class="metismenu" id="menu" metis-menu *ngIf="loggedInUser.roleID === 9 && loggedInUser.isCancelled === false">
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/maindashboard' }">
+                <a [routerLink]="['/user/maindashboard']"
+                    class="{{(currentHref == '/user/maindashboard') ? 'mm-active' : ''}}"
+                    (click)="onClick('Dashboard')">
+                    <span><img src="assets/images/dashboard.png" class="pr-3" alt=""></span>
+                    <span class="nav-text">{{'Dashboard' | translate }}</span>
+                </a>
+            </li>
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class="flaticon-381-referral"><img src="./assets/images/scorecard.png" alt=""></i>
+                    <span class="nav-text">{{'ScoreCard' | translate }}</span>
+                </a>
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                    <li><a [routerLink]="['/user/vendorscorecard']"
+                            class="{{(currentHref == '/user/vendorscorecard') ? 'mm-active' : ''}}"
+                            (click)="onClick('Vendor ScoreCard')">
+                            {{'Vendor ScoreCard' | translate }} </a>
+                    </li>
+                    <li><a [routerLink]="['/user/buyerScoreCard']"
+                            class="{{(currentHref == '/user/buyerScoreCard') ? 'mm-active' : ''}}"
+                            (click)="onClick('Buyer ScoreCard')">{{'Buyer ScoreCard' | translate }}</a></li>
+                    <li><a [routerLink]="['/user/commodityScoreCard']"
+                            class="{{(currentHref == '/user/commodityScoreCard') ? 'mm-active' : ''}}"
+                            (click)="onClick('Commodity ScoreCard')">{{'Commodity ScoreCard' | translate }}</a></li>
+                    <li><a [routerLink]="['/user/plantScoreCard']"
+                            class="{{(currentHref == '/user/plantScoreCard') ? 'mm-active' : ''}}"
+                            (click)="onClick('Plant ScoreCard')">{{'Plant ScoreCard' | translate }} </a></li>
+                    <li class="material"><a [routerLink]="['/user/materialScoreCard']"
+                            class="{{(currentHref == '/user/materialScoreCard') ? 'mm-active' : ''}}">
+                            {{'Material ScoreCard' | translate }}</a></li>
+                    <li><a [routerLink]="['/user/mapoutvendor']"
+                            class="{{(currentHref == '/user/mapoutvendor') ? 'mm-active' : ''}}"
+                            (click)="onClick('Mapout vendor')">{{'Mapout Vendors'| translate }}</a>
+                    </li>
+                </ul>
+            </li>
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class=""><img src="./assets/images/admin.png" alt=""></i>
+                    <span class="nav-text">{{'Admin' | translate }} </span>
+                    {{'(View Only)' | translate }}
+                </a>
+               
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                    <li class="kpi">
+                        <a [routerLink]="['/user/kpiparameter']"
+                            class="{{(currentHref == '/user/kpiparameter') ? 'mm-active ' : ''}}"
+                            (click)="onClick('KPI Parameter')">{{'KPI Parameter Setting' | translate }} </a>
+                    </li>
+                    <li class="kpi"><a [routerLink]="['/user/rawdatasetting']"
+                            class="{{(currentHref == '/user/rawdatasetting') ? 'mm-active' : ''}}"
+                            (click)="onClick('Raw Data')">{{'Raw Data Setting' | translate }}</a></li>
+                    <li class="kpi"><a [routerLink]="['/user/targetsettings']"
+                            class="{{(currentHref == '/user/targetsettings') ? 'mm-active' : ''}}"
+                            (click)="onClick('Target setting')">{{'Target Setting' | translate }}</a>
+                    </li>
+                </ul>
+            </li>
+
+
+            
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/reporthistory'}">
+                <a [routerLink]="['/user/reporthistory']"
+                    class="{{(currentHref == '/user/reporthistory') ? 'mm-active' : ''}}"
+                    (click)="onClick('Report History')">
+                    <i class="flaticon-381-referral"><img src="./assets/images/reporthistory.png" alt=""></i>
+                    <span class="nav-text">{{'Report History' | translate }}</span>
+                </a>
+            </li>
+
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/subscriptionpayment'}">
+                <a [routerLink]="['/user/subscriptionpayment']"
+                    class="{{(currentHref == '/user/subscriptionpayment') ? 'mm-active' : ''}}"
+                    (click)="onClick('Subscription & Payment')">
+                    <i class="flaticon-381-referral"><img src="./assets/images/subscriptionpayment.png" alt=""></i>
+                    <span class="nav-text">{{'Subscription & Payment' | translate }}</span>
+                </a>
+            </li>
+
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/invitevendor'}">
+                <a [routerLink]="['/user/invitevendor']"
+                    class="{{(currentHref == '/user/invitevendor') ? 'mm-active' : ''}}"
+                    (click)="onClick('Invite Vendor')">
+                    <i class="flaticon-381-referral"><img src="./assets/images/subscriptionpayment.png" alt=""></i>
+                    <span class="nav-text">{{'Invite Vendor' | translate }}</span>
+                </a>
+            </li>
+
+            <!-- <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/reporthistory'}">
+                        <a [routerLink]="['/user/reporthistory']"
+                            class="{{(currentHref == '/user/reporthistory') ? 'mm-active' : ''}}"
+                            (click)="onClick('Report History')">
+                            <i class="flaticon-381-referral"><img src="./assets/images/reporthistory.png" alt=""></i>
+                            <span class="nav-text">{{'Report History' | translate }}</span>
+                        </a>
+                    </li> -->
+            <!-- <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/subscriptionpayment'}">
+                        <a [routerLink]="['/user/subscriptionpayment']"
+                            class="{{(currentHref == '/user/subscriptionpayment') ? 'mm-active' : ''}}"
+                            (click)="onClick('Subscription & Payment')">
+                            <i class="flaticon-381-referral"><img src="./assets/images/subscriptionpayment.png" alt=""></i>
+                            <span class="nav-text">{{'Subscription & Payment' | translate }}</span>
+                        </a>
+                    </li> -->
+            <!-- <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                        <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                            <i class=""><img src="./assets/images/datalog.png" alt=""></i>
+                            <span class="nav-text">{{'Data' | translate }}</span>
+                        </a>
+                        <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                            <li class="import"><a [routerLink]="['/user/importdata']"
+                                    class="{{(currentHref == '/user/importdata') ? 'mm-active' : ''}}"
+                                    (click)="onClick('Import Data')">{{'Import Data' | translate }}</a></li>
+                            <li class="import"><a [routerLink]="['/user/datalog']"
+                                    class="{{(currentHref == '/user/datalog') ? 'mm-active' : ''}}"
+                                    (click)="onClick('Logs')">{{'Logs' | translate }}</a></li>
+                        </ul>
+                    </li> -->
+
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/howtouse'}">
+                <a [routerLink]="['/user/howtouse']" class="{{(currentHref == '/user/howtouse') ? 'mm-active' : ''}}"
+                    (click)="onClick('How to use')">
+                    <i class="flaticon-381-referral"><img src="./assets/images/howtouse.png" alt=""></i>
+                    <span class="nav-text">{{'How to Use' | translate }}</span>
+                </a>
+            </li>
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/aboutscoreus'}">
+                <a [routerLink]="['/user/aboutscoreus']"
+                    class="{{(currentHref == '/user/aboutscoreus') ? 'mm-active' : ''}}" (click)="onClick('About us')">
+                    <i class="flaticon-381-referral"><img src="./assets/images/about.png" alt=""></i>
+                    <span class="nav-text">{{'About ScoreUs' | translate }}</span>
+                </a>
+            </li>
+
+        </ul>
+
+        <!-- ============= User ADMIN Scorecard ============= -->
+
+        <ul class="metismenu" id="menu" metis-menu *ngIf="(loggedInUser.roleID === 7) && loggedInUser.isCancelled === false">
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/maindashboard' }">
+                <a [routerLink]="['/user/maindashboard']"
+                    class="{{(currentHref == '/user/maindashboard') ? 'mm-active' : ''}}"
+                    (click)="onClick('Dashboard')">
+                    <span><img src="assets/images/dashboard.png" class="pr-3" alt=""></span>
+                    <span class="nav-text">{{'Dashboard' | translate }}</span>
+                </a>
+            </li>
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class="flaticon-381-referral"><img src="./assets/images/scorecard.png" alt=""></i>
+                    <span class="nav-text">{{'ScoreCard' | translate }}</span>
+                </a>
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                    <li><a [routerLink]="['/user/vendorscorecard']"
+                            class="{{(currentHref == '/user/vendorscorecard') ? 'mm-active' : ''}}"
+                            (click)="onClick('Vendor ScoreCard')">
+                            {{'Vendor ScoreCard' | translate }} </a>
+                    </li>
+                    <li><a [routerLink]="['/user/buyerScoreCard']"
+                            class="{{(currentHref == '/user/buyerScoreCard') ? 'mm-active' : ''}}"
+                            (click)="onClick('Buyer ScoreCard')">{{'Buyer ScoreCard' | translate }}</a></li>
+                    <li><a [routerLink]="['/user/commodityScoreCard']"
+                            class="{{(currentHref == '/user/commodityScoreCard') ? 'mm-active' : ''}}"
+                            (click)="onClick('Commodity ScoreCard')">{{'Commodity ScoreCard' | translate }}</a></li>
+                    <li><a [routerLink]="['/user/plantScoreCard']"
+                            class="{{(currentHref == '/user/plantScoreCard') ? 'mm-active' : ''}}"
+                            (click)="onClick('Plant ScoreCard')">{{'Plant ScoreCard' | translate }} </a></li>
+                    <li class="material"><a [routerLink]="['/user/materialScoreCard']"
+                            class="{{(currentHref == '/user/materialScoreCard') ? 'mm-active' : ''}}">{{'Material
+                            ScoreCard' | translate }}</a></li>
+                    <li><a [routerLink]="['/user/mapoutvendor']"
+                            class="{{(currentHref == '/user/mapoutvendor') ? 'mm-active' : ''}}"
+                            (click)="onClick('Mapout vendor')">{{'Mapout Vendors'| translate }}</a>
+                    </li>
+                </ul>
+            </li>
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class=""><img src="./assets/images/admin.png" alt=""></i>
+                    <span class="nav-text">{{'Admin' | translate }} </span>
+                </a>
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                    <li class="kpi">
+                        <a [routerLink]="['/user/kpiparameter']"
+                            class="{{(currentHref == '/user/kpiparameter') ? 'mm-active ' : ''}}"
+                            (click)="onClick('KPI Parameter')">{{'KPI Parameter Setting' | translate }} </a>
+                    </li>
+                    <li class="kpi"><a [routerLink]="['/user/rawdatasetting']"
+                            class="{{(currentHref == '/user/rawdatasetting') ? 'mm-active' : ''}}"
+                            (click)="onClick('Raw Data')">{{'Raw Data Setting' | translate }}</a></li>
+                    <li class="kpi"><a [routerLink]="['/user/targetsettings']"
+                            class="{{(currentHref == '/user/targetsettings') ? 'mm-active' : ''}}"
+                            (click)="onClick('Target setting')">{{'Target Setting' | translate }}</a>
+                    </li>
+                </ul>
+            </li>
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/reporthistory'}">
+                <a [routerLink]="['/user/reporthistory']"
+                    class="{{(currentHref == '/user/reporthistory') ? 'mm-active' : ''}}"
+                    (click)="onClick('Report History')">
+                    <i class="flaticon-381-referral"><img src="./assets/images/reporthistory.png" alt=""></i>
+                    <span class="nav-text">{{'Report History' | translate }}</span>
+                </a>
+            </li>
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/subscriptionpayment'}">
+                <a [routerLink]="['/user/subscriptionpayment']"
+                    class="{{(currentHref == '/user/subscriptionpayment') ? 'mm-active' : ''}}"
+                    (click)="onClick('Subscription & Payment')">
+                    <i class="flaticon-381-referral"><img src="./assets/images/subscriptionpayment.png" alt=""></i>
+                    <span class="nav-text">{{'Subscription & Payment' | translate }}</span>
+                </a>
+            </li>
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class=""><img src="./assets/images/datalog.png" alt=""></i>
+                    <span class="nav-text">{{'Data' | translate }}</span>
+                </a>
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                    <li class="import"><a [routerLink]="['/user/importdata']"
+                            class="{{(currentHref == '/user/importdata') ? 'mm-active' : ''}}"
+                            (click)="onClick('Import Data')">{{'Import Data' | translate }}</a></li>
+                    <li class="import"><a [routerLink]="['/user/datalog']"
+                            class="{{(currentHref == '/user/datalog') ? 'mm-active' : ''}}"
+                            (click)="onClick('Logs')">{{'Logs' | translate }}</a></li>
+                </ul>
+            </li>
+
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/howtouse'}">
+                <a [routerLink]="['/user/howtouse']" class="{{(currentHref == '/user/howtouse') ? 'mm-active' : ''}}"
+                    (click)="onClick('How to use')">
+                    <i class="flaticon-381-referral"><img src="./assets/images/howtouse.png" alt=""></i>
+                    <span class="nav-text">{{'How to Use' | translate }}</span>
+                </a>
+            </li>
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/aboutscoreus'}">
+                <a [routerLink]="['/user/aboutscoreus']"
+                    class="{{(currentHref == '/user/aboutscoreus') ? 'mm-active' : ''}}" (click)="onClick('About us')">
+                    <i class="flaticon-381-referral"><img src="./assets/images/about.png" alt=""></i>
+                    <span class="nav-text">{{'About ScoreUs' | translate }}</span>
+                </a>
+            </li>
+
+        </ul>
+
+
+
+        <!-- <========================VENDOR SCORE CARD =======================================> -->
+        <ul class="metismenu" id="menu" metis-menu *ngIf="loggedInUser.roleID == 12 && loggedInUser.isCancelled === false" >
+            
+            <li><a [routerLink]="['/user/vendor/vendorscore']"
+                    class="{{(currentHref == '/user/vendor/vendorscore') ? 'mm-active' : ''}}"
+                    (click)="onClick('Vendor ScoreCard')">
+                    <i class="flaticon-381-referral"><img src="./assets/images/admin.png" alt=""></i>
+                    <span class="nav-text">  {{'Vendor ScoreCard' | translate }}</span> </a>
+            </li>
+       
+            <!-- <li (click)="mainMenuClick($event)" *ngIf="isReferralAllowed"  [ngClass]="{'mm-active': currentHref == '/user/referafriend'}">
+                <a [routerLink]="['/user/referafriend']"
+                    class="{{(currentHref == '/user/referafriend') ? 'mm-active' : ''}}">
+                    <i class="flaticon-381-referral"><img src="./assets/images/admin.png" alt=""></i>
+                    <span class="nav-text">{{"Referral" | translate}}</span>
+                </a>
+            </li> -->
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/vendor/aboutscoreus'}">
+                <a [routerLink]="['/user/vendor/aboutscoreus']"
+                    class="{{(currentHref == '/user/vendor/aboutscoreus') ? 'mm-active' : ''}}">
+                    <i class="flaticon-381-referral"><img src="./assets/images/about.png" alt=""></i>
+                    <span class="nav-text">{{'About ScoreUs' | translate }}</span>
+                </a>
+            </li>
+
+        </ul>
+        <!-- <===============================VENDOR SCORE CARD ================================> -->
+    
+        <!-- <===============================COMPLETE PRODUCT USERADMIN =======================>-->
+        
+        <ul class="metismenu" id="menu" metis-menu *ngIf="( loggedInUser.roleID === 6) && loggedInUser.isCancelled === false">
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/maindashboard' }">
+                <a [routerLink]="['/user/maindashboard']"
+                    class="{{(currentHref == '/user/maindashboard') ? 'mm-active' : ''}}"
+                    (click)="onClick('Dashboard')">
+                    <span><img src="assets/images/dashboard.png" class="pr-3" alt=""></span>
+                    <span class="nav-text">{{'Dashboard Scorecard' | translate }}</span>
+                </a>
+            </li>
+
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/pouserdashboard' }">
+                <a [routerLink]="['/admin/pouserdashboard']"
+                    class="{{(currentHref == '/admin/pouserdashboard') ? 'mm-active' : ''}}">
+                    <span><img src="assets/images/dashboard.png" class="pr-3" alt=""></span>
+                    <span class="nav-text">{{"Dashboard PO Manager" | translate}}</span>
+                </a>
+            </li>
+            
+
+
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class="flaticon-381-referral"><img src="./assets/images/scorecard.png" alt=""></i>
+                    <span class="nav-text">{{'Scorecard' | translate }}</span>
+                </a>
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                    <li><a [routerLink]="['/user/vendorscorecard']"
+                            class="{{(currentHref == '/user/vendorscorecard') ? 'mm-active' : ''}}"
+                            (click)="onClick('Vendor ScoreCard')">
+                            {{'Vendor ScoreCard' | translate }} </a>
+                    </li>
+                    <li><a [routerLink]="['/user/buyerScoreCard']"
+                            class="{{(currentHref == '/user/buyerScoreCard') ? 'mm-active' : ''}}"
+                            (click)="onClick('Buyer ScoreCard')">{{'Buyer ScoreCard' | translate }}</a></li>
+                    <li><a [routerLink]="['/user/commodityScoreCard']"
+                            class="{{(currentHref == '/user/commodityScoreCard') ? 'mm-active' : ''}}"
+                            (click)="onClick('Commodity ScoreCard')">{{'Commodity ScoreCard' | translate }}</a></li>
+                    <li><a [routerLink]="['/user/plantScoreCard']"
+                            class="{{(currentHref == '/user/plantScoreCard') ? 'mm-active' : ''}}"
+                            (click)="onClick('Plant ScoreCard')">{{'Plant ScoreCard' | translate }} </a></li>
+                    <li class="material"><a [routerLink]="['/user/materialScoreCard']"
+                            class="{{(currentHref == '/user/materialScoreCard') ? 'mm-active' : ''}}">{{'Material
+                            ScoreCard' | translate }}</a></li>
+                    <li><a [routerLink]="['/user/mapoutvendor']"
+                            class="{{(currentHref == '/user/mapoutvendor') ? 'mm-active' : ''}}"
+                            (click)="onClick('Mapout vendor')">{{'Mapout Vendors'| translate }}</a>
+                    </li>
+                </ul>
+            </li>
+                
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class="flaticon-381-referral"><img src="./assets/images/pomanager.png" alt=""></i>
+                    <span class="nav-text">{{"PO Manager" | translate}}</span>
+                </a>
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/openpoexpeditor']"
+                            class="{{(currentHref == '/admin/openpoexpeditor') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{"Open PO Expeditor" | translate }}</span>
+                        </a>
+                    </li>
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/openpotrendlinesuseradmin']"
+                            class="{{(currentHref == '/admin/openpotrendlinesuseradmin') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{"Open PO Trendlines" | translate }}</span>
+                        </a>
+                    </li>
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/openpoanalysis']"
+                            class="{{(currentHref == '/admin/openpoanalysis') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{"Open PO Analysis" | translate }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class=""><img src="./assets/images/admin.png" alt=""></i>
+                    <span class="nav-text">{{'Admin' | translate }} </span>
+                </a>
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                    <li class="kpi">
+                        <a [routerLink]="['/user/kpiparameter']"
+                            class="{{(currentHref == '/user/kpiparameter') ? 'mm-active ' : ''}}"
+                            (click)="onClick('KPI Parameter')">{{'Scorecard KPI Setting' | translate }} </a>
+                    </li>
+                    <li class="kpi"><a [routerLink]="['/admin/kpiparam']"
+                        class="{{(currentHref == '/admin/kpiparam') ? 'mm-active' : ''}}">{{"PO Manager KPI Setting" | translate }}</a></li>
+                    <li class="kpi"><a [routerLink]="['/user/rawdatasetting']"
+                            class="{{(currentHref == '/user/rawdatasetting') ? 'mm-active' : ''}}"
+                            (click)="onClick('Raw Data')">{{'Raw Data Setting' | translate }}</a></li>
+                    <li class="kpi"><a [routerLink]="['/user/targetsettings']"
+                            class="{{(currentHref == '/user/targetsettings') ? 'mm-active' : ''}}"
+                            (click)="onClick('Target setting')">{{'Target Setting' | translate }}</a>
+                    </li>
+
+
+
+                    
+                </ul>
+            </li>
+         
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/reporthistory'}">
+                <a [routerLink]="['/user/reporthistory']"
+                    class="{{(currentHref == '/user/reporthistory') ? 'mm-active' : ''}}"
+                    (click)="onClick('Report History')">
+                    <i class="flaticon-381-referral"><img src="./assets/images/reporthistory.png" alt=""></i>
+                    <span class="nav-text">{{'Scorecard Report History' | translate }}</span>
+                </a>
+            </li>
+            
+            <li (click)="mainMenuClick($event)"  [ngClass]="{'mm-active': currentHref == '/admin/poreporthistory'}">
+                <a [routerLink]="['/admin/poreporthistory']"
+                    class="{{(currentHref == '/admin/poreporthistory') ? 'mm-active' : ''}}">
+                    <i class="flaticon-381-referral"><img src="./assets/images/reporthistory.png" alt=""></i>
+                    <span class="nav-text">{{"PO Manager Report History" | translate }}</span>
+                </a>
+            </li>
+
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/subscriptionpayment'}">
+                <a [routerLink]="['/user/subscriptionpayment']"
+                    class="{{(currentHref == '/user/subscriptionpayment') ? 'mm-active' : ''}}"
+                    (click)="onClick('Subscription & Payment')">
+                    <i class="flaticon-381-referral"><img src="./assets/images/subscriptionpayment.png" alt=""></i>
+                    <span class="nav-text">{{'Subscription & Payment' | translate }}</span>
+                </a>
+            </li>
+       
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class=""><img src="./assets/images/datalog.png" alt=""></i>
+                    <span class="nav-text">{{'Data' | translate }}</span>
+                </a>
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                    <li class="import"><a [routerLink]="['/user/importdata']"
+                            class="{{(currentHref == '/user/importdata') ? 'mm-active' : ''}}"
+                            (click)="onClick('Import Data')">{{'Import Data' | translate }}</a></li>
+                    <li class="import"><a [routerLink]="['/user/datalog']"
+                            class="{{(currentHref == '/user/datalog') ? 'mm-active' : ''}}"
+                            (click)="onClick('Logs')">{{'Logs' | translate }}</a></li>
+                </ul>
+            </li>
+
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/howtouse'}">
+                <a [routerLink]="['/user/howtouse']" class="{{(currentHref == '/user/howtouse') ? 'mm-active' : ''}}"
+                    (click)="onClick('How to use')">
+                    <i class="flaticon-381-referral"><img src="./assets/images/howtouse.png" alt=""></i>
+                    <span class="nav-text">{{'How to Use' | translate }}</span>
+                </a>
+            </li>
+     
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/aboutscoreus'}">
+                <a [routerLink]="['/user/aboutscoreus']"
+                    class="{{(currentHref == '/user/aboutscoreus') ? 'mm-active' : ''}}" (click)="onClick('About us')">
+                    <i class="flaticon-381-referral"><img src="./assets/images/about.png" alt=""></i>
+                    <span class="nav-text">{{'About ScoreUs' | translate }}</span>
+                </a>
+            </li>
+
+        </ul>
+         <!-- <===============================COMPLETE PRODUCT USERADMIN =======================>-->
+
+        <!-- <===============================COMPLETE PRODUCT USER =======================>-->
+         
+         <ul class="metismenu" id="menu" metis-menu *ngIf="loggedInUser.roleID === 11 && loggedInUser.isCancelled === false">
+     
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/maindashboard' }">
+                <a [routerLink]="['/user/maindashboard']"
+                    class="{{(currentHref == '/user/maindashboard') ? 'mm-active' : ''}}"
+                    (click)="onClick('Dashboard')">
+                    <span><img src="assets/images/dashboard.png" class="pr-3" alt=""></span>
+                    <span class="nav-text">{{'Dashboard ScoreCard' | translate }}</span>
+                </a>
+            </li>
+      
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/pouserdashboard' }">
+                <a [routerLink]="['/admin/pouserdashboard']"
+                    class="{{(currentHref == '/admin/pouserdashboard') ? 'mm-active' : ''}}">
+                    <span><img src="assets/images/dashboard.png" class="pr-3" alt=""></span>
+                    <span class="nav-text">{{"Dashboard PO Manager" | translate}}</span>
+                </a>
+            </li>
+
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class="flaticon-381-referral"><img src="./assets/images/scorecard.png" alt=""></i>
+                    <span class="nav-text">{{'ScoreCard' | translate }}</span>
+                </a>
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                    <li><a [routerLink]="['/user/vendorscorecard']"
+                            class="{{(currentHref == '/user/vendorscorecard') ? 'mm-active' : ''}}"
+                            (click)="onClick('Vendor ScoreCard')">
+                            {{'Vendor ScoreCard' | translate }} </a>
+                    </li>
+                    <li><a [routerLink]="['/user/buyerScoreCard']"
+                            class="{{(currentHref == '/user/buyerScoreCard') ? 'mm-active' : ''}}"
+                            (click)="onClick('Buyer ScoreCard')">{{'Buyer ScoreCard' | translate }}</a></li>
+                    <li><a [routerLink]="['/user/commodityScoreCard']"
+                            class="{{(currentHref == '/user/commodityScoreCard') ? 'mm-active' : ''}}"
+                            (click)="onClick('Commodity ScoreCard')">{{'Commodity ScoreCard' | translate }}</a></li>
+                    <li><a [routerLink]="['/user/plantScoreCard']"
+                            class="{{(currentHref == '/user/plantScoreCard') ? 'mm-active' : ''}}"
+                            (click)="onClick('Plant ScoreCard')">{{'Plant ScoreCard' | translate }} </a></li>
+                    <li class="material"><a [routerLink]="['/user/materialScoreCard']"
+                            class="{{(currentHref == '/user/materialScoreCard') ? 'mm-active' : ''}}">{{'Material
+                            ScoreCard' | translate }}</a></li>
+                    <li><a [routerLink]="['/user/mapoutvendor']"
+                            class="{{(currentHref == '/user/mapoutvendor') ? 'mm-active' : ''}}"
+                            (click)="onClick('Mapout vendor')">{{'Mapout Vendors'| translate }}</a>
+                    </li>
+                </ul>
+            </li>
+      
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class="flaticon-381-referral"><img src="./assets/images/pomanager.png" alt=""></i>
+                    <span class="nav-text">{{"PO Manager" | translate}}</span>
+                </a>
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/openpoexpeditor']"
+                            class="{{(currentHref == '/admin/openpoexpeditor') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{"Open PO Expeditor" | translate}}</span>
+                        </a>
+                    </li>
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/openpotrendlinesuseradmin']"
+                            class="{{(currentHref == '/admin/openpotrendlinesuseradmin') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{"Open PO Trendlines" | translate}}</span>
+                        </a>
+                    </li>
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/openpoanalysis']"
+                            class="{{(currentHref == '/admin/openpoanalysis') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{"Open PO Analysis" | translate}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class=""><img src="./assets/images/admin.png" alt=""></i>
+                    <span class="nav-text">{{'Admin' | translate }} </span>
+                    {{'(View Only)' | translate }}
+                </a>
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                    <li class="kpi">
+                        <a [routerLink]="['/user/kpiparameter']"
+                            class="{{(currentHref == '/user/kpiparameter') ? 'mm-active ' : ''}}"
+                            (click)="onClick('KPI Parameter')">{{'Scorecard KPI Setting' | translate }} </a>
+                    </li>
+                    <li class="kpi"><a [routerLink]="['/admin/kpiparam']"
+                        class="{{(currentHref == '/admin/kpiparam') ? 'mm-active' : ''}}">{{"PO Manager KPI Setting" | translate }}</a></li>
+
+                    <li class="kpi"><a [routerLink]="['/user/rawdatasetting']"
+                            class="{{(currentHref == '/user/rawdatasetting') ? 'mm-active' : ''}}"
+                            (click)="onClick('Raw Data')">{{'Raw Data Setting' | translate }}</a></li>
+                    <li class="kpi"><a [routerLink]="['/user/targetsettings']"
+                            class="{{(currentHref == '/user/targetsettings') ? 'mm-active' : ''}}"
+                            (click)="onClick('Target setting')">{{'Target Setting' | translate }}</a>
+                    </li>
+                </ul>
+            </li>
+     
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/reporthistory'}">
+                <a [routerLink]="['/user/reporthistory']"
+                    class="{{(currentHref == '/user/reporthistory') ? 'mm-active' : ''}}"
+                    (click)="onClick('Report History')">
+                    <i class="flaticon-381-referral"><img src="./assets/images/reporthistory.png" alt=""></i>
+                    <span class="nav-text">{{'Scorecard Report History' | translate }}</span>
+                </a>
+            </li>
+     
+            <li (click)="mainMenuClick($event)"  [ngClass]="{'mm-active': currentHref == '/admin/poreporthistory'}">
+                <a [routerLink]="['/admin/poreporthistory']"
+                    class="{{(currentHref == '/admin/poreporthistory') ? 'mm-active' : ''}}">
+                    <i class="flaticon-381-referral"><img src="./assets/images/reporthistory.png" alt=""></i>
+                    <span class="nav-text">{{"PO Manager Report History" | translate}}</span>
+                </a>
+            </li>
+
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/subscriptionpayment'}">
+                <a [routerLink]="['/user/subscriptionpayment']"
+                    class="{{(currentHref == '/user/subscriptionpayment') ? 'mm-active' : ''}}"
+                    (click)="onClick('Subscription & Payment')">
+                    <i class="flaticon-381-referral"><img src="./assets/images/subscriptionpayment.png" alt=""></i>
+                    <span class="nav-text">{{'Subscription & Payment' | translate }}</span>
+                </a>
+            </li>
+            
+            <!-- <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/invitevendor'}">
+                <a [routerLink]="['/user/invitevendor']"
+                    class="{{(currentHref == '/user/invitevendor') ? 'mm-active' : ''}}"
+                    (click)="onClick('Invite Vendor')">
+                    <i class="flaticon-381-referral"><img src="./assets/images/subscriptionpayment.png" alt=""></i>
+                    <span class="nav-text">{{'Invite Vendor' | translate }}</span>
+                </a>
+            </li> -->
+            <!-- <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/reporthistory'}">
+                        <a [routerLink]="['/user/reporthistory']"
+                            class="{{(currentHref == '/user/reporthistory') ? 'mm-active' : ''}}"
+                            (click)="onClick('Report History')">
+                            <i class="flaticon-381-referral"><img src="./assets/images/reporthistory.png" alt=""></i>
+                            <span class="nav-text">{{'Report History' | translate }}</span>
+                        </a>
+                    </li> -->
+            <!-- <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/subscriptionpayment'}">
+                        <a [routerLink]="['/user/subscriptionpayment']"
+                            class="{{(currentHref == '/user/subscriptionpayment') ? 'mm-active' : ''}}"
+                            (click)="onClick('Subscription & Payment')">
+                            <i class="flaticon-381-referral"><img src="./assets/images/subscriptionpayment.png" alt=""></i>
+                            <span class="nav-text">{{'Subscription & Payment' | translate }}</span>
+                        </a>
+                    </li> -->
+            <!-- <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                        <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                            <i class=""><img src="./assets/images/datalog.png" alt=""></i>
+                            <span class="nav-text">{{'Data' | translate }}</span>
+                        </a>
+                        <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                            <li class="import"><a [routerLink]="['/user/importdata']"
+                                    class="{{(currentHref == '/user/importdata') ? 'mm-active' : ''}}"
+                                    (click)="onClick('Import Data')">{{'Import Data' | translate }}</a></li>
+                            <li class="import"><a [routerLink]="['/user/datalog']"
+                                    class="{{(currentHref == '/user/datalog') ? 'mm-active' : ''}}"
+                                    (click)="onClick('Logs')">{{'Logs' | translate }}</a></li>
+                        </ul>
+                    </li> -->
+
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/howtouse'}">
+                <a [routerLink]="['/user/howtouse']" class="{{(currentHref == '/user/howtouse') ? 'mm-active' : ''}}"
+                    (click)="onClick('How to use')">
+                    <i class="flaticon-381-referral"><img src="./assets/images/howtouse.png" alt=""></i>
+                    <span class="nav-text">{{'How to Use' | translate }}</span>
+                </a>
+            </li>
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/aboutscoreus'}">
+                <a [routerLink]="['/user/aboutscoreus']"
+                    class="{{(currentHref == '/user/aboutscoreus') ? 'mm-active' : ''}}" (click)="onClick('About us')">
+                    <i class="flaticon-381-referral"><img src="./assets/images/about.png" alt=""></i>
+                    <span class="nav-text">{{'About ScoreUs' | translate }}</span>
+                </a>
+            </li>
+
+        </ul>
+
+         
+         <!-- <===============================COMPLETE PRODUCT USER =======================>-->
+
+        <!-- <===============================COMPLETE PRODUCT VENDOR =======================>-->
+        
+
+        <ul class="metismenu" id="menu" metis-menu *ngIf="loggedInUser.roleID === 14 && loggedInUser.isCancelled === false">
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/pouserdashboard' }">
+                <a [routerLink]="['/admin/pouserdashboard']"
+                    class="{{(currentHref == '/admin/pouserdashboard') ? 'mm-active' : ''}}">
+                    <span><img src="assets/images/dashboard.png" class="pr-3" alt=""></span>
+                    <span class="nav-text">{{"Dashboard PO Manager" | translate}}</span>
+                </a>
+            </li>
+          
+            
+            <li><a [routerLink]="['/user/vendor/vendorscore']"
+                class="{{(currentHref == '/user/vendor/vendorscore') ? 'mm-active' : ''}}"
+                (click)="onClick('Vendor ScoreCard')">
+                <i class="flaticon-381-referral"><img src="./assets/images/admin.png" alt=""></i>
+                <span class="nav-text">  {{'Vendor ScoreCard' | translate }}</span>
+              
+                
+                </a>
+            </li>
+
+
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class="flaticon-381-referral"><img src="./assets/images/pomanager.png" alt=""></i>
+                    <span class="nav-text">{{"PO Manager" | translate}}</span>
+                </a>
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/openpoexpeditor']"
+                            class="{{(currentHref == '/admin/openpoexpeditor') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{"Open PO Expeditor" | translate}}</span>
+                        </a>
+                    </li>
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/openpotrendlinesuseradmin']"
+                            class="{{(currentHref == '/admin/openpotrendlinesuseradmin') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{"Open PO Trendlines" | translate}}</span>
+                        </a>
+                    </li>
+                    <li class="superadmin1nav">
+                        <a [routerLink]="['/admin/openpoanalysis']"
+                            class="{{(currentHref == '/admin/openpoanalysis') ? 'mm-active' : ''}}">
+                            <span class="nav-text">{{"Open PO Analysis" | translate}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+<!--           
+
+            <li (click)="mainMenuClick($event)"  *ngIf="isReferralAllowed" [ngClass]="{'mm-active': currentHref == '/user/referafriend'}">
+                <a [routerLink]="['/user/referafriend']"
+                    class="{{(currentHref == '/user/referafriend') ? 'mm-active' : ''}}">
+                    <i class="flaticon-381-referral"><img src="./assets/images/admin.png" alt=""></i>
+                    <span class="nav-text">{{"Referral" | translate}}</span>
+                </a>
+            </li> -->
+
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/howtouse'}">
+                <a [routerLink]="['/admin/howtouse']" class="{{(currentHref == '/admin/howtouse') ? 'mm-active' : ''}}">
+                    <i class="flaticon-381-referral"><img src="./assets/images/howtouse.png" alt=""></i>
+                    <span class="nav-text">{{"How to Use" | translate}}</span>
+                </a>
+            </li>
+
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/aboutscoreus'}">
+                <a [routerLink]="['/admin/aboutscoreus']"
+                    class="{{(currentHref == '/admin/aboutscoreus') ? 'mm-active' : ''}}">
+                    <i class="flaticon-381-referral"><img src="./assets/images/about.png" alt=""></i>
+                    <span class="nav-text">{{"About ScoreUs" | translate}}</span>
+                </a>
+            </li>
+
+        </ul>
+
+        
+        <!-- <===============================COMPLETE PRODUCT USER =======================>-->
+
+        
+        <ul class="metismenu" id="menu" metis-menu *ngIf="loggedInUser.isCancelled === true">
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/plans' }">
+                <a [routerLink]="['/user/plans']"
+                    class="{{(currentHref == '/user/plans') ? 'mm-active' : ''}}">
+                    <span><img src="assets/images/dashboard.png" class="pr-3" alt=""></span>
+                    <span class="nav-text">{{"Plans" | translate}}</span>
+                </a>
+            </li>
+          
+            
+            <li><a [routerLink]="['/user/mybills']"
+                class="{{(currentHref == '/user/mybills') ? 'mm-active' : ''}}"
+                (click)="onClick('mybills')">
+                <i class="flaticon-381-referral"><img src="./assets/images/admin.png" alt=""></i>
+                {{'Bills' | translate }} </a>
+            </li>
+
+
+
+          
+
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/howtouse'}">
+                <a [routerLink]="['/admin/howtouse']" class="{{(currentHref == '/admin/howtouse') ? 'mm-active' : ''}}">
+                    <i class="flaticon-381-referral"><img src="./assets/images/howtouse.png" alt=""></i>
+                    <span class="nav-text">{{"How to Use" | translate}}</span>
+                </a>
+            </li>
+
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/aboutscoreus'}">
+                <a [routerLink]="['/user/aboutscoreus']"
+                    class="{{(currentHref == '/user/aboutscoreus') ? 'mm-active' : ''}}">
+                    <i class="flaticon-381-referral"><img src="./assets/images/about.png" alt=""></i>
+                    <span class="nav-text">{{"About ScoreUs" | translate}}</span>
+                </a>
+            </li>
+
+        </ul>
+
+
+        
+        </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/current-users'}">
+                <a [routerLink]="['/admin/current-users']"
+                    class="{{(currentHref == '/admin/current-users') ? 'mm-active' : ''}}">
+                    <i class="flaticon-381-referral"><img src="./assets/images/currentusers.png" alt=""></i>
+                    <span class="nav-text">Current Users</span>
+                </a>
+            </li> -->
+<!-- <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/datalog'}">
+                <a [routerLink]="['/admin/datalog']" class="{{(currentHref == '/admin/datalog') ? 'mm-active' : ''}}">
+                    <i class="flaticon-381-referral"><img src="./assets/images/datalog.png" alt=""></i>
+                    <span class="nav-text">Data Log</span>
+                </a>
+            </li> -->
+<!-- <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
+                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class=""><img src="./assets/images/invite.png" alt=""></i>
+                    <span class="nav-text">Invite</span>
+                </a>
+                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
+                     <li class="invi"><a [routerLink]="['/admin/inviteuser']"
+                            class="{{(currentHref == '/admin/inviteuser') ? 'mm-active' : ''}}">Invite Vendor</a></li>
+                    <li class="referprofessional"><a [routerLink]="['/admin/referafriend']"
+                            class="{{(currentHref == '/admin/referafriend') ? 'mm-active' : ''}}">Refer a
+                            Professional</a></li>
+                </ul>
+            </li> -->
+
+
+<!-- <li><a [routerLink]="['/admin/userdetail']" class="{{(currentHref == '/admin/userdetail') ? 'mm-active' : ''}}">
+                <i class="flaticon-381-networking"></i>
+                <span class="nav-text">User Detail</span>
+                </a>
+            </li> -->
+<!-- <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/manageusers'}">
+                <a [routerLink]="['/admin/manageusers']" class="{{(currentHref == '/admin/manageusers') ? 'mm-active' : ''}}">
+                <i class="flaticon-381-id-card"></i>
+                <span class="nav-text">Manage Users</span>
+                </a>
+            </li>
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/referralmanagement'}">
+                <a [routerLink]="['/admin/referralmanagement']" class="{{(currentHref == '/admin/referralmanagement') ? 'mm-active' : ''}}">
+                <i class="flaticon-381-referral"><img src="./assets/images/referral.png" alt=""></i>
+                <span class="nav-text">Referral Management</span>
+                </a>
+            </li> -->

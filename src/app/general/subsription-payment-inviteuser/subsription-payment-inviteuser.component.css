@@ -1,0 +1,15 @@
+.button_background{
+    background-color: none !important;
+    background: none !important;
+    padding:0px !important;
+    outline:none !important;
+    border:none !important;
+}
+
+.material-icons{
+    color:#bc1a20;
+}
+.material-icons:hover{
+    color:black;
+    transition: all 0.5s;
+}

@@ -1,0 +1,315 @@
+<div class="card p-4">
+    <div class="row" >
+        <form [formGroup]="form">
+            <div class="row d-flex">
+                <div class="col-md-6 col-sm-12">
+                    <div class="d-flex mb-4"
+                    [matTooltip]="tips.startDate" [matTooltipPosition]="'above'">
+                        <span class="vendor-per pt-2 w-25">{{'Start date' | translate}}</span>
+                        <mat-form-field appearance="fill">
+                            <input matInput formControlName="startDate" [matDatepicker]="startDate"
+                                style="border-radius:15px;padding-left: 15px !important;" class="px-2" 
+                                (dateChange)="onDateChange()">
+                            <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                            <mat-datepicker #startDate></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <!-- <app-comparison-ranges></app-comparison-ranges> -->
+                </div>
+                <div class="col-md-6 col-sm-12 mb-3 mt-3">
+                    <div class="d-flex" style="top: -16px;position: relative;"
+                    [matTooltip]="tips.endDate" [matTooltipPosition]="'above'"
+                    >
+                        <span class="vendor-per pt-2  w-25">{{'End date' | translate }}</span>
+                        <mat-form-field appearance="fill">
+                            <input matInput [matDatepicker]="endDate" formControlName="endDate" style="border-radius:15px;padding-left: 15px !important;"
+                                [max]="currentDate" class="px-2"
+                                (dateChange)="onDateChange()"
+                                >
+                            <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                            <mat-datepicker #endDate></mat-datepicker>
+                        </mat-form-field>
+                        <!-- <app-comparison-ranges></app-comparison-ranges> -->
+                    </div>
+                    <p *ngIf="form?.errors?.dateValid " class="text-danger w-100 d-flex pl-3 text-small">{{'End date must be greater then start date' | translate }}</p>
+                </div>
+                <div class="col-md-6 mb-3 col-sm-12">
+                    <div class="d-flex">
+    
+    
+                        <span class="vendor-per w-25 pt-2">{{'Plant' | translate }}:</span>
+    
+                        <!-- <mat-form-field appearance="fill"> -->
+                        <!-- form-control plant-select -->
+                        <!-- <mat-select class="" placeholder="Select plant" [(value)]="plant" multiple (selectionChange)="onSelection($event)">
+                            <mat-option *ngFor="let item of listPlant"
+                                [value]="item.vendorCode">
+                                {{item.plantName}} &nbsp;&nbsp;  {{item.vendorCode }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+    
+                        <mat-form-field appearance="outline" class="pl-0"
+                        [matTooltip]="tips.plantSelection" [matTooltipPosition]="'above'">
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="plantInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="plant"
+                                (keyup)="onPlantInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #plant="matAutocomplete"
+                                (optionSelected)="onPlantSelect($event)">
+                                <mat-option *ngFor="let item of listPlant"
+                                    [value]="item?.name">{{item?.name}} <span class="float-right">{{item.id}}</span></mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+    
+    
+                        <!-- <select class="form-control plant-select" formControlName="commodity">
+                        <option [value]="null"><input type="text" [(ngModel)]="commodityInput" [ngModelOptions]="{standalone: true}" (keyPress)="onCommodityInput()"/></option>
+                        <option *ngFor="let item of listCommodity" [value]="item?.id">
+                            {{item?.commodity}}
+                        </option>
+                    </select> -->
+    
+                    </div>
+    
+                    <!-- <div class="d-flex">
+                    <span class="vendor-per w-25 pr-5 pt-2">Plant:</span>
+                    <select class="form-control plant-select" formControlName="plant" (change)="onPlantSelect()">
+                        <option [value]="null"></option>
+                        <option *ngFor="let item of listPlant" [value]="item?.plantCode">
+                            {{item?.plantName}}
+                        </option>
+                    </select>
+    
+                </div> -->
+                </div>
+    
+                <div class="col-md-6 mb-3 col-sm-12">
+                    <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">{{'Commodity' | translate }}:</span>
+                        <mat-form-field appearance="outline" [matTooltip]="tips.commoditySelection" [matTooltipPosition]="'above'">
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="commodityInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="commodity"
+                                (keyup)="onCommodityInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #commodity="matAutocomplete"
+                                (optionSelected)="onCommoditySelection($event)">
+                                <mat-option *ngFor="let item of listCommodity" 
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+    
+    
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3 col-sm-12">
+                    <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">{{'Vendor' | translate }}:</span>
+    
+                        <mat-form-field class="example-chip-list" appearance="outline" [matTooltip]="tips.vendorSelection" [matTooltipPosition]="'above'"
+                            style="border:1px solid #b4b8bb!important; border-radius:30px!important;padding-left: 15px;font-size: 16px;padding-top: 3px;color: #525353;">
+                            <mat-chip-list #chipList>
+                                <mat-chip class="px-2" *ngFor="let selectreport of selected" [selectable]="selectable"
+                                    [removable]="true" (removed)="remove(selectreport)">
+                                    {{selectreport.name}}
+                                    <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+                                </mat-chip>
+                                <input #fruitInput [matAutocomplete]="auto" [matChipInputFor]="chipList"
+                                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [(ngModel)]="vendorInput"
+                                    [ngModelOptions]="{standalone: true}" matInput (keyup)="onVendorInput($event)">
+                            </mat-chip-list>
+                            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelected($event)">
+                                <mat-option *ngFor="let selectreport of listVendor" [value]="selectreport.id">
+                                    {{selectreport.name}} <span class="float-right"> {{selectreport.id }}</span>
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                       
+                    </div>
+    
+                </div>
+    
+
+                <div class="col-md-6 mb-3 col-sm-12">
+                    <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">{{'Country' | translate }}:</span>
+                        <mat-form-field appearance="outline" >
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="countryInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="country"
+                                (keyup)="onCountryInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #country="matAutocomplete"
+                                (optionSelected)="onCountrySelection($event)">
+                                <mat-option *ngFor="let item of listCountry" 
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+    
+    
+                        <!-- <select class="form-control plant-select" formControlName="commodity">
+                        <option [value]="null"><input type="text" [(ngModel)]="commodityInput" [ngModelOptions]="{standalone: true}" (keyPress)="onCommodityInput()"/></option>
+                        <option *ngFor="let item of listCommodity" [value]="item?.id">
+                            {{item?.commodity}}
+                        </option>
+                    </select> -->
+    
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3 col-sm-12">
+                    <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">{{'City' | translate }}:</span>
+                        <mat-form-field appearance="outline" >
+                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="cityInput"
+                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="city"
+                                (input)="onCityInput($event)">
+                            <mat-autocomplete autoActiveFirstOption #city="matAutocomplete"
+                                (optionSelected)="onCitySelection($event)">
+                                <mat-option *ngFor="let item of listCity" 
+                                    [value]="item?.name">{{item?.name}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+    
+    
+                    </div>
+                </div>
+    
+                <div class="col-md-6 mb-3 col-sm-12">
+                    <div class="d-flex">
+                        <span class="vendor-per w-25 pt-2">{{'Colour' | translate }}:</span>
+                        <mat-form-field appearance="outline" >
+                            <mat-select formControlName="colour" class="form-control plant-select px-2">
+                                <mat-option [value]= "'GREEN'">
+                                {{'GREEN' | translate}}
+                                </mat-option>
+                                <mat-option [value] = "'YELLOW'">
+                                {{'YELLOW' | translate}}
+                                </mat-option>
+                                <mat-option [value] = "'RED'">
+                                {{'RED' | translate}}
+                                </mat-option>
+                                <mat-option [value] = "'ALL'">
+                                {{'ALL' | translate}}
+                                </mat-option>
+                              </mat-select>
+                        </mat-form-field>
+    
+    
+                    </div>
+                </div>
+
+
+                <div class="col-md-2 mb-3 col-sm-12">
+                    <div class="form-group mt-1">
+                        <button type="submit" class="btn btn-primary" style="border-radius: 50px;width: 100%;"   
+                        (click)="onExecuteClick()"
+                        
+                        >
+                        {{'mapout' | translate }}
+                        <!-- <mat-spinner diameter="30" color="white" *ngIf="loader"></mat-spinner> -->
+                    </button>
+                </div>
+                </div>
+            </div>
+        </form>
+
+      
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 map-rank1 pr-0">
+        <div class="profile card card-body px-2 pt-3 pb-0 owe-scr">
+
+            <div class="pro-form">
+                <div class="mapout-ta">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">{{'Ranking' | translate }}</th>
+                                <th scope="col">{{'Vendor Name' | translate }}</th>
+                                <th scope="col">{{'Score' | translate }}</th>
+                                <th scope="col">{{'Spend' | translate }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of listMapOutVendor">
+                                <td>{{item.ranking}}</td>
+                                <td>{{item.vendorName}}</td>
+                                <td>{{item.score}}</td>
+                                <td>${{item.spend.toFixed(2)}}</td>
+                        
+                            </tr>
+                        
+                               
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+        <div class="ven-sc-scroll" *ngIf="listMapOutVendor && listMapOutVendor.length>0">
+        <div class="d-flex">
+                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 mapboxes-hover me-4" *ngFor="let item of listMapOutVendor">
+                    <div class="profile-h card rankig-hover pb-0 mb-0">
+                        <div class="mapout-ta2">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td class="pt-4">{{'Ranking' | translate }}</td>
+                                        <td  class="pt-4">{{item.ranking}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{'Vendor' | translate }}</td>
+                                        <td>{{item.vendorCode}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{'Name of Vendor' | translate}} </td>
+                                        <td>{{item.vendorName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{'Email Address' | translate }}</td>
+                                        <td>{{item.emailAddress}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{'Contact Name' | translate }}</td>
+                                        <td>{{item.contactName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{'Country' | translate }}</td>
+                                        <td>{{item.country}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{'City' | translate }}</td>
+                                        <td>{{item.city}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{'Address' | translate }}</td>
+                                        <td>{{item.address}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{'Zipcode' | translate}}</td>
+                                        <td>{{item.zipcode}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{'Phone' | translate }}</td>
+                                        <td>{{item.phone}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{'Color' | translate }}</td>
+                                        <td>{{item.color}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-4">{{'Spend' | translate }}</td>
+                                        <td class="pb-4">${{item.spend.toFixed(2)}}</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+          
+                
+            </div>
+        </div>
+    </div>
+</div>

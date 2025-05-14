@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12  col-6 deliver-nav  ml-auto">
+        <div class="card card-body px-0 pt-0 pb-2">
+            <div class="row mt-4">
+                <div class="col-md-5">
+                    <h2 class="mb-0 pl-4 pt-0">Open PO up to</h2>
+                </div>
+                <div class="col-md-7 pr-4">
+                    <div class="form-group otd-para pr-2 mb-0">
+                        <!-- <app-basic-datepicker style="border: 0px !important;"></app-basic-datepicker> -->
+                        <input type="text" placeholder="08/1/2021" class="form-control" disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12  col-6 deliver-nav">
+        <div class="card card-body px-3 pt-3 pb-3 mb-0">
+            <h2 class="mb-0">Report Option</h2>
+            <mat-radio-group aria-label="Select an option" class="rad-io d-flex pb-3">
+                <mat-radio-button value="1">All Open Order</mat-radio-button>
+                <mat-radio-button value="2">Ack Needed Orders</mat-radio-button>
+                <mat-radio-button value="3">Past Due Orders</mat-radio-button>
+                <mat-radio-button value="4">Future Past Due Orders</mat-radio-button>
+                <div class="form-group row  mb-3">
+                    <div class="col-sm-6 otd-para pl-3 pr-2">
+                        <input type="text" class="form-control" placeholder="50" readonly
+                            style="width:50px;text-align: center;margin-left: 10px;">
+                    </div>
+                    <label class="col-sm-6 col-form-label larec pt-0"
+                        style="color:#7E7F81;font-size: 13px;">Days</label>
+                </div>
+                <mat-radio-button value="5">Lead Time Check Report</mat-radio-button>
+              </mat-radio-group>
+
+        </div>
+    </div>
+</div>

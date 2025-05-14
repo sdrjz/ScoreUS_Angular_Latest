@@ -1,0 +1,111 @@
+<!--**********************************
+	Content body start
+***********************************-->
+<div class="content-body">
+    <div class="container-fluid">
+
+        <!-- row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="profile card card-body px-3 pt-3 pb-0">
+                    <div class="profile-head">
+                        <div class="profile-name px-3 pt-2">
+                            <h4 class="mb-0 pro-name uer-font invite-hd">{{'Buy Users & Vendors' | translate}}</h4>
+                            <p class="pt-3">{{'The fee of adding an additional user is $10.00 per/month while adding vendor is absolutely free' | translate}}.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="row mb-3">
+                        <ng-container *ngFor="let item of listReferFriend" class="mb-2">
+                            <div class="col-md-3 col-sm-8">{{item.fullName}}</div>
+                            <div class="col-md-3 col-sm-8">{{item.email}}</div>
+                            <div class="col-md-3 col-sm-8">{{getRoleName(item.roleId)}}</div>
+
+                            <div class="col-md-3 d-flex flex-row col-sm-2">
+                                <button (click)="onEditClick(item)" class="button_background"
+                                    matTooltip="Click to edit email"><span class="material-icons">edit</span>
+                                </button>
+                                <button (click)="onDeleteClick(item)" class="button_background"
+                                    matTooltip="Click to delete email"><span
+                                        class="material-icons">delete_outline</span>
+                                </button>
+                            </div>
+                        </ng-container>
+                    </div>
+
+
+                    <div class="pro-form pt-2">
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 pl-4 pr-4 udetail">
+                                <div class="card-body pt-0 pl-0">
+                                    <div class="form-validation">
+                                        <form class="form-valide" [formGroup]="angForm" novalidate autocomplete="off">
+                                            <div class="form-group row">
+                                                <div class="col-lg-2">
+                                                    <select class="form-control default-select" id="usertype"
+                                                        formControlName="roleId" (change)="onRoleSelection($event)">
+                                                        <option value="">{{'Select Role' | translate}}</option>
+
+                                                        <option *ngFor="let item of roles" value="{{item.roleId}}">
+                                                            {{item.name}}</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-lg-3"
+                                                    *ngIf="currentSelectedRole == 12 || currentSelectedRole == 13 || currentSelectedRole == 14">
+                                                    <select class="form-control default-select"
+                                                        (change)="onVendorSelection($event)"
+                                                        [(ngModel)]="selectedVendorForDropDown"
+                                                        [ngModelOptions]="{standalone: true}">
+                                                        <option [value]="">Select Vendor</option>
+
+                                                        <option *ngFor="let item of listVendor" [value]="item.id">
+                                                            {{item.name}}</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-lg-2">
+                                                    <input type="text" class="form-control" id="firstname"
+                                                        formControlName="firstName"
+                                                        [placeholder]="'Full Name' | translate" maxlength="50">
+                                                </div>
+
+                                                <div class="col-lg-3">
+                                                    <input type="text" class="form-control" id="email"
+                                                        formControlName="email" [placeholder]="'Email Address' | translate" >
+
+                                                </div>
+
+                                                <div class="col-lg-2"><button (click)="onSaveClick()"
+                                                        class="button_background" matTooltip="Click to save email">{{'Add Professional' | translate}}
+                                                    </button></div>
+                                                <!-- <span class="material-icons">add</span> -->
+                                            </div>
+
+
+
+                                            <div class="form-group row">
+                                                <div class="col-lg-5">
+                                                    <button type="submit"
+                                                        class="btn btn-primary profi-btn mb-4 pl-5 pr-5 pt-2 pb-2"
+                                                        (click)="onReferClick()">{{'Buy' | translate}}</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <div *ngIf="alreadyExists!=''"><strong class="text-danger">Account already exist: {{alreadyExists}}</strong></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--**********************************
+	Content body end
+***********************************-->

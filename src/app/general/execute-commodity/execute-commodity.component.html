@@ -1,0 +1,117 @@
+<div class="card p-4 mt-5">
+    <form [formGroup]="form">
+    <div class="row d-flex">
+        <div class="col-md-6 col-sm-12 mb-3">
+            <div class="d-flex">
+                <span class="vendor-per pt-2 w-25">{{'Start date' | translate}}</span>
+                <mat-form-field appearance="fill">
+                    <input matInput
+                    formControlName="startDate" 
+                    [matDatepicker]="startDate" 
+                     style="border-radius:15px;"
+                     (dateChange)="onDateChange()">
+                    <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                    <mat-datepicker #startDate></mat-datepicker>
+                </mat-form-field>
+            </div>
+            
+        </div>
+        <div class="col-md-6 col-sm-12 mb-3 mt-0">
+            <div class="d-flex">
+                <span class="vendor-per pt-2  w-25">{{'End date' | translate}}</span>
+                <mat-form-field appearance="fill">
+                    <input matInput [matDatepicker]="endDate"
+                    formControlName="endDate"
+                    style="border-radius:15px;"
+                    (dateChange)="onDateChange()">
+                    <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                    <mat-datepicker #endDate></mat-datepicker>
+                </mat-form-field>
+                <!-- <app-comparison-ranges></app-comparison-ranges> -->
+            </div>
+            <p *ngIf="form?.errors?.dateValid " class="text-danger w-100 d-flex pl-3 text-small">{{'End date must be greater then start date' | translate }}</p>
+        </div>
+        <div class="col-md-6 mb-3 col-sm-12">
+            <div class="d-flex">
+                <span class="vendor-per w-25 pt-2">{{ 'Plant' | translate}}:</span>
+                <mat-form-field appearance="outline" class="pl-0"
+                    [matTooltip]="tips.plantSelection" [matTooltipPosition]="'above'">
+                        <input type="text" class="form-control plant-select px-2" [(ngModel)]="plantInput"
+                            [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="plant"
+                            (keyup)="onPlantInput($event)">
+                        <mat-autocomplete autoActiveFirstOption #plant="matAutocomplete"
+                            (optionSelected)="onPlantSelect($event)">
+                            <mat-option *ngFor="let item of listPlant"
+                                [value]="item?.name">{{item?.name}}<span class="float-right">{{item.id}}</span></mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+            </div>
+            
+         
+        </div>
+        <!-- (keyup)="onCommodityInput($event)" -->
+       
+        
+   
+         <div class="col-md-6 mb-3 col-sm-12"> 
+            <div class="d-flex">
+                <span class="vendor-per w-25 pt-2">{{ 'Commodity' | translate }}:</span>
+                <mat-form-field appearance="outline" class="pl-0"
+                [matTooltip]="tips.commoditySelection" [matTooltipPosition]="'above'">
+                    
+                <input type="text" id="selectBox" class="form-control plant-select px-2" [(ngModel)]="commodityInput"
+                        [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="commodity"
+                        (keyup)="onCommodityInput($event)">
+                    <mat-autocomplete autoActiveFirstOption #commodity="matAutocomplete"
+                        (optionSelected)="onCommoditySelect($event)">
+                        <mat-option *ngFor="let item of listCommodity"
+                            [value]="item?.value">{{item?.name}}<span class="float-right">{{item.id}}</span></mat-option>
+                    </mat-autocomplete>
+                    <div id="selectVale" style="display:none;" (click)="onSelectValeClick()" class="mat-form-field-autofill-control mat-autocomplete-trigger form-control plant-select px-2 ng-tns-c151-3 ng-pristine ng-valid cdk-text-field-autofill-monitored"></div>
+                </mat-form-field>
+
+            
+            </div>
+            
+            
+            
+        </div>
+
+        <div class="col-md-2 mb-3 col-sm-12">
+            <div class="form-group mt-1">
+                <button type="submit" class="btn btn-primary" style="border-radius: 50px;width: 100%;" (click)="onCommodityExecuteClick()">{{ 'Execute' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+
+
+
+<!-- 
+<mat-form-field class="example-chip-list" appearance="outline" style="border:1px solid #b4b8bb!important; border-radius:30px!important">
+    <mat-chip-list #chipList>
+      <mat-chip
+        *ngFor="let selectreport of selected"
+        [selectable]="selectable"
+        [removable]="true"
+        (removed)="remove(selectreport)">
+        {{selectreport.name}}
+        <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+      </mat-chip>
+      <input style="height:26px;"
+        #fruitInput
+        [matAutocomplete]="auto"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        [(ngModel)]="commodityInput"
+        [ngModelOptions]="{standalone: true}"
+        matInput    
+        (keyup)="onCommodityInput($event)">
+    </mat-chip-list>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelected($event)">
+      <mat-option *ngFor="let selectreport of listCommodity" [value]="selectreport.id">
+          {{selectreport.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field> -->

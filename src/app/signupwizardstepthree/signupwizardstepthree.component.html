@@ -1,0 +1,189 @@
+<div class="authincation h-100 login-bg">
+    <div class="container">
+        <div *ngIf="currentUrl === '/user/plans'" class="row" id="row">
+            <div class="col-3" ></div>
+            <div id="col-12" class="col-md-11 col-9 pl-4 pr-4 manage-u pohistory-entrie activeusers offset-md-2" >
+                <div class="pt-3 pb-0 mt-5">
+                    <div class="profile-head">
+                        <div class="col-lg-5 justify-content-center mx-auto">
+                            <div class="wizard-boulit mb-5">
+                                <ul>
+                                    <li></li>
+                                    <li></li>
+                                    <li class="active"></li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="profile-name px-3 pt-2 col-lg-8 ml-auto">
+                                <h4 class="mb-0 pro-name uer-font text-center" style="font-size:22px;">SUBSCRIPTION PLANS</h4>
+                            </div>
+                            <div class="col-lg-2 col-sm-2 text-right">
+                                <label class="switch">
+                                    <input
+                                      type="checkbox"
+                                      [checked]="isYearly"
+                                      class="switch-input"
+                                      (change)="pkg_toggle($event)"
+                                    >
+                                    <span
+                                      class="switch-label"
+                                      [attr.data-monthly]="'Monthly' | translate"
+                                      [attr.data-yearly]="'Yearly' | translate"
+                                    ></span>
+                                    <span class="switch-handle"></span>
+                                  </label>
+                                <!-- <label class="switch">
+                                    <input type="checkbox" class="switch-input">
+                                    <span class="switch-label" data-monthly="Monthly" data-yearly="Yearly"
+                                        (click)="pkg_toggle($event)"></span>
+                                    <span class="switch-handle"></span>
+                                </label> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pro-form pt-4">
+                        <div class="pb-5 mb-5">
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12" *ngFor="let item of packages">
+                                    <div class="price-list active" style="position: relative; padding-bottom: 180px;">
+                                        <h2>{{item.name}}</h2>
+                                        <div class="d-flex mb-4">
+                                            <div class="col-md-6">
+                                                <h3>${{item.beforeAmount}}</h3>
+                                                <p>PER USER ADMIN</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h3 style="text-decoration:none;" class="red">${{item.currentAmount}}
+                                                </h3>
+                                                <p class="red">PER USER ADMIN</p>
+                                            </div>
+                                        </div>
+                                        <div class="list-user">
+                                            <!-- <p>Invite Users</p>
+                                            <p>Check reports</p>
+                                            <p>Upload data</p>
+                                            <p>Make analysis</p> -->
+                                            <p class="pb-0" *ngFor="let detail of item.details.split('#')">{{ detail.trim() | translate}}</p>
+                                        </div>
+                                        <div class="text-center mt-5" style="position: absolute;bottom:15px;left: 0;right:0;padding-bottom:0px!important;">
+                                                <span #id style="display:none;" >{{item.pkgId}}</span>
+                                                <span #priceID style="display:none;">{{item.stripePriceId}}</span>
+
+                                            <button (click)="getStarted(id.innerHTML,priceID.innerHTML,1)"
+                                                class="upgrade  pl-4 pr-4 mb-3">GET STARTED</button><br>
+                                            <a  (click)="getStarted(id.innerHTML,priceID.innerHTML,0)"
+                                                class="pt-3 mb-3"
+                                                style="color:#BC1A20;font-size:20px;font-weight:600;text-decoration:underline;cursor: pointer!important;">
+                                                FREE TRIAL</a>
+                                            
+                                                <p class="pt-2" style="color:#9CA1A5;font-size:16px;">*Valid for 30 days. 1
+                                                User only</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div *ngIf="currentUrl !== '/user/plans'" class="row" id="row">
+            <!-- <div class="col-3" *ngIf="currentUrl == '/user/plans'"></div> -->
+            <div id="col-12" class="col-xl-12 col-lg-12 pl-4 pr-4 manage-u pohistory-entrie activeusers" >
+                <div class="pt-3 pb-0 mt-5">
+                    <div class="profile-head">
+                        <div class="col-lg-5 justify-content-center mx-auto">
+                            <div class="wizard-boulit mb-5">
+                                <ul>
+                                    <li></li>
+                                    <li></li>
+                                    <li class="active"></li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="profile-name px-3 pt-2 col-lg-8 ml-auto">
+                                <h4 class="mb-0 pro-name uer-font text-center" style="font-size:22px;">SUBSCRIPTION PLANS</h4>
+                            </div>
+                            <div class="col-lg-2 col-sm-2 text-right">
+                                <label class="switch">
+                                    <input
+                                      type="checkbox"
+                                      [checked]="isYearly"
+                                      class="switch-input"
+                                      (change)="pkg_toggle($event)" 
+                                    >
+                                    <span
+                                      class="switch-label"
+                                      [attr.data-monthly]="'Monthly' | translate"
+                                      [attr.data-yearly]="'Yearly' | translate"
+                                    ></span>
+                                    <span class="switch-handle"></span>
+                                  </label>
+                                <!-- <label class="switch">
+                                    <input type="checkbox" class="switch-input">
+                                    <span class="switch-label" data-yearly="Yearly" data-monthly="Monthly"
+                                        (click)="pkg_toggle($event)"></span>
+                                    <span class="switch-handle"></span>
+                                </label> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pro-form pt-4">
+                        <div class="pb-5 mb-5">
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12" *ngFor="let item of packages">
+                                    <div class="price-list active" style="position: relative; padding-bottom: 180px;">
+                                        <h2>{{item.name}}</h2>
+                                        <div class="d-flex mb-4">
+                                            <div class="col-md-6">
+                                                <h3>${{item.beforeAmount}}</h3>
+                                                <p>PER USER ADMIN</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h3 style="text-decoration:none;" class="red">${{item.currentAmount}}
+                                                </h3>
+                                                <p class="red">PER USER ADMIN</p>
+                                            </div>
+                                        </div>
+                                        <div class="list-user">
+                                            <p class="pb-0" *ngFor="let detail of item.details.split('#')">{{ detail.trim() | translate}}</p>
+                                            <!-- <p>Invite Users</p>
+                                            <p>Check reports</p>
+                                            <p>Upload data</p>
+                                            <p>Make analysis</p> -->
+                                        </div>
+                                        <div class="text-center mt-5" style="position: absolute;bottom:15px;left: 0;right:0;padding-bottom:0px!important;">
+                                                <span #id style="display:none;" >{{item.pkgId}}</span>
+                                                <span #priceID style="display:none;">{{item.stripePriceId}}</span>
+
+                                            <button (click)="getStarted(id.innerHTML,priceID.innerHTML,1)"
+                                                class="upgrade  pl-4 pr-4 mb-3">GET STARTED</button><br>
+                                            <a  (click)="getStarted(id.innerHTML,priceID.innerHTML,0)"
+                                                class="pt-3 mb-3"
+                                                style="color:#BC1A20;font-size:20px;font-weight:600;text-decoration:underline;cursor: pointer!important;">
+                                                FREE TRIAL</a>
+                                            
+                                                <p class="pt-2" style="color:#9CA1A5;font-size:16px;">*Valid for 30 days. 1
+                                                User only</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

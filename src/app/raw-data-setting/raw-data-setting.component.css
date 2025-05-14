@@ -1,0 +1,14 @@
+table.dataTable thead th, table.dataTable thead td {
+    padding: 0px 18px;
+    border-bottom: 1px solid #111;
+    width: 200px !important;
+    text-align: left !important;
+    padding-left: 10px !important;
+}
+table.dataTable thead th, table.dataTable thead th {
+    width: 200px !important;
+    text-align: left !important;
+    padding-left: 10px !important;
+}
+
+

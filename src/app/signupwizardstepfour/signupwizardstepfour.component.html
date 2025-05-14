@@ -1,0 +1,118 @@
+<div class="authincation h-100 login-bg">
+    <div class="container vh-100">
+        <div class="row justify-content-center h-100 align-items-center">
+            <div class="col-lg-5 col-md-7">
+                <div class="wizard-boulit mb-5">
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li class="active"></li>
+                    </ul>
+                </div>
+                <div class="authincation-content">
+                    <div class="row no-gutters">
+                        <div class="col-xl-12 wizard-num">
+                            <div class="auth-form pr-3">
+                                <h4 class="text-center mb-3" style="font-weight: 500;">Payment Details</h4>
+                                <form class="secstep" [formGroup]="paymentForm">
+                                    <div class="form-control mb-3 pb-5">
+                                        <input matInput class="border-0" placeholder="Name on Card*"
+                                            formControlName="nameOnCard" >
+                                        <mat-error *ngIf="isControlHasError('nameOnCard','required')" class="mt-2">
+                                            <p class="pt-2">Name On Card Required</p>
+                                        </mat-error>
+                                    </div>
+                                    <div class="form-control mb-3 pb-5">
+                                        <!-- <input matInput class="border-0" placeholder="Card*" formControlName="cardNo"> -->
+                                        <input type="text" matInput class="border-0" mask="0000 0000 0000 0000"
+                                            placeholder="xxxx xxxx xxxx xxxx" formControlName="cardNo" />
+                                        <mat-error *ngIf="isControlHasError('cardNo','required')" class="mt-2">
+                                            <p class="pt-2">Card No Required</p>
+                                        </mat-error>
+                                    </div>
+                                    <div class="d-flex flex-md-row flex-sm-column mb-5">
+                                        <div class="col-md-7 pl-0">
+                                            <mat-label>Expiry:</mat-label>
+                                            <div class="d-flex flex-column mb-3">
+                                                
+                                                <div class="d-flex flex-md-row flex-sm-column">
+                                                <mat-form-field appearance="fill" class="mt-2" style="width:50%;">
+                                                    <mat-select class="form-select" [(ngModel)]="selectedMonth" (ngModelChange)="updateExpiry()" [ngModelOptions]="{standalone: true}">
+                                                        <mat-option *ngFor="let month of months" [value]="month.value">{{ month.value }}</mat-option>
+                                                    </mat-select>
+                                                  </mat-form-field>
+                                                
+                                                  <!-- Year Dropdown -->
+                                                  <mat-form-field appearance="fill" class="mt-2" style="width:50%; margin-left:10px;">
+                                                    <mat-select class="form-select" [(ngModel)]="selectedYear" (ngModelChange)="updateExpiry()" [ngModelOptions]="{standalone: true}">
+                                                      <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
+                                                    </mat-select>
+                                                  </mat-form-field>
+                                                
+                                                </div>
+                                          
+                                                  <!-- Error Message -->
+                                                  <mat-error *ngIf="!selectedMonth || !selectedYear">
+                                                    <p class="pt-1">Expiry Month and Year are required</p>
+                                                  </mat-error>
+                                               
+                                                  <mat-error *ngIf="isDateInvalid">
+                                                    <p class="pt-1">Expiry date cannot be in the past</p>
+                                                  </mat-error>
+                                                <!-- <mat-form-field appearance="fill" class="mt-2">
+                                                    <input matInput [matDatepicker]="picker" formControlName="expiry"
+                                                        style="position:inherit;border-bottom: #525353 solid 1px;padding-bottom: 2px;"
+                                                        [min]="currentDate">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker">
+                                                    </mat-datepicker-toggle>
+                                                    <mat-datepicker #picker></mat-datepicker>
+                                                </mat-form-field>
+                                                <mat-error *ngIf="isControlHasError('expiry','required')" >
+                                                    <p class="pt-1" >Expiry Required</p>
+                                                </mat-error> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-5 pr-0 ">
+                                            <label></label>
+                                            <!-- <div class="form-control mb-3 pb-3 mt-3">
+                                                <input type="text" matInput class="border-0" mask="0000"
+                                                    placeholder="CVV" formControlName="cvv" />
+                                                <mat-error *ngIf="isControlHasError('cvv','required')">
+                                                    <p class="pt-2">CVV Required</p>
+                                                </mat-error>
+                                            </div> -->
+                                            <div class="form-control mb-3 pb-3 mt-3">
+                                                <input
+                                                  type="text"
+                                                  matInput
+                                                  class="border-0"
+                                                  placeholder="CVV"
+                                                  formControlName="cvv"
+                                                  maxlength="4" 
+                                                />
+                                                <mat-error *ngIf="isControlHasError('cvv', 'required')">
+                                                  <p class="pt-2">CVV Required</p>
+                                                </mat-error>
+                                                <mat-error *ngIf="isControlHasError('cvv', 'pattern')">
+                                                  <p class="pt-2">CVV must be 3 or 4 digits</p>
+                                                </mat-error>
+                                              </div>
+                                        </div>
+                                    </div>
+                                    <p style="font-size:14px;" class="pb-2 mt-5"><span style="color:#BC1A20;">Note:</span>
+                                        You'll be charged after 30 days if you don't cancel your trial</p>
+
+                                    <div class="text-center mt-4 mb-3 wizard-padding">
+                                        <a (click)="onSubmit()" class="btn btn-primary btn-block mb-4">Submit</a>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

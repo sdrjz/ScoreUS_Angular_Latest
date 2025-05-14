@@ -1,0 +1,155 @@
+<div>
+    <h2 class=" myplanh2 pl-3 pt-4">{{'Add More Users to your Current Subscription' | translate }}</h2>
+    <div class="row">
+        <div class="col-lg-2 pr-2">
+        <p class="pl-3 pt-3" style="font-size:12px;">{{'$10.00 per/user' | translate}} <br> {{'$0.00 per/vendor' | translate }}</p>
+        </div>
+        <div class="col-lg-6 col-sm-10 d-flex mt-2">
+            <div class="form-group myplan pt-2">
+                <div class="profile-name pt-2 col-lg-5 d-flex pl-0">
+                    <!-- <h4 class="mb-0 pro-name uer-font pr-4">Purchase User</h4> -->
+                    <div class="form-check-inline" style="height:25px;">
+                        <button class="btn minus" (click)="minus()"><i
+                                class="fa fa-minus"></i></button>
+                    </div>
+                    <div class="form-check-inline" style="height:25px;">
+                        <input type="text" class="form-control num-pup" [(ngModel)]="inputnumber">
+                    </div>
+                    <div class="form-check-inline" style="height:25px;">
+                        <button class="btn plus" (click)="plus()"><i
+                                class="fa fa-plus"></i></button>
+                    </div>
+                </div>
+                <!-- <select class="form-control mt-1">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select> -->
+            </div>
+            <!-- <button
+            type="button"
+            class="btn btn-primary profi-btn mb-4 pl-5 pr-5 mt-2 pt-2 pb-2"
+            style="height: 40px;"
+            (click)="onBuyClick()"
+            >
+            {{ 'Buy' | translate }}
+            </button> -->
+            <button type="submit" [routerLink]="['/user/subsription-payment-inviteuser/']"  [queryParams]=
+            "{id:inputnumber}" class="btn btn-primary profi-btn mb-4 pl-5 pr-5 mt-2 pt-2 pb-2" style="height:40px;"  >{{'Buy' | translate }}</button>
+        </div>
+    </div>
+</div>
+
+<!-- row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="profile card card-body px-3 pt-3 pb-0 mt-5" style="height: auto!important;">
+            <div class="profile-head">
+                <div class="row">
+                    <div class="profile-name px-3 pt-2 col-lg-3">
+                        <h4 class="mb-0 pro-name uer-font">{{'Subscription' | translate }}</h4>
+                    </div>
+                    
+                    <div class="col-lg-3 col-sm-3 ml-auto text-right">
+                        <button type="submit" class="btn btn-primary profi-btn mb-4 pl-5 pr-5 mt-2 pt-3 pb-3 can-btn" (click)="openDialog()">
+                            {{'Cancel Plan' | translate }}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-sm-2 d-flex justify-content-end">
+                <label class="switch">
+                    <input type="checkbox" [disabled]="userCurrentPkg" [checked]="isYearly" class="switch-input">
+                    <span class="switch-label" [attr.data-monthly]="'Monthly' | translate" [attr.data-yearly]="'Yearly' | translate"
+                    (click)="!userCurrentPkg && pkg_toggle($event)"></span>
+                    <span class="switch-handle"></span>
+                </label>
+            </div>
+            <div class="pro-form pt-4">
+                <div class="pl-5 pr-5">
+                    <div class="row ">
+<!--                    
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                        <div class="price-list active">
+                            <h2>SCORECARD</h2>
+                            <div class="d-flex mb-4">
+                                <div class="col-md-6">
+                                    <h3>$149</h3>
+                                    <p>PER USER ADMIN</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h3 style="text-decoration:none;" class="red">$99</h3>
+                                    <p class="red">PER USER ADMIN</p>
+                                </div>
+                            </div>
+                            <div class="list-user">
+                                <p>Invite Users</p>
+                                <p>Check reports</p>
+                                <p>Upload data</p>
+                                <p>Make analysis</p>
+                            </div>
+                            <div class="text-center mt-5 pb-5">
+                                <button [routerLink]="['/admin/packageupgrade']" class="upgrade  pl-4 pr-4" href="">CURRENT PACKAGE</button>
+                            </div>
+                        </div>
+                    </div>
+                    -->
+
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 mb-4 " [ngId]="item.beforeAmount" *ngFor="let item of packages">
+                        <div class="price-list" style="position: relative; padding-bottom: 60px;">
+                            <h2 class="mb-0">{{item.name | translate}}</h2>
+                            <h4>{{item.description | translate}}</h4>
+
+                            <div class="d-flex mb-4">
+                                <div class="col-md-6">
+                                    <h3>${{item.beforeAmount}}</h3>
+                                    <p>{{'PER USER ADMIN' | translate }}
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h3 style="text-decoration:none;" class="red">${{item.currentAmount}}</h3>
+                                    <p class="red">{{'PER USER ADMIN' | translate }}</p>
+                                </div>
+                            </div>
+
+                            <div class="list-user">
+                                <p class="pb-0" *ngFor="let detail of item.details.split('#')">{{ detail.trim() | translate}}</p>
+                                <!-- <p class="pb-3">{{'Check reports' | translate}}</p>
+                                <p class="pb-2">{{'Upload data' | translate}}</p>
+                                <p>{{'Make analysis' | translate }}</p> -->
+                                <p *ngIf="loggedInUser.stripePriceID == item.stripePriceId"><span>{{'Expiry Date' | translate }}</span> <span>: {{expiryDate}}</span></p>
+                                <p *ngIf="loggedInUser.stripePriceID != item.stripePriceId" class="pb-2"><span>{{'Expiry Date' | translate }}</span> <span>: N/A</span></p>
+                            </div>
+
+                            <div class="text-center mt-5 pb-5" style="position: absolute;bottom:15px;left: 0;right:0;padding-bottom:0px!important;">
+                                <div>
+                                    <button 
+                                        class="upgrade" 
+                                        [disabled]="loggedInUser.stripePriceID === item.stripePriceId ? true : false"
+                                        
+                                        (click)="openDialogupgrade(item,((['price_1LSG7XD3VtR6Yon3VvQgVtDx', 'price_1LSG6OD3VtR6Yon3e8tBQy2Q', 'price_1LSG8QD3VtR6Yon3uprGEg2A'].includes(loggedInUser.stripePriceID) ? [1, 3, 5].includes(item.pkgId) : false) ||
+                                        (['price_1LSG8QD3VtR6Yon3uprGEg2A'].includes(loggedInUser.stripePriceID) ? [1, 2, 3, 4, 5].includes(item.pkgId) : false) ||
+                                        (['price_1LSG8QD3VtR6Yon3Bhe8zSWL'].includes(loggedInUser.stripePriceID) ? [1, 2, 3, 4].includes(item.pkgId) : false)))" 
+                                        
+                                        [style.background-color]="loggedInUser.stripePriceID === item.stripePriceId ? '#bc1a20 !important' : ((['price_1LSG7XD3VtR6Yon3VvQgVtDx', 'price_1LSG6OD3VtR6Yon3e8tBQy2Q', 'price_1LSG8QD3VtR6Yon3uprGEg2A'].includes(loggedInUser.stripePriceID) ? [1, 3, 5].includes(item.pkgId) : false) ||
+                                        (['price_1LSG8QD3VtR6Yon3uprGEg2A'].includes(loggedInUser.stripePriceID) ? [1, 2, 3, 4, 5].includes(item.pkgId) : false) ||
+                                        (['price_1LSG8QD3VtR6Yon3Bhe8zSWL'].includes(loggedInUser.stripePriceID) ? [1, 2, 3, 4].includes(item.pkgId) : false))?'grey': 'black'" 
+                                    >
+                                        {{ loggedInUser.stripePriceID === item.stripePriceId ? getMessage() : 'SUBSCRIBE' | translate }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- [style.display]="loggedInUser.stripePriceID === item.stripePriceId ? 'block' : 'none'" -->
+                        <!-- *ngIf="!([6, 11, 14].includes(loggedInUser.roleID))"  -->
+                   
+                    </div>
+                    
+                
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

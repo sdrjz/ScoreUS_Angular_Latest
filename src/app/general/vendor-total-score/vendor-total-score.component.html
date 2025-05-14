@@ -1,0 +1,18 @@
+<div class="total-reven pt-0" style="position:relative">
+  
+    
+  
+    <p>{{totalscorename | translate}}</p>
+    <!-- <h2 *ngIf="!data">no data</h2> -->
+    <h3 *ngIf="data?.currentStatus?.length>0" style="color:white !important;" >{{ data?.currentStatus[0].totalScore}}/100 </h3>        
+
+    <ng-container *ngIf="(previousStatus <=0 || previousStatus>0)">
+       
+       
+        <h3 [style]="getTextColor()" > {{previousStatus}}%  <img [src]="getImage()" alt="" style="width:20px !important; margin-right: 2px !important;" class="pb-0"> <span>{{sentance | translate}}</span></h3>
+        <div class="new-use-red-b">
+            <div class="align-items-center"><img src="../assets/images/newuser.png" alt=""></div>
+        </div>
+    </ng-container>
+  
+</div>

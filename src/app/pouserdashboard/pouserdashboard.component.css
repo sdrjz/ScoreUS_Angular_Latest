@@ -1,0 +1,55 @@
+
+.perfrmanceTable {
+    width: 100%!important;
+}
+
+table.perfrmanceTable tr th, td {
+    padding: 8px;
+}
+
+table.perfrmanceTable tr  td {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.filed-ma {
+    width: 60px !important;
+    position: relative;
+    right: 19% !important;
+    float: right;
+    top: 27px;
+    z-index: 1;
+}
+
+.filed-ma2 {
+    width: 60px !important;
+    position: relative;
+    right: 17.5% !important;
+    float: right;
+    top: 27px;
+    z-index: 1;
+}
+
+@media screen and (min-width: 1366px) and (max-width: 1919px) {
+    .filed-ma {
+        right: 19% !important;
+    }
+    .filed-ma2 {
+        right: 17.5% !important;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    .filed-ma {
+        right: 26% !important;
+    }
+    .filed-ma2 {
+        right: 25% !important;
+    }
+}
+
+
+
+
+
+

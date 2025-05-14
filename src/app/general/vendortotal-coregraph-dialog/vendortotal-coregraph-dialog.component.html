@@ -1,0 +1,19 @@
+<div class="fullpop">
+<div class="vendor-graph">
+    <h3 class="text-center"><span>{{ data?.title }}</span><span class="pr-3" style="float: right;cursor: pointer;">
+            <button mat-dialog-close style="border: 0px;background: none;">
+                <i class="fa fa-times-circle fa-2x" aria-hidden="true"></i></button></span></h3>
+
+    <p class="text-center mb-0">
+        <span class="total-red-new-ven">{{ data?.point1 }}</span>
+        <span class="total-red-new-ven">{{ data?.point2 }}</span>
+        <span class="total-red-new-ven">{{ data?.point3 }}</span>    
+        <span class="total-red-new-ven">{{ data?.point4 }}</span>
+        <span class="total-red-new-ven">{{ data?.point5 }}</span>
+        <span class="total-red-new-ven">{{ data?.point6 }}</span>
+    </p>
+
+    <app-totalscore-graph class="text-center"></app-totalscore-graph>
+    <!-- <app-graphlargetc class="text-center"></app-graphlargetc> -->
+</div>
+</div>

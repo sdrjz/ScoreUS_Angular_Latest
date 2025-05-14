@@ -1,0 +1,86 @@
+
+
+
+
+
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="profile card card-body px-3 pt-3 pb-0 mt-5">
+      <div class="profile-head">
+        <div class="profile-name px-3 pt-2">
+      
+        </div>
+      </div>
+      <div class="pro-form pt-4">
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 pl-4 pr-4 manage-u pohistory-entrie activeusers">
+
+
+
+      <app-datatablewithpagination 
+      style="margin-top: 22px!important; overflow-x: auto !important; overflow-y: auto !important;" 
+      defaultSortBy="name"
+      [url]="getProjectsUrl"
+      [columns]="poRowcolumns" 
+      [isDeleted]="isDeleted"
+    
+      >
+
+      
+      <div ngProjectAs="title">
+        <div class="d-flex flex-row">
+          <h4 class="text-lg font-medium">{{'MATERIAL TARGET SCORE' | translate }}</h4>
+          
+          <button style="margin-left:5px;height:23px" class="toolbutton" [matTooltip]="tips.materialTargetDataSetting" [matTooltipPosition]="'above'" >?</button>
+        </div>
+      </div>
+
+
+          <ng-template let-column let-data="element" let-value="value">
+              <div *ngIf="column.def == 'status'" class="flex items-center space-x-2">
+                  <mat-slide-toggle [checked]="value == true" (change)="onToggleChange($event, data)">
+                  </mat-slide-toggle>
+              </div>
+
+              <div *ngIf="column.def == 'compare'" sticky>
+                  <mat-checkbox [checked]="isVendorSelected(data)" (change)="onCheckBoxClick($event,data)"></mat-checkbox>
+              </div>
+
+
+              <span *ngIf="column.def == 'ncR_Date'" class="px-3">
+                {{ (data.ncR_Date | date: 'MM/dd/yyyy')  }}
+              </span>
+              <span *ngIf="column.def == 'completionDate'" class="px-3">
+                {{ (data.completionDate | date: 'MM/dd/yyyy')  }}
+              </span>
+              <span *ngIf="column.def == 'pO_Issue_Date'" class="px-3">
+                {{ (data.pO_Issue_Date | date: 'MM/dd/yyyy')  }}
+              </span>
+              <span *ngIf="column.def == 'createdAt'" class="px-3">
+                {{ (data.createdAt | date: 'MM/dd/yyyy')  }}
+              </span>
+              <span *ngIf="column.def == 'updatedAt'" class="px-3">
+                {{ (data.updatedAt | date: 'MM/dd/yyyy')  }}
+              </span>
+
+
+              <div *ngIf="column.def == 'view'" class="flex flex-row justify-start">
+                  <button mat-stroked-button color="primary" *ngIf="![9,11].includes(loggedInUser.roleID)" (click)="onDelete(data)">
+                      {{'Delete' | translate }}
+                  </button>
+                  <button mat-stroked-button color="primary" *ngIf="![9,11].includes(loggedInUser.roleID)" (click)="onUpdate(data)">
+                     {{'Update' | translate }}
+                  </button>
+              </div>
+          </ng-template>
+      </app-datatablewithpagination>
+
+
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+

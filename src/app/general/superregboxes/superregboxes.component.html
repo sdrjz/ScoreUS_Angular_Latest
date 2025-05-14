@@ -1,0 +1,84 @@
+<div class="row">
+    <div class="col-xl-3 col-sm-6 mb-4">
+        <div class="new-use new-use-hei">
+
+            <p>{{'New User Registrations' | translate }}</p>
+            <h2 style="font-size:28px;font-weight: 500;" *ngIf="superAdminCounts && name =='all'">{{superAdminCounts[0]?.newUserOverALLRegistration}}</h2>
+            <h3 *ngIf="name =='all'">{{getPercentageValue('newUserRegistration')}}% <img [attr.src]="getPercentageValue('newUserOverALLRegistration') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>
+            
+            <h2 style="font-size:28px;font-weight: 500;" *ngIf="superAdminCounts && name =='po'">{{superAdminCounts[0]?.newUserPoRegistration}}</h2>
+            <h3 *ngIf="name =='po'">{{getPercentageValue('newUserPoRegistration')}}% <img [attr.src]="getPercentageValue('newUserPoRegistration') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>
+            
+            <h2 style="font-size:28px;font-weight: 500;" *ngIf="superAdminCounts && name =='scorecard'">{{superAdminCounts[0]?.newUserVendorRegistration}}</h2>
+            <h3 *ngIf="name =='scorecard'">{{getPercentageValue('newUserVendorRegistration')}}% <img [attr.src]="getPercentageValue('newUserVendorRegistration') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>
+            
+            <h2 style="font-size:28px;font-weight: 500;" *ngIf="superAdminCounts && name =='complete'">{{superAdminCounts[0]?.newUserALLRegistration}}</h2>
+            <h3 *ngIf="name =='complete'">{{getPercentageValue('newUserRegistration')}}% <img [attr.src]="getPercentageValue('newUserALLRegistration') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>
+            
+            <div class="new-use-red-b">
+                <div class="align-items-center"><img src="../assets/images/newuser.png" alt=""></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-4">
+        <div class="new-use active-user new-use-hei">
+            <p>{{'Active Users' | translate }}</p>
+            <h2 style="font-size:28px;font-weight: 500;" *ngIf="superAdminCounts && name=='all'">{{superAdminCounts[0]?.activeOverALLUsers}}</h2>
+            <h3 *ngIf="name == 'all'">{{getPercentageValue('activeALLUsers')}}% <img [attr.src]="getPercentageValue('activeOverALLUsers') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>
+            
+            <h2 style="font-size:28px;font-weight: 500;" *ngIf="superAdminCounts && name=='po'">{{superAdminCounts[0]?.activePOUsers}}</h2>
+            <h3 *ngIf="name == 'po'">{{getPercentageValue('activePOUsers')}}% <img [attr.src]="getPercentageValue('activePOUsers') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>
+            
+            <h2 style="font-size:28px;font-weight: 500;" *ngIf="superAdminCounts && name=='scorecard'">{{superAdminCounts[0]?.activeVendorUsers}}</h2>
+            <h3 *ngIf="name == 'scorecard'">{{getPercentageValue('activeVendorUsers')}}% <img [attr.src]="getPercentageValue('activeVendorUsers') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>
+            
+            <h2 style="font-size:28px;font-weight: 500;" *ngIf="superAdminCounts && name=='complete'">{{superAdminCounts[0]?.activeALLUsers}}</h2>
+            <h3 *ngIf="name == 'complete'">{{getPercentageValue('activeUsers')}}% <img [attr.src]="getPercentageValue('activeALLUsers') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>
+            
+            <div class="new-use-red-b">
+                <div class="align-items-center"><img src="../assets/images/newuser.png" alt=""></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-4">
+        <div class="new-use new-use-hei">
+            <p>{{'Avg. time on Site' | translate }}</p>
+            
+            <h2 style="font-size:28px;font-weight: 500;" *ngIf="superAdminCounts && name=='all'">{{superAdminCounts[0]?.allActiveTimeOnSite}}min</h2>
+            <h3 *ngIf="name=='all'">{{getPercentageValue('allActiveTimeOnSite')}}% <img [attr.src]="getPercentageValue('allActiveTimeOnSite') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>
+            
+            <h2 style="font-size:28px;font-weight: 500;" *ngIf="superAdminCounts && name=='po'">{{superAdminCounts[0]?.poActiveTimeOnSite}}min</h2>
+            <h3 *ngIf="name=='po'">{{getPercentageValue('poActiveTimeOnSite')}}% <img [attr.src]="getPercentageValue('poActiveTimeOnSite') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>
+            
+            <h2 style="font-size:28px;font-weight: 500;" *ngIf="superAdminCounts && name=='scorecard'">{{superAdminCounts[0]?.scActiveTimeOnSite}} min</h2>
+            <h3 *ngIf="name=='scorecard'">{{getPercentageValue('scActiveTimeOnSite')}}% <img [attr.src]="getPercentageValue('scActiveTimeOnSite') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate }}</span></h3>
+            
+            <h2 style="font-size:28px;font-weight: 500;" *ngIf="superAdminCounts && name=='complete'">{{superAdminCounts[0]?.completeActiveTimeOnSite}} min</h2>
+            <h3 *ngIf="name=='complete'">{{getPercentageValue('completeActiveTimeOnSite')}}% <img [attr.src]="getPercentageValue('completeActiveTimeOnSite') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate }}</span></h3>
+
+            <div class="new-use-red-b">
+                <div class="align-items-center"><img src="../assets/images/newuser.png" alt=""></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-4">
+        <div class="new-use active-user new-use-hei">
+            <p>{{'Referral Sign Ups' | translate }}</p>
+            <h2 style="font-size:28px;font-weight: 500;" *ngIf="superAdminCounts && name == 'all'">{{superAdminCounts[0]?.referralOverALLCount}}</h2>
+            <h3 *ngIf="name == 'all'">{{getPercentageValue('referralOverALLCount')}}% <img [attr.src]="getPercentageValue('referralALLCount') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>
+            
+            <h2 style="font-size:28px;font-weight: 500;" *ngIf="superAdminCounts && name == 'po'">{{superAdminCounts[0]?.referralPOCount}}</h2>
+            <h3 *ngIf="name == 'po'">{{getPercentageValue('referralPOCount')}}% <img [attr.src]="getPercentageValue('referralPOCount') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>
+            
+            <h2 style="font-size:28px;font-weight: 500;" *ngIf="superAdminCounts && name == 'scorecard'">{{superAdminCounts[0]?.referralVendorCount}}</h2>
+            <h3 *ngIf="name == 'scorecard'">{{getPercentageValue('referralVendorCount')}}% <img [attr.src]="getPercentageValue('referralVendorCount') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>
+            
+            <h2 style="font-size:28px;font-weight: 500;" *ngIf="superAdminCounts && name == 'complete'">{{superAdminCounts[0]?.referralALLCount}}</h2>
+            <h3 *ngIf="name == 'complete'">{{getPercentageValue('referralALLCount')}}% <img [attr.src]="getPercentageValue('referralALLCount') <= 0 ? '../../../assets/images/arrow-narrow-up.png':'../../../assets/images/ic-arrow-narrow-up.svg'" alt=""> <span id="text4">{{sentance | translate}}</span></h3>
+            
+            <div class="new-use-red-b">
+                <div class="align-items-center"><img src="../assets/images/newuser.png" alt=""></div>
+            </div>
+        </div>
+    </div>    
+</div>
