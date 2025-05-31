@@ -119,32 +119,14 @@
                 </a>
             </li>
             
-            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': apsArray.indexOf(currentHref) > -1}">
-                <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
-                    <i class="flaticon-381-referral"><img src="./assets/images/pomanager.png" alt=""></i>
-                    <span class="nav-text">{{"PO Manager" | translate}}</span>
+            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/openpoexpeditor'}">
+                <a [routerLink]="['/admin/openpoexpeditor']"
+                   class="{{(currentHref == '/admin/openpoexpeditor') ? 'mm-active' : ''}}">
+                  <i class="flaticon-381-referral"><img src="./assets/images/pomanager.png" alt=""></i>
+                  <span class="nav-text">{{"Open PO Expeditor" | translate}}</span>
                 </a>
-                <ul aria-expanded="false" [ngClass]="{'mm-show': apsArray.indexOf(currentHref) > -1}"  class="sub-menu">
-                    <li class="superadmin1nav">
-                        <a [routerLink]="['/admin/openpoexpeditor']"
-                            class="{{(currentHref == '/admin/openpoexpeditor') ? 'mm-active' : ''}}">
-                            <span class="nav-text">{{"Open PO Expeditor" | translate}}</span>
-                        </a>
-                    </li>
-                    <li class="superadmin1nav">
-                        <a [routerLink]="['/admin/openpotrendlinesuseradmin']"
-                            class="{{(currentHref == '/admin/openpotrendlinesuseradmin') ? 'mm-active' : ''}}">
-                            <span class="nav-text">{{"Open PO Trendlines" | translate}}</span>
-                        </a>
-                    </li>
-                    <li class="superadmin1nav">
-                        <a [routerLink]="['/admin/openpoanalysis']"
-                            class="{{(currentHref == '/admin/openpoanalysis') ? 'mm-active' : ''}}">
-                            <span class="nav-text">{{"Open PO Analysis" | translate}}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+              </li>
+                  
 
             
             <!-- <li (click)="mainMenuClick($event)"  *ngIf="isReferralAllowed" [ngClass]="{'mm-active': currentHref == '/user/referafriend'}">
@@ -158,7 +140,7 @@
             <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/howtouse'}">
                 <a [routerLink]="['/admin/howtouse']" class="{{(currentHref == '/admin/howtouse') ? 'mm-active' : ''}}">
                     <i class="flaticon-381-referral"><img src="./assets/images/howtouse.png" alt=""></i>
-                    <span class="nav-text">{{"How to Use" | translate}}</span>
+                    <span class="nav-text">{{"Quick Guide" | translate}}</span>
                 </a>
             </li>
 
@@ -258,7 +240,7 @@
             <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/howtouse'}">
                 <a [routerLink]="['/admin/howtouse']" class="{{(currentHref == '/admin/howtouse') ? 'mm-active' : ''}}">
                     <i class="flaticon-381-referral"><img src="./assets/images/howtouse.png" alt=""></i>
-                    <span class="nav-text">{{"How to Use" |  translate}}</span>
+                    <span class="nav-text">{{"Quick Guide" |  translate}}</span>
                 </a>
             </li>
             <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/aboutscoreus'}">
@@ -363,7 +345,7 @@
             <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/howtouse'}">
                 <a [routerLink]="['/admin/howtouse']" class="{{(currentHref == '/admin/howtouse') ? 'mm-active' : ''}}">
                     <i class="flaticon-381-referral"><img src="./assets/images/howtouse.png" alt=""></i>
-                    <span class="nav-text">{{"How to Use" | translate}}</span>
+                    <span class="nav-text">{{"Quick Guide" | translate}}</span>
                 </a>
             </li>
      
@@ -507,7 +489,7 @@
                 <a [routerLink]="['/user/howtouse']" class="{{(currentHref == '/user/howtouse') ? 'mm-active' : ''}}"
                     (click)="onClick('How to use')">
                     <i class="flaticon-381-referral"><img src="./assets/images/howtouse.png" alt=""></i>
-                    <span class="nav-text">{{'How to Use' | translate }}</span>
+                    <span class="nav-text">{{'Quick Guide' | translate }}</span>
                 </a>
             </li>
             <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/aboutscoreus'}">
@@ -615,7 +597,7 @@
                 <a [routerLink]="['/user/howtouse']" class="{{(currentHref == '/user/howtouse') ? 'mm-active' : ''}}"
                     (click)="onClick('How to use')">
                     <i class="flaticon-381-referral"><img src="./assets/images/howtouse.png" alt=""></i>
-                    <span class="nav-text">{{'How to Use' | translate }}</span>
+                    <span class="nav-text">{{'Quick Guide' | translate }}</span>
                 </a>
             </li>
             <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/aboutscoreus'}">
@@ -809,7 +791,7 @@
                 <a [routerLink]="['/user/howtouse']" class="{{(currentHref == '/user/howtouse') ? 'mm-active' : ''}}"
                     (click)="onClick('How to use')">
                     <i class="flaticon-381-referral"><img src="./assets/images/howtouse.png" alt=""></i>
-                    <span class="nav-text">{{'How to Use' | translate }}</span>
+                    <span class="nav-text">{{'Quick Guide' | translate }}</span>
                 </a>
             </li>
      
@@ -996,7 +978,7 @@
                 <a [routerLink]="['/user/howtouse']" class="{{(currentHref == '/user/howtouse') ? 'mm-active' : ''}}"
                     (click)="onClick('How to use')">
                     <i class="flaticon-381-referral"><img src="./assets/images/howtouse.png" alt=""></i>
-                    <span class="nav-text">{{'How to Use' | translate }}</span>
+                    <span class="nav-text">{{'Quick Guide' | translate }}</span>
                 </a>
             </li>
             <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/aboutscoreus'}">
@@ -1076,7 +1058,7 @@
             <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/howtouse'}">
                 <a [routerLink]="['/admin/howtouse']" class="{{(currentHref == '/admin/howtouse') ? 'mm-active' : ''}}">
                     <i class="flaticon-381-referral"><img src="./assets/images/howtouse.png" alt=""></i>
-                    <span class="nav-text">{{"How to Use" | translate}}</span>
+                    <span class="nav-text">{{"Quick Guide" | translate}}</span>
                 </a>
             </li>
 
@@ -1118,7 +1100,7 @@
             <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/admin/howtouse'}">
                 <a [routerLink]="['/admin/howtouse']" class="{{(currentHref == '/admin/howtouse') ? 'mm-active' : ''}}">
                     <i class="flaticon-381-referral"><img src="./assets/images/howtouse.png" alt=""></i>
-                    <span class="nav-text">{{"How to Use" | translate}}</span>
+                    <span class="nav-text">{{"Quick Guide" | translate}}</span>
                 </a>
             </li>
 

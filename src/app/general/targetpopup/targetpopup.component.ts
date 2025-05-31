@@ -587,10 +587,10 @@ export class TargetpopupComponent implements OnInit {
 
   submitForm() {
 
-    if (this.form.invalid) {
-      this._notificationService.push("Invalid data", 2)
-      return;
-    }
+    // if (this.form.invalid) {
+    //   this._notificationService.push("Invalid data", 2)
+    //   return;
+    // }
 
     if (this.form.controls['plantCode']) {
       this.form.controls['plantCode'].enable()

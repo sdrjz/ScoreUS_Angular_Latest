@@ -98,7 +98,13 @@
         </mat-card-content> -->
 
 
-        <mat-card-content class="relative w-100" style="overflow-x:auto !important;overflow-y: auto !important;height:500px !important;" >
+        <mat-card-content
+        class="relative w-100"
+        [ngClass]="dataClass"
+        [ngStyle]="isCompact ? {'height': '150px', 'padding': '4px 0', 'overflow-y': 'hidden'} : {}"
+        style="overflow-x:auto; overflow-y: auto;">
+      
+
             <table  mat-table [dataSource]="dataSource" matSort class="w-100"  (matSortChange)="onClick('a',$event)">
                 <ng-container *ngFor="let column of filteredColumns" class="w-100 ml-5 mr-5">
                 <ng-container [matColumnDef]="column.def" [sticky]="column?.isSticky" class="w-100">
@@ -157,9 +163,11 @@
         
         
         <mat-paginator 
+        *ngIf="!isCompact"
         [pageSize]="pageSize" 
         [pageSizeOptions]="pageSizeOption" 
         aria-label="Select page of search results">
+      
         </mat-paginator>
     </div>
 </mat-card>

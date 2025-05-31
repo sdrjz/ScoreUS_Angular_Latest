@@ -127,15 +127,22 @@ export class SignupwizardstepfourComponent implements OnInit {
       subscriptionPlan  = (selectedPackage.totalDays == 365)?'Yearly':'Monthly';
     }
     
-    const currentDate = new Date();
-    const nextMonthDate = new Date(currentDate);
-    nextMonthDate.setMonth(currentDate.getMonth() + 1);
-    if (nextMonthDate.getDate() !== currentDate.getDate()) {
-      nextMonthDate.setDate(0);
-    }
+   const currentDate = new Date();
 
-    const nextMonthDatePlusOne = new Date(nextMonthDate);
-    nextMonthDatePlusOne.setDate(nextMonthDate.getDate() + 1);
+// First Billing Date = same day next month (handles month overflow)
+const nextMonthDatePlusOne = new Date(currentDate);
+nextMonthDatePlusOne.setMonth(currentDate.getMonth() + 1);
+
+// Fix overflow (e.g., Jan 31 → Mar 3)
+if (nextMonthDatePlusOne.getDate() !== currentDate.getDate()) {
+  nextMonthDatePlusOne.setDate(1);         // First day of next month
+  nextMonthDatePlusOne.setDate(0);         // Last day of previous month
+}
+
+// Free Trial End Date = 1 day before first billing date
+const nextMonthDate = new Date(nextMonthDatePlusOne);
+nextMonthDate.setDate(nextMonthDatePlusOne.getDate() - 1);
+
 
     const cardNo = this.paymentForm.value.cardNo;
     const lastFourDigits = cardNo.slice(-4);
@@ -144,17 +151,17 @@ export class SignupwizardstepfourComponent implements OnInit {
       data: {
         height: '75%',
         width: '100%',
-        yesBtn: 'Confirm & Subscribe',
+        yesBtn: 'Start Free Trial & Confirm Subscription',
         noBtn: 'Cancel',
-        heading: "Subscription Details",
+        heading: "Subscription Summary",
         message: `
           <p>Product Selected: <strong>${selectedPackage?.name}</strong></p>
           <p>Subscription Plan: <strong>${subscriptionPlan}</strong></p>
           <p>Free Trial Period: 1 months until <strong>${nextMonthDate.toISOString().split('T')[0]}</strong></p>
           <p>First Billing Date: <strong>${nextMonthDatePlusOne.toISOString().split('T')[0]}</strong></p>
-          <p>Subscription Fees: <strong>$${selectedPackage?.currentAmount}/${subscriptionPlan}</strong></p>
+          <p>Subscription Fee: <strong>$${selectedPackage?.currentAmount}/${subscriptionPlan}</strong></p>
           <p>Payment Method: Card Ending in <strong>${lastFourDigits}</strong></p>
-          <p>By confirming, you agree to the terms you have reviewed and wish to proceed with your subscription</p>
+          <p>By confirming, you acknowledge that you have reviewed the subscription details and agree to the terms. Your free trial will begin immediately, and billing will start automatically on the first billing date unless canceled beforehand.</p>
           `,
       },
       panelClass: 'custom-dialog-container'

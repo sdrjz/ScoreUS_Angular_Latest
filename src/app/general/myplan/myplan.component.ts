@@ -50,8 +50,8 @@ export class MyplanComponent implements OnInit {
         data: {
           height: '75%',
           width: '80%',
-          yesBtn: 'Okay',
-          noBtn: 'Cancel',
+          yesBtn: 'Yes',
+          noBtn: 'No',
           heading: 'Confirmation!',
           message: `
             <p>We’re sorry to see you go! Before you proceed, please be aware of the following:</p>
@@ -225,59 +225,51 @@ export class MyplanComponent implements OnInit {
             var details = "";
             switch(pkg) {
               case "SCORECARD30":
-                details = `6 Sigma and Continuous improvement methodology#
-                          Multiple layer 360 Review mechanism#
-                          Vendor, buyer, plant, material, commodity evaluation#
-                          Multiple Analysis tools for performance#
-                          Multiple Comparison charts for stakeholders#
-                          Statistical data for your performance#
-                          Various Reports for communication#
-                          Vendor Account setup`;
+                details = `Closed Order Management#
+                          Six Sigma Methodology#
+                          360° Review System#
+                          Full-Scope Evaluations#
+                          Performance Analytics#
+                          Comparison Dashboards#
+                          Statistical Insights#
+                          Advanced Reporting#
+                          Vendor Onboarding`;
                 break;
               case "SCORECARD365":
-                details = `6 Sigma and Continuous improvement methodology#
-                          Multiple layer 360 Review mechanism#
-                          Vendor, buyer, plant, material, commodity evaluation#
-                          Multiple Analysis tools for performance#
-                          Multiple Comparison charts for stakeholders#
-                          Statistical data for your performance#
-                          Various Reports for communication#
-                          Vendor Account setup`;
+                details = `Closed Order Management#
+                          Six Sigma Methodology#
+                          360° Review System#
+                          Full-Scope Evaluations#
+                          Performance Analytics#
+                          Comparison Dashboards#
+                          Statistical Insights#
+                          Advanced Reporting#
+                          Vendor Onboarding`;
                 break;
               case "PO MANAGER30":
-                details = `Multiple layer 360 Review mechanism#
-                          Multiple Analysis tools for Open orders#
-                          Multiple Comparison charts for vendors and buyers#
-                          Statistical data for your open orders#
-                          Various Reports for communication#
-                          Vendor Account setup`;
+                details = `Open Order Oversight#
+                          360° Review System#
+                          Open Order Analytics#
+                          Statistical Insights#
+                          Advanced Reporting#
+                          Vendor Onboarding`;
                 break;
               case "PO MANAGER365":
-                details = `Multiple layer 360 Review mechanism#
-                          Multiple Analysis tools for Open orders#
-                          Multiple Comparison charts for vendors and buyers#
-                          Statistical data for your open orders#
-                          Various Reports for communication#
-                          Vendor Account setup`;
+                details = `Open Order Oversight#
+                          360° Review System#
+                          Open Order Analytics#
+                          Statistical Insights#
+                          Advanced Reporting#
+                          Vendor Onboarding`;
                 break;
               case "COMPLETE30":
-                details = `6 Sigma and Continuous improvement methodology#
-                          Multiple layer 360 Review mechanism#
-                          Vendor, buyer, plant, material, commodity evaluation#
-                          Multiple Analysis tools for open orders and performance#
-                          Multiple Comparison charts for stakeholders – open orders and performance#
-                          Statistical data for your open orders and performance#
-                          Various open orders and performance Reports for communication#
-                          Vendor Account setup for open orders and performance`;
+                details = `Open and Closed Orders#
+                          All Features in ScoreCard (Closed Order Management)#
+                          All Features in PO Manager (Open Order Oversight)`;
               case "COMPLETE365":
-                details = `6 Sigma and Continuous improvement methodology#
-                          Multiple layer 360 Review mechanism#
-                          Vendor, buyer, plant, material, commodity evaluation#
-                          Multiple Analysis tools for open orders and performance#
-                          Multiple Comparison charts for stakeholders – open orders and performance#
-                          Statistical data for your open orders and performance#
-                          Various open orders and performance Reports for communication#
-                          Vendor Account setup for open orders and performance`;
+                details = `Open and Closed Orders#
+                          All Features in ScoreCard (Closed Order Management)#
+                          All Features in PO Manager (Open Order Oversight)`;
                 break;
               
             }

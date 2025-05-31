@@ -2,9 +2,9 @@
     <h1 mat-dialog-title class="mb-4">{{heading}}</h1>
     <div mat-dialog-content style="display: initial;" class="polic wizard-Signup-dialog">
         <p class="mb-0" [innerHTML]="body"></p>
-        <mat-checkbox class="example-margin float-left" (change)="onAgree($event)">I agree to <span *ngIf="heading == 'Terms of Service'">all </span> <span style="color:#BC1A20;text-decoration:underline">{{heading}}</span></mat-checkbox>
+        <mat-checkbox class="example-margin float-left" (change)="onAgree($event)">I agree to <span *ngIf="heading == 'Terms & Conditions'">all </span> <span style="color:#BC1A20;text-decoration:underline">{{heading}}</span></mat-checkbox>
     </div>
     <div  class="text-center">
-        <button  class="profi-btn-yes" style="width: auto; color: #fff; margin: 0px auto;" (click)="onClose('')">Proceed</button>
+        <button  class="profi-btn-yes" style="width: auto; color: #fff; margin: 0px auto;" (click)="onClose('')">Agree & Continue</button>
     </div>
 </div>

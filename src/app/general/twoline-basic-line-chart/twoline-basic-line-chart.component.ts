@@ -836,7 +836,7 @@ export class TwolineBasicLineChartComponent implements OnInit, OnChanges {
           yaxis: [
             {
               seriesName: this.scoreCardGraphHeading,
-              decimalsInFloat: 0,
+              decimalsInFloat: 2,
               opposite: false,
               axisTicks: {
                 show: true,
@@ -2993,7 +2993,7 @@ export class TwolineBasicLineChartComponent implements OnInit, OnChanges {
         yaxis: [
           {
             seriesName: this.scoreCardGraphHeading,
-            //decimalsInFloat: 0,
+            decimalsInFloat: 2,
             opposite: false,
             axisTicks: {
               show: true,

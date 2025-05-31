@@ -79,60 +79,52 @@ export class SignupwizardstepthreeComponent implements OnInit {
           var details = "";
           switch(pkg) {
             case "SCORECARD30":
-              details = `6 Sigma and Continuous improvement methodology#
-                        Multiple layer 360 Review mechanism#
-                        Vendor, buyer, plant, material, commodity evaluation#
-                        Multiple Analysis tools for performance#
-                        Multiple Comparison charts for stakeholders#
-                        Statistical data for your performance#
-                        Various Reports for communication#
-                        Vendor Account setup`;
-              break;
-            case "SCORECARD365":
-              details = `6 Sigma and Continuous improvement methodology#
-                        Multiple layer 360 Review mechanism#
-                        Vendor, buyer, plant, material, commodity evaluation#
-                        Multiple Analysis tools for performance#
-                        Multiple Comparison charts for stakeholders#
-                        Statistical data for your performance#
-                        Various Reports for communication#
-                        Vendor Account setup`;
-              break;
-            case "PO MANAGER30":
-              details = `Multiple layer 360 Review mechanism#
-                        Multiple Analysis tools for Open orders#
-                        Multiple Comparison charts for vendors and buyers#
-                        Statistical data for your open orders#
-                        Various Reports for communication#
-                        Vendor Account setup`;
-              break;
-            case "PO MANAGER365":
-              details = `Multiple layer 360 Review mechanism#
-                        Multiple Analysis tools for Open orders#
-                        Multiple Comparison charts for vendors and buyers#
-                        Statistical data for your open orders#
-                        Various Reports for communication#
-                        Vendor Account setup`;
-              break;
-            case "COMPLETE30":
-              details = `6 Sigma and Continuous improvement methodology#
-                        Multiple layer 360 Review mechanism#
-                        Vendor, buyer, plant, material, commodity evaluation#
-                        Multiple Analysis tools for open orders and performance#
-                        Multiple Comparison charts for stakeholders – open orders and performance#
-                        Statistical data for your open orders and performance#
-                        Various open orders and performance Reports for communication#
-                        Vendor Account setup for open orders and performance`;
-            case "COMPLETE365":
-              details = `6 Sigma and Continuous improvement methodology#
-                        Multiple layer 360 Review mechanism#
-                        Vendor, buyer, plant, material, commodity evaluation#
-                        Multiple Analysis tools for open orders and performance#
-                        Multiple Comparison charts for stakeholders – open orders and performance#
-                        Statistical data for your open orders and performance#
-                        Various open orders and performance Reports for communication#
-                        Vendor Account setup for open orders and performance`;
-              break;
+                details = `Closed Order Management#
+                          Six Sigma Methodology#
+                          360° Review System#
+                          Full-Scope Evaluations#
+                          Performance Analytics#
+                          Comparison Dashboards#
+                          Statistical Insights#
+                          Advanced Reporting#
+                          Vendor Onboarding`;
+                break;
+              case "SCORECARD365":
+                details = `Closed Order Management#
+                          Six Sigma Methodology#
+                          360° Review System#
+                          Full-Scope Evaluations#
+                          Performance Analytics#
+                          Comparison Dashboards#
+                          Statistical Insights#
+                          Advanced Reporting#
+                          Vendor Onboarding`;
+                break;
+              case "PO MANAGER30":
+                details = `Open Order Oversight#
+                          360° Review System#
+                          Open Order Analytics#
+                          Statistical Insights#
+                          Advanced Reporting#
+                          Vendor Onboarding`;
+                break;
+              case "PO MANAGER365":
+                details = `Open Order Oversight#
+                          360° Review System#
+                          Open Order Analytics#
+                          Statistical Insights#
+                          Advanced Reporting#
+                          Vendor Onboarding`;
+                break;
+              case "COMPLETE30":
+                details = `Open and Closed Orders#
+                          All Features in ScoreCard (Closed Order Management)#
+                          All Features in PO Manager (Open Order Oversight)`;
+              case "COMPLETE365":
+                details = `Open and Closed Orders#
+                          All Features in ScoreCard (Closed Order Management)#
+                          All Features in PO Manager (Open Order Oversight)`;
+                break;
             
           }
           return {
@@ -153,60 +145,52 @@ export class SignupwizardstepthreeComponent implements OnInit {
               var details = "";
               switch(pkg) {
                 case "SCORECARD30":
-                  details = `6 Sigma and Continuous improvement methodology#
-                            Multiple layer 360 Review mechanism#
-                            Vendor, buyer, plant, material, commodity evaluation#
-                            Multiple Analysis tools for performance#
-                            Multiple Comparison charts for stakeholders#
-                            Statistical data for your performance#
-                            Various Reports for communication#
-                            Vendor Account setup`;
-                  break;
-                case "SCORECARD365":
-                  details = `6 Sigma and Continuous improvement methodology#
-                            Multiple layer 360 Review mechanism#
-                            Vendor, buyer, plant, material, commodity evaluation#
-                            Multiple Analysis tools for performance#
-                            Multiple Comparison charts for stakeholders#
-                            Statistical data for your performance#
-                            Various Reports for communication#
-                            Vendor Account setup`;
-                  break;
-                case "PO MANAGER30":
-                  details = `Multiple layer 360 Review mechanism#
-                            Multiple Analysis tools for Open orders#
-                            Multiple Comparison charts for vendors and buyers#
-                            Statistical data for your open orders#
-                            Various Reports for communication#
-                            Vendor Account setup`;
-                  break;
-                case "PO MANAGER365":
-                  details = `Multiple layer 360 Review mechanism#
-                            Multiple Analysis tools for Open orders#
-                            Multiple Comparison charts for vendors and buyers#
-                            Statistical data for your open orders#
-                            Various Reports for communication#
-                            Vendor Account setup`;
-                  break;
-                case "COMPLETE30":
-                  details = `6 Sigma and Continuous improvement methodology#
-                            Multiple layer 360 Review mechanism#
-                            Vendor, buyer, plant, material, commodity evaluation#
-                            Multiple Analysis tools for open orders and performance#
-                            Multiple Comparison charts for stakeholders – open orders and performance#
-                            Statistical data for your open orders and performance#
-                            Various open orders and performance Reports for communication#
-                            Vendor Account setup for open orders and performance`;
-                case "COMPLETE365":
-                  details = `6 Sigma and Continuous improvement methodology#
-                            Multiple layer 360 Review mechanism#
-                            Vendor, buyer, plant, material, commodity evaluation#
-                            Multiple Analysis tools for open orders and performance#
-                            Multiple Comparison charts for stakeholders – open orders and performance#
-                            Statistical data for your open orders and performance#
-                            Various open orders and performance Reports for communication#
-                            Vendor Account setup for open orders and performance`;
-                  break;
+                details = `Closed Order Management#
+                          Six Sigma Methodology#
+                          360° Review System#
+                          Full-Scope Evaluations#
+                          Performance Analytics#
+                          Comparison Dashboards#
+                          Statistical Insights#
+                          Advanced Reporting#
+                          Vendor Onboarding`;
+                break;
+              case "SCORECARD365":
+                details = `Closed Order Management#
+                          Six Sigma Methodology#
+                          360° Review System#
+                          Full-Scope Evaluations#
+                          Performance Analytics#
+                          Comparison Dashboards#
+                          Statistical Insights#
+                          Advanced Reporting#
+                          Vendor Onboarding`;
+                break;
+              case "PO MANAGER30":
+                details = `Open Order Oversight#
+                          360° Review System#
+                          Open Order Analytics#
+                          Statistical Insights#
+                          Advanced Reporting#
+                          Vendor Onboarding`;
+                break;
+              case "PO MANAGER365":
+                details = `Open Order Oversight#
+                          360° Review System#
+                          Open Order Analytics#
+                          Statistical Insights#
+                          Advanced Reporting#
+                          Vendor Onboarding`;
+                break;
+              case "COMPLETE30":
+                details = `Open and Closed Orders#
+                          All Features in ScoreCard (Closed Order Management)#
+                          All Features in PO Manager (Open Order Oversight)`;
+              case "COMPLETE365":
+                details = `Open and Closed Orders#
+                          All Features in ScoreCard (Closed Order Management)#
+                          All Features in PO Manager (Open Order Oversight)`;
+                break;
                 
               }
               return {
@@ -295,16 +279,34 @@ export class SignupwizardstepthreeComponent implements OnInit {
         height: '75%',
         width: '100%',
         showWidht: true,
-        yesBtn: 'Acknowledge & Proceed',
+        yesBtn: 'Confirm & Continue',
         noBtn: 'Cancel',
-        heading: "Confirmation",
+        heading: "Confirm Your Subscription",
         message: `
-          <p>Thank you for choosing to subscribe to ${selectedPackage?.name}. Please take a moment to review the important information about your subscription:</p>
-          <p>One Month Free Trial: Your subscription includes a one-month free trial. Your credit card will be automatically charged on the first day after the end of the free trial.</p>
-          <p>No Cancellation Refund: Please be aware that once you subscribe, there will be no refunds if you choose to cancel your service.</p>
-          <p>Subscription Downgrade: If you are subscribing to a yearly plan, please note that downgrading your subscription, such as switching from a Yearly license to a Monthly license and a Complete License to a PO Manager or Score Card license during the contract term are not allowed, and no refunds will be issued.</p>
-          <p>Auto-Renewal and Auto-Charge: Your subscription will automatically renew at the end of the current billing period, and your credit card will be charged for the new term unless you cancel your subscription before the renewal date.</p>
-          <p>By proceeding with your subscription, you acknowledge that you will review and agree to be bound by our Terms of Service and Privacy Policy on the next page.</p>
+        <div style="text-align: left; max-width: 700px; margin: 0 auto;">
+    <p>
+      Thank you for choosing the 
+      <span style="color: red;"><strong>${selectedPackage?.name}</strong></span> 
+      product. Please review the important information below before proceeding:
+    </p>
+
+   <p style="text-align: left !important;"><strong>Free Trial:</strong> Enjoy a one-month free trial. After that, your credit card will be automatically charged unless you cancel before the trial ends.</p>
+
+   <p style="text-align: left !important;"><strong>No Refunds:</strong> Once subscribed, cancellations are non-refundable. Please confirm your selection carefully.</p>
+
+   <p style="text-align: left !important;"><strong>Plan Changes:</strong> Downgrading your subscription during the term (e.g., Complete to PO Manager or ScoreCard) is not allowed.</p>
+
+   <p style="text-align: left !important;"><strong>Auto-Renewal:</strong> Your subscription will automatically renew unless you cancel before the renewal date.</p>
+
+<p style="font-size: 14px; color: #333; text-align: left; margin-top: 20px;">
+  Your subscription will follow the terms outlined in our
+  <a href="javascript:void(0)" (click)="openLegalDialog('Subscription Agreement')" style="color: #007bff; text-decoration: underline;">Subscription Agreement</a>,
+  <a href="javascript:void(0)" (click)="openLegalDialog('Terms & Conditions')" style="color: #007bff; text-decoration: underline;">Terms & Conditions</a>, and
+  <a href="javascript:void(0)" (click)="openLegalDialog('Privacy Policy')" style="color: #007bff; text-decoration: underline;">Privacy Policy</a>.
+  which you have previously reviewed and agreed to.
+</p>
+  </div>
+
           `,
       },
       panelClass: 'custom-dialog-container'

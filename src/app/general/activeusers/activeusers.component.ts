@@ -58,23 +58,23 @@ export class ActiveusersComponent implements OnInit {
       key: 'roleName',
     },
     {
-      def: 'companyName',
-      name: 'Company Name',
-      key: 'companyName',
+      def: 'createdAt',
+      name: 'Created At',
+      key: 'createdAt',
     },
     {
       def: 'email',
-      name: 'Email',
+      name: 'Email Address',
       key: 'email',
     },
     {
       def: 'renewalDate',
-      name: 'Renewal Date',
+      name: 'Next Billing Date',
       key: 'renewalDate',
     },
     {
       def: 'cancel',
-      name: 'Renew/Cancel',
+      name: 'Status',
       key: 'cancel',
       projection:true
     },
@@ -110,32 +110,34 @@ export class ActiveusersComponent implements OnInit {
       modalData   = {
         height: '75%',
         width: '40%',
-        yesBtn: event.value === false ?'Cancel Immediately':'Acknowledge & Proceed',
-        noBtn: event.value === false ?'Keep My Subscription':'Cancel',
-        heading: event.value === false ? "Cancel Vendor Account" : "Renew Vendor Account",
-        message: event.value === false ? `<p>Please note the following important information about canceling your subscription:</p> 
-          <p><strong>Immediate Termination: </strong>The subscription will stop immediately, and access will be terminated.</p>
-          <p>Please choose your preferred cancellation option below.</p>`:`<p>You are subscribing to our service for a vendor account at no cost.</p>
-          <p><strong>Automatic Monthly Charge:</strong> Currently there will be no charge for this subscription.</p>
-          <p><strong>Ongoing Subscription:</strong> This subscription will continue until you cancel it.</p>
-          <p>By proceeding, you acknowledge and agree to these terms.</p>
+        yesBtn: event.value === false ?'Deactivate Now':'Reactivate Account',
+        noBtn: event.value === false ?'Keep Active':'Keep Inactive',
+        heading: event.value === false ? "Deactivate Vendor Account" : "Reactivate Vendor Account",
+        message: event.value === false ? `<p>Please note the following important information about deactivating this vendor account:</p> 
+          <p><strong>Immediate Deactivation:</strong>The vendor will lose access to the system immediately, and their account will be disabled.</p>
+          <p>Please choose your preferred action below.</p>`:`<p>You are reactivating a vendor account with system access.</p>
+          <p><strong>Free of Charge:</strong> This account will remain free of charge unless otherwise specified.</p>
+          <p><strong>Ongoing Access:</strong> Once reactivated, the account will stay active until you choose to deactivate it again.</p>
+          <p>By proceeding, you confirm that you understand and agree to these terms.</p>
           `,
       };
     } else {
       modalData   = {
         height: '75%',
         width: '40%',
-        yesBtn: event.value === false ?'Cancel Immediately':'Acknowledge & Proceed',
-        noBtn: event.value === false ?'Keep My Subscription':'Cancel',
-        heading: event.value === false ? "Cancel User Account" : "Renew User Account",
-        message: event.value === false ? `<p>Please note the following important information about canceling your subscription: </p>
-          <p><strong>No Reimbursement:</strong> Once you cancel your subscription, you will not receive any reimbursement for the current billing period.</p>
-          <p><strong>Immediate Termination:</strong> The user subscription will stop immediately, and access will be terminated.</p>
-          <p>Please choose your preferred cancellation option below.</p>
-        ` : `<p>You are subscribing to our service at $10 per month for each user account.</p>
-          <p><strong>Automatic Monthly Charge:</strong> Your credit card will be charged $10 per month automatically. The charge will occur on the same date each month as your initial subscription date.</p>
-          <p><strong>Ongoing Subscription:</strong> This subscription will continue until you cancel it.</p> 
-          <p>By proceeding, you acknowledge and agree to these terms.</p>
+        yesBtn: event.value === false ?'Deactivate Now':'Reactivate Account',
+        noBtn: event.value === false ?'Keep Active':'Keep Inactive',
+        heading: event.value === false ? "Deactivate User Account" : "Reactivate User Account",
+        message: event.value === false ? `<p>Please note the following important information about deactivating this user account: </p>
+          <p><strong>No Refund: </strong>Deactivation will forfeit any remaining subscription time. No refunds will be issued.</p>
+          <p><strong>Immediate Termination: </strong>This user's access will be revoked immediately upon Deactivation.</p>
+          <p>Please choose your preferred action below.</p>
+        ` : `<p>You are reactivating a user account at <strong>$10 per month</strong>.</p>
+          <p><strong>Automatic Monthly Charge:</strong> Your card will be charged $10 monthly on the same date as your original subscription.</p>
+
+          <p><strong>Ongoing Subscription:</strong> This subscription will remain active until you cancel it.</p>
+
+          <p>By proceeding, you confirm and agree to these terms.</p>
         `,
       };
     }
@@ -173,7 +175,10 @@ export class ActiveusersComponent implements OnInit {
         // Proceed with the API call if the user confirmed the action
         this._apiService.isCompareLoader$.next(true);
     
-        const message = event.value === false ? "User status is changed to Cancel" : "User status is changed to Renew";
+        const isVendor = data.roleName?.toLowerCase().includes('vendor');
+        const entity = isVendor ? 'Vendor' : 'User';
+        const status = event.value === false ? 'Inactive' : 'Active';
+        const message = `${entity} account has been set to ${status}.`;
     
         // Call the API to change user status
         this._apiService.get(`${api.superAdminActiveDeactiveUser}/${data.userId}/${event.value}`)

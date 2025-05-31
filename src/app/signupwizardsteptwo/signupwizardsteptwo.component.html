@@ -14,7 +14,10 @@
                     <div class="row no-gutters">
                         <div class="col-xl-12 wizard-num">
                             <div class="auth-form pr-3">
-                                <h4 class="text-center mb-3" style="font-weight: 500;">Welcome! Please Add Details</h4>
+                                <div class="text-center mb-3">
+                                    <p style="font-weight: 500; margin-bottom: 16px;">Your email address has been verified.</p>
+                                    <h4 style="font-weight: 500;">Welcome! Let’s Complete Your Account.</h4>
+                                  </div>
                                 <form [formGroup]="signupForm" class="secstep wizard-Signup-dialog" autocomplete="off">
                                     <label style="font-size:14;color:#3F4040;font-weight:600;padding-top:10px;">Referral code</label>
                                     <div class="form-control mb-3">
@@ -246,7 +249,7 @@
                                     
                                     <div class="text-center mt-4 mb-3 wizard-padding">
                                         <!-- <button type="submit" class="btn btn-primary btn-block">Sign in</button> -->
-                                        <button (click)="onNext()" class="btn btn-primary btn-block mb-4">Next</button>
+                                        <button (click)="onNext()" class="btn btn-primary btn-block mb-4">Continue</button>
                                     </div>
                                 </form>
 

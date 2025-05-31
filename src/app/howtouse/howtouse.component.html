@@ -1,4 +1,4 @@
-<!--**********************************
+<!--********************************** 
 	Content body start
 ***********************************-->
 <div class="content-body">
@@ -10,24 +10,587 @@
                 <div class="profile card card-body px-3 pt-3 pb-0">
                     <div class="profile-head">
                         <div class="profile-name px-3 pt-2">
-                            <p class="mb-5 aboutservicep">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor
-                                sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod Lorem ipsum dolor sit
-                                amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-                                dolore magna aliquyam erat,</p>
+                            <h2 class="mb-5" style="font-weight: bold; color: #BC1A20; font-size: 2rem;">Complete – ScoreCard and PO Manager</h2>
 
-                            <p class="mb-5 aboutservicep">
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor
-                                sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod Lorem ipsum dolor sit
-                                amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-                                dolore magna aliquyam erat,</p>
+                            <h5 class="mb-4" style="font-weight: bold; color: #BC1A20; font-size: 1.5rem; margin-top: 80px;">ScoreCard Overview</h5>
+                            
+                            <p class="mb-4 aboutservicep">
+                                The Scorecard is a tool designed to assess the performance of closed purchase orders in your ERP system, helping you evaluate key procurement metrics such as On-Time Delivery (OTD), Non-Conforming Material (NCR), Purchase Price Variance (PPV), and Lead Time Accuracy (LTA). By reviewing past performance, the Scorecard allows you to identify potential issues, take proactive actions to prevent them, and make informed decisions to improve future procurement performance. The goal of the Scorecard is to provide valuable insights that help prevent recurring problems, refine procurement processes, and ensure better decision-making for future purchasing activities.
+                            </p>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Getting Started</h5>
+                            <p class="mb-3 aboutservicep">
+                                To get started with the Scorecard, the first step is to assign an Administrator to manage the system. The Administrator is responsible for overseeing the routine uploading of raw data and configuring KPI parameters. Specifically, the Administrator's responsibilities include:
+                            </p>
+                            <ul class="mb-4 aboutservicep">
+                                <li>Ensuring that the five raw data tables and five target sheets are up to date.</li>
+                                <li>Setting appropriate performance targets for procurement stakeholders.</li>
+                                <li>Configuring the four indicators and their respective weightings based on your organization's needs.</li>
+                                <li>Configuring additional options, such as accepting early deliveries, determining the price variance day range, and selecting line chart report options.</li>
+                            </ul>
 
-                            <p class="mb-5 aboutservicep">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor
-                                sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod Lorem ipsum dolor sit
-                                amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-                                dolore magna aliquyam erat,</p>  
+                            <p class="mb-3 aboutservicep">
+                                The Admin account is essential for the effective operation of the Scorecard app. It holds exclusive permissions to upload raw data, adjust KPI settings, and configure key parameters. User accounts, on the other hand, can only view the data and settings behind the Scorecard.
+                            </p>
+
+                            <p class="mb-4 aboutservicep">
+                                It's important to note that there can only be one Admin account per organization, but multiple user accounts can be added. The Admin account is typically the one that subscribes to the Scorecard service and is responsible for managing the raw data tables and KPI parameters.
+                            </p>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Recommended Approach:</h5>
+                            <p class="mb-3 aboutservicep">
+                                It’s advisable to start with the top 10 vendors with their corresponding buyers and commodities. This allows you to familiarize yourself with the system before expanding to additional vendors. If you intend to use the Commodity Scorecard feature for comparison, it is recommended to include at least two vendors per commodity.
+                            </p>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-4" style="font-weight: bold; color: #BC1A20;">Familiarize with the Four Performance Metrics</h5>
+
+                            <h6 class="mb-2"><strong>1. On-Time Delivery (OTD):</strong></h6>
+<p class="aboutservicep">
+    OTD measures how well vendors fulfill their promise to deliver orders on time...
+</p>
+<ul class="mb-4 aboutservicep">
+    <li>Ensure that each Purchase Order (PO) includes necessary details...</li>
+    <li>Require vendors to acknowledge orders and provide a "First Promised Delivery Date".</li>
+    <li>The "First Promised Delivery Date" is crucial and should remain fixed.</li>
+    <li>The default weight for OTD in the total score is recommended at 35.</li>
+</ul>
+
+<h6 class="mb-2"><strong>2. Non-Conforming Report (NCR):</strong></h6>
+<p class="aboutservicep">
+    NCR measures the quality of products delivered by vendors...
+</p>
+<ul class="mb-4 aboutservicep">
+    <li>Ensure NCR records contain complete details...</li>
+    <li>Involve qualified quality inspectors to minimize inaccuracies.</li>
+    <li>Include the reason for the non-conformance in reports.</li>
+    <li>The default weight for NCR in the total score is set to 35.</li>
+</ul>
+
+<h6 class="mb-2"><strong>3. Purchase Price Variance (PPV):</strong></h6>
+<p class="aboutservicep">
+    PPV evaluates how vendors adjust their selling prices over time...
+</p>
+<ul class="mb-4 aboutservicep">
+    <li>Ensure you have relevant PO details such as part number, quantity, price, etc.</li>
+    <li>Set a time frame for monitoring price variance (e.g., 90-365 days).</li>
+    <li>Communicate regularly with vendors on PPV expectations.</li>
+    <li>The default weight for PPV is set at 15.</li>
+</ul>
+
+<h6 class="mb-2"><strong>4. Lead Time Accuracy (LTA):</strong></h6>
+<p class="aboutservicep">
+    LTA measures the accuracy of the time it takes from order placement to delivery...
+</p>
+<ul class="mb-4 aboutservicep">
+    <li>Ensure each PO record includes PO issue date, lead time days, etc.</li>
+    <li>Educate vendors and buyers on accurate lead time importance.</li>
+    <li>Base LTA on actual production lead time, not stock availability.</li>
+    <li>The default weight for LTA in the total score is 15.</li>
+</ul>
+
+
+                            <p class="aboutservicep">
+                                By familiarizing yourself with these four key performance indicators and understanding how to set and track them, you will be equipped to use the Scorecard effectively. These metrics will provide insights into your procurement operations, enabling you to identify issues early and improve the overall efficiency of your supply chain.
+                            </p>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Dashboard Screen</h5>
+                            <p class="mb-4 aboutservicep">
+                                On the Dashboard screen, you will be presented with the overall score, including individual scores and percentages for On-Time Delivery (OTD), Non-Conforming Material (NCR), Purchase Price Variance (PPV), and Lead Time Accuracy (LTA) based on the raw data you have uploaded to the Scorecard system.
+                            </p>
+                            <p class="mb-4 aboutservicep">
+                                For example, if you have data from 2 plants, 3 commodities, 10 vendors, 5 buyers, and 100 materials, the total score and individual OTD, NCR, PPV, and LTA scores will reflect the overall performance across these categories.
+                            </p>
+                            <p class="mb-4 aboutservicep">
+                                You will also have access to trend lines that track overall performance over time, with a default period of the past 180 days. This allows you to quickly assess performance trends and compare with the previous 180 days.
+                            </p>
+                            <p class="mb-4 aboutservicep">
+                                Additionally, the Dashboard will show counts of vendors, buyers, commodities, plants, and materials involved. It will display how many vendors have created accounts to monitor their performance. Metrics like total spend, issued PO lines, received PO lines, and total sourced materials will be visible and can be compared to previous periods.
+                            </p>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">ScoreCard</h5>
+                            <p class="mb-4 aboutservicep">
+                                The Scorecard screen provides a detailed view of procurement stakeholders' performance based on the selected start and end dates. You can filter data by specific plants, commodities, and vendors for more precise insights.
+                            </p>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Average Percentage and Score</h5>
+                            <p class="mb-4 aboutservicep">
+                                You can view average percentages and scores based on your selected criteria. For instance, choosing Plant A and Commodity Casting will display the average performance for those criteria. Selecting "All Plants" and a specific commodity will show performance across all plants for that commodity.
+                            </p>
+                            <hr class="my-5" /> 
+                            <h6 class="mb-3" style="font-weight: bold; color: #BC1A20;">The Average Percentage</h6>
+                            <p class="mb-2 aboutservicep">The average percentage represents the average OTD, NCR, PPV, and LTA percentages based on your selections:</p>
+                            <ul class="mb-4 aboutservicep">
+                                <li><strong>Vendor Scorecard:</strong> Based on start/end dates, plant, and commodity selected.</li>
+                                <li><strong>Buyer Scorecard:</strong> Based on start/end dates and plant selected.</li>
+                                <li><strong>Commodity Scorecard:</strong> Based on selected plant and commodity.</li>
+                                <li><strong>Material Scorecard:</strong> Based on start/end dates, plant, commodity, and vendor.</li>
+                            </ul>
+                            <hr class="my-5" /> 
+                            <h6 class="mb-3" style="font-weight: bold; color: #BC1A20;">The Average Score</h6>
+                            <p class="mb-4 aboutservicep">
+                                The average score is calculated using the average percentage and the scoring rules set in the Admin panel. For example, a 99% OTD with a max score of 35 (as defined by Admin settings) will yield a score of 35.
+                            </p>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Key Metrics</h5>
+                            <ul class="mb-4 aboutservicep">
+                                <li><strong>OTD% (On-Time Delivery Percentage):</strong> Calculated using the PO history table. It represents the ratio of orders delivered on the "First Promised Delivery Date" to the total number of orders during the selected period. The OTD percentage can also account for early deliveries if this option is enabled in the Admin settings.</li>
+                                <li><strong>NCR% (Non-Conforming Material Percentage):</strong> Reflects the percentage of non-conforming material quantities compared to the total quantities received during the selected time period. Calculated from the PO history and NCR tables.</li>
+                                <li><strong>NCR Score (Non-Conforming Material Score):</strong> Derived from the NCR% and the score parameter in the Admin page. For example, if NCR% is 1% and the parameter for ≤1% is 30, then the NCR score will be 30.</li>
+                                <li><strong>PPV% (Purchase Price Variance Percentage):</strong> Measures price variance between current and past purchase prices. Calculated from PO history, it helps track pricing trends and monitor vendor fairness.</li>
+                                <li><strong>PPV Score (Purchase Price Variance Score):</strong> Based on PPV% and the Admin-defined parameter. For instance, if PPV% is 0% and the parameter for 0% PPV is 15, then the score is 15.</li>
+                                <li><strong>LTA% (Lead Time Accuracy Percentage):</strong> Measures how accurately a vendor’s lead time matches the duration between PO issue date and posting date. Pulled from PO history data.</li>
+                                <li><strong>LTA Score (Lead Time Accuracy Score):</strong> Based on LTA% and Admin-defined score thresholds. For example, a 100% LTA with a defined score of 15 will result in an LTA score of 15.</li>
+                            </ul>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Additional Metrics</h5>
+                            <ul class="mb-4 aboutservicep">
+                                <li><strong>Spend:</strong> Total dollar value spent during the selected period.</li>
+                                <li><strong>Spend%:</strong> Proportion of total spend relative to the selected period.</li>
+                                <li><strong>Material:</strong> Count of unique materials acquired during the selected period.</li>
+                                <li><strong>Material%:</strong> Share of acquired materials compared to total materials purchased.</li>
+                                <li><strong>Received PO Lines:</strong> Total number of PO lines posted during the selected period.</li>
+                                <li><strong>Received PO Line%:</strong> Percentage of received PO lines relative to the overall total.</li>
+                                <li><strong>Issued PO Lines:</strong> Total PO lines issued during the time period.</li>
+                                <li><strong>Issued PO Line%:</strong> Ratio of issued lines to total received lines in the selected timeframe.</li>
+                            </ul>
+
+                            <p class="aboutservicep">
+                                By analyzing these metrics, the Scorecard offers a comprehensive overview of procurement performance, empowering stakeholders to make informed decisions, detect inefficiencies, and continuously optimize the purchasing process.
+                            </p>
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Color Zone</h5>
+                            <p class="aboutservicep">
+                                The Color Zone provides an overview of vendor performance from the start date to the end date. It visually represents the frequency of each color indicator for your selected vendors. Here’s the significance of each color:
+                            </p>
+                            <ul class="mb-4 aboutservicep">
+                                <li><strong>Yellow:</strong> Indicates a total score that falls within the range between the target score and the average score.</li>
+                                <li><strong>Red:</strong> Indicates a total score that is lower than the average score.</li>
+                                <li><strong>Green:</strong> Indicates a total score that surpasses the target score.</li>
+                            </ul>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Color Zone Chart</h5>
+                            <p class="aboutservicep">
+                                The Color Zone chart displays performance fluctuations between the selected start and end dates, with details depending on the level of granularity selected in the KPI parameter settings under the Admin page. The chart provides an in-depth view of your procurement stakeholders' past performance, including how often a stakeholder appears in the red zone. A frequent appearance in the red zone may indicate consistently poor performance compared to others.
+                            </p>
+                            <p class="aboutservicep">
+                                <strong>Example:</strong> In the color zone chart above, it is evident that performance was improving during the period when green zones were prevalent in the middle of the chart. However, as time progressed, the number of red and yellow zones increased, overtaking the green zones, signaling a decline in performance.
+                            </p>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Comparison Section</h5>
+                            <p class="aboutservicep">
+                                When you select a specific plant or commodity group and choose “All” vendors, you can view the percentages and scores for all vendors within the selected plant and commodity group. This section allows you to compare vendor performance to identify high and low performers. You will also see the total spend with vendors and the percentage of spend occupied in the selected plant and commodity.
+                            </p>
+                            <p class="aboutservicep">
+                                You can sort the data to identify your top 10 spend vendors or vendors from whom you purchase the most materials. Additionally, in the comparison section, you can toggle the color filter to focus on vendor performance based on the color zone. This makes it easier to identify and compare vendors performing below average or against targets.
+                            </p>
+                            <p class="aboutservicep">
+                                <strong>Note:</strong> It’s important to remember that comparing vendor performance across different commodities may not be meaningful, as the performance metrics for each commodity group may differ significantly.
+                            </p>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Comparison Line and Charts</h5>
+                            <p class="aboutservicep">
+                                From the Comparison section, you can select vendors to generate performance line charts to compare metrics such as Total, OTD, NCR, PPV, and LTA, both in terms of score and percentage. These charts provide valuable insights into how vendors are performing in each indicator. By examining these details, you can easily identify which vendors are performing well and which are falling short.
+                            </p>
+                            <p class="aboutservicep">
+                                You can also create a line chart for a specific vendor to compare their performance against their target and the average performance. This comparison helps you understand how far the vendor is from meeting their target and provides a basis for formulating strategies to improve their performance. This feature is particularly useful for communication with vendors, as it provides clear, data-driven insights to discuss improvements.
+                            </p>
+
+                            <p class="aboutservicep">
+                                By utilizing the Color Zone, Comparison section, and Performance Line charts, you can effectively monitor and evaluate vendor performance, identify areas for improvement, and engage in informed discussions to enhance procurement efficiency and vendor relationships.
+                            </p>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Mapout Vendors Screen</h5>
+                            <p class="aboutservicep">
+                                The Mapout Vendor feature helps you identify top-performing vendors based on their past performance and location, allowing you to select the most suitable vendors for your upcoming orders. By considering both performance metrics and geographic proximity, you can gradually increase business with the highest-performing vendors while filtering out those that consistently underperform. This feature encourages the selection of vendors with green or yellow ratings for new material orders, ensuring you maintain a strong and continuously improving vendor base.
+                            </p>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Admin</h5>
+                            <h6 class="mb-3" style="font-weight: bold; color: #BC1A20;">KPI Parameter Setting Screen</h6>
+                            <p class="aboutservicep">
+                                The Admin screen allows for the customization of various KPI parameters to ensure your score reports align with your specific business needs. You can adjust the following settings:
+                            </p>
+
+                            <h6 class="mb-3" style="font-weight: bold; color: #BC1A20;">OTD, NCR, PPV, and LTA Parameters Option</h6>
+                            <p class="aboutservicep">
+                                Within the OTD, NCR, PPV, and LTA sections, you can set the desired percentages and corresponding scores for each metric. For example, if On-Time Delivery (OTD) is a key priority for your business, you can assign a high score only if vendors meet a 99% on-time delivery rate. Alternatively, if Price Variance (PPV) is more important, you may decide to withhold full scores unless vendors meet a certain price threshold, such as a -10% variance. These settings offer you the flexibility to modify percentages and scores as needed to reflect your priorities.
+                            </p>
+
+                            <h6 class="mb-3" style="font-weight: bold; color: #BC1A20;">On-Time Delivery Option</h6>
+                            <p class="aboutservicep">
+                                This setting enables you to choose how on-time delivery should be calculated. You have two options:
+                            </p>
+                            <ul class="aboutservicep mb-4">
+                                <li><strong>Accept early delivery:</strong> This will include early deliveries in your on-time delivery metrics.</li>
+                                <li><strong>Do not accept early delivery:</strong> Only deliveries made on the promised delivery date will be considered on-time.</li>
+                            </ul>
+
+                            <h6 class="mb-3" style="font-weight: bold; color: #BC1A20;">Receiving Buffer Days Option</h6>
+                            <p class="aboutservicep">
+                                This feature allows you to account for warehouse processing time, which can affect the accuracy of on-time delivery calculations. By including a buffer period, you can avoid penalizing vendors for late deliveries that are caused by internal processing delays. The buffer period is configurable to reflect your specific operational needs.
+                            </p>
+
+                            <h6 class="mb-3" style="font-weight: bold; color: #BC1A20;">Price Variance Day Range Option</h6>
+                            <p class="aboutservicep">
+                                To calculate Purchase Price Variance (PPV), this setting allows you to specify the time frame for comparing current purchase prices against past prices. A default range of 90 to 365 days is set, meaning the system will compare the latest purchase price with prices from 90 days before the current purchase and 365 days after. You can adjust this range to fit your needs, ensuring that the comparison period is relevant for your procurement strategy.
+                            </p>
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Line Chart Report Option</h5>
+                            <p class="aboutservicep">
+                                This setting controls the time period for the line chart in the performance report.
+                            </p>
+                            <ul class="aboutservicep mb-4">
+                                <li><strong>Shorter time period:</strong> Results in more detailed line charts, closely resembling the raw data. However, this will take longer to generate.</li>
+                                <li><strong>Longer time period:</strong> Provides a less detailed line chart and may distort the data, but will generate results more quickly.</li>
+                            </ul>
+                            <p class="aboutservicep">
+                                For example, selecting a 7-day period will result in data being calculated and displayed every 7 days on the chart.
+                            </p>
+
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Report Sending Option</h5>
+                            <p class="aboutservicep">
+                                This feature allows the Administrator to set the default method for sending reports to relevant parties. Users can override this setting in the scorecard screen to choose whether to send reports for review before sending or to send them directly.
+                            </p>
+
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Metrics Weight Option</h5>
+                            <p class="aboutservicep">
+                                The user administrator can determine the weight assigned to each performance metric (OTD, NCR, PPV, and LTA). For example, if on-time delivery is deemed more critical than price variance, you can assign a higher weight to OTD while adjusting the weights of the other metrics. It is important to ensure that the total of all metric weights equals 100. Any changes made to one metric’s weight will require adjustments to the others to maintain this total.
+                            </p>
+
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Save and Reset</h5>
+                            <p class="aboutservicep">
+                                If you have made several adjustments to your parameters and are unsure about the correct settings, you can always reset the parameters to the original default settings when you first started using the Scorecard. This feature allows you to revert to the default configuration, ensuring you can maintain a consistent approach to scoring procurement stakeholders.
+                            </p>
+
+                            <p class="aboutservicep">
+                                By utilizing these customization options in the Admin screen, you can tailor the Scorecard to your specific needs, ensuring that it accurately reflects your procurement goals and facilitates effective vendor performance management.
+                            </p>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Raw Data Setting Screen</h5>
+                            <p class="aboutservicep">
+                                This screen provides an overview of the raw data you have uploaded into the system, displaying the contents of the five primary data tables: PO History, Non-Conformance Report (NCR), Buyer, Vendor, and Plant tables. You can verify the accuracy of the data in these tables to ensure it matches what you have uploaded and is aligned with your scorecard requirements. This functionality allows you to quickly check if all the necessary data has been uploaded correctly for processing.
+                            </p>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Target Setting Screen</h5>
+                            <p class="aboutservicep">
+                                On this screen, you can view the current information in all five target sheet tables that you have uploaded: Vendor Target, Buyer Target, Commodity Target, Plant Target, and Material Target. It enables you to verify that the target values within these tables are consistent with your goals and what has been established for the scorecard. Ensuring that the targets match the data will help maintain alignment across the system and ensure accurate performance tracking.
+                            </p>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Report History Screen</h5>
+                            <p class="aboutservicep">
+                                This section stores all reports related to vendors, buyers, plants, commodities, and materials that have been sent to relevant parties. It includes details such as the file date, the recipient, and the type of report. This feature allows you to track report distribution, maintain a record of all communications, and ensure that your stakeholders have received the necessary performance data.
+                            </p>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Subscription and Payment</h5>
+                            <p class="aboutservicep">
+                              This page provides insights into your active user subscriptions and allows you to manage your account. You can see the individuals you have referred to the ScoreUs application and the number of months of free service you have received through the referral program. Additionally, you can view your current subscription plan and make changes, such as upgrading or downgrading your plan. The page also offers an option to download or view your invoice from the Billing page.
+                            </p>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Active Users screen</h5>
+                            <p class="aboutservicep">
+                              On this screen, you can monitor the number of user accounts you have purchased, their current status (Active or Deactivate), and take action to either activate or deactivate accounts as needed. You can also manage renewals or cancellations for current users, providing you full control over user account management.
+                            </p>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">My Plan</h5>
+                            <p class="aboutservicep">
+                              This page allows you to view your current subscription plan and provides options for making changes. You can cancel your existing subscription, or switch to a different plan, such as PO Manager or Complete. Additionally, you can purchase more user accounts and assign them to your team members.
+                              You also have the option to buyer vendor accounts. This enables vendors to view their Scorecard performance in real-time, making them more proactive in identifying and resolving performance issues. Vendors can now easily monitor their performance and collaborate with you to make improvements.
+                            </p>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Billing</h5>
+                            <p class="aboutservicep">
+                              On this page, you can access and manage your invoices. View or print past invoices, and take any necessary actions regarding your billing details. This feature ensures you have a clear record of all transactions related to your ScoreUs subscription and services.
+                            </p>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Data</h5>
+                            <h6 class="mb-3" style="font-weight: bold; color: #BC1A20;">Import Data Screen</h6>
+                            <p class="aboutservicep">
+                              To properly prepare for using the Scorecard system, follow these steps to upload raw data and target sheets:
+                            </p>
+                            <p class="aboutservicep"><strong style="color: #BC1A20;">Step 1:</strong> Download Templates<br>
+                                Download the five raw data tables and five target sheets from the ScoreUs system. Review the data requirements for each column, clear any existing data, and ensure the data you enter is accurate.
+                              </p>
+                              <p class="aboutservicep"><strong style="color: #BC1A20;">Step 2:</strong> Gather Data<br>
+                                Obtain the necessary information for the PO History, NCR, Vendor, Buyer, and Plant tables from your ERP system or purchasing system. Organize the data according to the templates and copy-paste the information into the respective tables. Ensure that all five tables are ready for upload.
+                              </p>
+                              <p class="aboutservicep"><strong style="color: #BC1A20;">Step 3:</strong> Fill in Target Information<br>
+                                In the five target sheets, input the vendor, buyer, plant, commodity, and material information. Assign target percentages for OTD, NCR, PPV, and LTA. If you do not have specific targets, we recommend starting with 95% for OTD, 0% for NCR, 0% for PPV, and 95% for LTA. These values can be adjusted later.
+                              </p>
+                              <p class="aboutservicep"><strong style="color: #BC1A20;">Step 4:</strong> Upload Data<br>
+                                Upload the five raw data tables and the five target sheets to the Scorecard system, following the provided instructions.
+                              </p>
+                              <p class="aboutservicep"><strong style="color: #BC1A20;">Step 5:</strong>Coordinate with Stakeholders<br>
+                                Discuss the Scorecard system with your vendors, buyers, plants, and commodity managers. Make necessary adjustments to the target scores, ensuring both parties agree on the targets for OTD, NCR, PPV, and LTA.
+                              </p>
+                              <p class="aboutservicep"><strong style="color: #BC1A20;">Step 6:</strong> Regular Maintenance<br>
+                                Regularly update and maintain the five tables. We recommend assigning an administrator to update the tables daily, which should take no more than 5–10 minutes per update. This will ensure that your Scorecard data stays current.
+                              </p>
+                              
+                              
+                            <p class="aboutservicep">
+                              Once the raw data and target sheets are successfully uploaded, you are ready to start using the Scorecard system. If your ERP system is compatible with the ScoreUs system, we can help you connect it for real-time data integration, eliminating the need for manual updates. Note that if the raw data is not up-to-date, the Scorecard may not generate accurate scores and may display a message saying "no sufficient data, please select a different time period."
+                            </p>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Logs Screen</h5>
+                            <p class="aboutservicep">
+                              In the Logs section, you can view the history of uploaded raw data tables and target sheets. This log records who uploaded the files, when they were uploaded, and whether the upload was successful or failed. This feature ensures you have a detailed record of all data management activities.
+                            </p>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">5 Raw Data Tables</h5>
+                            <p class="aboutservicep">
+                              To use the ScoreUs system effectively, you must maintain five raw data tables, which should be available from your current ERP or purchasing system. These tables are essential for generating accurate performance reports. Please ensure the data is properly formatted according to the provided templates:
+                            </p>
+                            <hr class="my-5" /> 
+                            <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">5 Target Tables</h5>
+                            <p class="aboutservicep">
+                              In addition to the raw data tables, you will also need to maintain five target sheets for performance metrics. These sheets are used to set targets for OTD%, NCR%, PPV%, and LTA% for each vendor, buyer, plant, commodity, and material.
+                            </p>
+                            
+                            <h5 class="mb-4" style="font-weight: bold; color: #BC1A20; font-size: 1.5rem; margin-top: 300px;">PO Manager Overview</h5>
+              <p class="aboutservicep">
+                The PO Manager is an essential application designed to help you efficiently manage your outstanding orders within your ERP system. By using the PO Manager, you can streamline the process of tracking and monitoring open orders, providing a clear view of pending order lines, past-due orders, and other key statuses. This application will help you identify which orders need to be prioritized, those requiring vendor confirmation, and materials that need discussions regarding lead time. It also enables you to prevent orders from becoming overdue by facilitating proactive communication.
+              </p>
+              <p class="aboutservicep">
+                Please note, the PO Manager is intended to assist users in managing open orders without adding extra work for vendors or buyers.
+              </p>
+              <hr class="my-5" /> 
+              <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Getting Started:</h5>
+              <p class="aboutservicep">
+                Familiarize yourself with the following options available in the PO Manager, and understand their role in helping you manage open orders effectively.
+              </p>
+
+              <p class="aboutservicep"><strong>1. All Open Orders:</strong><br>
+                The PO Manager allows you to view a comprehensive list of all open orders. These orders are organized by buyer, vendor, and material number. In the detailed panel, you can easily see the buyer and vendor details, the number of order lines, and the total value of these orders, providing a full picture of your open order status.
+              </p>
+              
+              <p class="aboutservicep"><strong>2. Past Due Orders:</strong><br>
+                The PO Manager highlights orders that have passed their confirmed delivery date. Please note that the Delivery Date refers to the latest date confirmed by the vendor for delivery, not the initial Promised Date. The MRP system schedules production based on the confirmed Delivery Date, making it crucial to track past-due orders closely. Regular communication with vendors is essential to reduce both the volume and value of overdue orders.
+              </p>
+              
+              <p class="aboutservicep"><strong>3. Acknowledgement Needed Orders:</strong><br>
+                When placing a new order with a vendor, it is important to request an acknowledgment to confirm the vendor's receipt of the order. The PO Manager will highlight orders that still need acknowledgment. Promptly obtaining this acknowledgment allows the MRP system to schedule production more accurately. During this process, be sure to request the vendor's first promised delivery date, which will be used to track their on-time delivery performance and cannot be changed later.
+              </p>
+              
+              <p class="aboutservicep"><strong>4. Future Past Due Orders:</strong><br>
+                Proactively monitoring potential future past due orders is critical for avoiding delays. The Future Past Due Orders function in the PO Manager helps you identify orders that will soon become overdue. This feature gives you the opportunity to reach out to vendors and address potential issues before they affect production.
+              </p>
+              
+              <p class="aboutservicep"><strong>5. Lead Time Check Orders:</strong><br>
+                Lead time information is vital for the correct scheduling of production in the MRP system. However, lead times can change due to factors like vendor capacity and inventory levels. The PO Manager allows you to periodically check lead time with vendors, ensuring that the system's lead time information remains accurate. It helps strike the right balance by avoiding excessive checks while ensuring timely updates.
+              </p>
+              
+              <hr class="my-5" /> 
+              <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Dashboard Screen:</h5>
+
+              <p class="aboutservicep"><strong>1. Open PO Up to Date:</strong><br>
+                At the top of the dashboard, you will see the "Open PO Up to Date" field. This date reflects the current open PO report date, ensuring you are looking at the most up-to-date data.
+              </p>
+              
+              <p class="aboutservicep"><strong>2. Detail Report Option:</strong><br>
+                In the top right corner, you will find the "Detail Report" option. This feature allows you to download various reports, including:
+              </p>
+              <ul class="aboutservicep" style="color: #000;">
+                <li>Past Due PO Report</li>
+                <li>Acknowledgement Needed PO Report</li>
+                <li>Future Past Due PO Report</li>
+                <li>Lead Time Check PO Report</li>
+                <li>All Open PO Report</li>
+              </ul>
+              
+              <!-- SPACE BEFORE SECTION 3 -->
+              <p class="aboutservicep mt-4" style="margin-top: 30px;"><strong>3. Tiles Overview:</strong><br>
+                Below the Detail Report function, you will see five tiles that correspond to different order categories:
+              </p>
+              <ul class="aboutservicep" style="color: #000;">
+                <li><strong style="color: #BC1A20;">Past Due PO Tile:</strong> Displays the number of PO lines and the total value of orders that have not yet been received. You can also see what percentage of your total open orders these represent.</li>
+                <li><strong style="color: #BC1A20;">Acknowledgement Needed PO Tile:</strong> Shows the PO lines and total values for orders that have not yet been acknowledged by the vendor, along with the percentage of total open orders they represent.</li>
+                <li><strong style="color: #BC1A20;">Future Past Due PO Tile:</strong> Highlights orders that are expected to become past due within a specified number of days. You can adjust the days to view different data, allowing you to track and address potential issues before they become overdue.</li>
+                <li><strong style="color: #BC1A20;">Lead Time Check PO Tile:</strong> Displays PO lines and total values for orders that have surpassed their first promised delivery date but remain undelivered. These orders may have inaccurate lead times, which need to be updated.</li>
+                <li><strong style="color: #BC1A20;">All Open PO Tile:</strong> Shows the total number of open PO lines and values, as well as the number of unique materials your customer is purchasing.</li>
+              </ul>
+              
+              
+              <!-- SPACE BEFORE SECTION 4 -->
+              <p class="aboutservicep mt-4" style="margin-top: 30px;"><strong>4. Average Performance:</strong><br>
+                The Average Performance section shows performance data for the last five calendar days, starting one day before your "Open PO Up to Date" date. You can adjust the average days to view performance metrics across different time periods. This section provides insights into the percentage of past due, acknowledgement-needed, and lead time check orders during the selected PO issue period.
+              </p>
+              
+              
+              <p class="aboutservicep"><strong>5. Tile Count Information:</strong><br>
+                The four tiles labeled Plant Counts, Vendor Counts, Buyer Counts, and Material Counts show the number of unique plants, vendors, buyers, and materials involved in your open PO report, giving you a broader understanding of your stakeholders.
+              </p>
+              
+              <p class="aboutservicep"><strong>6. Current Open PO Status:</strong><br>
+                This section includes a bar chart that displays the percentage of each category (e.g., past due, acknowledgement needed, etc.) for all open POs. By quickly reviewing these percentages, you can identify areas that need attention, such as high past-due percentages or orders that require vendor acknowledgment.
+              </p>
+              
+              <p class="aboutservicep"><strong>7. Total Open PO Line:</strong><br>
+                This line chart shows the total number of PO lines for each category, broken down by PO issue date across the current year. It allows you to see trends over time and identify months where order management performance was better or worse.
+              </p>
+              
+              <p class="aboutservicep"><strong>8. Total Open PO Value:</strong><br>
+                Similar to the Total Open PO Line chart, this chart tracks the total value of open POs by category over time. This metric can help identify potential issues where the value of past-due orders might be more significant, even if the number of lines is lower.
+              </p>
+              
+              <hr class="my-5" /> 
+              <h4 class="mb-3" style="font-weight: bold; color: #BC1A20;">PO Manager</h4>
+              <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Open PO Expeditor Screen</h5>
+              <p class="aboutservicep">
+                The Open PO Expeditor screen in the PO Manager allows you to efficiently manage and communicate with vendors or buyers regarding open purchase orders. This screen offers five key options, each designed to help you streamline communication through email or text messages, ensuring timely actions on your orders:
+              </p>
+
+              <p class="aboutservicep"><strong>1. All Open Orders:</strong><br>
+                This option displays all current open orders, organized by buyer, vendor, and material within the selected plant. It provides a detailed overview of the total number of lines and the value of each group, as well as the percentage weight each group holds within your entire set of open orders.
+              </p>
+              
+              <p class="aboutservicep"><strong>2. Past Due Orders:</strong><br>
+                This option focuses on orders that have exceeded their confirmed delivery date. By grouping them by buyer, vendor, and material in the selected plant, it provides a clear view of the total lines and value of past due orders. The percentage weight of these past due orders within your total open orders is also shown.
+              </p>
+              
+              <p class="aboutservicep"><strong>3. Acknowledgement Needed Orders:</strong><br>
+                Here, you can view all orders that have not yet been acknowledged by the buyer, vendor, or material in the selected plant. The screen shows the total lines and value of these orders and the percentage weight they hold within your total acknowledgment-needed orders.
+              </p>
+              
+              <p class="aboutservicep"><strong>4. Future Past Due Orders:</strong><br>
+                This option helps you identify orders that are likely to become past due in the future. By default, it shows orders that are due within 14 days, but you can adjust this period to suit your needs.
+              </p>
+              
+              <p class="aboutservicep"><strong>5. Lead Time Check Orders:</strong><br>
+                This option allows you to view open orders that require verification of their lead time. These orders are grouped by buyer, vendor, and material in the selected plant, and the screen displays the total lines and value of each group, along with the percentage weight they represent in your lead time check orders.
+              </p>
+              
+              <p class="aboutservicep">
+                From this screen, you can use the Send Report function to send detailed PO reports to either buyers or vendors and communicate directly with them to resolve any issues.
+              </p>
+              
+
+              <hr class="my-5" />
+
+              <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Buyer/Vendor % by Plant</h5>
+              <p class="aboutservicep">
+                This section displays the percentage impact of the selected buyer or vendor on past due orders, acknowledgment-needed orders, future past due orders, and lead time check orders within the selected plant.
+              </p>
+
+              <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Buyer/Vendor % by Buyer/Vendor and Plant</h5>
+              <p class="aboutservicep">
+                Here, the percentage breakdown shows the selected buyer or vendor's contribution to past due orders, acknowledgment-needed orders, future past due orders, and lead time check orders.
+              </p>
+
+              <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Bar Chart</h5>
+              <p class="aboutservicep">
+                The bar chart visualizes the impact of open orders at both the plant level and the buyer/vendor level, providing insights into how each entity contributes to the overall status of your open purchase orders.
+              </p>
+
+              <hr class="my-5" /> 
+              <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Open PO Trendline Screen</h5>
+              <p class="aboutservicep">
+                Understanding the trend of open orders over time is crucial for evaluating performance and making adjustments. The Open PO Trendline screen uses a moving average method to track changes in open orders, past due orders, acknowledgment-needed orders, future past due orders, and lead time check orders.
+              </p>
+              <p class="aboutservicep">
+                By selecting a custom number of days (from 1 to 30), you can view the average daily trends in these categories. This feature helps identify improvements or areas of concern in vendor and buyer activities. For instance, if the average number of past due orders is lower over a 3-day period than over a 10-day period, it suggests a positive trend. Additionally, the trendline can be used to assess the workload of buyers, enabling the distribution of tasks when necessary.
+              </p>
+              <hr class="my-5" />
+              <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Open PO Analysis Screen</h5>
+              <p class="aboutservicep">
+                The Open PO Analysis screen allows you to compare the open order performance of two, three, or all buyers or vendors using pie or bar charts. This comparison shows metrics such as the total value and number of lines for open orders, past due orders, acknowledgment-needed orders, future past due orders, and lead time check orders within custom time periods. This analysis helps you identify which buyers or vendors are contributing the most to issues like past due orders, allowing you to focus your efforts on reducing these problems. You can present these findings visually, using pie or bar charts to clearly communicate the status of open orders during discussions with buyers or vendors, enabling a better understanding and a focused approach to improving performance.
+              </p>
+
+              <hr class="my-5" />
+              <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Report History Screen</h5>
+              <p class="aboutservicep">
+                The Report History screen maintains a comprehensive archive of all Vendor, Buyer, Plant, Commodity, and Material reports that have been distributed to relevant parties. This includes important details such as the date the report was generated and the recipient. You can easily track and review all past reports distributed through the system.
+              </p>
+
+              <hr class="my-5" />
+              <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Subscription and Payment Screen</h5>
+              <p class="aboutservicep">
+                This page provides an overview of your current subscription status, including the active users associated with your account and the number of months of free service you have earned through the referral program. You can also view your current subscription plan and have the option to upgrade, downgrade, or manage your plan as needed. If applicable, you can retrieve your invoices from the Billing page.
+              </p>
+
+              <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Active Users</h5>
+              <p class="aboutservicep">
+                On this page, you can manage your active user and vendor accounts. The screen shows the number of user and vendor accounts you’ve purchased, along with their current status (Active or Deactivated). You have the ability to activate or deactivate users and vendors directly from this page, giving you full control over your account’s access permissions.
+              </p>
+
+              <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">My Plan</h5>
+              <p class="aboutservicep">
+                In the My Plan section, you can view your current subscription details and make any changes to your plan. Options include cancelling your current subscription, or switching to a different plan, such as ScoreCard or Complete. Additionally, you can purchase additional user accounts and assign them to your team members.
+              </p>
+              <p class="aboutservicep">
+                You also have the ability to invite vendors to create their own vendor accounts. This will give them real-time access to their open PO status, eliminating the need for you to manually send performance reports. By giving vendors direct visibility into their performance, they can proactively address any issues and collaborate with you to improve their results.
+              </p>
+
+              <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Billing</h5>
+              <p class="aboutservicep">
+                The Billing page allows you to access your current and past invoices. You can view, print, or take necessary actions related to your invoices, ensuring that all billing information is organized and easily accessible.
+              </p>
+              <hr class="my-5" />
+              <h5 class="mb-3" style="font-weight: bold; color: #BC1A20;">Data</h5>
+              <h6 class="mb-3" style="font-weight: bold; color: #BC1A20;">Import Data Screen</h6>
+              <p class="aboutservicep">
+                To properly prepare for using the PO Manager, follow these steps to upload your raw data:
+              </p>
+              <p class="aboutservicep"><strong style="color: #BC1A20;">Step 1:</strong> Download Raw Data Table Templates<br>
+                Download the four raw data table templates from the PO Manager system and familiarize yourself with the required data for each column. Ensure that any existing data in the tables is cleared before starting.</p>
+                
+                <p class="aboutservicep"><strong style="color: #BC1A20;">Step 2:</strong> Retrieve Data from Your ERP System<br>
+                Obtain Open Order, Vendor, Buyer, and Plant information from your ERP or purchasing system. Arrange the data according to the template specifications and copy it into the relevant tables. It's essential that the data is accurate to avoid any discrepancies in the results.</p>
+                
+                <p class="aboutservicep"><strong style="color: #BC1A20;">Step 3:</strong> Upload the Data<br>
+                Upload the four completed tables into the PO Manager system as per the instructions provided.</p>
+                
+                <p class="aboutservicep"><strong style="color: #BC1A20;">Step 4:</strong> Collaborate with Stakeholders<br>
+                Meet with vendors, buyers, plants, and commodity managers to discuss the ScoreUs system and set targets for OTD (On-Time Delivery), NCR (Non-Conformance Rate), PV (Purchase Variance), and LTA (Long-Term Agreement) performance. Collaborate to develop a plan that ensures these targets are met.</p>
+                
+                <p class="aboutservicep"><strong style="color: #BC1A20;">Step 5:</strong> Maintain and Update Data<br>
+                Keep the four tables updated as necessary. The Open Order Table should be updated daily, while other tables should be updated as changes occur. Designate an Admin User to handle daily updates. If your MRP system can integrate with the PO Manager system, manual updates may not be required.</p>
+                
+
+              <p class="aboutservicep">
+                Once the raw data is successfully uploaded, you will be able to begin using the PO Manager. If your ERP system can connect directly to ScoreUs, you won't need to maintain the raw data tables manually. Our team can assist you with integrating your ERP system into ScoreUs for real-time operations. Please note that if the raw data is not up-to-date, the PO Manager may not provide accurate Open Order Status and will prompt you with a message stating, "No sufficient data, please update your latest open order raw data."
+              </p>
+
+              <hr class="my-5" />
+              <h6 class="mb-3" style="font-weight: bold; color: #BC1A20;">Logs Screen</h6>
+              <p class="aboutservicep">
+                The Logs screen provides a detailed record of all data uploads. It displays the file name, the time of upload, and the user who uploaded the raw data. This allows you to track the history of data imports and verify any updates made to the system.
+              </p>
+
+              <hr class="my-5" />
+              <h6 class="mb-3" style="font-weight: bold; color: #BC1A20;">Admin</h6>
+              <h6 class="mb-3" style="font-weight: bold; color: #BC1A20;">KPI Parameter Screen</h6>
+              <ul class="aboutservicep">
+                <li><strong>Self Defined Future Days:</strong> This parameter allows you to control how future past-due orders are defined for both users and vendors. You can adjust this setting to align with your business needs.</li>
+                <li><strong>Receiving Buffer Days:</strong> This setting allows you to specify how many days your warehouse requires to process received orders. You can define this buffer to suit the operational needs of your warehouse.</li>
+              </ul>
+              
+
+              <hr class="my-5" />
+              <h6 class="mb-3" style="font-weight: bold; color: #BC1A20;">Raw Data Setting Screen</h6>
+              <p class="aboutservicep">
+                To use the PO Manager effectively, it is crucial to upload raw data into the system. The following four tables are required for the system to function properly. These tables should be available from your ERP or purchasing system, and templates for each table can be downloaded from the Import Data Screen. You can also manually delete or update data directly from this screen.
+              </p>
+              <ol class="aboutservicep">
+                <li><strong style="color: #BC1A20;">Buyer Table:</strong><br>
+                  This table contains information about buyers. Users must provide the following details: Buyer Code, Buyer Name, Plant Code, and Buyer Email Address.
+                </li>
+              
+                <li><strong style="color: #BC1A20;">Vendor Table:</strong><br>
+                  This table contains information about vendors. Users must provide Vendor Code, Vendor Name, Vendor Email Address, Vendor Contact Name, and Plant Code.
+                </li>
+              
+                <li><strong style="color: #BC1A20;">Plant Table:</strong><br>
+                  This table holds information about plants. Users must provide Plant Code, Plant Name, Plant Email Address, and Plant Contact Name.
+                </li>
+              
+                <li><strong style="color: #BC1A20;">Open Purchase Order Table:</strong><br>
+                  This table contains detailed order information. Users must provide Order Number, Line, Vendor Code, Vendor Name, Order Create Date, Material Description, Order Quantity, Quantity Delivered, Unit Price, Due Date, First Promise Date, Currency, Order Unit, Buyer Code, Plant Code, Acknowledgement Date, Lead Time, and Material Number.
+                </li>
+              </ol>
+              
+              
+
+              <p class="aboutservicep">
+                These tables are essential for the PO Manager to function effectively, ensuring that you can accurately track and manage your open orders. Please ensure that the data entered into these tables is accurate and up-to-date to avoid any discrepancies.
+              </p>
+
                         </div>
                     </div>
 

@@ -17,3 +17,8 @@ tr{
     font-size: 0.75em; /* Adjust size as needed */
     color: red; /* Adjust color as needed */
   }
+  .tall-mode {
+    height: 600px !important;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+  }

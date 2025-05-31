@@ -843,7 +843,7 @@ if (res[3]?.data?.length > 0 && res[4]?.data?.length > 0) {
         requiredChartData = this.colorZoneChartData
         break;
       case 'Compare Total Score':
-        requiredChartData = null
+      requiredChartData = this.totalCompareScoreList;
         break;
       default:
         break

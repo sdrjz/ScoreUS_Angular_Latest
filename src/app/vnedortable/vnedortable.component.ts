@@ -1023,7 +1023,7 @@ async ngOnChanges(changes: SimpleChanges) {
     }
 
     data.pageNumber = 1;
-    data.pageSize = 5;
+    data.pageSize = 10000;
     data.searchText = ""
     switch (tableName) {
       case 'otdDetail':

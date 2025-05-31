@@ -44,6 +44,8 @@ export class DatatableComponent extends PaginationController implements OnInit {
   @Output() dataOutput = new EventEmitter();
   @Output() recordOutput = new EventEmitter();
   @Input() fileTypeId: any
+  @Input() isCompact: boolean = false;
+
   collectionData!: any[];
   fetching: boolean = false;
   totalRecords: number = 0;

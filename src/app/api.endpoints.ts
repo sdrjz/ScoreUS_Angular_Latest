@@ -214,6 +214,7 @@ export const api = {
 
     //MAPOUTVENDOR API STARTS
     mapOutVendor:'/mapoutvendor/GetMapOutVendor',
+    GetMapoutScoreCard:'/MapOutVendor/GetPlantScorecard',
     //MAPOUTVENDOR API ENDS
 
     //User Admin Dashboard APi Starts

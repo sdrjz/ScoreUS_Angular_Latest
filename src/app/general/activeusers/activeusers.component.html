@@ -68,8 +68,8 @@
                 >
             </mat-slide-toggle> -->
             <mat-radio-group [disabled]="[9,10,11].includes(loggedInUser.roleID)" [value]="data.isActive" (change)="onToggleChange($event, data)">
-              <mat-radio-button [value]="true">Renew</mat-radio-button>
-              <mat-radio-button [value]="false" style="margin-left:10px !important;">Cancel</mat-radio-button>
+              <mat-radio-button [value]="true">Active</mat-radio-button>
+              <mat-radio-button [value]="false" style="margin-left:10px !important;">Inactive</mat-radio-button>
             </mat-radio-group>
             </div>
 
@@ -218,7 +218,7 @@
     </div>
     <div class="modal-body text-center">
        <p>Please note the following important information about canceling your subscription:
-        <strong>No Reimbursement:</strong> Once you cancel your subscription, you will not receive any reimbursement for the current billing period.
+        <strong>No Refund:</strong> Once you cancel your subscription, you will not receive any reimbursement for the current billing period.
         </p>
         <p><strong>Immediate Termination: </strong>The user subscription will stop immediately, and access will be terminated.</p>
         <p>Please choose your preferred cancellation option below.</p>
@@ -243,7 +243,7 @@
   </div>
   <div class="modal-body text-center">
       <p>Please note the following important information about canceling your subscription:
-          <strong>No Reimbursement:</strong> Once you cancel your subscription, you will not receive any reimbursement for the current billing period.
+          <strong>No Refund:</strong> Once you cancel your subscription, you will not receive any refund for the current billing period.
       </p>
       <p><strong>Immediate Termination: </strong>The user subscription will stop immediately, and access will be terminated.</p>
       <p>Please choose your preferred cancellation option below.</p>

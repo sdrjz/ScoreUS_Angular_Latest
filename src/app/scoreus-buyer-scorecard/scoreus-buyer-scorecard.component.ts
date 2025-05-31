@@ -394,7 +394,8 @@ console.log("📅 Buyer Previous End Date:", this.previousYear.endDate);
 
     this._apiService.isCompareLoader$.next(true);
     if (data != '') {
-    
+      this.requiredBuyerGraph = [];  // 🧹 Clear stale data
+      this.cdr.detectChanges();      // 🧼 Trigger UI update
 
       if(data.indexOf(",")>0){
         let buyerCode = []

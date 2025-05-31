@@ -61,50 +61,137 @@ export class MapoutVendorFiledComponent implements OnInit {
     private cdr:ChangeDetectorRef) { }
 
 
-  ngOnInit(): void {
+ngOnInit(): void {
+  this._apiService.isLanguageSelector$.subscribe((res: any) => {
+    this.translateService.use(res);
+    this.cdr.detectChanges();
+  });
 
-    this._apiService.isLanguageSelector$.subscribe((res:any)=>{
-      this.translateService.use(res)
-      this.cdr.detectChanges()
-    })
+  const user = localStorage.getItem('userData');
+  if (user) this.currentUser = JSON.parse(user);
 
-    var user = localStorage.getItem('userData')
-    if (user)
-      this.currentUser = JSON.parse(user);
+  this._apiService.isCompareLoader$.subscribe((res: any) => {
+    this.loader = res;
+  });
 
-    this._apiService.isCompareLoader$.subscribe((res: any) => {
-      this.loader = res;
-    })
+  this._apiService.get(api.getCountries + "/" + this.currentUser.tenantID).subscribe((res: any) => {
+    this.listCountry = res.data;
+    this.listsDropDown.CountryDropDown = JSON.parse(JSON.stringify(res.data));
 
-    this._apiService.get(api.getCountries+"/"+this.currentUser.tenantID).subscribe((res:any)=>{
-      this.listCountry  = res.data
-      this.listsDropDown.CountryDropDown = JSON.parse(JSON.stringify(res.data))
-   
+    this._apiService.get(api.getCity + "/" + this.currentUser.tenantID).subscribe((inres: any) => {
+      this.listCity = inres.data;
+      this.listsDropDown.CityDropDown = JSON.parse(JSON.stringify(inres.data));
+    });
+  });
 
-      this._apiService.get(api.getCity+"/"+this.currentUser.tenantID).subscribe((inres:any)=>{
-        this.listCity  = inres.data
-        this.listsDropDown.CityDropDown = JSON.parse(JSON.stringify(inres.data))
-      })
-  
-   
-    })
+  this.form = new FormGroup({
+    startDate: new FormControl(null, Validators.required),
+    endDate: new FormControl(null, Validators.required),
+    plantCode: new FormControl(null, Validators.required),
+    commodity: new FormControl(''),
+    vendorCode: new FormControl(''),
+    allVendorCode: new FormControl(''),
+    countryCode: new FormControl(null, Validators.required),
+    cityCode: new FormControl(null, Validators.required),
+    colour: new FormControl(),
+    tenantId: new FormControl(this.currentUser.tenantID)
+  }, { validators: dateValidator });
 
-    this.form = new FormGroup({
-      startDate: new FormControl(null, Validators.required),
-      endDate: new FormControl(null, Validators.required),
-      plantCode: new FormControl(null, Validators.required),
-      commodity: new FormControl(''),
-      vendorCode: new FormControl(''),
-      allVendorCode: new FormControl(''),
-      countryCode: new FormControl(null, Validators.required),
-      cityCode: new FormControl(null, Validators.required),
-      colour: new FormControl(),
-      tenantId: new FormControl(this.currentUser.tenantID)
-    }, { validators: dateValidator })
+ this._apiService.get(`${api.GetMaterialScoreCard}/${this.currentUser.tenantID}`).subscribe((res: any) => {
+  const startDateRaw = res?.data?.startDate;
+  const endDateRaw = res?.data?.endDate;
+  const plantCode = res?.data?.plantCode;
+  const commodityCodes = res?.data?.commodity?.split(',') || [];
+  const vendorCodes = res?.data?.vendorCode?.split(',') || [];
+
+  if (!startDateRaw || !endDateRaw) return;
+
+  const startDate = new Date(startDateRaw);
+  const endDate = new Date(endDateRaw);
+
+  this.form.patchValue({ startDate, endDate });
+  this.startDate = startDate;
+  this.endDate = endDate;
+
+  this.onDateChange(); // triggers plant load
+
+  // Step 1: Wait for plantDropDown to load, then select plant
+  setTimeout(() => {
+    const plantCodes = plantCode?.split(',') || [];
+    const commodityCodes = res?.data?.commodity?.split(',') || [];
+    const vendorCodes = res?.data?.vendorCode?.split(',') || [];
 
 
-    
+    if (plantCodes.length > 1 && this.listsDropDown.plantDropDown?.length > 0) {
+      this.plantInput = 'ALL';
+      this.onPlantSelect({ option: { value: 'ALL' } });
+    } else if (plantCodes.length === 1) {
+      const singlePlant = this.listsDropDown.plantDropDown.find(p => p.id === plantCodes[0]);
+      if (singlePlant) {
+        this.plantInput = singlePlant.name;
+        this.onPlantSelect({ option: { value: singlePlant.name } });
+      }
+    }
+
+    // Step 2: Wait for commodityDropDown to load after onPlantSelect
+    setTimeout(() => {
+      if (commodityCodes.length > 1 && this.listsDropDown.commodityDropDown?.length > 0) {
+        this.commodityInput = 'ALL';
+        this.onCommoditySelection({ option: { value: 'ALL' } });
+      } else if (commodityCodes.length === 1) {
+        const singleCommodity = this.listsDropDown.commodityDropDown.find(c => c.id === commodityCodes[0]);
+        if (singleCommodity) {
+          this.commodityInput = singleCommodity.name;
+          this.onCommoditySelection({ option: { value: singleCommodity.name } });
+        }
+      }
+
+      // Step 3: Wait for vendorDropDown to load after onCommoditySelection
+      setTimeout(() => {
+        if (vendorCodes.length > 1 && this.listsDropDown.vendorDropDown?.length > 0) {
+          const allOption = this.listsDropDown.vendorDropDown.find(v => v.id === 'ALL');
+          if (allOption) {
+            this.selected = [allOption];
+          }
+        } else {
+          this.selected = this.listsDropDown.vendorDropDown.filter(v => vendorCodes.includes(v.id));
+        }
+      }, 1000); // ⏱ wait for vendor dropdown
+    }, 1000); // ⏱ wait for commodity dropdown
+  }, 2000); // ⏱ wait for plant dropdown
+});
+
+setTimeout(() => {
+  // ✅ Default Country: USA
+  const usa = this.listsDropDown.CountryDropDown.find(c => c.name?.toLowerCase() === 'usa');
+  if (usa) {
+    this.countryInput = usa.name;
+    this.selectedCountry = usa.id;
+    this.onCountrySelection({ option: { value: usa.name } });
+    console.log('✅ Country set to USA');
   }
+
+  // ✅ Default City: Houston
+  setTimeout(() => {
+    const houston = this.listsDropDown.CityDropDown.find(c => c.name?.toLowerCase() === 'houston');
+    if (houston) {
+      this.cityInput = houston.name;
+      this.selectedCity = houston.id;
+      this.onCitySelection({ option: { value: houston.name } });
+      console.log('✅ City set to Houston');
+    }
+  }, 1000); // wait for getCities() to complete after selecting USA
+
+  // ✅ Default Color: ALL
+  this.form.controls['colour'].setValue('ALL');
+  console.log('✅ Color set to ALL');
+}, 3000);
+
+
+
+}
+
+
 
   ngOnChanges(changes: SimpleChanges) {
 

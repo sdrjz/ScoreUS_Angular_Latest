@@ -14,7 +14,7 @@
                     <div class="row no-gutters">
                         <div class="col-xl-12 wizard-num">
                             <div class="auth-form pr-3">
-                                <h4 class="text-center mb-3" style="font-weight: 500;">Payment Details</h4>
+                                <h4 class="text-center mb-3" style="font-weight: 500;">Enter Your Payment Details</h4>
                                 <form class="secstep" [formGroup]="paymentForm">
                                     <div class="form-control mb-3 pb-5">
                                         <input matInput class="border-0" placeholder="Name on Card*"
@@ -33,7 +33,7 @@
                                     </div>
                                     <div class="d-flex flex-md-row flex-sm-column mb-5">
                                         <div class="col-md-7 pl-0">
-                                            <mat-label>Expiry:</mat-label>
+                                            <mat-label>Expiration Date</mat-label>
                                             <div class="d-flex flex-column mb-3">
                                                 
                                                 <div class="d-flex flex-md-row flex-sm-column">
@@ -54,11 +54,11 @@
                                           
                                                   <!-- Error Message -->
                                                   <mat-error *ngIf="!selectedMonth || !selectedYear">
-                                                    <p class="pt-1">Expiry Month and Year are required</p>
+                                                    <p class="pt-1">Expiration Month and Year are required</p>
                                                   </mat-error>
                                                
                                                   <mat-error *ngIf="isDateInvalid">
-                                                    <p class="pt-1">Expiry date cannot be in the past</p>
+                                                    <p class="pt-1">Expiration date cannot be in the past</p>
                                                   </mat-error>
                                                 <!-- <mat-form-field appearance="fill" class="mt-2">
                                                     <input matInput [matDatepicker]="picker" formControlName="expiry"
@@ -100,11 +100,11 @@
                                               </div>
                                         </div>
                                     </div>
-                                    <p style="font-size:14px;" class="pb-2 mt-5"><span style="color:#BC1A20;">Note:</span>
-                                        You'll be charged after 30 days if you don't cancel your trial</p>
+                                    <p style="font-size:14px;" class="pb-2 mt-5"><strong style="color:#BC1A20;">Note : </strong>
+                                        <strong>Your free trial lasts 30 days.</strong> You’ll be charged automatically after that unless you cancel before the trial ends.</p>
 
                                     <div class="text-center mt-4 mb-3 wizard-padding">
-                                        <a (click)="onSubmit()" class="btn btn-primary btn-block mb-4">Submit</a>
+                                        <a (click)="onSubmit()" class="btn btn-primary btn-block mb-4" style="font-size: 18px;">Confirm & Start Trial</a>
                                     </div>
                                 </form>
 

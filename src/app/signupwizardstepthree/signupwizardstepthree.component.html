@@ -25,7 +25,7 @@
                                       type="checkbox"
                                       [checked]="isYearly"
                                       class="switch-input"
-                                      (change)="pkg_toggle($event)"
+                                      (click)="$event.preventDefault()"  
                                     >
                                     <span
                                       class="switch-label"
@@ -72,7 +72,7 @@
                                                 <span #priceID style="display:none;">{{item.stripePriceId}}</span>
 
                                             <button (click)="getStarted(id.innerHTML,priceID.innerHTML,1)"
-                                                class="upgrade  pl-4 pr-4 mb-3">GET STARTED</button><br>
+                                                class="upgrade  pl-4 pr-4 mb-3">Confirm & Continue</button><br>
                                             <a  (click)="getStarted(id.innerHTML,priceID.innerHTML,0)"
                                                 class="pt-3 mb-3"
                                                 style="color:#BC1A20;font-size:20px;font-weight:600;text-decoration:underline;cursor: pointer!important;">
@@ -113,14 +113,17 @@
                         <div class="row">
                             <div class="profile-name px-3 pt-2 col-lg-8 ml-auto">
                                 <h4 class="mb-0 pro-name uer-font text-center" style="font-size:22px;">SUBSCRIPTION PLANS</h4>
-                            </div>
+                                <p class="pro-name uer-font" style="font-size:22px; margin-top:4px; color:#555; text-align: center; font-weight: 600;">
+                                    Last Chance to Pick What Works Best for You
+                                  </p>
+                                </div>
                             <div class="col-lg-2 col-sm-2 text-right">
                                 <label class="switch">
                                     <input
                                       type="checkbox"
                                       [checked]="isYearly"
                                       class="switch-input"
-                                      (change)="pkg_toggle($event)" 
+                                      (click)="$event.preventDefault()"  
                                     >
                                     <span
                                       class="switch-label"
@@ -167,7 +170,7 @@
                                                 <span #priceID style="display:none;">{{item.stripePriceId}}</span>
 
                                             <button (click)="getStarted(id.innerHTML,priceID.innerHTML,1)"
-                                                class="upgrade  pl-4 pr-4 mb-3">GET STARTED</button><br>
+                                                class="upgrade  pl-4 pr-4 mb-3">Confirm & Continue</button><br>
                                             <a  (click)="getStarted(id.innerHTML,priceID.innerHTML,0)"
                                                 class="pt-3 mb-3"
                                                 style="color:#BC1A20;font-size:20px;font-weight:600;text-decoration:underline;cursor: pointer!important;">

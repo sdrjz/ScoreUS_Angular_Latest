@@ -33,11 +33,11 @@ export class MaindashboardComponent implements OnInit {
     startDate!: any
     endDate!: any
     a: string = "as/as"
-    plantColorZoneGraphData: any
+    // plantColorZoneGraphData: any
     // commodityColorZoneGraphData: any
-    buyerColorZoneGraphData: any
+    // buyerColorZoneGraphData: any
     // materialColorZoneGraphData: any
-    vendorColorZoneGraphData: any
+    // vendorColorZoneGraphData: any
     totalPoSpendData: any
     totalIssuePoData: any
     totalSourceMaterialData: any
@@ -68,9 +68,9 @@ export class MaindashboardComponent implements OnInit {
     listVendor: any[]
     dashBoardStatistic: any = {}
     dashBoardRegistration: any = {}
-    vendorColorZoneStats: any
-    buyerColorZoneStats: any
-    plantColorZoneStats: any
+    // vendorColorZoneStats: any
+    // buyerColorZoneStats: any
+    // plantColorZoneStats: any
     // commodityColorZoneStats: any
     // materialColorZoneStats: any
     plantGraphData: any
@@ -84,11 +84,11 @@ export class MaindashboardComponent implements OnInit {
     ncrPercentageChartData: any
     totalScoreChartData: any
     dashBoardChartData: any
-    plantColorZoneChartData: any
+    // plantColorZoneChartData: any
     // commodityColorZoneChartData: any
-    buyerColorZoneChartData: any
+    // buyerColorZoneChartData: any
     // materialColorZoneChartData: any
-    vendorColorZoneChartData: any
+    // vendorColorZoneChartData: any
     @Input() subtitle: string;
 
     @Input() numberScore: string;
@@ -143,11 +143,6 @@ export class MaindashboardComponent implements OnInit {
             
 
             localStorage.setItem('kpiSettingSendReportValue', JSON.stringify(this.viewFirst));
-          
-
-
-       
-  
          
         })
         
@@ -155,147 +150,138 @@ export class MaindashboardComponent implements OnInit {
 
     }
 
-    pageLoadCall(){
+pageLoadCall() {
+    Promise.all([
+        this._apiService.get(`${api.GetMaterialScoreCard}/${this.loggedInUser.tenantID}`).toPromise(),
+        this._apiService.get(`${api.GetBuyerScoreCard}/${this.loggedInUser.tenantID}`).toPromise()
+    ]).then((res: any) => {
+
+        if (res[1].data.length < 1) {
+            this._apiService.isCompareLoader$.next(false);
+            this._notificationService.push("No record for this tenant", 2);
+            return;
+        }
+
+        this.dateDiffSentance = res[1].dateDiff;
+
+        const currentData = {
+            startDate: res[1].data.startDate,
+            endDate: res[1].data.endDate,
+            plantCode: res[0].data.plantCode,
+            commodity: res[0].data.commodity,
+            vendorCode: res[0].data.vendorCode,
+            buyerCode: res[1].data.buyerCode,
+            materialCode: "ALL",
+            tenantId: this.loggedInUser.tenantID
+        };
+
+        this.apiPlantRequestData = currentData;
+        this.currentData = { ...currentData };
+
+        const previousData = {
+            startDate: res[1].previousDate.startDate,
+            endDate: res[1].previousDate.endDate,
+            plantCode: res[0].data.plantCode,
+            commodity: res[0].data.commodity,
+            vendorCode: res[0].data.vendorCode,
+            buyerCode: res[1].data.buyerCode,
+            materialCode: "ALL",
+            tenantId: this.loggedInUser.tenantID
+        };
+
+        this.previousData = { ...previousData };
+        this.startDate = this.currentData.startDate;
+        this.endDate = this.currentData.endDate;
+
+        this.startDateControl = new FormControl(new Date(this.startDate));
+        this.endDateControl = new FormControl(new Date(this.endDate));
+
+        if (!this.isCustomDate) {
+            this.startDateControl.disable();
+            this.endDateControl.disable();
+        }
+
+        this.cdr.detectChanges();
+
+        // Remaining necessary API calls
         Promise.all([
-            this._apiService.get(`${api.GetMaterialScoreCard}/${this.loggedInUser.tenantID}`).toPromise(),
-            this._apiService.get(`${api.GetBuyerScoreCard}/${this.loggedInUser.tenantID}`).toPromise(),
+            this._apiService.post(`${api.dashboardGraphPO}`, {
+                startDate: currentData.startDate.split("T")[0],
+                endDate: currentData.endDate.split("T")[0],
+                tenantId: this.loggedInUser.tenantID
+            }).toPromise(), // 0
 
-        ]).then((res: any) => {
+            this._apiService.post(`${api.dashboardStats}`, {
+                startDate: currentData.startDate.split("T")[0],
+                lastDate: currentData.endDate.split("T")[0],
+                tenantId: this.loggedInUser.tenantID
+            }).toPromise(), // 1
 
-              if (res[1].data.length < 1) {
+            this._apiService.post(`${api.dashboardStats}`, {
+                startDate: previousData.startDate.split("T")[0],
+                lastDate: previousData.endDate.split("T")[0],
+                tenantId: this.loggedInUser.tenantID
+            }).toPromise(), // 2
+
+            this._apiService.post(`${api.dashboardKPICount}`, {
+                startDate: currentData.startDate.split("T")[0],
+                lastDate: currentData.endDate.split("T")[0],
+                tenantId: this.loggedInUser.tenantID
+            }).toPromise(), // 3
+
+            this._apiService.post(`${api.dashboardKPICount}`, {
+                startDate: previousData.startDate.split("T")[0],
+                lastDate: previousData.endDate.split("T")[0],
+                tenantId: this.loggedInUser.tenantID
+            }).toPromise(), // 4
+
+            this._apiService.post(api.plantStatistics, { ...currentData }).toPromise(), // 5
+            this._apiService.post(api.plantStatistics, { ...previousData }).toPromise(), // 6
+
+            this._apiService.post(api.plantAverageGraph, { ...currentData }).toPromise() // 7 ✅ for Total Score
+        ]).then((innerResponse: any) => {
+            if (!innerResponse) {
                 this._apiService.isCompareLoader$.next(false);
-                this._notificationService.push("No record for this tenant", 2);
-                return
+                return;
             }
-        
-            this.dateDiffSentance = res[1].dateDiff
-            var currentData = {
-                startDate: res[1].data.startDate,
-                endDate: res[1].data.endDate,
-                plantCode: res[0].data.plantCode,
-                commodity: res[0].data.commodity,
-                vendorCode: res[0].data.vendorCode,
-                buyerCode: res[1].data.buyerCode,
-                // materialCode: res[0].data.materialCode,
-                materialCode: "ALL",
-                tenantId: this.loggedInUser.tenantID
+
+            this.poData = innerResponse[0].data;
+
+            this.dashBoardStatistic = {
+                currentStatus: innerResponse[5].data,
+                previousStatus: innerResponse[6].data
             };
-            this.apiPlantRequestData = currentData
-            this.currentData = { ...currentData }
-            let previousData = {
-                startDate: res[1].previousDate.startDate,
-                endDate: res[1].previousDate.endDate,
-                plantCode: res[0].data.plantCode,
-                commodity: res[0].data.commodity,
-                vendorCode: res[0].data.vendorCode,
-                buyerCode: res[1].data.buyerCode,
-                // materialCode: res[0].data.materialCode,
-                materialCode: "ALL",
-                tenantId: this.loggedInUser.tenantID
-            }
-            this.previousData = { ...previousData }
-            this.startDate = this.currentData.startDate
-            this.endDate = this.currentData.endDate
-            this.startDateControl = new FormControl(new Date(this.startDate));
-            this.endDateControl = new FormControl(new Date(this.endDate));
-            if(!this.isCustomDate){
-                this.startDateControl.disable()
-                this.endDateControl.disable()
-                
-            }
-            this.cdr.detectChanges();
-            
-            Promise.all([
-                this._apiService.post(api.VendorColorZone, { ...currentData, allVendorCode: currentData.vendorCode }).toPromise(),//0
-                this._apiService.post(api.VendorColorZone, { ...previousData, allVendorCode: currentData.vendorCode }).toPromise(),//1
-                this._apiService.post(api.buyerColorZone, { ...currentData, allBuyerCode: currentData.buyerCode }).toPromise(),//2
-                this._apiService.post(api.buyerColorZone, { ...previousData, allBuyerCode: currentData.buyerCode }).toPromise(),//3
-                this._apiService.post(api.plantColorZone, { ...currentData, allPlantCode: currentData.plantCode }).toPromise(),//6
-                this._apiService.post(api.plantColorZone, { ...previousData, allPlantCode: currentData.plantCode }).toPromise(),//7
-                this._apiService.post(api.plantStatistics, { ...currentData }).toPromise(),//8
-                this._apiService.post(api.plantStatistics, { ...previousData }).toPromise(),//9
-                this._apiService.post(api.plantAverageGraph, { ...currentData }).toPromise(),//16
-                this._apiService.post(`${api.dashboardGraphPO}`, {startDate: currentData.startDate.split("T")[0], endDate: currentData.endDate.split("T")[0],tenantId: this.loggedInUser.tenantID }).toPromise(),//19
-                this._apiService.post(`${api.dashboardStats}`, { startDate: currentData.startDate.split("T")[0], lastDate: currentData.endDate.split("T")[0], tenantId: this.loggedInUser.tenantID }).toPromise(),//19
-                this._apiService.post(`${api.dashboardStats}`, { startDate: previousData.startDate.split("T")[0], lastDate: previousData.endDate.split("T")[0], tenantId: this.loggedInUser.tenantID }).toPromise(),//19
-                this._apiService.post(`${api.dashboardKPICount}`, { startDate: currentData.startDate.split("T")[0], lastDate: currentData.endDate.split("T")[0], tenantId: this.loggedInUser.tenantID }).toPromise(),//19
-                this._apiService.post(`${api.dashboardKPICount}`, { startDate: previousData.startDate.split("T")[0], lastDate: previousData.endDate.split("T")[0], tenantId: this.loggedInUser.tenantID }).toPromise(),//19
-                // this._apiService.post(api.commodityColorZone, { ...currentData, allCommodity: currentData.commodity,commodityWithPlant : "ALL-ALL"}).toPromise(),//0
-                // this._apiService.post(api.commodityColorZone, { ...previousData,allCommodity : currentData.commodity,commodityWithPlant : "ALL-ALL" }).toPromise(),//1
-                // this._apiService.post(api.materialColorZone, { ...currentData, allMaterialCode: "ALL" }).toPromise(),//0
-                // this._apiService.post(api.materialColorZone, { ...previousData, allMaterialCode: "ALL" }).toPromise(),//1
-                
-            
-            ]).then((innerResponse: any) => {
 
-                if (innerResponse === null || innerResponse === undefined) {
-                    this._apiService.isCompareLoader$.next(false)
-                    return
-                }
-                // this.dateDiffSentance = 90
+            this.dashBoardRegistration = {
+                currentRegistration: innerResponse[3].data,
+                previousRegistration: innerResponse[4].data
+            };
 
-                this.vendorColorZoneGraphData = []
-                this.buyerColorZoneGraphData = []
-                // this.materialColorZoneGraphData = []
-                this.plantColorZoneGraphData = []
-                // this.commodityColorZoneGraphData = []
+            this.dataStats = {
+                currentData: innerResponse[1].data[0],
+                previousData: innerResponse[2].data[0]
+            };
 
-                this.vendorColorZoneGraphData = innerResponse[0].data
-                this.buyerColorZoneGraphData = innerResponse[2].data
-                // this.materialColorZoneGraphData = innerResponse[16].data
-                this.plantColorZoneGraphData = innerResponse[4].data
-                // this.commodityColorZoneGraphData = innerResponse[14].data
+            // ✅ Total Score Graph Data
+            this.totalScores = innerResponse[7].data;
 
-                this.arrangeProperData(innerResponse[4].graphData)
-                this.dashBoardStatistic = {
-                    currentStatus: innerResponse[6].data,
-                    previousStatus: innerResponse[7].data
-                }
+            // Optional: prepare graph chart object
+            this.arrangeProperData(innerResponse[7].data);
 
-                this.dashBoardRegistration = {
-                    currentRegistration: innerResponse[12].data,
-                    previousRegistration: innerResponse[13].data
-                }
-
-
-                // this.plantColorZoneStats = this.getColorZonesState(innerResponse[4].data,innerResponse[5].data)
-                // this.commodityColorZoneStats = this.getColorZonesState(innerResponse[6].data,innerResponse[7].data)
-                // this.materialColorZoneStats = this.getColorZonesState(innerResponse[0].data,innerResponse[1].data)
-                // this.vendorColorZoneStats = this.getColorZonesState(innerResponse[0].data,innerResponse[1].data)
-                // this.buyerColorZoneStats = this.getColorZonesState(innerResponse[2].data,innerResponse[3].data)
-                this.totalScores = innerResponse[8].data
-                // this.colorZoneStat = []
-                this.poData = innerResponse[9].data
-                this.dataStats = {
-                    currentData: innerResponse[10].data[0],
-                    previousData: innerResponse[11].data[0],
-
-                }
-
-                this.plantColorZoneStats = this.getColorZoneStat(innerResponse[4].data, innerResponse[5].data)
-                this.vendorColorZoneStats = this.getColorZoneStat(innerResponse[0].data, innerResponse[1].data)
-                // this.commodityColorZoneStats = this.getColorZoneStat(innerResponse[14].data, innerResponse[15].data)
-                this.buyerColorZoneStats = this.getColorZoneStat(innerResponse[2].data, innerResponse[3].data)
-                // this.materialColorZoneStats = this.getColorZoneStat(innerResponse[16].data, innerResponse[17].data)
-
-
-
-                this._apiService.isCompareLoader$.next(false)
-            }).catch((e:any)=> this._apiService.isCompareLoader$.next(false))
-            .finally(() =>{})
-
-
+            // ✅ Resize & loader off after 3s
+            setTimeout(() => {
+                window.dispatchEvent(new Event('resize'));
+                this._apiService.isCompareLoader$.next(false);
+            }, 1000);
 
         }).catch((e: any) => {
-            this._apiService.isCompareLoader$.next(false)
-            })
-            .finally(() => {
+            this._apiService.isCompareLoader$.next(false);
+        });
 
-        })
-
-
-    }
-
+    }).catch((e: any) => {
+        this._apiService.isCompareLoader$.next(false);
+    });
+}
 
     openDialog() {
         this.dialog.open(VendortotalCoregraphDialogComponent);
@@ -324,123 +310,107 @@ export class MaindashboardComponent implements OnInit {
         this.loadDashboardData();
       }
       
-    
+ loadDashboardData(): void {
+  const currentStart = new Date(this.startDate);
+  const currentEnd = new Date(this.endDate);
 
-    loadDashboardData(): void {
-        const currentStart = new Date(this.startDate);
-        const currentEnd = new Date(this.endDate);
-      
-        if (isNaN(currentStart.getTime()) || isNaN(currentEnd.getTime())) {
-          this._notificationService.push("Invalid date format", 2);
-          return;
-        }
-      
-        const dayDiff = Math.floor((currentEnd.getTime() - currentStart.getTime()) / (1000 * 3600 * 24)) + 1;
-      
-        const prevEnd = new Date(currentStart);
-        prevEnd.setDate(prevEnd.getDate() - 1);
-      
-        const prevStart = new Date(prevEnd);
-        prevStart.setDate(prevStart.getDate() - (dayDiff - 1));
-      
-        this.previousData.endDate = prevEnd.toISOString().split("T")[0];
-        this.previousData.startDate = prevStart.toISOString().split("T")[0];
-      
-        this.currentData.startDate = this.startDate;
-        this.currentData.endDate = this.endDate;
-      
-        const obj = {
-          startDate: this.startDate,
-          endDate: this.endDate,
-          tenantId: this.loggedInUser.tenantID
-        };
-      
-        this._apiService.isCompareLoader$.next(true);
-      
-        this._apiService.post(api.getPlantDropDown, obj).subscribe((res: any) => {
-          this.dashBoardRegistration = null;
-          this.dataStats = null;
-          this.dateDiffSentance = null;
-      
-          Promise.all([
-            this._apiService.post(api.VendorColorZone, { ...this.currentData, allVendorCode: this.currentData.vendorCode }).toPromise(),
-            this._apiService.post(api.VendorColorZone, { ...this.previousData, allVendorCode: this.currentData.vendorCode }).toPromise(),
-            this._apiService.post(api.buyerColorZone, { ...this.currentData, allBuyerCode: this.currentData.buyerCode }).toPromise(),
-            this._apiService.post(api.buyerColorZone, { ...this.previousData, allBuyerCode: this.currentData.buyerCode }).toPromise(),
-            this._apiService.post(api.plantColorZone, { ...this.currentData, allPlantCode: this.currentData.plantCode }).toPromise(),
-            this._apiService.post(api.plantColorZone, { ...this.previousData, allPlantCode: this.currentData.plantCode }).toPromise(),
-            this._apiService.post(api.plantStatistics, { ...this.currentData }).toPromise(),
-            this._apiService.post(api.plantStatistics, { ...this.previousData }).toPromise(),
-            this._apiService.post(api.plantAverageGraph, { ...this.currentData }).toPromise(),
-            this._apiService.post(`${api.dashboardGraphPO}`, {
-              startDate: this.currentData.startDate,
-              endDate: this.currentData.endDate,
-              tenantId: this.loggedInUser.tenantID
-            }).toPromise(),
-            this._apiService.post(`${api.dashboardStats}`, {
-              startDate: this.currentData.startDate,
-              lastDate: this.currentData.endDate,
-              tenantId: this.loggedInUser.tenantID
-            }).toPromise(),
-            this._apiService.post(`${api.dashboardStats}`, {
-              startDate: this.previousData.startDate,
-              lastDate: this.previousData.endDate,
-              tenantId: this.loggedInUser.tenantID
-            }).toPromise(),
-            this._apiService.post(`${api.dashboardKPICount}`, {
-              startDate: this.currentData.startDate,
-              lastDate: this.currentData.endDate,
-              tenantId: this.loggedInUser.tenantID
-            }).toPromise(),
-            this._apiService.post(`${api.dashboardKPICount}`, {
-              startDate: this.previousData.startDate,
-              lastDate: this.previousData.endDate,
-              tenantId: this.loggedInUser.tenantID
-            }).toPromise()
-          ])
-          .then((innerResponse: any) => {
-            if (!innerResponse) {
-              this._apiService.isCompareLoader$.next(false);
-              return;
-            }
-      
-            this.dateDiffSentance = res.dateDiff;
-            this.vendorColorZoneGraphData = innerResponse[0].data;
-            this.buyerColorZoneGraphData = innerResponse[2].data;
-            this.plantColorZoneGraphData = innerResponse[4].data;
-      
-            this.arrangeProperData(innerResponse[4].graphData);
-      
-            this.dashBoardStatistic = {
-              currentStatus: innerResponse[6].data,
-              previousStatus: innerResponse[7].data
-            };
-      
-            this.dashBoardRegistration = {
-              currentRegistration: innerResponse[12].data,
-              previousRegistration: innerResponse[13].data
-            };
-      
-            this.plantColorZoneStats = this.getColorZoneStat(innerResponse[4].data, innerResponse[5].data);
-            this.vendorColorZoneStats = this.getColorZoneStat(innerResponse[0].data, innerResponse[1].data);
-            this.buyerColorZoneStats = this.getColorZoneStat(innerResponse[2].data, innerResponse[3].data);
-      
-            this.totalScores = innerResponse[8].data;
-            this.poData = innerResponse[9].data;
-            this.dataStats = {
-              currentData: innerResponse[10].data[0],
-              previousData: innerResponse[11].data[0]
-            };
-      
-            this._apiService.isCompareLoader$.next(false);
-          })
-          .catch(() => this._apiService.isCompareLoader$.next(false));
-        });
+  if (isNaN(currentStart.getTime()) || isNaN(currentEnd.getTime())) {
+    this._notificationService.push("Invalid date format", 2);
+    return;
+  }
+
+  const dayDiff = Math.floor((currentEnd.getTime() - currentStart.getTime()) / (1000 * 3600 * 24)) + 1;
+
+  const prevEnd = new Date(currentStart);
+  prevEnd.setDate(prevEnd.getDate() - 1);
+
+  const prevStart = new Date(prevEnd);
+  prevStart.setDate(prevStart.getDate() - (dayDiff - 1));
+
+  this.previousData.endDate = prevEnd.toISOString().split("T")[0];
+  this.previousData.startDate = prevStart.toISOString().split("T")[0];
+
+  this.currentData.startDate = this.startDate;
+  this.currentData.endDate = this.endDate;
+
+  const obj = {
+    startDate: this.startDate,
+    endDate: this.endDate,
+    tenantId: this.loggedInUser.tenantID
+  };
+
+  this._apiService.isCompareLoader$.next(true);
+
+  this._apiService.post(api.getPlantDropDown, obj).subscribe((res: any) => {
+    this.dashBoardRegistration = null;
+    this.dataStats = null;
+    this.dateDiffSentance = null;
+
+    Promise.all([
+      this._apiService.post(api.plantStatistics, { ...this.currentData }).toPromise(), // 0
+      this._apiService.post(api.plantStatistics, { ...this.previousData }).toPromise(), // 1
+      this._apiService.post(api.plantAverageGraph, { ...this.currentData }).toPromise(), // 2
+      this._apiService.post(`${api.dashboardGraphPO}`, {
+        startDate: this.currentData.startDate,
+        endDate: this.currentData.endDate,
+        tenantId: this.loggedInUser.tenantID
+      }).toPromise(), // 3
+      this._apiService.post(`${api.dashboardStats}`, {
+        startDate: this.currentData.startDate,
+        lastDate: this.currentData.endDate,
+        tenantId: this.loggedInUser.tenantID
+      }).toPromise(), // 4
+      this._apiService.post(`${api.dashboardStats}`, {
+        startDate: this.previousData.startDate,
+        lastDate: this.previousData.endDate,
+        tenantId: this.loggedInUser.tenantID
+      }).toPromise(), // 5
+      this._apiService.post(`${api.dashboardKPICount}`, {
+        startDate: this.currentData.startDate,
+        lastDate: this.currentData.endDate,
+        tenantId: this.loggedInUser.tenantID
+      }).toPromise(), // 6
+      this._apiService.post(`${api.dashboardKPICount}`, {
+        startDate: this.previousData.startDate,
+        lastDate: this.previousData.endDate,
+        tenantId: this.loggedInUser.tenantID
+      }).toPromise() // 7
+    ])
+    .then((innerResponse: any) => {
+      if (!innerResponse) {
+        this._apiService.isCompareLoader$.next(false);
+        return;
       }
-      
-    
-    
 
+      this.dateDiffSentance = res.dateDiff;
+
+      this.dashBoardStatistic = {
+        currentStatus: innerResponse[0].data,
+        previousStatus: innerResponse[1].data
+      };
+
+      this.totalScores = innerResponse[2].data;
+      this.arrangeProperData(innerResponse[2].data);
+
+      this.poData = innerResponse[3].data;
+      this.dataStats = {
+        currentData: innerResponse[4].data[0],
+        previousData: innerResponse[5].data[0]
+      };
+
+      this.dashBoardRegistration = {
+        currentRegistration: innerResponse[6].data,
+        previousRegistration: innerResponse[7].data
+      };
+
+      setTimeout(() => {
+        window.dispatchEvent(new Event('resize'));
+        this._apiService.isCompareLoader$.next(false);
+      }, 3000);
+    })
+    .catch(() => this._apiService.isCompareLoader$.next(false));
+  });
+}
     // onStartDateChange(event: Event) {
     //     const inputStartDate = (event.target as HTMLInputElement).value;
     //     this.startDate = this._apiService.setInputControlDate(inputStartDate, 'startDate');
@@ -988,17 +958,27 @@ export class MaindashboardComponent implements OnInit {
                     }
                     // this.dateDiffSentance = 90
     
-                    this.vendorColorZoneGraphData = []
-                    this.buyerColorZoneGraphData = []
+                    // this.vendorColorZoneGraphData = []
+                    // this.buyerColorZoneGraphData = []
                     // this.materialColorZoneGraphData = []
-                    this.plantColorZoneGraphData = []
+                    // this.plantColorZoneGraphData = []
     
-                    this.vendorColorZoneGraphData = innerResponse[0].data
-                    this.buyerColorZoneGraphData = innerResponse[2].data
-                    // this.materialColorZoneGraphData = innerResponse[2].data
-                    this.plantColorZoneGraphData = innerResponse[4].data
+                    // this.vendorColorZoneGraphData = innerResponse[0].data
+                    // this.buyerColorZoneGraphData = innerResponse[2].data
+                    // this.plantColorZoneGraphData = innerResponse[4].data
     
-                    this.arrangeProperData(innerResponse[4].graphData)
+                    // this.arrangeProperData(innerResponse[4].graphData)
+
+                    setTimeout(() => {
+                        // this.vendorColorZoneGraphData = innerResponse[0].data;
+                        // this.buyerColorZoneGraphData = innerResponse[2].data;
+                        // this.plantColorZoneGraphData = innerResponse[4].data;
+                        this.arrangeProperData(innerResponse[4].graphData);
+                        
+                          window.dispatchEvent(new Event('resize'));
+                        this._apiService.isCompareLoader$.next(false); // show loader until delay is over
+                      }, 3000); // 3 seconds
+
                     // this.commodityColorZoneGraphData = innerResponse[2].data
                     this.dashBoardStatistic = {
                         currentStatus: innerResponse[6].data,
@@ -1026,10 +1006,10 @@ export class MaindashboardComponent implements OnInit {
                     }
     
     
-                    this.plantColorZoneStats = this.getColorZoneStat(innerResponse[4].data, innerResponse[5].data)
-                    this.vendorColorZoneStats = this.getColorZoneStat(innerResponse[0].data, innerResponse[1].data)
+                    // this.plantColorZoneStats = this.getColorZoneStat(innerResponse[4].data, innerResponse[5].data)
+                    // this.vendorColorZoneStats = this.getColorZoneStat(innerResponse[0].data, innerResponse[1].data)
                     // this.commodityColorZoneStats = this.getColorZoneStat(innerResponse[0].data, innerResponse[1].data)
-                    this.buyerColorZoneStats = this.getColorZoneStat(innerResponse[2].data, innerResponse[3].data)
+                    // this.buyerColorZoneStats = this.getColorZoneStat(innerResponse[2].data, innerResponse[3].data)
                     // this.materialColorZoneStats = this.getColorZoneStat(innerResponse[0].data, innerResponse[1].data)
     
     
@@ -1126,17 +1106,17 @@ export class MaindashboardComponent implements OnInit {
             //     this.materialColorZoneChartData = data.data
             //     break;
 
-            case 'vendorColorZone':
-                this.vendorColorZoneChartData = data.data
-                break;
+            // case 'vendorColorZone':
+            //     this.vendorColorZoneChartData = data.data
+            //     break;
 
-            case 'buyerColorZone':
-                this.buyerColorZoneChartData = data.data
-                break;
+            // case 'buyerColorZone':
+            //     this.buyerColorZoneChartData = data.data
+            //     break;
 
-            case 'plantColorZone':
-                this.plantColorZoneChartData = data.data
-                break;
+            // case 'plantColorZone':
+            //     this.plantColorZoneChartData = data.data
+            //     break;
 
 
             default:
@@ -1197,21 +1177,21 @@ export class MaindashboardComponent implements OnInit {
                 // requiredColorData = this.colorZoneGraphData;
                 break;
 
-            case 'vendorColorZone':
-                requiredChartData = this.vendorColorZoneChartData;
-                break;
+            // case 'vendorColorZone':
+            //     requiredChartData = this.vendorColorZoneChartData;
+            //     break;
 
             // case 'commodityColorZone':
             //     requiredChartData = this.commodityColorZoneChartData;
             //     break;
 
-            case 'buyerColorZone':
-                requiredChartData = this.buyerColorZoneChartData;
-                break;
+            // case 'buyerColorZone':
+            //     requiredChartData = this.buyerColorZoneChartData;
+            //     break;
 
-            case 'plantColorZone':
-                requiredChartData = this.plantColorZoneChartData;
-                break;
+            // case 'plantColorZone':
+            //     requiredChartData = this.plantColorZoneChartData;
+            //     break;
 
             // case 'materialColorZone':
             //     requiredChartData = this.materialColorZoneChartData;

@@ -359,12 +359,12 @@ export class SubsriptionPaymentInviteuserComponent implements OnInit {
       data: {
         height: '75%',
         width: '40%',
-        heading:  "Subscription Confirmation",
-        message:  `<p>You are subscribing to our service as follows:</p>
-                  <p><strong>User Accounts:</strong> You are subscribing to our service at $10 per month for each user account. Your credit card will be charged $10 per month automatically on the same date each month as your initial subscription. This subscription will continue until you cancel it.</p>
-                  <p><strong>Vendor Accounts:</strong> You are subscribing to our service for a vendor account at no cost. There will be no charge for this subscription, and it will continue until you cancel it. </p>
-                  <p>By proceeding, you acknowledge and agree to these terms.</p>`,
-        yesBtn: "Acknowledge & Proceed",
+        heading:  "",
+        message:  `<p>You are about to add a new account to your subscription. Please review the details below:</p>
+                  <p><strong>User Accounts:</strong> This account is billed at $10 per month. Your credit card will be charged automatically on the same date each month as your original subscription. This subscription will renew automatically until you cancel it.</p>
+                  <p><strong>Vendor Accounts:</strong> This account is provided at no cost. No charges will be applied. Vendor accounts will remain active until you choose to cancel them.</p>
+                  <p>By continuing, you confirm that you have reviewed and agree to these terms.</p>`,
+        yesBtn: "Confirm & Add Account",
         noBtn: "Cancel"
       }
     });

@@ -10,7 +10,27 @@ export class AboutscoreusComponent implements OnInit {
 
   constructor(private _apiService :GeneralApiService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+  
+
+  openPopup(): void {
+    const popup = document.getElementById("videoPopup") as HTMLElement;
+    const video = document.getElementById("demoVideo") as HTMLVideoElement;
+
+    if (popup && video) {
+      popup.style.display = "block";
+      video.play();
+    }
   }
 
+  closePopup(): void {
+    const popup = document.getElementById("videoPopup") as HTMLElement;
+    const video = document.getElementById("demoVideo") as HTMLVideoElement;
+
+    if (popup && video) {
+      popup.style.display = "none";
+      video.pause();
+      video.currentTime = 0;
+    }
+  }
 }

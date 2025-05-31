@@ -505,6 +505,9 @@ export class ScoreusMaterialScorecardComponent implements OnInit {
   console.log("📦 Average API Payload:", this.averageApiData);
     // this.cdr.detectChanges()
   this.apiData = this.apiRequestData
+  this.requiredMaterialGraph = []; // clear previous selection
+this.cdr.detectChanges();        // trigger view update
+
 this.previousYear = { ...this.apiRequestData }
 
 const currentStart = new Date(this.apiRequestData.startDate);
@@ -525,7 +528,15 @@ this.previousYear.startDate = newPrevStart.toISOString().split("T")[0];
 this.previousYear.endDate = newPrevEnd.toISOString().split("T")[0];
 console.log("📅 Previous Start Date:", this.previousYear.startDate);
 console.log("📅 Previous End Date:", this.previousYear.endDate);
-  
+console.log("🕒 Previous Request Payload:", {
+  startDate: this.previousYear.startDate,
+  endDate: this.previousYear.endDate,
+  plantCode: this.previousYear.plantCode,
+  commodity: this.previousYear.commodity,
+  vendorCode: this.previousYear.vendorCode,
+  materialCode: this.previousYear.materialCode,
+  tenantId: this.previousYear.tenantId
+});
     this.averageApiData.endDate = this.apiRequestData.endDate
     this.averageApiData.startDate = this.apiRequestData.startDate
     this._apiService.isCompareLoader$.next(true);

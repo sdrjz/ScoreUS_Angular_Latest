@@ -1,4 +1,4 @@
-<!--**********************************
+<!--********************************** 
     Content body start
 ***********************************-->
 <div class="content-body">
@@ -171,9 +171,9 @@
                     <p class="text-center mb-0 statusAbbr" *ngIf="loggedInUser.roleID == 13">
                         <span>{{"PD (Past due)" | translate}}</span>
                         <span>{{"LT (Lead time)" | translate }}</span>
-                        <span>{{"FPD (Future past due)" | translate }}</span>
+                        <span>{{"FP (Future past due)" | translate }}</span>
                         <span>{{"AK (Ack needed)" | translate}}</span>
-                        <span>{{"AOO (All open order)" | translate}}</span>
+                        <span>{{"AO (All open order)" | translate}}</span>
                     </p>
 
                     <app-data-table 
@@ -233,23 +233,19 @@
                 </div>
 
                 <div class="col-md-4">
-                    <div class="d-flex" *ngIf="loggedInUser.roleID == 13;else sendEmailToElse">
+                    <!-- Show only for roles other than Vendor -->
+                    <ng-container *ngIf="loggedInUser.roleID != 13">
+                      <div class="d-flex">
                         <span class="vendor-per pt-2 w-50">{{ 'Report Send To' | translate }}</span>
-                        <select class="form-control plant-select w-50" [(ngModel)]="filters.sendEmailTo" >
-                            <option value="Buyer" selected>{{'Buyer' | translate}}</option>
+                        <select class="form-control plant-select w-50" [(ngModel)]="filters.sendEmailTo">
+                          <option value="">{{'Select' | translate}}</option>
+                          <option value="Buyer">{{'Buyer' | translate}}</option>
+                          <option value="Vendor">{{'Vendor' | translate}}</option>
                         </select>
-                    </div>
-                    <ng-template #sendEmailToElse>
-                        <div class="d-flex">
-                            <span class="vendor-per pt-2 w-50">{{ 'Report Send To' | translate }}</span>
-                            <select class="form-control plant-select w-50" [(ngModel)]="filters.sendEmailTo" >
-                                <option value="">{{'Select' | translate}}</option>
-                                <option value="Buyer">{{'Buyer' | translate}}</option>
-                                <option value="Vendor">{{'Vendor' | translate}}</option>
-                            </select>
-                        </div>
-                    </ng-template>
-                </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                  
 
                 <!-- <div class="col-md-6  col-sm-12"> 
                     <div class="d-flex">

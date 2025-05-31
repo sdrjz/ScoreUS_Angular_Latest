@@ -25,9 +25,14 @@
 						<div class="profile-photo mt-2 text-center position-relative">
 							<input type=file id="fileUpload" accept="image/*" (change)="onFileSelected($event)"
 								hidden />
-							<img src="{{userData.image}}" class="img-fluid rounded-circle" alt="">
+							<img 
+  [src]="userData?.image ? userData.image : 'assets/images/default-profile.png'" 
+  class="img-fluid rounded-circle" 
+  alt="Profile Picture"
+  style="border: none;">
+
 							<div class="edit-ico" (click)="openDialog()"><i class="fa fa-edit"
-									style="color: #fff;padding-top: 7px;padding-left: 3px;"></i></div>
+									style="color: #fff;padding-top: 7px;padding-left: 3px; cursor: pointer;"></i></div>
 						</div>
 						<div class="profile-name px-3 pt-2 text-center">
 							<h4 *ngIf="!userData" class="mb-0 text-center pro-name">John Doe</h4>
@@ -59,12 +64,17 @@
 											matInput class="form-control" maxlength="50"
 												formControlName="lastName">
 										</div>
+										<!-- ✅ INSERT THIS BELOW -->
+<div class="form-group col-md-6">
+  <label>{{'Company Name' | translate}}</label>
+  <input type="text" class="form-control" formControlName="companyName">
+</div>
 										<!-- <div class="form-group col-md-6">
 											<label>Email *</label>
 											<input type="email" matInput class="form-control" formControlName="email">
 										</div> -->
 										<div class="form-group col-md-6">
-											<label class="mb-1">{{'Contact' | translate }}</label>
+											<label class="mb-1">{{'Phone Number' | translate }}</label>
 											<input type="text" matInput class="form-control" mask="(000) 000-0000"
 												formControlName="contact">
 										</div>

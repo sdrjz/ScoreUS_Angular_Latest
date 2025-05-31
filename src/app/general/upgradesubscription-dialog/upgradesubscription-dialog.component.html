@@ -3,44 +3,36 @@
     <div mat-dialog-content>
         <div *ngIf="(currentPlan.name == 'PO MANAGER' || currentPlan.name == 'SCORECARD') && (selectedPlan.name == 'SCORECARD' || selectedPlan.name == 'PO MANAGER');else else_content">
             <p>Your subscription from <strong>{{currentPlan.descriptions | translate}}</strong> will be discontinued and switched to <strong>{{selectedPlan.descriptions | translate}}</strong></p>
-            <p><strong>From</strong> Product will be -> {{currentPlan.descriptions | translate}}</p>
-            <p><strong>To</strong> Product will be -> {{selectedPlan.descriptions | translate}}</p>
+            <p><strong>From</strong> {{currentPlan.descriptions | translate}}</p>
+            <p><strong>To</strong> {{selectedPlan.descriptions | translate}}</p>
             <p>
-                <strong>Agreement Terms:</strong> When you change your subscription type, a new agreement term for the newly selected service will begin from {{ today | date:'fullDate' }}. 
-                You will be billed for the new service right away according to the yearly or monthly subscription option from <strong>{{ today | date:'fullDate' }}</strong>. 
+                <strong>Agreement Terms:</strong> When you change your subscription type, the remaining agreement term will apply to the newly selected product begin from {{ today | date:'fullDate' }}. 
+                If applicable, you will be charged a prorated amount based on the remaining time of your current subscription term. This charge reflects the difference in pricing between the two products, adjusted for the remaining duration, starting <strong>{{ today | date:'fullDate' }}</strong>. 
             </p>
             <p>
-                <strong>Pro-Rated Billing Adjustment:</strong> Any remaining balance from the previous subscription will be pro-rated, the difference of which will be calculated, billed or re-imbursed within 7 to 10 business days. Please contact administrator for further process at <a href="mailto:contact@scoreus.com">contact&#64;scoreus.com</a>
+                <strong>Auto-Renewals</strong> Subscriptions will automatically renew at the beginning of next billing period unless canceled before the renewal date. No refunds will be issued for cancellations after renewal. 
             </p>
-            <p>
-                <strong>Auto-Renewals</strong> Subscriptions will automatically renew at the end of each billing period unless the subscription is canceled before the renewal date,
-                 in which case there will be no issuance of refund. 
-            </p>
-            <p>By Proceeding, you acknowledge & agree to these terms </p>
+            <p>By Proceeding, you acknowledge and agree to these terms </p>
         </div>
         <ng-template #else_content>
             <div *ngIf="(currentPlan.name == 'PO MANAGER' || currentPlan.name == 'SCORECARD' || currentPlan.name == 'COMPLETE') && (selectedPlan.name == 'COMPLETE');">
                 <p>Your subscription from <strong>{{currentPlan.descriptions | translate}}</strong> will be discontinued and switched to <strong>{{selectedPlan.descriptions | translate}}</strong></p>
-                <p><strong>From</strong> Product will be -> {{currentPlan.descriptions | translate}}</p>
-                <p><strong>To</strong> Product will be -> {{selectedPlan.descriptions | translate}}</p>
-                
+                <p><strong>From</strong> {{currentPlan.descriptions | translate}}</p>
+                <p><strong>To</strong> {{selectedPlan.descriptions | translate}}</p>
                 <p>
-                    <strong>No Product changes during Contract Term:</strong> Upgrading to Complete product avails you access to the entire product lines. 
-                    <strong>No downgrades</strong> to Scorecard or PO Manager will be allowed during the contract term. Cancellation will result in no refunds being issued. 
+                    <strong>Prorated Charges During Product Change:</strong> When upgrading from ScoreCard or PO Manager to Complete, you will be charged a  
+                    <strong>prorated amount</strong> based on the remaining time of your current subscription term. This charge reflects the difference in pricing between the two products, adjusted for the remaining duration, starting <strong>{{ today | date:'fullDate' }}</strong>.
                 </p>
-
                 <p>
                     <strong>Changes at End of Term:</strong> If you wish to downgrade from Complete product, 
                     please cancel your subscription and re-subscribe to PO Manager or Scorecard products. 
-                    <strong>No refunds</strong> will be issued, or you can choose to wait until the current subscription is up for renewal, 
-                    cancel it and then subscribe to other products. 
+                    <strong>No refunds</strong> will be issued. Alternatively, you can wait until your current subscription ends, cancel it, and then subscribe to a different product.
                 </p>
 
                 <p>
-                    <strong>Auto-Renewals</strong> Subscriptions will automatically renew at the end of each billing period unless the subscription is canceled before the renewal date,
-                    in which case there will be no issuance of refund. 
+                    <strong>Auto-Renewals</strong> Subscriptions will automatically renew at the beginning of next billing period unless canceled before the renewal date. No refunds will be issued for canceled renewals. 
                 </p>
-                <p>By Proceeding, you acknowledge & agree to these terms </p>
+                <p>By Proceeding, you acknowledge and agree to these terms </p>
             </div>
         </ng-template>
     </div>

@@ -55,7 +55,7 @@ export class OpenpoexpeditorComponent implements OnInit {
     filters:any={
         tenantId:'',
         OnTimeDeliveryOption:'allopenorder',
-        bufferDays:50,
+        bufferDays:2,
         selfdefinedfuturedays:14,
         plantCode:"all",
         byBuyerOrSupplierOption:"Buyer",
@@ -273,19 +273,35 @@ export class OpenpoexpeditorComponent implements OnInit {
     // }
 
     onCheckBoxClick(event: any, data: any) {
-    
-        if (event.checked === true) {
-            // Check if the combination of vendorCode and buyerCode is already in the list
-            if (!this.listCheckedRecords.some(r => r.vendorCode === data.vendorCode && r.buyerCode === data.buyerCode)) {
-                this.listCheckedRecords.push(data);
-                this.listCheckedRecordsForEmail.push(data);
+        if(this.filters.byBuyerOrSupplierOption == "Material Number") {
+            if (event.checked === true) {
+                // Check if the combination of vendorCode and buyerCode is already in the list
+                if (!this.listCheckedRecords.some(r => r.vendorCode === data.vendorCode && r.buyerCode === data.buyerCode && r.material == data.material && r.poNumber == data.poNumber)) {
+                    this.listCheckedRecords.push(data);
+                    this.listCheckedRecordsForEmail.push(data);
+                }
+            } else {
+                // Find the index of the combination of vendorCode and buyerCode
+                const index = this.listCheckedRecords.findIndex(r => r.vendorCode === data.vendorCode && r.buyerCode === data.buyerCode && r.material == data.material && r.poNumber == data.poNumber);
+                if (index > -1) {
+                    this.listCheckedRecords.splice(index, 1);
+                    this.listCheckedRecordsForEmail.splice(index, 1);
+                }
             }
         } else {
-            // Find the index of the combination of vendorCode and buyerCode
-            const index = this.listCheckedRecords.findIndex(r => r.vendorCode === data.vendorCode && r.buyerCode === data.buyerCode);
-            if (index > -1) {
-                this.listCheckedRecords.splice(index, 1);
-                this.listCheckedRecordsForEmail.splice(index, 1);
+            if (event.checked === true) {
+                // Check if the combination of vendorCode and buyerCode is already in the list
+                if (!this.listCheckedRecords.some(r => r.vendorCode === data.vendorCode && r.buyerCode === data.buyerCode)) {
+                    this.listCheckedRecords.push(data);
+                    this.listCheckedRecordsForEmail.push(data);
+                }
+            } else {
+                // Find the index of the combination of vendorCode and buyerCode
+                const index = this.listCheckedRecords.findIndex(r => r.vendorCode === data.vendorCode && r.buyerCode === data.buyerCode);
+                if (index > -1) {
+                    this.listCheckedRecords.splice(index, 1);
+                    this.listCheckedRecordsForEmail.splice(index, 1);
+                }
             }
         }
     }
@@ -2656,31 +2672,35 @@ export class OpenpoexpeditorComponent implements OnInit {
                         let existReportsData = [];
                         this.listCheckedRecordsForEmail.forEach((i: any) => {
                             if (this.filters.sendEmailTo == "Buyer") {
-                                    
-                                    reportsData.push({
-                                        vendorCode : i.vendorCode,
-                                        code: i.buyerCode,
-                                        name: i.buyerName,
-                                        vendorName: i.vendorName,
-                                        contact: i.phoneNo,
-                                        email: [i.buyerEmail],
-                                        cc: []
-                                    });
+                                // if (existReportsData.includes(i.buyerEmail)) {
+                                //     return;
+                                // } else {
+                                //     existReportsData.push(i.buyerEmail);
+                                // }
+                                reportsData.push({
+                                    vendorCode : i.vendorCode,
+                                    code: i.buyerCode,
+                                    name: i.buyerName,
+                                    vendorName: i.vendorName,
+                                    contact: i.phoneNo,
+                                    email: [i.buyerEmail],
+                                    cc: []
+                                });
+                            } else {
+                                if (existReportsData.includes(i.vendorEmail)) {
+                                    return;
                                 } else {
-                                    if (existReportsData.includes(i.vendorEmail)) {
-                                        return;
-                                    } else {
-                                        existReportsData.push(i.vendorEmail);
-                                    }
-                                    reportsData.push({
-                                        vendorCode : i.vendorCode,
-                                        code: i.vendorCode,
-                                        name: i.vendorName,
-                                        contact: i.phoneNo,
-                                        email: [i.vendorEmail],
-                                        cc: []
-                                    });
+                                    existReportsData.push(i.vendorEmail);
                                 }
+                                reportsData.push({
+                                    vendorCode : i.vendorCode,
+                                    code: i.vendorCode,
+                                    name: i.vendorName,
+                                    contact: i.phoneNo,
+                                    email: [i.vendorEmail],
+                                    cc: []
+                                });
+                            }
                         });
                         const dialogRef = this.dialog.open(SendreportdialogComponent, {
                             panelClass: 'sendreportcontainer',
@@ -2753,7 +2773,7 @@ export class OpenpoexpeditorComponent implements OnInit {
 
                                 this._apiService.isCompareLoader$.next(false);
                                 this.cdr.detectChanges();
-                                this._notificationService.push("Email Sent Successfully.",1);
+                                this._notificationService.push("Reports sent successfully",1);
                             },
                             (error:any)=>{
                                 this._apiService.isCompareLoader$.next(false)
