@@ -192,6 +192,8 @@ export const api = {
     getBuyerDropDown:'/ExecutiveDropDown/Buyer',
     getMaterialDropDown:'/ExecutiveDropDown/Material',
     getCountries: '/ExecutiveDropDown/Country', 
+    getMapOutCountries: '/ExecutiveDropDown/MapOutCountry',
+    getMapOutCities:    '/ExecutiveDropDown/MapOutCity',
     getCity: '/ExecutiveDropDown/City', 
     getAllVendor: '/ExecutiveDropDown/AllVendor', 
     getCommodityWithPlant:'/ExecutiveDropDown/CommodityWithPlant',
@@ -214,7 +216,6 @@ export const api = {
 
     //MAPOUTVENDOR API STARTS
     mapOutVendor:'/mapoutvendor/GetMapOutVendor',
-    GetMapoutScoreCard:'/MapOutVendor/GetPlantScorecard',
     //MAPOUTVENDOR API ENDS
 
     //User Admin Dashboard APi Starts

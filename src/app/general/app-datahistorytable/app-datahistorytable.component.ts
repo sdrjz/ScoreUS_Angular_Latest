@@ -270,14 +270,20 @@ export class AppDatahistorytableComponent extends PaginationController implement
 
 
           this.apiRequestData.searchText = this.apiRequestData.searchText === undefined ? '': this.apiRequestData.searchText;
-          // this._apiService.get(`/Report/GetReportHistory?pageSize=10000000&pageNumber=1&ReportFor=${reportFor}&TenantId=${this.loggedInUser.tenantID}`).subscribe((res: any) => {
-          this._apiService.get(`/Report/GetReportHistory?pageSize=${this.pageSize}&pageNumber=${this.pageNumber}&ReportFor=${reportFor}&TenantId=${this.loggedInUser.tenantID}&searchText=${this.apiRequestData.searchText}`).subscribe((res: any) => {
-            if(  res.data.length < 1 )
-              {
-            this._apiService.isCompareLoader$.next(false)
-            this._notificationService.push("No records",1);
-            return
-          }
+const postData = {
+  pageSize: this.pageSize,
+  pageNumber: this.pageNumber,
+  reportFor: reportFor,
+  tenantId: this.loggedInUser.tenantID,
+  searchText: this.apiRequestData.searchText || ''
+};
+
+this._apiService.post(`/Report/GetReportHistory`, postData).subscribe((res: any) => {
+  if (res.data.length < 1) {
+    this._apiService.isCompareLoader$.next(false);
+    this._notificationService.push("No records", 1);
+    return;
+  }
 
           this.dataSource = res.data
           this.totalRecords = res.data[0].totalRecords;

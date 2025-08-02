@@ -63,6 +63,7 @@ export class LinechartOptionComponent implements OnInit,OnChanges {
   }
 
   ngOnInit(): void {
+    this.byVendor = false;
     var user = localStorage.getItem('userData')
     if(user)
     this.loggedInUser = JSON.parse(user)

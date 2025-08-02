@@ -61,6 +61,7 @@ export class ActiveusersComponent implements OnInit {
       def: 'createdAt',
       name: 'Created At',
       key: 'createdAt',
+      projection: true  
     },
     {
       def: 'email',
@@ -69,7 +70,7 @@ export class ActiveusersComponent implements OnInit {
     },
     {
       def: 'renewalDate',
-      name: 'Next Billing Date',
+      name: 'Renewed On',
       key: 'renewalDate',
     },
     {

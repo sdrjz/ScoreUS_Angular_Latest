@@ -61,6 +61,7 @@ export class MaterialScorecardTableComponent implements OnInit {
   @Input() public materialData: any
   @Input() public apiRequestData: any = {}
   @Input() public apiRequestType: any = 'post'
+  @Input() clearedSelection: Set<string> = new Set();
   @ViewChild('chart', { read: ElementRef, static: true }) chart!: ElementRef;
   // @ViewChild('chart',{static:true}) chart!:ElementRef
   public loggedInUser: any;
@@ -713,9 +714,21 @@ emails: data.listReportToSend?.map((x: any) => x.email?.[0]).filter(Boolean) ?? 
       listSelectedReports: this.selected
     }
 
+     this.dialog.open(UserdialogoutComponent,
+      {
+        data: {
+          height: '75%',
+          width: '25%!important',
+          minWidth: '25%',
+          top: '20%',
+          resize: 'none',
+          message: "Your report is being generated and will be sent shortly. This process may take a few minutes. You can continue using the system as usual, and you will receive a notification once the report has been successfully sent.",
+          heading: 'Notification',
+          isMessage: true,
+        }
+      });
 
-
-
+console.log("🔍 API endpoint:", api.sendMaterialReport);
     this._apiService.post(api.sendMaterialReport, sendResponseModel)
       .subscribe((res: any) => {
         this._notificationService.push("Reports sent successfully", 1)
@@ -723,6 +736,7 @@ emails: data.listReportToSend?.map((x: any) => x.email?.[0]).filter(Boolean) ?? 
       }, (e: any) => {
         this._notificationService.push("Reports not sent ", 2)
       })
+
 
   }
 
@@ -991,7 +1005,10 @@ emails: data.listReportToSend?.map((x: any) => x.email?.[0]).filter(Boolean) ?? 
   }
 
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges) { if (changes['clearedSelection'] && changes['clearedSelection'].currentValue instanceof Set) {
+    this.listSelectedMaterial = [];  // Clear selection list
+    this.cdr.detectChanges();        // Trigger view update
+  }
 
   }
 

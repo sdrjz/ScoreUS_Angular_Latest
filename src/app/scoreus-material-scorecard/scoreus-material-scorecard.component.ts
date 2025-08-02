@@ -22,6 +22,7 @@ export class ScoreusMaterialScorecardComponent implements OnInit {
   materialGraphData:any[]=
   [
   ]
+  selectedMaterialCodes: Set<string> = new Set();
   previousDateFromApi! :any
   totalScores:any[]=[]
   replicaColorZoneStat
@@ -473,6 +474,8 @@ export class ScoreusMaterialScorecardComponent implements OnInit {
   console.log("🚀 EXECUTE CLICKED");
   console.log("🌿 Selected Plant (from Execute):", data?.plantCode);
   console.log("📦 Payload Sent to Graph Data:", data);
+   this.selectedMaterialCodes = new Set(); // ✅ FORCES change detection
+  this.cdr.detectChanges();
     this.loader = true
     this._apiService.isCompareLoader$.next(true)
 
@@ -683,7 +686,7 @@ console.log("🕒 Previous Request Payload:", {
         this.ltaChartData = data.data;
         break;
 
-      case 'LTA percentage':
+      case 'LTA Percentage':
         this.ltaPercentageChartData = data.data;
         break;
 
@@ -691,7 +694,7 @@ console.log("🕒 Previous Request Payload:", {
         this.ppvChartData = data.data;
         break;
 
-      case 'PPV percentage':
+      case 'PPV Percentage':
         this.ppvPercentageChartData = data.data
         break;
 
@@ -699,7 +702,7 @@ console.log("🕒 Previous Request Payload:", {
         this.ncrChartData = data.data
         break;
 
-      case 'NCR percentage':
+      case 'NCR Percentage':
         this.ncrPercentageChartData = data.data
         break;
 
@@ -707,7 +710,7 @@ console.log("🕒 Previous Request Payload:", {
         this.otdChartData = data.data
         break;
 
-      case 'OTD percentage':
+      case 'OTD Percentage':
         this.otdPercentageChartData = data.data
         break;
 
@@ -741,7 +744,7 @@ console.log("🕒 Previous Request Payload:", {
         // requiredColorData = null
         break;
 
-      case 'LTA percentage':
+      case 'LTA Percentage':
         requiredChartData = this.ltaPercentageChartData;
         // requiredColorData = null
         break;
@@ -751,7 +754,7 @@ console.log("🕒 Previous Request Payload:", {
         // requiredColorData = null
         break;
 
-      case 'PPV percentage':
+      case 'PPV Percentage':
         requiredChartData = this.ppvPercentageChartData;
         // requiredColorData = null
         break;
@@ -761,7 +764,7 @@ console.log("🕒 Previous Request Payload:", {
         // requiredColorData = null
         break;
 
-      case 'NCR percentage':
+      case 'NCR Percentage':
         requiredChartData = this.ncrPercentageChartData;
         // requiredColorData = null
         break;
@@ -771,7 +774,7 @@ console.log("🕒 Previous Request Payload:", {
         // requiredColorData = null
         break;
 
-      case 'OTD percentage':
+      case 'OTD Percentage':
         requiredChartData = this.otdPercentageChartData;
         // requiredColorData = null
         break;

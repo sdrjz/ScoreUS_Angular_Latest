@@ -26,10 +26,10 @@
 							<input type=file id="fileUpload" accept="image/*" (change)="onFileSelected($event)"
 								hidden />
 							<img 
-  [src]="userData?.image ? userData.image : 'assets/images/default-profile.png'" 
-  class="img-fluid rounded-circle" 
-  alt="Profile Picture"
-  style="border: none;">
+							[src]="userData?.image ? userData.image : 'https://scoreusapistaging.azurewebsites.net/wwwroot/Content/UserImages/default-profile.png'" 
+							class="img-fluid rounded-circle" 
+							alt="Profile Picture"
+							style="border: none;">
 
 							<div class="edit-ico" (click)="openDialog()"><i class="fa fa-edit"
 									style="color: #fff;padding-top: 7px;padding-left: 3px; cursor: pointer;"></i></div>
@@ -64,11 +64,22 @@
 											matInput class="form-control" maxlength="50"
 												formControlName="lastName">
 										</div>
+
+										<div class="form-group col-md-6">
+										<label>{{'Email' | translate}}</label>
+										<input type="email" class="form-control" formControlName="email" readonly>
+										</div>
+
+										<div class="form-group col-md-6">
+										<label>{{'Customer ID' | translate}}</label>
+										<input type="text" class="form-control" formControlName="tenantId" readonly>
+										</div>
 										<!-- ✅ INSERT THIS BELOW -->
-<div class="form-group col-md-6">
-  <label>{{'Company Name' | translate}}</label>
-  <input type="text" class="form-control" formControlName="companyName">
-</div>
+										<div class="form-group col-md-6">
+										<label>{{'Company Name' | translate}}</label>
+										<input type="text" class="form-control" formControlName="companyName">
+										</div>
+
 										<!-- <div class="form-group col-md-6">
 											<label>Email *</label>
 											<input type="email" matInput class="form-control" formControlName="email">

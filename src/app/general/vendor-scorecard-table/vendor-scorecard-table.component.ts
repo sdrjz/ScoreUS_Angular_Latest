@@ -1084,7 +1084,9 @@ onSelection(data: any) {
       this.listSelectedVendor = []
     }
   }
-
+  clearAllCompareSelections() {
+    this.listSelectedVendor = []; // ✅ And this method here
+  }
   onCheckBoxClick(event: any, data: any) {
     
     if (event.checked == true) {

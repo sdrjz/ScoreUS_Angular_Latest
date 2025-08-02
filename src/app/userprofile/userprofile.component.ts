@@ -90,6 +90,7 @@ export class UserprofileComponent implements OnInit {
       userId: new FormControl(data?.userID,[Validators.required]),
       contact: new FormControl(data?.phone, [Validators.required]),
       address: new FormControl(data?.address,Validators.required),
+      email: new FormControl(data?.email),
       // // 'email': ['', [[
       // //   Validators.required,
       // //   Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]]],
@@ -110,6 +111,7 @@ export class UserprofileComponent implements OnInit {
       mobile: new FormControl('', [Validators.required]),
       address: new FormControl('',Validators.required),
       companyName: new FormControl('',[Validators.required]),
+      email: new FormControl('',[Validators.required]),
       // // 'email': ['', [[
       // //   Validators.required,
       // //   Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]]],

@@ -83,11 +83,10 @@ export class OpenordersreporthistoryComponent implements OnInit {
             key: 'reportExtension'
         },
         {
-            def: 'createdTime',
-            name: 'Time',
-            // key: 'createdAt',
+            def: 'name',
+            name: 'Sender Name',
             key: (i: any) => {
-                return i.createdTime.split("T")[1]
+                return i.name ? i.name : "-";
             }
         },
         {
@@ -100,13 +99,7 @@ export class OpenordersreporthistoryComponent implements OnInit {
         //     name: 'Status',
         //     key: (i:any)=>'Send',
         // },
-        {
-            def: 'name',
-            name: 'Sender Name',
-            key: (i: any) => {
-                return i.name ? i.name : "-";
-            }
-        },
+
         {
             def: 'action',
             name: 'Action',

@@ -81,14 +81,12 @@ export class FuturepastduereporthistoryComponent implements OnInit {
             name: 'Ext.',
             key: 'reportExtension'
         },
-        {
-        def: 'createdTime',
-        name: 'Time',
-        // key: 'createdAt',
-        key:(i:any)=> {
-            
-        return  i.createdTime.split("T")[1]
-        }  
+       {
+            def: 'name',
+            name: 'Sender Name',
+            key:(i:any)=> {
+                return  i.name?i.name:"-";
+            } 
         },
         {
         def: 'email',
@@ -100,13 +98,7 @@ export class FuturepastduereporthistoryComponent implements OnInit {
         //   name: 'Status',
         //   key: (i:any)=>'Send',
         // },
-        {
-            def: 'name',
-            name: 'Sender Name',
-            key:(i:any)=> {
-                return  i.name?i.name:"-";
-            } 
-        },
+ 
         {
         def: 'action',
         name: 'Action',

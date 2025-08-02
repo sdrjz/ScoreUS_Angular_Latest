@@ -1,15 +1,17 @@
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { HttpClient } from '@angular/common/http';
+
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { MatChipInputEvent } from '@angular/material/chips';
+import { MatChipInputEvent } from '@angular/material/chips'; // Can remove if not used elsewhere
 import { TranslateService } from '@ngx-translate/core';
 import { api } from 'src/app/api.endpoints';
 import { NotificationService } from 'src/app/notification.service';
 import { GeneralApiService } from 'src/app/services/appService/generalApiService';
 import { tips } from 'src/app/tootTips';
 import { dateValidator } from 'src/app/validation/date-validator';
+import { DropdownService } from '../../services/appService/dropdown.service';
+import { DropDownDTO } from '../../modal/dropdown-dto';
 
 @Component({
   selector: 'app-mapout-vendor-filed',
@@ -17,27 +19,30 @@ import { dateValidator } from 'src/app/validation/date-validator';
   styleUrls: ['./mapout-vendor-filed.component.css']
 })
 export class MapoutVendorFiledComponent implements OnInit {
-  
+  countries: DropDownDTO[] = [];
+  countryControl = new FormControl();
   @Output() vendorMapOutEmitter = new EventEmitter<any>();
-  listMapOutVendor:any[]
+  listMapOutVendor: any[]
   numberArray: number[]
   tips = tips
-  selectedPlants:any=''
-  selectedCommodity:any = ''
-  selectedCountry : any = ''
-  selectedCity : any = ''
+  selectedPlants: any = ''
+  selectedCommodity: any = ''
+  selectedCountry: any = ''
+  selectedCity: any = ''
   public currentDate = new Date()
-    listsDropDown: any  = {
-    plantDropDown:[],
-    VendorDropDown:[],
-    CommodityDropDown:[],
-    CountryDropDown:[], 
-    CityDropDown:[]
+  listsDropDown: any = {
+    plantDropDown: [],
+    VendorDropDown: [],
+    CommodityDropDown: [],
+    CountryDropDown: [],
+    CityDropDown: [],
+    colourDropDown: []
   }
-  selected = [];
+  // CHANGE: Remove 'selected' array; use a single selectedVendor instead
+  selectedVendor: any = ''; // For single selection
   plant = [''];
   @Input() loader = false
-  separatorKeysCodes: number[] = [ENTER, COMMA];
+  separatorKeysCodes: number[] = [ENTER, COMMA]; // Can remove if not used
   currentUser: any
   public startDate: any
   public endDate: any
@@ -52,144 +57,253 @@ export class MapoutVendorFiledComponent implements OnInit {
   public countryInput: string = ""
   public cityInput: string = ""
   public vendorInput: string = ""
-  @ViewChild('fruitInput') fruitInput: ElementRef;
+  public listColour: any[] = [];
+  public colourInput: string = '';
+  public selectedColour: any = '';
+  @ViewChild('fruitInput') fruitInput: ElementRef; // Can rename or remove if not needed
 
   constructor(private _apiService: GeneralApiService,
     private _notificationService: NotificationService,
-    private http:HttpClient,
-    private translateService:TranslateService,
-    private cdr:ChangeDetectorRef) { }
+
+    private translateService: TranslateService,
+    private dropdownSvc: DropdownService,
+    private cdr: ChangeDetectorRef) { }
 
 
-ngOnInit(): void {
-  this._apiService.isLanguageSelector$.subscribe((res: any) => {
-    this.translateService.use(res);
-    this.cdr.detectChanges();
-  });
-
-  const user = localStorage.getItem('userData');
-  if (user) this.currentUser = JSON.parse(user);
-
-  this._apiService.isCompareLoader$.subscribe((res: any) => {
-    this.loader = res;
-  });
-
-  this._apiService.get(api.getCountries + "/" + this.currentUser.tenantID).subscribe((res: any) => {
-    this.listCountry = res.data;
-    this.listsDropDown.CountryDropDown = JSON.parse(JSON.stringify(res.data));
-
-    this._apiService.get(api.getCity + "/" + this.currentUser.tenantID).subscribe((inres: any) => {
-      this.listCity = inres.data;
-      this.listsDropDown.CityDropDown = JSON.parse(JSON.stringify(inres.data));
+  ngOnInit(): void {
+    // language & loader subscriptions
+    this._apiService.isLanguageSelector$.subscribe((res: any) => {
+      this.translateService.use(res);
+      this.cdr.detectChanges();
     });
-  });
+    this._apiService.isCompareLoader$.subscribe((res: any) => this.loader = res);
 
-  this.form = new FormGroup({
-    startDate: new FormControl(null, Validators.required),
-    endDate: new FormControl(null, Validators.required),
-    plantCode: new FormControl(null, Validators.required),
-    commodity: new FormControl(''),
-    vendorCode: new FormControl(''),
-    allVendorCode: new FormControl(''),
-    countryCode: new FormControl(null, Validators.required),
-    cityCode: new FormControl(null, Validators.required),
-    colour: new FormControl(),
-    tenantId: new FormControl(this.currentUser.tenantID)
-  }, { validators: dateValidator });
+    // get user
+    const user = localStorage.getItem('userData');
+    if (user) this.currentUser = JSON.parse(user);
 
- this._apiService.get(`${api.GetMaterialScoreCard}/${this.currentUser.tenantID}`).subscribe((res: any) => {
-  const startDateRaw = res?.data?.startDate;
-  const endDateRaw = res?.data?.endDate;
-  const plantCode = res?.data?.plantCode;
-  const commodityCodes = res?.data?.commodity?.split(',') || [];
-  const vendorCodes = res?.data?.vendorCode?.split(',') || [];
+    // build form
+    this.form = new FormGroup({
+      startDate: new FormControl(null, Validators.required),
+      endDate: new FormControl(null, Validators.required),
+      plantCode: new FormControl('ALL', Validators.required),
+      commodity: new FormControl('ALL'),
+      vendorCode: new FormControl('ALL'),
+      allVendorCode: new FormControl('ALL'),
+      countryCode: new FormControl(null, Validators.required),
+     cityCode: new FormControl(null, Validators.required),
+      colour: new FormControl('ALL'),
+      tenantId: new FormControl(this.currentUser.tenantID)
+    }, { validators: dateValidator });
 
-  if (!startDateRaw || !endDateRaw) return;
+    // kick off the loader
+    this._apiService.isCompareLoader$.next(true);
 
-  const startDate = new Date(startDateRaw);
-  const endDate = new Date(endDateRaw);
+    // fetch your “last posting date” and seed the start/end controls
+    this._apiService
+      .get(`${api.GetVendorScoreCard}/${this.currentUser.tenantID}`)
+      .subscribe(
+        (res: any) => {
+          if (res.data?.endDate) {
+            this.endDate = new Date(res.data.endDate);
+            this.startDate = new Date(this.endDate);
+            this.startDate.setDate(this.endDate.getDate() - 179);
 
-  this.form.patchValue({ startDate, endDate });
-  this.startDate = startDate;
-  this.endDate = endDate;
+            this.form.controls['startDate'].setValue(this.startDate);
+            this.form.controls['endDate'].setValue(this.endDate);
 
-  this.onDateChange(); // triggers plant load
+            // ==== NEW: load country dropdown ====
+            this.loadCountries();
+            this.loadCities();
+            // ====================================
 
-  // Step 1: Wait for plantDropDown to load, then select plant
-  setTimeout(() => {
-    const plantCodes = plantCode?.split(',') || [];
-    const commodityCodes = res?.data?.commodity?.split(',') || [];
-    const vendorCodes = res?.data?.vendorCode?.split(',') || [];
+            // your existing dropdown loaders
+            this.loadDefaultDropdowns();
 
-
-    if (plantCodes.length > 1 && this.listsDropDown.plantDropDown?.length > 0) {
-      this.plantInput = 'ALL';
-      this.onPlantSelect({ option: { value: 'ALL' } });
-    } else if (plantCodes.length === 1) {
-      const singlePlant = this.listsDropDown.plantDropDown.find(p => p.id === plantCodes[0]);
-      if (singlePlant) {
-        this.plantInput = singlePlant.name;
-        this.onPlantSelect({ option: { value: singlePlant.name } });
-      }
-    }
-
-    // Step 2: Wait for commodityDropDown to load after onPlantSelect
-    setTimeout(() => {
-      if (commodityCodes.length > 1 && this.listsDropDown.commodityDropDown?.length > 0) {
-        this.commodityInput = 'ALL';
-        this.onCommoditySelection({ option: { value: 'ALL' } });
-      } else if (commodityCodes.length === 1) {
-        const singleCommodity = this.listsDropDown.commodityDropDown.find(c => c.id === commodityCodes[0]);
-        if (singleCommodity) {
-          this.commodityInput = singleCommodity.name;
-          this.onCommoditySelection({ option: { value: singleCommodity.name } });
-        }
-      }
-
-      // Step 3: Wait for vendorDropDown to load after onCommoditySelection
-      setTimeout(() => {
-        if (vendorCodes.length > 1 && this.listsDropDown.vendorDropDown?.length > 0) {
-          const allOption = this.listsDropDown.vendorDropDown.find(v => v.id === 'ALL');
-          if (allOption) {
-            this.selected = [allOption];
+            // re‑load countries whenever any filter changes
+            this.form.controls['startDate'].valueChanges.subscribe(() => this.loadCountries());
+            this.form.controls['endDate'].valueChanges.subscribe(() => this.loadCountries());
+            this.form.controls['plantCode'].valueChanges.subscribe(() => this.loadCountries());
+            this.form.controls['vendorCode'].valueChanges.subscribe(() => this.loadCountries());
+            this.form.controls['commodity'].valueChanges.subscribe(() => this.loadCountries());
+            this.form.controls['countryCode'].valueChanges.subscribe(() => this.loadCities());  // ← new
+          } else {
+            this._notificationService.push(
+              'No valid posting date returned from PO History.',
+              2
+            );
           }
-        } else {
-          this.selected = this.listsDropDown.vendorDropDown.filter(v => vendorCodes.includes(v.id));
+          this._apiService.isCompareLoader$.next(false);
+        },
+        () => {
+          this._notificationService.push(
+            'Failed to retrieve posting date.',
+            2
+          );
+          this._apiService.isCompareLoader$.next(false);
         }
-      }, 1000); // ⏱ wait for vendor dropdown
-    }, 1000); // ⏱ wait for commodity dropdown
-  }, 2000); // ⏱ wait for plant dropdown
-});
+      );
 
-setTimeout(() => {
-  // ✅ Default Country: USA
-  const usa = this.listsDropDown.CountryDropDown.find(c => c.name?.toLowerCase() === 'usa');
-  if (usa) {
-    this.countryInput = usa.name;
-    this.selectedCountry = usa.id;
-    this.onCountrySelection({ option: { value: usa.name } });
-    console.log('✅ Country set to USA');
+    this.listColour = [
+      { id: 'ALL', name: 'ALL' },
+      { id: 'GREEN', name: 'GREEN' },
+      { id: 'YELLOW', name: 'YELLOW' },
+      { id: 'RED', name: 'RED' }
+    ];
+    this.listsDropDown.colourDropDown = JSON.parse(JSON.stringify(this.listColour));
+    this.selectedColour = this.onDropDownSelectionSetData(this.listColour, 'ALL');
+    this.form.controls['colour'].setValue(this.selectedColour);
+    this.colourInput = 'ALL';
   }
 
-  // ✅ Default City: Houston
-  setTimeout(() => {
-    const houston = this.listsDropDown.CityDropDown.find(c => c.name?.toLowerCase() === 'houston');
-    if (houston) {
-      this.cityInput = houston.name;
-      this.selectedCity = houston.id;
-      this.onCitySelection({ option: { value: houston.name } });
-      console.log('✅ City set to Houston');
+  /**
+   * Calls the new /MapOutCountry endpoint and updates `this.countries`.
+   */
+  private loadCountries(): void {
+    // build the query string exactly how GeneralApiService expects it
+    let path = `${api.getMapOutCountries}`
+      + `?TenantId=${this.currentUser.tenantID}`
+      + `&StartDate=${this.formatDate(this.form.controls['startDate'].value)}`
+      + `&EndDate=${this.formatDate(this.form.controls['endDate'].value)}`
+      + `&PlantCode=${this.form.controls['plantCode'].value}`;
+
+    const vendor = this.form.controls['vendorCode'].value;
+    if (vendor && vendor !== 'ALL') {
+      path += `&VendorCode=${vendor}`;
     }
-  }, 1000); // wait for getCities() to complete after selecting USA
+    const commodity = this.form.controls['commodity'].value;
+    if (commodity && commodity !== 'ALL') {
+      path += `&Commodity=${commodity}`;
+    }
 
-  // ✅ Default Color: ALL
-  this.form.controls['colour'].setValue('ALL');
-  console.log('✅ Color set to ALL');
-}, 3000);
+    this._apiService.get(path)
+      .subscribe(
+        (res: any) => {
+          const data: DropDownDTO[] = res.data || [];
+          // 1. build an “ALL” option
+          const allOpt: DropDownDTO = { id: 'ALL', name: 'ALL' };
+          // 2. prefix it to the list
+          this.countries = [allOpt, ...data];
+          this.listCountry = this.countries;
+          this.listsDropDown.CountryDropDown = this.countries;
+          // 3. if nothing selected yet, default to ALL
+          if (!this.form.controls['countryCode'].value) {
+            this.form.controls['countryCode'].setValue('ALL');
+            this.countryInput = 'ALL';
+          }
+        },
+        () => {
+          this._notificationService.push('Failed to load countries', 2);
+        }
+      );
+
+  }
+  /**
+   * Loads cities filtered by map‑out criteria, including the selected country.
+   */
+private loadCities(): void {
+    // build the same base path
+    let path = `${api.getMapOutCountries.replace('Country', 'City')}`
+      + `?TenantId=${this.currentUser.tenantID}`
+      + `&StartDate=${this.formatDate(this.form.controls['startDate'].value)}`
+      + `&EndDate=${this.formatDate(this.form.controls['endDate'].value)}`
+      + `&PlantCode=${this.form.controls['plantCode'].value}`
+      + `&VendorCode=${this.form.controls['vendorCode'].value}`
+      + `&Commodity=${this.form.controls['commodity'].value}`
+      + `&Country=${this.form.controls['countryCode'].value}`;
+
+    this._apiService.get(path)
+      .subscribe(
+        (res: any) => {
+          const data: DropDownDTO[] = res.data || [];
+          const allOpt: DropDownDTO = { id: 'ALL', name: 'ALL' };
+          this.listCity = [allOpt, ...data];
+          this.listsDropDown.CityDropDown = this.listCity;
+          if (!this.form.controls['cityCode'].value) {
+            this.form.controls['cityCode'].setValue('ALL');
+            this.cityInput = 'ALL';
+          }
+        },
+        () => {
+          this._notificationService.push('Failed to load cities', 2);
+        }
+      );
+
+  }
 
 
+  /**
+   * Formats a Date object as 'YYYY-MM-DD' for the API.
+   */
+  private formatDate(d: Date): string {
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  }
 
-}
+  loadCountryCity() {
+    this._apiService.get(api.getCountries + "/" + this.currentUser.tenantID).subscribe((res: any) => {
+      const countries = [{ id: 'ALL', name: 'ALL' }, ...res.data];
+      this.listCountry = res.data;
+      this.listsDropDown.CountryDropDown = JSON.parse(JSON.stringify(res.data));
+      this.countryInput = this.listCountry.find((c: any) => c.id === 'ALL')?.name || 'ALL';
+
+      this._apiService.get(api.getCity + "/" + this.currentUser.tenantID).subscribe((inres: any) => {
+        const cities = [{ id: 'ALL', name: 'ALL' }, ...inres.data];
+        this.listCity = inres.data;
+        this.listsDropDown.CityDropDown = JSON.parse(JSON.stringify(inres.data));
+        this.cityInput = this.listCity.find((c: any) => c.id === 'ALL')?.name || 'ALL';
+      });
+    });
+  }
+
+  loadDefaultDropdowns() {
+    this._apiService.isCompareLoader$.next(true);
+
+    this._apiService.post(api.getPlantDropDown, {
+      startDate: this.startDate,
+      endDate: this.endDate,
+      tenantId: this.currentUser.tenantID
+    }).subscribe((res: any) => {
+      this.listPlant = res.data;
+      this.listsDropDown.plantDropDown = res.data;
+      this.selectedPlants = this.onDropDownSelectionSetData(this.listPlant, "ALL");
+      this.form.controls['plantCode'].setValue(this.selectedPlants);
+      this.plantInput = this.listPlant.find((p: any) => p.id === 'ALL')?.name || 'ALL';
+
+      this._apiService.post(api.getCommodityDropDown, {
+        startDate: this.startDate,
+        endDate: this.endDate,
+        tenantId: this.currentUser.tenantID,
+        plantCode: this.selectedPlants
+      }).subscribe((res: any) => {
+        this.listCommodity = res.data;
+        this.listsDropDown.commodityDropDown = res.data;
+        this.selectedCommodity = this.onDropDownSelectionSetData(this.listCommodity, "ALL");
+        this.form.controls['commodity'].setValue(this.selectedCommodity);
+        this.commodityInput = this.listCommodity.find((c: any) => c.id === 'ALL')?.name || 'ALL';
+
+        this._apiService.post(api.getVendorDropDown, {
+          startDate: this.startDate,
+          endDate: this.endDate,
+          tenantId: this.currentUser.tenantID,
+          plantCode: this.selectedPlants,
+          commodity: this.selectedCommodity
+        }).subscribe((res: any) => {
+          this.listVendor = res.data;
+          this.listsDropDown.vendorDropDown = res.data;
+          // CHANGE: Set single vendor to 'ALL' initially
+          this.selectedVendor = this.onDropDownSelectionSetData(this.listVendor, "ALL");
+          this.form.controls['vendorCode'].setValue(this.selectedVendor);
+          this.vendorInput = this.listVendor.find((v: any) => v.id === 'ALL')?.name || 'ALL';
+          this._apiService.isCompareLoader$.next(false);
+        }, () => this._apiService.isCompareLoader$.next(false));
+
+      }, () => this._apiService.isCompareLoader$.next(false));
+
+    }, () => this._apiService.isCompareLoader$.next(false));
+  }
 
 
 
@@ -212,144 +326,132 @@ setTimeout(() => {
 
 
   onExecuteClick() {
-    
-    this.form.controls['countryCode'].setValue(this.listsDropDown.CountryDropDown.filter((i:any)=>i.id == this.selectedCountry)[0]?.name.toLowerCase())
-    this.form.controls['cityCode'].setValue(this.listsDropDown.CityDropDown.filter((i:any)=>i.id == this.selectedCity)[0]?.name.toLowerCase())
-    if(this.form.controls['colour'].value == 'ALL')
-    this.form.controls['colour'].setValue('GREEN,YELLOW,RED');
+    // CHANGE: Use single vendorCode directly instead of building CSV
+    const data = this.form.controls['vendorCode'].value || 'ALL';
 
-    let data: any = ''
-    
-    if(this.selected.some((i:any)=>i.id == "ALL"))
-    {
-      this.listsDropDown.vendorDropDown.forEach((i:any) => {
-        if(i.id != "ALL")
-        data = data+i.id+","
-      });
+    // 2) Ensure countryCode & cityCode aren’t empty
+    const country = this.form.controls['countryCode'].value || 'ALL';
+    const city = this.form.controls['cityCode'].value || 'ALL';
 
-    }else{
-      this.selected.forEach((i: any) => {
-        data = data + i.id + ","
-      })
+    // 3) Quick form validity check for the required fields
+    if (
+      !this.form.controls['startDate'].value ||
+      !this.form.controls['endDate'].value ||
+      !this.form.controls['plantCode'].value ||
+      !data ||
+      !country ||
+      !city
+    ) {
+      this._notificationService.push('fill all data first', 1);
+      return;
     }
-    
-    data = data.slice(0, -1)
-    
-    this.form.controls['plantCode'].setValue(this.selectedPlants)
-    this.form.controls['commodity'].setValue(this.selectedCommodity)
-    this.form.controls['vendorCode'].setValue(data);
-   
-    let res = this.findInvalidControls()
 
-    if (res.length > 0) {
-      this._notificationService.push("fill all data first", 1)
-      return
-    }
-    // let plantData=''
-    // this.plant.forEach((i:any)=>{
-    //   plantData=plantData+i+","
-    // })
-    // plantData=plantData.slice(0,-1)
-    // this.form.controls['plantCode'].setValue(plantData);
-    this.startDate = this.form.controls['startDate'].value
-    this.endDate = this.form.controls['endDate'].value
-
-    this.form.controls['startDate'].setValue(this._apiService.setFormControlDate(this.form, 'startDate'))
-    this.form.controls['endDate'].setValue(this._apiService.setFormControlDate(this.form, 'endDate'))
-    this.form.controls['countryCode'].setValue(this.form.controls['countryCode'].value.toString().toUpperCase())
-    this.form.controls['cityCode'].setValue(this.form.controls['cityCode'].value.toString().toUpperCase())
+    // 4) Build the payload, overriding dates, country/city case, colour, vendorCode
+    const payload = {
+      tenantId: this.currentUser.tenantID,
+      startDate: this._apiService.setFormControlDate(this.form, 'startDate'),
+      endDate: this._apiService.setFormControlDate(this.form, 'endDate'),
+      plantCode: this.form.controls['plantCode'].value,
+      commodity: this.form.controls['commodity'].value,
+      vendorCode: this.form.value.vendorCode, // CHANGE: Single value instead of CSV
+       allVendorCode: this.form.value.vendorCode,
+      countryCode: this.form.value.countryCode,
+      cityCode: this.form.value.cityCode,
+      colour: this.form.controls['colour'].value
+    };
+  // ← Insert your debug log here:
+  console.log('MapOut payload:', payload);
+    // 5) Fire the API
     this._apiService.isCompareLoader$.next(true);
-      
-// this.http.post(api.mapOutVendor,this.form.value).subscribe((res:any)=>{
-// })
-
-    this._apiService.post(api.mapOutVendor,this.form.value)
-    .subscribe((res:any)=>{
-      this._apiService.isCompareLoader$.next(false);
-      this.listMapOutVendor = res?.data
-      this.form.controls['countryCode'].setValue(this.selectedCountry)
-      this.form.controls['cityCode'].setValue(this.selectedCity)
-      this.form.controls['colour'].setValue("ALL");
-      
-      this.form.controls['startDate'].setValue(this.startDate);
-      this.form.controls['endDate'].setValue(this.endDate);
-      
-      this.vendorMapOutEmitter.emit(this.listMapOutVendor);
-    },(e:any)=>{
-      this._apiService.isCompareLoader$.next(false);
-    })
-    this.form.controls['colour'].setValue('ALL');
-
-
+    this._apiService.post(api.mapOutVendor, payload)
+      .subscribe(
+        (res: any) => {
+          this._apiService.isCompareLoader$.next(false);
+          this.listMapOutVendor = res.data;
+          this.vendorMapOutEmitter.emit(this.listMapOutVendor);
+        },
+        () => {
+          this._apiService.isCompareLoader$.next(false);
+        }
+      );
   }
+
+
+
 
 
   onPlantSelect(data: any) {
     this.form.controls["vendorCode"].setValue(null)
     this.form.controls["commodity"].setValue(null)
     this.selectedPlants = ''
-    this.selectedPlants = this.onDropDownSelectionSetData(this.listsDropDown.plantDropDown,data.option.value);
+    this.selectedPlants = this.onDropDownSelectionSetData(this.listsDropDown.plantDropDown, data.option.value);
     this.form.controls['plantCode'].setValue(this.selectedPlants)
-      this._apiService.isCompareLoader$.next(true)
+    this.plantInput = data.option.value;
+    this._apiService.isCompareLoader$.next(true)
     this._apiService.post(api.getCommodityDropDown,
       {
-        startDate:this.form.controls["startDate"].value,
-        endDate:this.form.controls["endDate"].value,
-        tenantId:this.currentUser.tenantID,
-        plantCode:this.selectedPlants,
-      }).subscribe((res:any)=>{
+        startDate: this.form.controls["startDate"].value,
+        endDate: this.form.controls["endDate"].value,
+        tenantId: this.currentUser.tenantID,
+        plantCode: this.selectedPlants,
+      }).subscribe((res: any) => {
         this._apiService.isCompareLoader$.next(false)
         this.listCommodity = res.data
         this.listsDropDown.commodityDropDown = res.data
-        },(e:any)=>{
+      }, (e: any) => {
         this._apiService.isCompareLoader$.next(false)
       })
 
 
-    
+
   }
 
 
-  onDropDownSelectionSetData(list:any[],value:any){
+  onDropDownSelectionSetData(list: any[], value: any) {
     let output = ''
-    if(value == "ALL")
-    {
-      for(var i=0;i<list.length;i++){
-        if(list[i].id !="ALL")
-          output=output+list[i].id
-        
-        if(i<list.length-1  ){
-          if(list[i].id !="ALL")
-          output = output+',';
+    if (value == "ALL") {
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].id != "ALL")
+          output = output + list[i].id
+
+        if (i < list.length - 1) {
+          if (list[i].id != "ALL")
+            output = output + ',';
         }
-      } 
-    }else{
-      output = list.filter((i:any)=> i.name == value)[0]?.id
+      }
+    } else {
+      output = list.filter((i: any) => i.name == value)[0]?.id
     }
     return output
   }
 
   onCommoditySelection(data: any) {
-    this.selected = []
-    this.selectedCommodity = this.onDropDownSelectionSetData(this.listsDropDown.commodityDropDown,data.option.value)
+    // CHANGE: Reset single vendor instead of array
+    this.selectedVendor = '';
+    this.selectedCommodity = this.onDropDownSelectionSetData(this.listsDropDown.commodityDropDown, data.option.value)
     this.form.controls['commodity'].setValue(this.selectedCommodity)
-  
+    this.commodityInput = data.option.value;
+
     this._apiService.isCompareLoader$.next(true)
     this._apiService.post(api.getVendorDropDown,
       {
-        startDate:this.form.controls["startDate"].value,
-        endDate:this.form.controls["endDate"].value,
-        tenantId:this.currentUser.tenantID,
-        plantCode:this.selectedPlants,
-        commodity:this.selectedCommodity
-      }).subscribe((res:any)=>{
+        startDate: this.form.controls["startDate"].value,
+        endDate: this.form.controls["endDate"].value,
+        tenantId: this.currentUser.tenantID,
+        plantCode: this.selectedPlants,
+        commodity: this.selectedCommodity
+      }).subscribe((res: any) => {
         this._apiService.isCompareLoader$.next(false)
         this.listsDropDown.vendorDropDown = res.data
-        let selectedVendor = this.onDropDownSelectionSetData(this.listsDropDown.vendorDropDown,"ALL");
+        let selectedVendor = this.onDropDownSelectionSetData(this.listsDropDown.vendorDropDown, "ALL");
         this.form.controls["allVendorCode"].setValue(selectedVendor);
-        
+
         this.listVendor = res.data
-        },(e:any)=>{
+        // CHANGE: Set default single vendor
+        this.selectedVendor = selectedVendor;
+        this.form.controls['vendorCode'].setValue(this.selectedVendor);
+        this.vendorInput = this.listVendor.find((v: any) => v.id === 'ALL')?.name || 'ALL';
+      }, (e: any) => {
         this._apiService.isCompareLoader$.next(false)
       })
   }
@@ -357,90 +459,84 @@ setTimeout(() => {
 
   onCountrySelection(data: any) {
 
-    this.selectedCountry = this.onDropDownSelectionSetData(this.listsDropDown.CountryDropDown,data.option.value)
-    this.numberArray = [] 
-    this.numberArray = this.selectedCountry.split(",").map(Number);
-    this.form.controls['countryCode'].setValue(this.selectedCommodity)
+    this.selectedCountry = this.onDropDownSelectionSetData(this.listsDropDown.CountryDropDown, data.option.value);
+    this.countryInput = data.option.value;
+
+    this.form.controls['countryCode'].setValue(this.selectedCountry);
     // this.getCities('');
-    
+    this.loadCities();
   }
-  
- getCities(data:any){
 
-  this._apiService.isCompareLoader$.next(true)
-    this._apiService.post(api.getCity,{
-      countriesId:this.numberArray,
-      searchText:data
-    }      
-      ).subscribe((res:any)=>{
-        this._apiService.isCompareLoader$.next(false)
-        this.listsDropDown.CityDropDown = JSON.parse(JSON.stringify(res.data));
-        this.listCity = res.data
-        },(e:any)=>{
-        this._apiService.isCompareLoader$.next(false)
-      })
- }
+  getCities(data: any) {
+
+    this._apiService.isCompareLoader$.next(true)
+    this._apiService.post(api.getCity, {
+      countriesId: this.numberArray,
+      searchText: data
+    }
+    ).subscribe((res: any) => {
+      this._apiService.isCompareLoader$.next(false)
+      this.listsDropDown.CityDropDown = JSON.parse(JSON.stringify(res.data));
+      this.listCity = res.data
+    }, (e: any) => {
+      this._apiService.isCompareLoader$.next(false)
+    })
+  }
 
 
- 
+
   onCitySelection(data: any) {
-    this.selectedCity = this.onDropDownSelectionSetData(this.listsDropDown.CityDropDown,data.option.value)
+    this.selectedCity = this.onDropDownSelectionSetData(this.listsDropDown.CityDropDown, data.option.value)
+    this.cityInput = data.option.value;
     this.form.controls['cityCode'].setValue(this.selectedCity)
-  
-   
+
+
   }
 
 
 
 
-onCommodityInput(data: any) {
+  onCommodityInput(data: any) {
     if (this.commodityInput === '' || this.commodityInput === undefined) {
       this.listCommodity = this.listsDropDown?.commodityDropDown;
     } else {
       this.listCommodity = this.listsDropDown?.commodityDropDown.filter((i: any) => i.name.toLowerCase().includes(this.commodityInput.toLowerCase()));
     }
- }
+  }
 
- onCountryInput(data: any) {
+  onCountryInput(data: any) {
     if (this.countryInput === '' || this.countryInput === undefined) {
       this.listCountry = this.listsDropDown?.CountryDropDown;
     } else {
       this.listCountry = this.listsDropDown?.CountryDropDown.filter((i: any) => i.name.toLowerCase().includes(this.countryInput.toLowerCase()));
     }
- }
+  }
 
- onCityInput(data: any) {
+  onCityInput(data: any) {
     if (this.cityInput === '' || this.cityInput === undefined) {
-      this.getCities('')
-      // this.listCity = this.listsDropDown?.cityDropDown;
+      this.listCity = this.listsDropDown?.CityDropDown;
     } else {
-    this.getCities(this.cityInput)
-      // this.listCity = this.listsDropDown?.cityDropDown.filter((i: any) => i.name.toLowerCase().includes(this.cityInput.toLowerCase()));
+      this.listCity = this.listsDropDown?.CityDropDown.filter((i: any) => i.name.toLowerCase().includes(this.cityInput.toLowerCase()));
     }
- }
+  }
 
 
 
 
 
- onVendorSelection(data: any) {
-  //   var vendor = this.listsDropDown?.vendorDropDown?.filter((i: any) => i.vendorName?.toLowerCase() == data?.option?.value.toLowerCase())[0]
-  //   this.form.controls['vendorCode'].setValue(vendor?.vendorCode);
-   }
+  // CHANGE: New method for single vendor selection (modeled after onCommoditySelection)
+  onVendorSelection(data: any) {
+    this.selectedVendor = this.onDropDownSelectionSetData(this.listsDropDown.vendorDropDown, data.option.value);
+    this.form.controls['vendorCode'].setValue(this.selectedVendor);
+    this.vendorInput = data.option.value;
+  }
 
   onVendorInput(data: any) {
     if (this.vendorInput === '' || this.vendorInput === undefined) {
       this.listVendor = this.listsDropDown?.vendorDropDown;
     } else {
-      this.listVendor = this.listsDropDown?.vendorDropDown.filter((i: any) => i.name.toLowerCase().includes(this.vendorInput.toLowerCase() ));
+      this.listVendor = this.listsDropDown?.vendorDropDown.filter((i: any) => i.name.toLowerCase().includes(this.vendorInput.toLowerCase()));
     }
-    // this.listVendor?.sort((a: any, b: any) => {
-    //   if (a.vendorName < b.vendorName) {
-    //     return -1;
-    //   } else if (a.vendorName > b.vendorName) {
-    //     return 1;
-    //   } else return 0
-    // })
   }
 
   onPlantInput(data: any) {
@@ -451,65 +547,31 @@ onCommodityInput(data: any) {
     }
   }
 
+  onColourSelection(data: any) {
+    this.selectedColour = this.onDropDownSelectionSetData(this.listsDropDown.colourDropDown, data.option.value);
+    this.form.controls['colour'].setValue(this.selectedColour);
+    this.colourInput = data.option.value;
+  }
+
+  onColourInput(data: any) {
+    if (this.colourInput === '' || this.colourInput === undefined) {
+      this.listColour = this.listsDropDown?.colourDropDown;
+    } else {
+      this.listColour = this.listsDropDown?.colourDropDown.filter((i: any) => i.name.toLowerCase().includes(this.colourInput.toLowerCase()));
+    }
+  }
 
   
-  onSelected(event: MatAutocompleteSelectedEvent): void {
-    if(this.selected.length>0 && event.option.value == "ALL"){
-      this._notificationService.push("Can not Select All after selecting any of the vendor",2)
-      return
-    }
-    
-    
-    if (this.selected.some((i: any) => i.id == "ALL")) {
-      this._notificationService.push("Can not select any other vendor now", 2)
-      return
-    }
-
-    var alreadyExist = this.selected.find((i: any) => i.id == event.option.value)
-    if (alreadyExist) {
-      this._notificationService.push("vendor already selected", 2)
-      return
-    } 
-    // else if (this.selected.length > 4) {
-    //   this._notificationService.push("can not insert more then 5 vendor", 2)
-    //   return
-    // }
-    // if(event.option.value == "ALL") 
-    this.selected.push(this.listsDropDown.vendorDropDown.filter((i: any) => i.id == event.option.value)[0]);
-
-
-    this.fruitInput.nativeElement.value = '';
-    this.listVendor = this.listsDropDown.vendorDropDown;
-  }
-
-
-  add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    // Add our fruit
-    if ((value || '').trim()) {
-      this.selected.push(this.listVendor.filter((i: any) => i.vendorName.toLowerCase() == value.trim().toLowerCase())[0]);
-    }
-    // Reset the input value
-  }
-
-
-  remove(fruit: string): void {
-    const index = this.selected.indexOf(fruit);
-
-    if (index >= 0) {
-      this.selected.splice(index, 1);
-    }
-  }
+  // CHANGE: Remove onSelected, add, remove methods as they are for multi-selection chips
 
   onDateChange() {
     this.form.controls["plantCode"].setValue(null)
     this.form.controls["commodity"].setValue(null)
     this.form.controls["vendorCode"].setValue(null)
-    this.selectedPlants=''
-    this.selectedCommodity= ''
-    this.selected = []
+    this.selectedPlants = ''
+    this.selectedCommodity = ''
+    // CHANGE: Reset single vendor
+    this.selectedVendor = ''
     this.plantInput = ''
     this.commodityInput = ''
     if (!this.form.controls['startDate'].value || !this.form.controls['endDate'].value)
@@ -528,12 +590,12 @@ onCommodityInput(data: any) {
       this._apiService.isCompareLoader$.next(false)
       this.listPlant = res.data
       this.listsDropDown.plantDropDown = res.data
-      
+
       this.selectedPlants = ''
-       
-     
-    this._notificationService.push(res.message, 1)
-      
+
+
+      this._notificationService.push(res.message, 1)
+
     }, (e: any) => {
       this._apiService.isCompareLoader$.next(false)
 

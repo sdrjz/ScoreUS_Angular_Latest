@@ -41,15 +41,17 @@
                 <span *ngIf="column.def == 'pO_Post_Rec_Date'" class="px-3">
                   {{ (data.pO_Post_Rec_Date.split(" ")[0])  }}
                 </span>
+          
                 <span *ngIf="column.def == 'pO_Frist_Delivery_Date'" class="px-3">
                   {{ (data.pO_Frist_Delivery_Date.split(" ")[0])  }}
                 </span>
-                <span *ngIf="column.def == 'pO_Issue_Date'" class="px-3">
+                <!-- <span *ngIf="column.def == 'pO_Issue_Date'" class="px-3">
                   {{ (data.pO_Issue_Date.split(" ")[0])  }}
-                </span>
-                <span *ngIf="column.def == 'createdAt'" class="px-3">
+                </span> -->
+                        <span *ngIf="column.def == 'createdAt'" class="px-3">
                   {{ (data.createdAt.split(" ")[0] ) }}
                 </span>
+              
                 <span *ngIf="column.def == 'updatedAt'" class="px-3">
                   {{ (data.updatedAt.split(" ")[0])  }}
                 </span>

@@ -955,6 +955,9 @@ this.isViewFirst = JSON.parse(localStorage.getItem('kpiSettingSendReportValue') 
   isPlantSelected(data: any) {
     return this.listSelectedPlant.includes(data?.plantCode)
   }
+clearSelections() {
+  this.listSelectedPlant = [];
+}
 
   
   disablePopUpModelButton(){

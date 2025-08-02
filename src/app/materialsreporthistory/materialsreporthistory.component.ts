@@ -72,15 +72,11 @@ export class MaterialsreporthistoryComponent implements OnInit {
        return i.reportExtension
       }
     },
-    {
-      def: 'createdTime',
-      name: 'Time',
-      // key: 'createdAt',
-      key:(i:any)=> {
-        
-      return  i.createdTime.split("T")[1]
-      }  
-    },
+{
+  def: 'name',           
+  name: 'Sender Name',
+  key: (i:any) => i.name 
+},
     {
       def: 'email',
       name: 'Recipient email',

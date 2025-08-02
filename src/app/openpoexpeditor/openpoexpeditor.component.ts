@@ -15,6 +15,11 @@ import { PopupchartComponent } from '../general/popupchart/popupchart.component'
 import { SendreportdialogComponent } from '../general/sendreportdialog/sendreportdialog.component';
 import { poEmailService } from 'src/app/services/appService/poEmailService';
 import { UserdialogoutComponent } from '../general/userdialogout/userdialogout.component';
+import { FormControl } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+
+
 
 // ../sendreportdialog/sendreportdialog.component
 @Component({
@@ -71,6 +76,9 @@ export class OpenpoexpeditorComponent implements OnInit {
     allPlants: any = [];
     columns:any[] | null = [];
     public showTable = false;
+    bvmInputControl = new FormControl('');
+filteredBVMOptions: Observable<any[]>;
+
     listVendors:any[]=[]
     vendorDropdown:any[]=[]
     selected = [];
@@ -134,6 +142,7 @@ export class OpenpoexpeditorComponent implements OnInit {
                 closeDropDownOnSelection: false,
                 showSelectedItemsAtTop: false,
                 defaultOpen: false,
+                
             };
 
         var user = localStorage.getItem("userData")
@@ -152,7 +161,48 @@ export class OpenpoexpeditorComponent implements OnInit {
                 this.bvmoptions = ['Buyer', 'Material Number'];
             }
             this.cdr.detectChanges();
+               // ====== ADD THESE TWO LINES BELOW ======
+    this.filters.byBuyerOrSupplier = 'all';
+    this.bvmInputControl.setValue('All', { emitEvent: false });
+            this.filteredBVMOptions = this.bvmInputControl.valueChanges.pipe(
+    startWith(''),
+    map(value => this._filterBVMOptions(value))
+);
     }
+private _filterBVMOptions(value: string): any[] {
+    const filterValue = value?.toLowerCase?.() || '';
+    if (filterValue === 'all' || !filterValue) {
+      return this.plantBVMSelectboxLists;
+    }
+    return this.plantBVMSelectboxLists.filter(option =>
+      option.Name.toLowerCase().includes(filterValue) ||
+      option.Code?.toLowerCase().includes(filterValue)
+    );
+}
+onBVMSelected(event: any) {
+  const value = event.option.value;
+  if (value === 'all') {
+    this.filters.byBuyerOrSupplier = 'all';
+    this.bvmInputControl.setValue('All', { emitEvent: false }); // Shows 'All' in field, but keeps 'all' in filters
+  } else {
+    this.filters.byBuyerOrSupplier = value;
+    // Optionally set Name+Code if you want that shown
+    const selected = this.plantBVMSelectboxLists?.find(item => item.Code === value);
+    if (selected) {
+      this.bvmInputControl.setValue(`${selected.Name} ${selected.Code}`, { emitEvent: false });
+    }
+  }
+}
+
+getSelectedDisplayValue() {
+    if (this.filters.byBuyerOrSupplier === 'all') {
+      return 'All';
+    }
+    const selected = this.plantBVMSelectboxLists?.find(
+      o => o.Code === this.filters.byBuyerOrSupplier
+    );
+    return selected ? `${selected.Name} ${selected.Code}` : '';
+}
 
     GetOpenOrderReportDropDown(){
         this._apiService.isCompareLoader$.next(true)
@@ -208,9 +258,13 @@ export class OpenpoexpeditorComponent implements OnInit {
                 input.click();
             }
         });
+if (this.bvmInputControl) {
+    this.bvmInputControl.setValue('');
+}
 
         this.listCheckedRecords = [];
         this.listCheckedRecordsForEmail = [];
+
     }
 
     callSettings(){
@@ -2664,44 +2718,32 @@ export class OpenpoexpeditorComponent implements OnInit {
                     })       
                     
                 } else {
-                 
-                    this._apiService.get(api.OpenPOExpeditorSentEmailTemplate)
-                    .subscribe((res:any)=>{
-                        this._apiService.isCompareLoader$.next(false)
-                        let reportsData = [];
-                        let existReportsData = [];
-                        this.listCheckedRecordsForEmail.forEach((i: any) => {
-                            if (this.filters.sendEmailTo == "Buyer") {
-                                // if (existReportsData.includes(i.buyerEmail)) {
-                                //     return;
-                                // } else {
-                                //     existReportsData.push(i.buyerEmail);
-                                // }
-                                reportsData.push({
-                                    vendorCode : i.vendorCode,
-                                    code: i.buyerCode,
-                                    name: i.buyerName,
-                                    vendorName: i.vendorName,
-                                    contact: i.phoneNo,
-                                    email: [i.buyerEmail],
-                                    cc: []
-                                });
-                            } else {
-                                if (existReportsData.includes(i.vendorEmail)) {
-                                    return;
-                                } else {
-                                    existReportsData.push(i.vendorEmail);
-                                }
-                                reportsData.push({
-                                    vendorCode : i.vendorCode,
-                                    code: i.vendorCode,
-                                    name: i.vendorName,
-                                    contact: i.phoneNo,
-                                    email: [i.vendorEmail],
-                                    cc: []
-                                });
-                            }
-                        });
+  this._apiService.get(api.OpenPOExpeditorSentEmailTemplate)
+  .subscribe((res:any)=>{
+     let reportsData = [];
+     this.listCheckedRecordsForEmail.forEach((i: any) => {
+         if (this.filters.sendEmailTo == "Buyer") {
+             reportsData.push({
+                 vendorCode : i.vendorCode,
+                 code: i.buyerCode,
+                 name: i.buyerName,
+                 vendorName: i.vendorName,
+                 contact: i.phoneNo,
+                 email: [i.buyerEmail],
+                 cc: []
+             });
+         } else {
+             reportsData.push({
+                 vendorCode : i.vendorCode,
+                 code: i.vendorCode,
+                 name: i.vendorName,
+                 contact: i.phoneNo,
+                 email: [i.vendorEmail],
+                 cc: []
+             });
+         }
+     });
+
                         const dialogRef = this.dialog.open(SendreportdialogComponent, {
                             panelClass: 'sendreportcontainer',
                             data: {

@@ -2415,6 +2415,19 @@ export class ImportdataComponent implements OnInit {
           this.errorMessage=this.fileUploadedName +" File "+ res.message
           postData = null;
 
+          let user = localStorage.getItem('userData')
+    if (user)
+      this.loggedInUser = JSON.parse(user);
+      this._apiService.isCompareLoader$.next(true)
+    this._apiService.get(api.excelImport + "/" + this.loggedInUser.roleID + "/" + this.loggedInUser.tenantID)
+  .subscribe((res: any) => {
+    this._apiService.isCompareLoader$.next(false);
+    this.listImportData = this.sortListByTarget(res.data);
+    this.notificationService.push("Import list retrieved", 1);
+  }, (e: any) => {
+    this._apiService.isCompareLoader$.next(false);
+  });
+
           
 
 

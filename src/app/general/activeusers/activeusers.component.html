@@ -50,7 +50,7 @@
                 {{ (data.completionDate | date: 'MM/dd/yyyy')  }}
               </span>
               <span *ngIf="column.def == 'renewalDate'" class="px-3">
-                {{ (data.pO_Issue_Date | date: 'MM/dd/yyyy')  }}
+                {{ (data.renewalDate | date: 'MM/dd/yyyy')  }}
               </span>
               <span *ngIf="column.def == 'createdAt'" class="px-3">
                 {{ (data.createdAt | date: 'MM/dd/yyyy')  }}

@@ -610,7 +610,7 @@ this.previousYear.endDate = newPrevEnd.toISOString().split("T")[0]
         this.ltaChartData = data.data;
         break;
 
-      case 'LTA percentage':
+      case 'LTA Percentage':
         this.ltaPercentageChartData = data.data;
         break;
 
@@ -618,7 +618,7 @@ this.previousYear.endDate = newPrevEnd.toISOString().split("T")[0]
         this.ppvChartData = data.data;
         break;
 
-      case 'PPV percentage':
+      case 'PPV Percentage':
         this.ppvPercentageChartData = data.data
         break;
 
@@ -626,7 +626,7 @@ this.previousYear.endDate = newPrevEnd.toISOString().split("T")[0]
         this.ncrChartData = data.data
         break;
 
-      case 'NCR percentage':
+      case 'NCR Percentage':
         this.ncrPercentageChartData = data.data
         break;
 
@@ -634,7 +634,7 @@ this.previousYear.endDate = newPrevEnd.toISOString().split("T")[0]
         this.otdChartData = data.data
         break;
 
-      case 'OTD percentage':
+      case 'OTD Percentage':
         this.otdPercentageChartData = data.data
         break;
 
@@ -667,7 +667,7 @@ this.previousYear.endDate = newPrevEnd.toISOString().split("T")[0]
         // requiredColorData = null
         break;
 
-      case 'LTA percentage':
+      case 'LTA Percentage':
         requiredChartData = this.ltaPercentageChartData;
         // requiredColorData = null
         break;
@@ -677,7 +677,7 @@ this.previousYear.endDate = newPrevEnd.toISOString().split("T")[0]
         // requiredColorData = null
         break;
 
-      case 'PPV percentage':
+      case 'PPV Percentage':
         requiredChartData = this.ppvPercentageChartData;
         // requiredColorData = null
         break;
@@ -687,7 +687,7 @@ this.previousYear.endDate = newPrevEnd.toISOString().split("T")[0]
         // requiredColorData = null
         break;
 
-      case 'NCR percentage':
+      case 'NCR Percentage':
         requiredChartData = this.ncrPercentageChartData;
         // requiredColorData = null
         break;
@@ -697,7 +697,7 @@ this.previousYear.endDate = newPrevEnd.toISOString().split("T")[0]
         // requiredColorData = null
         break;
 
-      case 'OTD percentage':
+      case 'OTD Percentage':
         requiredChartData = this.otdPercentageChartData;
         // requiredColorData = null
         break;

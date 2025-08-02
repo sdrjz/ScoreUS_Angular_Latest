@@ -304,7 +304,7 @@ export class TwolineBasicLineChartComponent implements OnInit, OnChanges {
               },
             ]
             break;
-          case 'OTD percentage':
+          case 'OTD Percentage':
          
           //   if(!this.isMainDashBoard)
           //  { 
@@ -715,7 +715,7 @@ export class TwolineBasicLineChartComponent implements OnInit, OnChanges {
               this.series.push({name:element.name,data:element.data.totalScore});
               })
             break;
-          case 'OTD percentage':
+          case 'OTD Percentage':
               
           // this.series.push({name:'average',data:this.requiredScorecardGraphData[0].data.averageScore})
             this.series.push({name:'Average', data:this.requiredScorecardGraphData[0].data.averageOtdPercentage.map(value => value === undefined || value === null ? null : Number(value).toFixed(3)) })
@@ -836,7 +836,7 @@ export class TwolineBasicLineChartComponent implements OnInit, OnChanges {
           yaxis: [
             {
               seriesName: this.scoreCardGraphHeading,
-              decimalsInFloat: 2,
+              decimalsInFloat: 0,
               opposite: false,
               axisTicks: {
                 show: true,
@@ -966,7 +966,7 @@ export class TwolineBasicLineChartComponent implements OnInit, OnChanges {
               },
             ]
             break;
-          case 'OTD percentage':
+          case 'OTD Percentage':
          
             if(!this.isMainDashBoard)
            { 
@@ -2840,7 +2840,7 @@ export class TwolineBasicLineChartComponent implements OnInit, OnChanges {
         case 'poSpend':
           this.series = [
             {
-              name: 'Total Po Spend',
+              name: 'Total PO Spend',
               data: spendPO
             }
           ]
@@ -2848,7 +2848,7 @@ export class TwolineBasicLineChartComponent implements OnInit, OnChanges {
         case 'issuePo':
           this.series = [
             {
-              name: 'Total Issued PO',
+              name: 'Total Issued PO Lines',
               data: issuePO
             }
           ]
@@ -2864,7 +2864,7 @@ export class TwolineBasicLineChartComponent implements OnInit, OnChanges {
         case 'recievedPO':
           this.series = [
             {
-              name: 'Total Recieved PO',
+              name: 'Total Received PO Lines',
               data: recievedPO
             }
           ]
@@ -2993,7 +2993,7 @@ export class TwolineBasicLineChartComponent implements OnInit, OnChanges {
         yaxis: [
           {
             seriesName: this.scoreCardGraphHeading,
-            decimalsInFloat: 2,
+            decimalsInFloat: 0,
             opposite: false,
             axisTicks: {
               show: true,

@@ -152,7 +152,7 @@
           <mat-card class="example-card">
             <div class="d-flex">
               <div class="mr-auto"></div>
-              <button (click)="popUpChart('OTD percentage')" class="button_background"
+              <button (click)="popUpChart('OTD Percentage')" class="button_background"
                 matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
               </button>
             </div>
@@ -164,7 +164,7 @@
             </mat-card-header>
             <mat-card-content>
               <app-twoline-basic-line-chart
-              [scoreCardGraphHeading]="'OTD percentage'" 
+              [scoreCardGraphHeading]="'OTD Percentage'" 
               [requiredVendorGraphData]="requiredVendorGraph"
               [graphData]="otdPercentageGraphData"
               [averageScore]="otdAverageScore"
@@ -216,7 +216,7 @@
           <mat-card class="example-card">
             <div class="d-flex">
               <div class="mr-auto"></div>
-              <button (click)="popUpChart('NCR percentage')" class="button_background"
+              <button (click)="popUpChart('NCR Percentage')" class="button_background"
                 matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
               </button>
             </div>
@@ -227,7 +227,7 @@
             </mat-card-header>
             <mat-card-content>
               <app-twoline-basic-line-chart
-              [scoreCardGraphHeading]="'NCR percentage'"
+              [scoreCardGraphHeading]="'NCR Percentage'"
               [requiredVendorGraphData]="requiredVendorGraph"
               [graphData]="ncrPercentageGraphData"
               [averageScore]="ncrAverageScore" 
@@ -277,7 +277,7 @@
           <mat-card class="example-card">
             <div class="d-flex">
               <div class="mr-auto"></div>
-              <button (click)="popUpChart('PPV percentage')" class="button_background"
+              <button (click)="popUpChart('PPV Percentage')" class="button_background"
                 matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
               </button>
             </div>
@@ -290,7 +290,7 @@
             </mat-card-header>
             <mat-card-content>
               <app-twoline-basic-line-chart
-              [scoreCardGraphHeading]="'PPV percentage'" 
+              [scoreCardGraphHeading]="'PPV Percentage'" 
               [requiredVendorGraphData]="requiredVendorGraph"
               [graphData]="ppvPercentageGraphData" 
               [averageScore]="ppvAverageScore" 
@@ -343,7 +343,7 @@
           <mat-card class="example-card">
             <div class="d-flex">
               <div class="mr-auto"></div>
-              <button (click)="popUpChart('LTA percentage')" class="button_background"
+              <button (click)="popUpChart('LTA Percentage')" class="button_background"
                 matTooltip="Click to open popup chart"><span class="material-icons"><i class="fa fa-expand" aria-hidden="true"></i></span>
               </button>
             </div>
@@ -355,7 +355,7 @@
             </mat-card-header>
             <mat-card-content>
               <app-twoline-basic-line-chart
-              [scoreCardGraphHeading]="'LTA percentage'" 
+              [scoreCardGraphHeading]="'LTA Percentage'" 
               [requiredVendorGraphData]="requiredVendorGraph"
               [graphData]="ltaPercentageGraphData"
               [averageScore]="ltaAverageScore"
@@ -425,7 +425,7 @@
           </mat-card-header>
           <mat-card-content>
             <app-twoline-basic-line-chart
-            [scoreCardGraphHeading]="'OTD percentage'" [requiredVendorGraphData]="requiredVendorGraph"
+            [scoreCardGraphHeading]="'OTD Percentage'" [requiredVendorGraphData]="requiredVendorGraph"
             [graphData]="otdPercentageGraphData" [averageScore]="otdAverageScore" (charDataEmitter)="getChartData($event)"
               [executeData]="apiData"></app-twoline-basic-line-chart>
           </mat-card-content>
@@ -475,7 +475,7 @@
           </mat-card-header>
           <mat-card-content>
             <app-twoline-basic-line-chart
-            [scoreCardGraphHeading]="'NCR percentage'" [requiredVendorGraphData]="requiredVendorGraph"
+            [scoreCardGraphHeading]="'NCR Percentage'" [requiredVendorGraphData]="requiredVendorGraph"
             [graphData]="ncrPercentageGraphData" [averageScore]="ncrAverageScore" (charDataEmitter)="getChartData($event)"
               [executeData]="apiData"></app-twoline-basic-line-chart>
           </mat-card-content>
@@ -524,7 +524,7 @@
           </mat-card-header>
           <mat-card-content>
             <app-twoline-basic-line-chart
-            [scoreCardGraphHeading]="'PPV percentage'" [requiredVendorGraphData]="requiredVendorGraph"
+            [scoreCardGraphHeading]="'PPV Percentage'" [requiredVendorGraphData]="requiredVendorGraph"
             [graphData]="ppvPercentageGraphData" [averageScore]="ppvAverageScore" (charDataEmitter)="getChartData($event)"
               [executeData]="apiData"></app-twoline-basic-line-chart>
           </mat-card-content>
@@ -574,7 +574,7 @@
           </mat-card-header>
           <mat-card-content>
             <app-twoline-basic-line-chart 
-            [scoreCardGraphHeading]="'LTA percentage'" [requiredVendorGraphData]="requiredVendorGraph"
+            [scoreCardGraphHeading]="'LTA Percentage'" [requiredVendorGraphData]="requiredVendorGraph"
             [graphData]="ltaPercentageGraphData" [averageScore]="ltaAverageScore" (charDataEmitter)="getChartData($event)"
               [executeData]="apiData"></app-twoline-basic-line-chart>
           </mat-card-content>

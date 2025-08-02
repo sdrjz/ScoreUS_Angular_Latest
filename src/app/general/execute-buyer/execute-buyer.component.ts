@@ -8,13 +8,18 @@ import { NotificationService } from 'src/app/notification.service';
 import { GeneralApiService } from 'src/app/services/appService/generalApiService';
 import { tips } from 'src/app/tootTips';
 import { dateValidator } from 'src/app/validation/date-validator';
+import { BuyerEventsService } from 'src/app/general/execute-buyer/buyer-events.service';
+
+
 
 @Component({
   selector: 'app-execute-buyer',
   templateUrl: './execute-buyer.component.html',
   styleUrls: ['./execute-buyer.component.css']
 })
+
 export class ExecuteBuyerComponent implements OnInit,OnChanges {
+
   tips = tips
   selectedPlants:any=''
   selectedBuyer:any
@@ -66,6 +71,8 @@ export class ExecuteBuyerComponent implements OnInit,OnChanges {
   constructor(private _apiService: GeneralApiService,
     private _notificationService: NotificationService,
     private translateService:TranslateService,
+    private buyerEventsService: BuyerEventsService,
+    
     private cdr :ChangeDetectorRef) { }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -188,6 +195,11 @@ export class ExecuteBuyerComponent implements OnInit,OnChanges {
   }
 
   onBuyerExecuteClick() {
+
+      //changing by me
+      this.buyerEventsService.triggerReset();
+
+
     let data: any = ''
     // if(this.selected.some((i:any)=>i.id == "ALL"))
     // {
@@ -233,10 +245,15 @@ export class ExecuteBuyerComponent implements OnInit,OnChanges {
     this.form.controls['startDate'].setValue(this._apiService.setFormControlDate(this.form, 'startDate'))
     this.form.controls['endDate'].setValue(this._apiService.setFormControlDate(this.form, 'endDate'))
     this.loader = true
-    this.buyerExecutiveDataEmitter.emit(this.form.value)
+    this.buyerExecutiveDataEmitter.emit(  
+      
+      
+      
+      this.form.value
+    
+    )
     this.form.controls['startDate'].setValue(this.startDate);
     this.form.controls['endDate'].setValue(this.endDate);
-
 
   }
 
@@ -340,6 +357,8 @@ onBuyerInput(data: any) {
   } else {
     this.listBuyer = this.buyerDropDown.filter((i: any) => i.name.toLowerCase().includes(this.buyerInput.toLowerCase()));
   }
+
+  this.selectedBuyer
 }
 
 onPlantInput(data: any) {
@@ -387,7 +406,5 @@ onSelected(event: MatAutocompleteSelectedEvent): void {
   this.fruitInput.nativeElement.value = '';
   this.listBuyer = this.buyerDropDown;
 }
-
-
 
 }

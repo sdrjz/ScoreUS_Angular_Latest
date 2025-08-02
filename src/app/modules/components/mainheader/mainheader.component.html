@@ -177,7 +177,12 @@
                     <li class="nav-item dropdown header-profile dropdown-no-icon" ngbDropdown>
                         <a class="nav-link" href="javascript:void(0);" (click)="onDropDownToggleClick()" role="button" data-toggle="dropdown"
                             ngbDropdownToggle>
-                            <img src="assets/images/profile/profile.png" width="20" alt="" />
+                            <!-- <img src="assets/images/profile/profile.png" width="20" alt="" /> -->
+                            <img 
+                            [src]="userData?.image ? userData.image : 'https://scoreusapistaging.azurewebsites.net/wwwroot/Content/UserImages/default-profile.png'" 
+                            class="img-fluid rounded-circle" 
+                            alt="Profile Picture"
+                            style="border: none;">
                             <div class="header-info">
                                 <span>{{ userData?.firstName}}</span>
                                 <small></small>

@@ -1,3 +1,4 @@
 {
-    "liveServer.settings.port": 5501
+    "appService.defaultWebAppToDeploy": "/subscriptions/393c5bde-71bf-44c8-b5cb-954d6279fc10/resourceGroups/ScoreUs/providers/Microsoft.Web/sites/ScoreUs",
+    "appService.deploySubpath": "dist"
 }

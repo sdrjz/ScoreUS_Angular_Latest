@@ -1,3 +1,10 @@
+<!-- <mat-card style="height:180px;">
+    <div class="row">
+        <div class="col-sm-4 align-item-centers">{{subtitle}} Color Zone</div>
+        <div class="col-sm-8"></div>
+    </div>
+</mat-card> -->
+
 <div clss="card p-4">
     <div class="row pt-3">
         <div class="col-md-5">
@@ -9,13 +16,16 @@
                     <div class="ml-auto pr-0">
                         <div class="float-right">
                             <span class="vendor-per" *ngIf="colorZoneStat && colorZoneStat.length<1">25%</span>
-
-                            <span class="vendor-per" *ngIf="colorZoneStat.length > 0">
-                                {{ (getPercentage(colorZoneStat[0][2], colorZoneStat[0][3]) === 0) ? 'N/A' : getPercentage(colorZoneStat[0][2], colorZoneStat[0][3]) + '%' }}
-                              </span>
-
-
                             <!-- <span class="vendor-per" *ngIf="colorZoneStat.length>0" style="margin-right:2px !important;" >{{getPercentage(colorZoneStat[0][2],colorZoneStat[0][3])}}%</span> -->
+                            <span class="vendor-per" *ngIf="colorZoneStat.length > 0" style="margin-right:2px !important;">
+                                {{
+                                    getPercentage(colorZoneStat[0][0], colorZoneStat[0][3]) === 0 &&
+                                    getPercentage(colorZoneStat[0][1], colorZoneStat[0][3]) === 0 &&
+                                    getPercentage(colorZoneStat[0][2], colorZoneStat[0][3]) === 0
+                                    ? 'N/A'
+                                    : getPercentage(colorZoneStat[0][2], colorZoneStat[0][3]) + '%'
+                                }}
+                                </span>
                             <span [attr.class]="redIsNeg == true? 'red-num':'co1'"
                                 *ngIf="(colorZoneStat?.length>1 && (redPercentageComparison<0 || redPercentageComparison>=0))" [style]="getRedYellowTextColor(redPercentageComparison)" style="margin-right:2px !important;">{{redPercentageComparison}}%</span>
                             
@@ -33,12 +43,15 @@
                     <div class="ml-auto pr-0">
                         <div class="float-right">
                             <span class="vendor-per pl-1" *ngIf="colorZoneStat && colorZoneStat.length<1">30%</span>
-                            
-                            <span class="vendor-per" *ngIf="colorZoneStat.length > 0">
-                                {{ (getPercentage(colorZoneStat[0][2], colorZoneStat[0][3]) === 0) ? 'N/A' : getPercentage(colorZoneStat[0][2], colorZoneStat[0][3]) + '%' }}
-                              </span>
-                            <!-- <span class="vendor-per pl-1"
-                                *ngIf="colorZoneStat?.length>0" style="margin-right:2px !important;">{{getPercentage(colorZoneStat[0][1],colorZoneStat[0][3])}}%</span> -->
+                            <span class="vendor-per" *ngIf="colorZoneStat.length > 0" style="margin-right:2px !important;">
+                                {{
+                                    getPercentage(colorZoneStat[0][0], colorZoneStat[0][3]) === 0 &&
+                                    getPercentage(colorZoneStat[0][1], colorZoneStat[0][3]) === 0 &&
+                                    getPercentage(colorZoneStat[0][2], colorZoneStat[0][3]) === 0
+                                    ? 'N/A'
+                                    : getPercentage(colorZoneStat[0][1], colorZoneStat[0][3]) + '%'
+                                }}
+                                </span>
                             <span [attr.class]="yellowIsNeg == true ?'red-num': 'co1'"
                                 *ngIf="(colorZoneStat?.length>1 && (yellowPercentageComparison<0 || yellowPercentageComparison>=0))" [style]="getRedYellowTextColor(yellowPercentageComparison)" style="margin-right:2px !important;" >{{yellowPercentageComparison}}%</span>
                             <img *ngIf="colorZoneStat?.length>1 " [src]="getRedYellowImage(yellowPercentageComparison)" [style]="getRedYellowTextColor(yellowPercentageComparison)" alt="">
@@ -53,12 +66,15 @@
                     <div class="ml-auto pr-0">
                         <div class="float-right">
                             <span class="vendor-per pl-1" *ngIf="colorZoneStat && colorZoneStat.length<1">35%</span>
-                            
-                            <span class="vendor-per" *ngIf="colorZoneStat.length > 0">
-                                {{ (getPercentage(colorZoneStat[0][2], colorZoneStat[0][3]) === 0) ? 'N/A' : getPercentage(colorZoneStat[0][2], colorZoneStat[0][3]) + '%' }}
-                              </span>
-                            <!-- <span class="vendor-per pl-1"
-                                *ngIf="colorZoneStat.length>0" style="margin-right:2px !important;">{{getPercentage(colorZoneStat[0][0],colorZoneStat[0][3])}}%</span> -->
+                              <span class="vendor-per" *ngIf="colorZoneStat.length > 0" style="margin-right:2px !important;">
+                                {{
+                                    getPercentage(colorZoneStat[0][0], colorZoneStat[0][3]) === 0 &&
+                                    getPercentage(colorZoneStat[0][1], colorZoneStat[0][3]) === 0 &&
+                                    getPercentage(colorZoneStat[0][2], colorZoneStat[0][3]) === 0
+                                    ? 'N/A'
+                                    : getPercentage(colorZoneStat[0][0], colorZoneStat[0][3]) + '%'
+                                }}
+                                </span>
                             <span [attr.class]="greenIsNeg == true? 'red-num':'co1'"
                                 *ngIf="(colorZoneStat?.length>1 && (greenPercentageComparison<0 ||greenPercentageComparison>=0))" [style]="getTextColor(greenPercentageComparison)" style="margin-right:2px !important;">{{greenPercentageComparison}}%</span>
                             <img *ngIf="colorZoneStat?.length>1 " [src]="getImage(greenPercentageComparison)"  style="width:14px !important; margin-right: 2px !important;" alt="">

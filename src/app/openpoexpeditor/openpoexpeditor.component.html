@@ -136,15 +136,45 @@
                             </mat-radio-group>
                         </div>
 
-                        <div class="col-md-5">
-                            <div class="d-flex">
-                                <span class="vendor-per pt-2 w-50" style="width: 130px !important;">{{filters.byBuyerOrSupplierOption | translate}}:</span>
-                                <select class="form-control plant-select w-50" [(ngModel)]="filters.byBuyerOrSupplier" >
-                                    <option value="all">{{'All' | translate}}</option>
-                                    <option *ngFor="let item of plantBVMSelectboxLists" [value]="item.Code">{{item.Name+" "+item.Code}}</option>
-                                </select>
-                            </div>
-                        </div>
+               <div class="col-md-5">
+  <div class="d-flex align-items-center" style="width: 100%;">
+    <span class="vendor-per pt-2 w-50" style="width: 130px !important; min-width: 90px;">
+      {{ filters.byBuyerOrSupplierOption | translate }}:
+    </span>
+    <div
+      style="
+        border: 1px solid #adb5bd;
+        border-radius: 24px;
+        padding: 2px 12px;
+        background: #fff;
+        width: 100%;
+        max-width: 340px;
+        display: flex;
+        align-items: center;
+      "
+    >
+<mat-form-field appearance="outline" floatLabel="never" class="bvm-field">
+
+  <input
+    matInput
+    placeholder="{{ 'All' | translate }}"
+    [formControl]="bvmInputControl"
+    [matAutocomplete]="autoBVM"
+    autocomplete="off"
+  />
+  <mat-autocomplete #autoBVM="matAutocomplete" (optionSelected)="onBVMSelected($event)">
+    <mat-option [value]="'all'">{{ 'All' | translate }}</mat-option>
+    <mat-option *ngFor="let item of filteredBVMOptions | async" [value]="item.Code">
+      {{ item.Name }} {{ item.Code }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+
+    </div>
+  </div>
+</div>
+
+
                 
                         <!-- <div class="col-md-2 ml-auto">
                             <div class="form-group">

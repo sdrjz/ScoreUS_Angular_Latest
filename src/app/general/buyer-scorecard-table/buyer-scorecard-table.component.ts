@@ -15,6 +15,9 @@ import { PopuptableComponent } from '../popuptable/popuptable.component';
 import { TranslateService } from '@ngx-translate/core';
 import { ScoreCardEmailService } from 'src/app/services/appService/scorecardEmailService';
 import { UserdialogoutComponent } from 'src/app/general/userdialogout/userdialogout.component';
+import { BuyerEventsService } from 'src/app/general/execute-buyer/buyer-events.service';
+
+
 
 
 @Component({
@@ -23,6 +26,7 @@ import { UserdialogoutComponent } from 'src/app/general/userdialogout/userdialog
   styleUrls: ['./buyer-scorecard-table.component.css']
 })
 export class BuyerScorecardTableComponent implements OnInit {
+
   selectedColor: any = "ALL";
   tips = tips
   isCompareLoading: boolean = false;
@@ -605,6 +609,7 @@ export class BuyerScorecardTableComponent implements OnInit {
     private _notificationService: NotificationService,
     private router: Router,
     private _emailService: ScoreCardEmailService,
+    private buyerEventsService: BuyerEventsService,
     private translateService: TranslateService) {
     this.masterSelected = false;
     this.checklist = [
@@ -634,6 +639,12 @@ export class BuyerScorecardTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.buyerEventsService.reset$.subscribe(() => {
+    this.listSelectedBuyer = [];
+  });
+
+    this.listSelectedBuyer = [];
     // this._apiService.isCompareLoader$.subscribe((res: boolean) => {
     //   this.isCompareLoading = res
     // })
@@ -1608,6 +1619,11 @@ console.log("Selected buyerCode for NCR:", data.buyerCode);
   }
 
   emitSelectedBuyer() {
+
+
+ //this.listSelectedBuyer = [];
+//  this.selected = [];
+    
     if (this.apiRequestData === null || this.apiRequestData === undefined) {
       this._apiService.isCompareLoader$.next(false);
       this._notificationService.push("Data set not selected", 2)
@@ -1639,10 +1655,15 @@ console.log("Selected buyerCode for NCR:", data.buyerCode);
     this.isCompareLoading = true
     this.buyerDataEmitter.emit(data)
 
+    this.clearCheckboxSelection();
+
   }
 
   onTestClick() {
     this.router.navigate(['user/ltadetail'])
   }
 
+  clearCheckboxSelection() {
+ 
+}
 }

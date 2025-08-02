@@ -17,6 +17,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { PageReloaderService } from '../services/appService/pageReloaderService';
 import { ignoreElements } from 'rxjs/operators';
 
+import { ViewChild } from '@angular/core';
+import { VendorScorecardTableComponent } from '../general/vendor-scorecard-table/vendor-scorecard-table.component';
+
+
+
 
 
 
@@ -33,7 +38,8 @@ import { ignoreElements } from 'rxjs/operators';
 export class VendorScorecardComponent implements OnInit {
   // hasWhichData this data 0 for on pageload 1 for without prev 2 for with previous
 
-
+@ViewChild(VendorScorecardTableComponent)
+vendorScorecardTableComponent!: VendorScorecardTableComponent;
 
 
   // filterDropDownList:any[]=[
@@ -99,6 +105,10 @@ export class VendorScorecardComponent implements OnInit {
     currentStatus: [],
     previousStatus: []
   }
+  clearAllCompareSelections() {
+  this.vendorScorecardTableComponent.clearAllCompareSelections();
+
+}
   public dataForVendorStatistics: any = {
     currentStatus: [],
     previousStatus: []
@@ -117,204 +127,260 @@ export class VendorScorecardComponent implements OnInit {
    ) { }
 
 
+async ngOnInit(): Promise<any> {
+  // Format Current Date
+  this.currentDate = new Date().toString().split(" ")[0] + "," + new Date().toString().split(" ")[1] + " " + new Date().toString().split(" ")[2] + " " + new Date().toString().split(" ")[3];
 
-  async ngOnInit():  Promise<any> {
-     
+  // Get logged in user
+  const userData = localStorage.getItem('userData');
+  if (userData) {
+    this.loggedInUser = JSON.parse(userData);
+  }
 
-    this.currentDate = new Date().toString().split(" ")[0] + "," + new Date().toString().split(" ")[1] + " " + new Date().toString().split(" ")[2] + " " + new Date().toString().split(" ")[3];
-    var userData = localStorage.getItem('userData');
-    if (userData) {
-      this.loggedInUser = JSON.parse(userData)
-    } else {
+  // Subscribe to language selector
+  this._apiService.isLanguageSelector$.subscribe((res: any) => {
+    this.translate.use(res);
+    this.cdr.detectChanges();
+  });
 
-    }
+  this.onVendorPageLoad = null;
+  this._apiService.isCompareLoader$.next(true);
 
-    // const result = await this.getSubjectResult()
-    // if(result !== null)
-    // {
-    //   this.setDataInPage(result)
-    //   return
-    // }
-    // this._apiService.isCompareLoader$.next(true);
+  // Subscribe to page loader cache (for routing persistence)
+  this._pageLoaderService.vendorScorecard$.subscribe((i: any | null) => {
+    if (i !== null) {
+      // Cached Data Available
+      this.onVendorPageLoad = i.currentData;
+      this.apiRequestData = i.currentData;
 
-    this._apiService.isLanguageSelector$.subscribe((res:any)=>{
-      this.translate.use(res)
-      this.cdr.detectChanges()
-    })
-    this.onVendorPageLoad = null
-    this._apiService.isCompareLoader$.next(true);
-    
-    this._pageLoaderService.vendorScorecard$.subscribe((i:any|null)=>{
-      if(i !== null)// to preload data after rerouting
-      {
-        switch (i.hasWhichData) {
-          case 0: // on page load
-          this.onVendorPageLoad = i.currentData
-            this.apiRequestData = i.currentData
-            this.fillDataInStatisticsAndColorZone(i.resData,0,1,2,3,0,4,null,null)
-            break;
-            
-            case 1: // without previous
-            this.onVendorPageLoad = i.currentData
-            this.apiData = i.currentData
-            this.apiRequestData = i.currentData
-            this.fillDataInStatisticsAndColorZone(i.resData,0,null,2,null,0,3,1,null)
-            break;
-          
-          case 2:// with previous
-          this.onVendorPageLoad = i.currentData
-            this.apiData = i.currentData
-            this.apiRequestData = i.currentData
-            
-            this.fillDataInStatisticsAndColorZone(i.resData,0,1,3,4,0,5,2,null)
-            break;
-         }
-         this._apiService.isCompareLoader$.next(false)
-        }else
-      {
-        this._apiService.get(`${api.GetVendorScoreCard}/${this.loggedInUser.tenantID}`).subscribe((res:any)=>{
-     
-          if(res.data.length<1){
-            this._apiService.isCompareLoader$.next(false);
-            this._notificationService.push("No record for this tenant",2);
-            return
-          }
-         
-    
-          this.vendorAllData = {...this.vendorAllData,res : res};
-          let currentData = {
-            startDate : res.data.startDate,
-            endDate 	: res.data.endDate ,
-            plantCode : res.data.plantCode,
-            commodity : res.data.commodity,
-            vendorCode : res.data.vendorCode,
-            allVendorCode : res.data.vendorCode,
-            tenantId : this.loggedInUser.tenantID
-          }
-          this.apiData = currentData
-          this.vendorAllData = {...this.vendorAllData,currentData : currentData};
-    
-          this.onVendorPageLoad = currentData
-    
-          let previousData = {
-            startDate : res.previousDate.startDate,
-            endDate 	: res.previousDate.endDate ,
-            plantCode : res.data.plantCode,
-            commodity : res.data.commodity,
-            vendorCode : res.data.vendorCode,
-            allVendorCode : res.data.vendorCode,
-            tenantId : this.loggedInUser.tenantID
-          }
-          this.vendorAllData = {...this.vendorAllData,previousData : previousData};
-          this.vendorAllData = {...this.vendorAllData,apiRequestData:this.apiRequestData }
-          Promise.all([
-            this._apiService.post(api.VendorColorZone, currentData).toPromise(),
-            this._apiService.post(api.VendorColorZone, previousData).toPromise(),
-            this._apiService.post(api.vendorStatistics, currentData).toPromise(),
-            this._apiService.post(api.vendorStatistics, previousData).toPromise(),
-            // this._apiService.post(api.vendorGraph, this.apiRequestData).toPromise()
-            this._apiService.post(api.vendorAverageGraph, currentData).toPromise(),
-            this._apiService.post(api.vendorStatistics, {...currentData,vendorCode :currentData.allVendorCode}).toPromise(),
-          ]).then((resData: any) => {
-    
-            if (resData === null || resData === undefined) {
-              this._apiService.isCompareLoader$.next(false)
-              return
-            }
-            // this.dateDiffSentance = this._apiService.getDateDifference(new Date(currentData.startDate).getTime(), new Date(currentData.endDate).getTime())
-            // this.dateDiffSentance = 60
-            this._notificationService.push("Vendor scorecard data retrieved", 1);
-            this.vendorAllData = {...this.vendorAllData,resData : resData}
-            this.vendorAllData = {...this.vendorAllData,hasWhichData : 0} // 0 for on pageLoad
-            this.fillDataInStatisticsAndColorZone(resData,0,1,2,3,0,4,null,5)      
-            this._pageLoaderService.vendorScorecard$.next(this.vendorAllData)
-            this._apiService.isCompareLoader$.next(false)
-          }, (e: any) => {
-            this._notificationService.push("Data set not valid", 2);
-            this._apiService.isCompareLoader$.next(false)
-          }).finally(() =>{})
-        },((e:any)=>this._apiService.isCompareLoader$.next(false)))
-    
-
+      switch (i.hasWhichData) {
+        case 0: // on page load
+          this.fillDataInStatisticsAndColorZone(i.resData, 0, 1, 2, 3, 0, 4, null, null);
+          break;
+        case 1: // without previous
+          this.apiData = i.currentData;
+          this.fillDataInStatisticsAndColorZone(i.resData, 0, null, 2, null, 0, 3, 1, null);
+          break;
+        case 2: // with previous
+          this.apiData = i.currentData;
+          this.fillDataInStatisticsAndColorZone(i.resData, 0, 1, 3, 4, 0, 5, 2, null);
+          break;
       }
-    })
 
-    // this._apiService.get(`${api.GetVendorScoreCard}/${this.loggedInUser.tenantID}`).subscribe((res:any)=>{
-     
-    //   if(res.data.length<1){
-    //     this._apiService.isCompareLoader$.next(false);
-    //     this._notificationService.push("No record for this tenant",2);
-    //     return
-    //   }
-     
-
-    //   this.vendorAllData = {...this.vendorAllData,res : res};
-    //   let currentData = {
-    //     startDate : res.data.startDate,
-    //     endDate 	: res.data.endDate ,
-    //     plantCode : res.data.plantCode,
-    //     commodity : res.data.commodity,
-    //     vendorCode : res.data.vendorCode,
-    //     allVendorCode : res.data.vendorCode,
-    //     tenantId : this.loggedInUser.tenantID
-    //   }
-
-    //   this.vendorAllData = {...this.vendorAllData,currentData : currentData};
-
-    //   this.onVendorPageLoad = currentData
-
-    //   let previousData = {
-    //     startDate : res.previousDate.startDate,
-    //     endDate 	: res.previousDate.endDate ,
-    //     plantCode : res.data.plantCode,
-    //     commodity : res.data.commodity,
-    //     vendorCode : res.data.vendorCode,
-    //     allVendorCode : res.data.vendorCode,
-    //     tenantId : this.loggedInUser.tenantID
-    //   }
-    //   this.vendorAllData = {...this.vendorAllData,previousData : previousData};
-    //   this.vendorAllData = {...this.vendorAllData,apiRequestData:this.apiRequestData }
-    //   Promise.all([
-    //     this._apiService.post(api.VendorColorZone, currentData).toPromise(),
-    //     this._apiService.post(api.VendorColorZone, previousData).toPromise(),
-    //     this._apiService.post(api.vendorStatistics, currentData).toPromise(),
-    //     this._apiService.post(api.vendorStatistics, previousData).toPromise(),
-    //     // this._apiService.post(api.vendorGraph, this.apiRequestData).toPromise()
-    //     this._apiService.post(api.vendorAverageGraph, currentData).toPromise()
-    //   ]).then((resData: any) => {
-
-    //     if (resData === null || resData === undefined) {
-    //       this._apiService.isCompareLoader$.next(false)
-    //       return
-    //     }
-    //     // this.dateDiffSentance = this._apiService.getDateDifference(new Date(currentData.startDate).getTime(), new Date(currentData.endDate).getTime())
-    //     // this.dateDiffSentance = 60
-    //     this._notificationService.push("Vendor scorecard data retrieved", 1);
-    //     this.vendorAllData = {...this.vendorAllData,resData : resData}
-    //     this.vendorAllData = {...this.vendorAllData,hasWhichData : 0} // 0 for on pageLoad
-    //     this.fillDataInStatisticsAndColorZone(resData,0,1,2,3,0,4,null)      
-    //     this._pageLoaderService.vendorScorecard$.next(this.vendorAllData)
-    //     this._apiService.isCompareLoader$.next(false)
-    //   }, (e: any) => {
-    //     this._notificationService.push("Data set not valid", 2);
-    //     this._apiService.isCompareLoader$.next(false)
-    //   }).finally(() =>{})
-    // },((e:any)=>this._apiService.isCompareLoader$.next(false)))
-
-
-
-
-
-
-    this._apiService.get(`${api.vendorDropdown}?tenantId=${this.loggedInUser.tenantID}`).
-      subscribe((res: any) => {
-        this.listsDropDown = res?.data
-        if (res.message == 'Plant Data Not Found!!') {
-          this._notificationService.push('No data for this tenant', 1)
+      this._apiService.isCompareLoader$.next(false);
+    } else {
+      // No cached data, fresh API calls
+      this._apiService.get(`${api.GetVendorScoreCard}/${this.loggedInUser.tenantID}`).subscribe((res: any) => {
+        if (res.data.length < 1) {
+          this._apiService.isCompareLoader$.next(false);
+          this._notificationService.push("No record for this tenant", 2);
+          return;
         }
 
-      }, (e: any) => this._apiService.isCompareLoader$.next(true))
-  }
+        // Prepare current and previous payloads
+        const currentData = {
+          startDate: res.data.startDate,
+          endDate: res.data.endDate,
+          plantCode: res.data.plantCode,
+          commodity: res.data.commodity,
+          vendorCode: res.data.vendorCode,
+          allVendorCode: res.data.vendorCode,
+          tenantId: this.loggedInUser.tenantID
+        };
+
+        const previousData = {
+          startDate: res.previousDate.startDate,
+          endDate: res.previousDate.endDate,
+          plantCode: res.data.plantCode,
+          commodity: res.data.commodity,
+          vendorCode: res.data.vendorCode,
+          allVendorCode: res.data.vendorCode,
+          tenantId: this.loggedInUser.tenantID
+        };
+
+        this.apiData = currentData;
+        this.onVendorPageLoad = currentData;
+
+        // Store for reuse
+        this.vendorAllData = {
+          ...this.vendorAllData,
+          res,
+          currentData,
+          previousData,
+          apiRequestData: this.apiRequestData
+        };
+
+        // Fetch All Required Data
+        Promise.all([
+          this._apiService.post(api.VendorColorZone, currentData).toPromise(),
+          this._apiService.post(api.VendorColorZone, previousData).toPromise(),
+          this._apiService.post(api.vendorStatistics, currentData).toPromise(),
+          this._apiService.post(api.vendorStatistics, previousData).toPromise(),
+          this._apiService.post(api.vendorAverageGraph, currentData).toPromise(),
+          this._apiService.post(api.vendorStatistics, {
+            ...currentData,
+            vendorCode: currentData.allVendorCode
+          }).toPromise(),
+        ])
+          .then((resData: any) => {
+            if (!resData) {
+              this._apiService.isCompareLoader$.next(false);
+              return;
+            }
+
+            this._notificationService.push("Vendor scorecard data retrieved", 1);
+
+            this.vendorAllData = {
+              ...this.vendorAllData,
+              resData,
+              hasWhichData: 0
+            };
+
+            this.fillDataInStatisticsAndColorZone(resData, 0, 1, 2, 3, 0, 4, null, 5);
+            this._pageLoaderService.vendorScorecard$.next(this.vendorAllData);
+            this._apiService.isCompareLoader$.next(false);
+          })
+          .catch(() => {
+            this._notificationService.push("Data set not valid", 2);
+            this._apiService.isCompareLoader$.next(false);
+          });
+      }, () => this._apiService.isCompareLoader$.next(false));
+    }
+  });
+
+  // Load dropdowns
+  this._apiService.get(`${api.vendorDropdown}?tenantId=${this.loggedInUser.tenantID}`)
+    .subscribe((res: any) => {
+      this.listsDropDown = res?.data;
+      if (res.message === 'Plant Data Not Found!!') {
+        this._notificationService.push('No data for this tenant', 1);
+      }
+    }, () => this._apiService.isCompareLoader$.next(true));
+}
+
+
+
+  // async ngOnInit():  Promise<any> {
+     
+  //   this.currentDate = new Date().toString().split(" ")[0] + "," + new Date().toString().split(" ")[1] + " " + new Date().toString().split(" ")[2] + " " + new Date().toString().split(" ")[3];
+  //   var userData = localStorage.getItem('userData');
+  //   if (userData) {
+  //     this.loggedInUser = JSON.parse(userData)
+  //   } else {
+
+  //   }
+
+  //   this._apiService.isLanguageSelector$.subscribe((res:any)=>{
+  //     this.translate.use(res)
+  //     this.cdr.detectChanges()
+  //   })
+  //   this.onVendorPageLoad = null
+  //   this._apiService.isCompareLoader$.next(true);
+    
+  //   this._pageLoaderService.vendorScorecard$.subscribe((i:any|null)=>{
+  //     if(i !== null)// to preload data after rerouting
+  //     {
+  //       switch (i.hasWhichData) {
+  //         case 0: // on page load
+  //         this.onVendorPageLoad = i.currentData
+  //           this.apiRequestData = i.currentData
+  //           this.fillDataInStatisticsAndColorZone(i.resData,0,1,2,3,0,4,null,null)
+  //           break;
+            
+  //           case 1: // without previous
+  //           this.onVendorPageLoad = i.currentData
+  //           this.apiData = i.currentData
+  //           this.apiRequestData = i.currentData
+  //           this.fillDataInStatisticsAndColorZone(i.resData,0,null,2,null,0,3,1,null)
+  //           break;
+          
+  //         case 2:// with previous
+  //         this.onVendorPageLoad = i.currentData
+  //           this.apiData = i.currentData
+  //           this.apiRequestData = i.currentData
+            
+  //           this.fillDataInStatisticsAndColorZone(i.resData,0,1,3,4,0,5,2,null)
+  //           break;
+  //        }
+  //        this._apiService.isCompareLoader$.next(false)
+  //       }else
+  //     {
+  //       this._apiService.get(`${api.GetVendorScoreCard}/${this.loggedInUser.tenantID}`).subscribe((res:any)=>{
+     
+  //         if(res.data.length<1){
+  //           this._apiService.isCompareLoader$.next(false);
+  //           this._notificationService.push("No record for this tenant",2);
+  //           return
+  //         }
+         
+    
+  //         this.vendorAllData = {...this.vendorAllData,res : res};
+  //         let currentData = {
+  //           startDate : res.data.startDate,
+  //           endDate 	: res.data.endDate ,
+  //           plantCode : res.data.plantCode,
+  //           commodity : res.data.commodity,
+  //           vendorCode : res.data.vendorCode,
+  //           allVendorCode : res.data.vendorCode,
+  //           tenantId : this.loggedInUser.tenantID
+  //         }
+  //         this.apiData = currentData
+  //         this.vendorAllData = {...this.vendorAllData,currentData : currentData};
+    
+  //         this.onVendorPageLoad = currentData
+    
+  //         let previousData = {
+  //           startDate : res.previousDate.startDate,
+  //           endDate 	: res.previousDate.endDate ,
+  //           plantCode : res.data.plantCode,
+  //           commodity : res.data.commodity,
+  //           vendorCode : res.data.vendorCode,
+  //           allVendorCode : res.data.vendorCode,
+  //           tenantId : this.loggedInUser.tenantID
+  //         }
+  //         this.vendorAllData = {...this.vendorAllData,previousData : previousData};
+  //         this.vendorAllData = {...this.vendorAllData,apiRequestData:this.apiRequestData }
+  //         Promise.all([
+  //           this._apiService.post(api.VendorColorZone, currentData).toPromise(),
+  //           this._apiService.post(api.VendorColorZone, previousData).toPromise(),
+  //           this._apiService.post(api.vendorStatistics, currentData).toPromise(),
+  //           this._apiService.post(api.vendorStatistics, previousData).toPromise(),
+  //           // this._apiService.post(api.vendorGraph, this.apiRequestData).toPromise()
+  //           this._apiService.post(api.vendorAverageGraph, currentData).toPromise(),
+  //           this._apiService.post(api.vendorStatistics, {...currentData,vendorCode :currentData.allVendorCode}).toPromise(),
+  //         ]).then((resData: any) => {
+    
+  //           if (resData === null || resData === undefined) {
+  //             this._apiService.isCompareLoader$.next(false)
+  //             return
+  //           }
+  //           // this.dateDiffSentance = this._apiService.getDateDifference(new Date(currentData.startDate).getTime(), new Date(currentData.endDate).getTime())
+  //           // this.dateDiffSentance = 60
+  //           this._notificationService.push("Vendor scorecard data retrieved", 1);
+  //           this.vendorAllData = {...this.vendorAllData,resData : resData}
+  //           this.vendorAllData = {...this.vendorAllData,hasWhichData : 0} // 0 for on pageLoad
+  //           this.fillDataInStatisticsAndColorZone(resData,0,1,2,3,0,4,null,5)      
+  //           this._pageLoaderService.vendorScorecard$.next(this.vendorAllData)
+  //           this._apiService.isCompareLoader$.next(false)
+  //         }, (e: any) => {
+  //           this._notificationService.push("Data set not valid", 2);
+  //           this._apiService.isCompareLoader$.next(false)
+  //         }).finally(() =>{})
+  //       },((e:any)=>this._apiService.isCompareLoader$.next(false)))
+    
+
+  //     }
+  //   })
+
+  //   this._apiService.get(`${api.vendorDropdown}?tenantId=${this.loggedInUser.tenantID}`).
+  //     subscribe((res: any) => {
+  //       this.listsDropDown = res?.data
+  //       if (res.message == 'Plant Data Not Found!!') {
+  //         this._notificationService.push('No data for this tenant', 1)
+  //       }
+
+  //     }, (e: any) => this._apiService.isCompareLoader$.next(true))
+  // }
 
 
   fillDataInStatisticsAndColorZone(resData:any,
@@ -478,6 +544,8 @@ export class VendorScorecardComponent implements OnInit {
    }
 
   getExecutiveData(data: any) {
+     if (this.vendorScorecardTableComponent) {
+    this.vendorScorecardTableComponent.clearAllCompareSelections();}
     this.loader = true
     this._apiService.isCompareLoader$.next(true)
 
@@ -659,7 +727,7 @@ export class VendorScorecardComponent implements OnInit {
         this.ltaChartData = data.data;
         break;
 
-      case 'LTA percentage':
+      case 'LTA Percentage':
         this.ltaPercentageChartData = data.data;
         break;
 
@@ -667,7 +735,7 @@ export class VendorScorecardComponent implements OnInit {
         this.ppvChartData = data.data;
         break;
 
-      case 'PPV percentage':
+      case 'PPV Percentage':
         this.ppvPercentageChartData = data.data
         break;
 
@@ -675,7 +743,7 @@ export class VendorScorecardComponent implements OnInit {
         this.ncrChartData = data.data
         break;
 
-      case 'NCR percentage':
+      case 'NCR Percentage':
         this.ncrPercentageChartData = data.data
         break;
 
@@ -683,7 +751,7 @@ export class VendorScorecardComponent implements OnInit {
         this.otdChartData = data.data
         break;
 
-      case 'OTD percentage':
+      case 'OTD Percentage':
         this.otdPercentageChartData = data.data
         break;
 
@@ -717,7 +785,7 @@ export class VendorScorecardComponent implements OnInit {
         // requiredColorData = null
         break;
 
-      case 'LTA percentage':
+      case 'LTA Percentage':
         requiredChartData = this.ltaPercentageChartData;
         // requiredColorData = null
         break;
@@ -727,7 +795,7 @@ export class VendorScorecardComponent implements OnInit {
         // requiredColorData = null
         break;
 
-      case 'PPV percentage':
+      case 'PPV Percentage':
         requiredChartData = this.ppvPercentageChartData;
         // requiredColorData = null
         break;
@@ -737,7 +805,7 @@ export class VendorScorecardComponent implements OnInit {
         // requiredColorData = null
         break;
 
-      case 'NCR percentage':
+      case 'NCR Percentage':
         requiredChartData = this.ncrPercentageChartData;
         // requiredColorData = null
         break;
@@ -747,7 +815,7 @@ export class VendorScorecardComponent implements OnInit {
         // requiredColorData = null
         break;
 
-      case 'OTD percentage':
+      case 'OTD Percentage':
         requiredChartData = this.otdPercentageChartData;
         // requiredColorData = null
         break;

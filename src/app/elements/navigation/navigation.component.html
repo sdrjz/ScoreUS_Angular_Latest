@@ -445,7 +445,7 @@
                 </a>
             </li>
 
-            <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/invitevendor'}">
+            <!--<li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/invitevendor'}">
                 <a [routerLink]="['/user/invitevendor']"
                     class="{{(currentHref == '/user/invitevendor') ? 'mm-active' : ''}}"
                     (click)="onClick('Invite Vendor')">
@@ -454,7 +454,7 @@
                 </a>
             </li>
 
-            <!-- <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/reporthistory'}">
+             <li (click)="mainMenuClick($event)" [ngClass]="{'mm-active': currentHref == '/user/reporthistory'}">
                         <a [routerLink]="['/user/reporthistory']"
                             class="{{(currentHref == '/user/reporthistory') ? 'mm-active' : ''}}"
                             (click)="onClick('Report History')">

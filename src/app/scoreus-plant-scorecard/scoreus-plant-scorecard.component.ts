@@ -12,12 +12,17 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { PopupchartComponent } from '../general/popupchart/popupchart.component';
 import * as _moment from 'moment/moment';
 import { TranslateService } from '@ngx-translate/core';
+import { PlantScorecardTableComponent } from '../general/plant-scorecard-table/plant-scorecard-table.component';
+import { ViewChild } from '@angular/core';
+
 @Component({
   selector: 'app-scoreus-plant-scorecard',
   templateUrl: './scoreus-plant-scorecard.component.html',
   styleUrls: ['./scoreus-plant-scorecard.component.css']
 })
 export class ScoreusPlantScorecardComponent implements OnInit {
+   
+
   totalScores: any
   requiredPlantGraph: any
   plantGraphData: any
@@ -80,6 +85,7 @@ export class ScoreusPlantScorecardComponent implements OnInit {
   public plantGraph: any
   @Input() subtitle: string;
 
+  @ViewChild(PlantScorecardTableComponent) plantScorecardTableComponent!: PlantScorecardTableComponent;
 
   constructor(private _apiService: GeneralApiService,
     private _notificationService: NotificationService,
@@ -291,6 +297,7 @@ if (resData[2]?.data?.length > 0 && resData[3]?.data?.length > 0) {
 
 
   getPlantExecutiveData(data: any) {
+      this.plantScorecardTableComponent.clearSelections();
 console.log('📥 getplantExecutiveData() called with:', data);
     this.loader = true
     this._apiService.isCompareLoader$.next(true)
@@ -753,7 +760,7 @@ if (res[3]?.data?.length > 0 && res[4]?.data?.length > 0) {
         this.ltaChartData = data.data;
         break;
 
-      case 'LTA percentage':
+      case 'LTA Percentage':
         this.ltaPercentageChartData = data.data;
         break;
 
@@ -761,7 +768,7 @@ if (res[3]?.data?.length > 0 && res[4]?.data?.length > 0) {
         this.ppvChartData = data.data;
         break;
 
-      case 'PPV percentage':
+      case 'PPV Percentage':
         this.ppvPercentageChartData = data.data
         break;
 
@@ -769,7 +776,7 @@ if (res[3]?.data?.length > 0 && res[4]?.data?.length > 0) {
         this.ncrChartData = data.data
         break;
 
-      case 'NCR percentage':
+      case 'NCR Percentage':
         this.ncrPercentageChartData = data.data
         break;
 
@@ -777,7 +784,7 @@ if (res[3]?.data?.length > 0 && res[4]?.data?.length > 0) {
         this.otdChartData = data.data
         break;
 
-      case 'OTD percentage':
+      case 'OTD Percentage':
         this.otdPercentageChartData = data.data
         break;
 
@@ -807,7 +814,7 @@ if (res[3]?.data?.length > 0 && res[4]?.data?.length > 0) {
         requiredChartData = this.ltaChartData;
         break;
 
-      case 'LTA percentage':
+      case 'LTA Percentage':
         requiredChartData = this.ltaPercentageChartData;
         break;
 
@@ -815,7 +822,7 @@ if (res[3]?.data?.length > 0 && res[4]?.data?.length > 0) {
         requiredChartData = this.ppvChartData;
         break;
 
-      case 'PPV percentage':
+      case 'PPV Percentage':
         requiredChartData = this.ppvPercentageChartData;
         break;
 
@@ -823,7 +830,7 @@ if (res[3]?.data?.length > 0 && res[4]?.data?.length > 0) {
         requiredChartData = this.ncrChartData;
         break;
 
-      case 'NCR percentage':
+      case 'NCR Percentage':
         requiredChartData = this.ncrPercentageChartData;
         break;
 
@@ -831,7 +838,7 @@ if (res[3]?.data?.length > 0 && res[4]?.data?.length > 0) {
         requiredChartData = this.otdChartData;
         break;
 
-      case 'OTD percentage':
+      case 'OTD Percentage':
         requiredChartData = this.otdPercentageChartData;
         break;
 
@@ -843,7 +850,7 @@ if (res[3]?.data?.length > 0 && res[4]?.data?.length > 0) {
         requiredChartData = this.colorZoneChartData
         break;
       case 'Compare Total Score':
-      requiredChartData = this.totalCompareScoreList;
+        requiredChartData = this.totalCompareScoreList;
         break;
       default:
         break

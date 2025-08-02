@@ -101,99 +101,72 @@
                     </div>
                 </div>
                 <div class="col-md-6 mb-3 col-sm-12">
-                    <div class="d-flex">
-                        <span class="vendor-per w-25 pt-2">{{'Vendor' | translate }}:</span>
-    
-                        <mat-form-field class="example-chip-list" appearance="outline" [matTooltip]="tips.vendorSelection" [matTooltipPosition]="'above'"
-                            style="border:1px solid #b4b8bb!important; border-radius:30px!important;padding-left: 15px;font-size: 16px;padding-top: 3px;color: #525353;">
-                            <mat-chip-list #chipList>
-                                <mat-chip class="px-2" *ngFor="let selectreport of selected" [selectable]="selectable"
-                                    [removable]="true" (removed)="remove(selectreport)">
-                                    {{selectreport.name}}
-                                    <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
-                                </mat-chip>
-                                <input #fruitInput [matAutocomplete]="auto" [matChipInputFor]="chipList"
-                                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [(ngModel)]="vendorInput"
-                                    [ngModelOptions]="{standalone: true}" matInput (keyup)="onVendorInput($event)">
-                            </mat-chip-list>
-                            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelected($event)">
-                                <mat-option *ngFor="let selectreport of listVendor" [value]="selectreport.id">
-                                    {{selectreport.name}} <span class="float-right"> {{selectreport.id }}</span>
-                                </mat-option>
-                            </mat-autocomplete>
-                        </mat-form-field>
-                       
-                    </div>
-    
-                </div>
+  <div class="d-flex">
+    <span class="vendor-per w-25 pt-2">{{'Vendor' | translate }}:</span>
+    <!-- CHANGE: Use mat-form-field with autocomplete like Commodity, remove chip-list -->
+    <mat-form-field appearance="outline" [matTooltip]="tips.vendorSelection" [matTooltipPosition]="'above'">
+      <input type="text" class="form-control plant-select px-2" [(ngModel)]="vendorInput"
+             [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="vendor"
+             (keyup)="onVendorInput($event)">
+      <mat-autocomplete autoActiveFirstOption #vendor="matAutocomplete"
+                        (optionSelected)="onVendorSelection($event)">
+        <mat-option *ngFor="let item of listVendor" 
+                    [value]="item?.name">{{item?.name}} <span class="float-right">{{item.id}}</span></mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+</div>
     
 
-                <div class="col-md-6 mb-3 col-sm-12">
-                    <div class="d-flex">
-                        <span class="vendor-per w-25 pt-2">{{'Country' | translate }}:</span>
-                        <mat-form-field appearance="outline" >
-                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="countryInput"
-                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="country"
-                                (keyup)="onCountryInput($event)">
-                            <mat-autocomplete autoActiveFirstOption #country="matAutocomplete"
-                                (optionSelected)="onCountrySelection($event)">
-                                <mat-option *ngFor="let item of listCountry" 
-                                    [value]="item?.name">{{item?.name}}</mat-option>
-                            </mat-autocomplete>
-                        </mat-form-field>
-    
-    
-                        <!-- <select class="form-control plant-select" formControlName="commodity">
-                        <option [value]="null"><input type="text" [(ngModel)]="commodityInput" [ngModelOptions]="{standalone: true}" (keyPress)="onCommodityInput()"/></option>
-                        <option *ngFor="let item of listCommodity" [value]="item?.id">
-                            {{item?.commodity}}
-                        </option>
-                    </select> -->
-    
-                    </div>
-                </div>
+<div class="col-md-6 mb-3 col-sm-12">
+  <div class="d-flex">
+    <span class="vendor-per w-25 pt-2">{{'Country' | translate }}:</span>
+    <mat-form-field appearance="outline" class="flex-grow-1">
+      <input type="text" class="form-control plant-select px-2" [(ngModel)]="countryInput"
+        [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="country"
+        (keyup)="onCountryInput($event)">
+      <mat-autocomplete autoActiveFirstOption #country="matAutocomplete"
+        (optionSelected)="onCountrySelection($event)">
+        <mat-option *ngFor="let item of listCountry" 
+          [value]="item?.name">{{item?.name}}</mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+</div>
 
-                <div class="col-md-6 mb-3 col-sm-12">
-                    <div class="d-flex">
-                        <span class="vendor-per w-25 pt-2">{{'City' | translate }}:</span>
-                        <mat-form-field appearance="outline" >
-                            <input type="text" class="form-control plant-select px-2" [(ngModel)]="cityInput"
-                                [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="city"
-                                (input)="onCityInput($event)">
-                            <mat-autocomplete autoActiveFirstOption #city="matAutocomplete"
-                                (optionSelected)="onCitySelection($event)">
-                                <mat-option *ngFor="let item of listCity" 
-                                    [value]="item?.name">{{item?.name}}</mat-option>
-                            </mat-autocomplete>
-                        </mat-form-field>
+
+<div class="col-md-6 mb-3 col-sm-12">
+  <div class="d-flex">
+    <span class="vendor-per w-25 pt-2">{{ 'City' | translate }}:</span>
+    <mat-form-field appearance="outline" class="flex-grow-1">
+      <input type="text" class="form-control plant-select px-2" [(ngModel)]="cityInput"
+        [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="city"
+        (keyup)="onCityInput($event)">
+      <mat-autocomplete autoActiveFirstOption #city="matAutocomplete"
+        (optionSelected)="onCitySelection($event)">
+        <mat-option *ngFor="let item of listCity" 
+          [value]="item?.name">{{item?.name}}</mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+</div>
+
     
-    
-                    </div>
-                </div>
-    
-                <div class="col-md-6 mb-3 col-sm-12">
-                    <div class="d-flex">
-                        <span class="vendor-per w-25 pt-2">{{'Colour' | translate }}:</span>
-                        <mat-form-field appearance="outline" >
-                            <mat-select formControlName="colour" class="form-control plant-select px-2">
-                                <mat-option [value]= "'GREEN'">
-                                {{'GREEN' | translate}}
-                                </mat-option>
-                                <mat-option [value] = "'YELLOW'">
-                                {{'YELLOW' | translate}}
-                                </mat-option>
-                                <mat-option [value] = "'RED'">
-                                {{'RED' | translate}}
-                                </mat-option>
-                                <mat-option [value] = "'ALL'">
-                                {{'ALL' | translate}}
-                                </mat-option>
-                              </mat-select>
-                        </mat-form-field>
-    
-    
-                    </div>
-                </div>
+<div class="col-md-6 mb-3 col-sm-12">
+  <div class="d-flex">
+    <span class="vendor-per w-25 pt-2">{{'Colour' | translate }}:</span>
+    <mat-form-field appearance="outline">
+      <input type="text" class="form-control plant-select px-2" [(ngModel)]="colourInput"
+        [ngModelOptions]="{standalone: true}" matInput [matAutocomplete]="colour"
+        (keyup)="onColourInput($event)">
+      <mat-autocomplete autoActiveFirstOption #colour="matAutocomplete"
+        (optionSelected)="onColourSelection($event)">
+        <mat-option *ngFor="let item of listColour" 
+          [value]="item?.name">{{item?.name}}</mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+</div>
 
 
                 <div class="col-md-2 mb-3 col-sm-12">
@@ -234,7 +207,7 @@
                                 <td>{{item.ranking}}</td>
                                 <td>{{item.vendorName}}</td>
                                 <td>{{item.score}}</td>
-                                <td>${{item.spend.toFixed(2)}}</td>
+                                <td class="text-right">{{ item.spend | currency }}</td>
                         
                             </tr>
                         
@@ -299,7 +272,7 @@
                                     </tr>
                                     <tr>
                                         <td class="pb-4">{{'Spend' | translate }}</td>
-                                        <td class="pb-4">${{item.spend.toFixed(2)}}</td>
+                                        <td class="pb-4 text-right">{{ item.spend | currency }}</td>
                                     </tr>
 
                                 </tbody>

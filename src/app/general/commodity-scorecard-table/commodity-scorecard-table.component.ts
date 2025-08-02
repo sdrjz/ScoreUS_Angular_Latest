@@ -1013,9 +1013,12 @@ async ngOnChanges(changes: SimpleChanges) {
   
 
 
-  getTableRecord(data: any) {
-    this.listCommodityDetail = data;
-  }
+ getTableRecord(data: any) {
+  // 📌 Clear any existing commodity selections on new data load
+  this.listSelectedCommodity = [];
+
+  this.listCommodityDetail = data;
+}
 
   getMessage(data:any,commodityDetails:any){
    
